@@ -1,6 +1,7 @@
 package com.noveria.cukes.steps;
 
 import com.noveria.cukes.runtime.RuntimeState;
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.slf4j.Logger;
@@ -17,12 +18,17 @@ public class SetUpAndTearDownStep {
     RuntimeState runtimeState;
 
     @Before
-    public void setUp() {
-        logger.info("Before Cucumber Scenario!");
+    public void setUp(Scenario scenario) {
+        //runtimeState.initialise();
+        runtimeState.setScenario(scenario);
     }
 
     @After
-    public void tearDown() {
-        logger.info("After Cucumber Scenario!");
+    public void tearDown(Scenario scenario) {
+        if(scenario.isFailed()) {
+            //runtimeState.takeScreenShot();
+        }
+
+        //runtimeState.closeBrowser();
     }
 }

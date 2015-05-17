@@ -3,6 +3,7 @@ package com.noveria.cukes.runners;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
@@ -10,5 +11,14 @@ import org.junit.runner.RunWith;
         features="classpath:features", tags={"~@wip"}, monochrome = true)
 public class AcceptanceTest {
 
+        static {
+                System.setProperty("browser", "Firefox");
+                //System.setProperty("browser", "Phantom");
+        }
+
+        @BeforeClass
+        public static void setUp() {
+                //TODO: Is this needed?
+        }
 
 }
