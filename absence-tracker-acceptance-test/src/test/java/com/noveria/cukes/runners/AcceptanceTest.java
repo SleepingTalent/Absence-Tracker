@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
 public class AcceptanceTest {
 
         static {
-                System.setProperty("browser", "Firefox");
-                //System.setProperty("browser", "Phantom");
+                //System.setProperty("browser", "Firefox");
+                System.setProperty("browser", "Phantom");
         }
 
         @BeforeClass

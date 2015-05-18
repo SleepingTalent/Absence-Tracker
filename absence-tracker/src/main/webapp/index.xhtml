@@ -13,7 +13,7 @@
     <h:form>
         <p:growl id="messages" showDetail="true"/>
 
-        <p:panel id="mainPanel" header="This is the main panel" footer="Demo Version" >
+        <p:panel id="mainPanel" header="This is the main panel">
             <p:panelGrid columns="2" columnClasses="alignTop">
                 <p:column>
                     <h:inputText id="nameInput" value="#{helloBean.name}"></h:inputText>
@@ -24,7 +24,7 @@
             </p:panelGrid>
         </p:panel>
 
-        <p:panel id="outputPanel" header="This is the output panel" footer="Demo Version" >
+        <p:panel id="outputPanel" header="This is the output panel">
             <p:outputLabel id="welcomeName" value="Welcome : #{helloBean.name}" disabled="#{helloBean.hasUserToWelcome}" />
         </p:panel>
     </h:form>

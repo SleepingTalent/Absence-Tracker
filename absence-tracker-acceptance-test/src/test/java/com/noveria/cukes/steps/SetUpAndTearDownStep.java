@@ -19,16 +19,16 @@ public class SetUpAndTearDownStep {
 
     @Before
     public void setUp(Scenario scenario) {
-        //runtimeState.initialise();
+        runtimeState.initialise();
         runtimeState.setScenario(scenario);
     }
 
     @After
     public void tearDown(Scenario scenario) {
         if(scenario.isFailed()) {
-            //runtimeState.takeScreenShot();
+            runtimeState.takeScreenShot();
         }
 
-        //runtimeState.closeBrowser();
+        runtimeState.closeBrowser();
     }
 }
