@@ -6,13 +6,12 @@ import static org.junit.Assert.assertEquals;
 
 public class WelcomePage extends Page {
 
-    private static final String NAME_INPUT_ID = "nameInput";
-    private static final String WELCOME_BTN_ID = "welcomeBtn";
-    private static final String WELCOME_NAME = "welcomeName";
+    private static final String NAME_INPUT_ID = "welcomeForm:nameInput";
+    private static final String WELCOME_BTN_ID = "welcomeForm:welcomeBtn";
+    private static final String WELCOME_NAME = "welcomeForm:welcomeName";
 
     public WelcomePage(CucumberWebDriver webDriver) {
         super(webDriver);
-
     }
 
     public void inputName(String name) {

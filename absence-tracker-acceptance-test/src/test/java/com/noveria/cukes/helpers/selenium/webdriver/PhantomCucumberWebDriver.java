@@ -1,6 +1,7 @@
 package com.noveria.cukes.helpers.selenium.webdriver;
 
 import cucumber.api.Scenario;
+import net.anthavio.phanbedder.Phanbedder;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -32,16 +33,9 @@ public class PhantomCucumberWebDriver extends PhantomJSDriver implements Cucumbe
         capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX + "loadimages",true);
         capabilities.setCapability("takesScreenshot", true);
 
-        final String phantomDriverPath = "./phantom-1.9.7/phantomjs";
+        File phantomJsBinary = Phanbedder.unpack();
 
-        final String absolutePath = PhantomCucumberWebDriver.class.getClassLoader().getResource(phantomDriverPath).getPath();
-
-        final File phantomDriverFile = new File(absolutePath);
-        if(phantomDriverFile.exists() && !phantomDriverFile.canExecute()) {
-            phantomDriverFile.setExecutable(true);
-        }
-
-        capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,absolutePath);
+        capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,phantomJsBinary.getAbsolutePath());
 
         return capabilities;
     }

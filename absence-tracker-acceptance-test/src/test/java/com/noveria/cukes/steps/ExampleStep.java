@@ -40,17 +40,20 @@ public class ExampleStep {
     @Given("^a User Navigates to the Welcome Page$")
     public void a_User_Navigates_to_the_Welcome_Page() throws Throwable {
         runtimeState.getWelcomePage().getPageHelper().navigateTo(RuntimeState.ABSENCE_TRACKER_URL);
+        runtimeState.takeScreenShot();
     }
 
     @When("^they input the name \"(.*?)\"$")
     public void they_input_the_name(String name) throws Throwable {
         runtimeState.getWelcomePage().inputName(name);
+        runtimeState.takeScreenShot();
         runtimeState.getWelcomePage().clickWelcomeButton();
     }
 
     @Then("^\"(.*?)\" is displayed on the Page$")
     public void is_displayed_on_the_Page(String name) throws Throwable {
         runtimeState.getWelcomePage().assertNameDisplayed(name);
+        runtimeState.takeScreenShot();
     }
 
 }

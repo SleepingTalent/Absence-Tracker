@@ -19,6 +19,9 @@
         <slf4j.version>1.7.7</slf4j.version>
         <logback.version>1.0.1</logback.version>
         <acceptanceTest.runner>**/AcceptanceTest.java</acceptanceTest.runner>
+        <ghostdriver.version>1.1.0</ghostdriver.version>
+        <phantomjs.plugin.version>0.2</phantomjs.plugin.version>
+        <phantomjs.version>1.9.7</phantomjs.version>
     </properties>
 
     <dependencies>
@@ -124,14 +127,18 @@
         <dependency>
             <groupId>com.github.detro.ghostdriver</groupId>
             <artifactId>phantomjsdriver</artifactId>
-            <version>1.1.0</version>
+            <version>${ghostdriver.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.anthavio</groupId>
+            <artifactId>phanbedder-1.9.8</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
     </dependencies>
 
     <build>
-        <finalName>test-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -187,16 +194,6 @@
                     </httpConnector>
                 </configuration>
                 <dependencies>
-                <!--<dependency>
-                        <groupId>javax.el</groupId>
-                        <artifactId>el-api</artifactId>
-                        <version>2.2</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.glassfish.web</groupId>
-                        <artifactId>el-impl</artifactId>
-                        <version>2.2</version>
-                    </dependency> -->
                     <dependency>
                         <groupId>com.sun.faces</groupId>
                         <artifactId>jsf-api</artifactId>
@@ -255,7 +252,7 @@
                 <executions>
                     <execution>
                         <id>generate-cucumber-reports</id>
-                        <phase>verify</phase>
+                        <phase>post-integration-test</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
