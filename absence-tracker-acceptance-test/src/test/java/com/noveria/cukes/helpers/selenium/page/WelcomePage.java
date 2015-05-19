@@ -1,6 +1,8 @@
 package com.noveria.cukes.helpers.selenium.page;
 
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
+import org.openqa.selenium.StaleElementReferenceException;
+import sun.nio.cs.ThreadLocalCoders;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +25,19 @@ public class WelcomePage extends Page {
     }
 
     public void assertNameDisplayed(String expectedName) {
-        String actualName = getPageHelper().findElementById(WELCOME_NAME).getText();
+        String actualName = "";
+
+            try {
+                actualName = getPageHelper().findElementById(WELCOME_NAME).getText();
+            } catch(StaleElementReferenceException e) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+                actualName = getPageHelper().findElementById(WELCOME_NAME).getText();
+            }
+
         assertEquals(expectedName, actualName);
     }
 }

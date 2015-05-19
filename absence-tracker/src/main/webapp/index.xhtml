@@ -19,7 +19,7 @@
                     <p:inputText id="nameInput" value="#{helloBean.name}"></p:inputText>
                 </p:column>
                 <p:column>
-                    <p:commandButton id="welcomeBtn" value="Welcome Me" actionListener="#{helloBean.welcome}" update="outputPanel"/>
+                    <p:commandButton id="welcomeBtn" value="Welcome Me" actionListener="#{helloBean.welcome}" update="outputPanel,messages"/>
                 </p:column>
             </p:panelGrid>
         </p:panel>

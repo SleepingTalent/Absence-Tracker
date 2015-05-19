@@ -15,4 +15,4 @@ Feature: Example Feature
     Scenario: Welcome Message is Displayed
     Given a User Navigates to the Welcome Page
     When they input the name "Dave"
-    Then "Dave" is displayed on the Page
+    Then "Welcome : Dave" is displayed on the Page
