@@ -1,5 +1,8 @@
 package com.noveria.cukes.steps;
 
+import java.io.IOException;
+
+import com.noveria.cukes.helpers.report.ScenarioHelper;
 import com.noveria.cukes.runtime.RuntimeState;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -17,6 +20,9 @@ public class SetUpAndTearDownStep {
     @Autowired
     RuntimeState runtimeState;
 
+    @Autowired
+    ScenarioHelper scenarioHelper;
+
     @Before
     public void setUp(Scenario scenario) {
         runtimeState.initialise();
@@ -24,11 +30,12 @@ public class SetUpAndTearDownStep {
     }
 
     @After
-    public void tearDown(Scenario scenario) {
+    public void tearDown(Scenario scenario) throws IOException {
         if(scenario.isFailed()) {
             runtimeState.takeScreenShot();
         }
 
         runtimeState.closeBrowser();
+        scenarioHelper.showDeveloperBusinessToggle(scenario);
     }
 }
