@@ -17,7 +17,16 @@ public class WelcomePage extends Page {
     }
 
     public void inputName(String name) {
-        getPageHelper().findElementById(NAME_INPUT_ID).sendKeys(name);
+        try {
+            getPageHelper().findElementById(NAME_INPUT_ID).sendKeys(name);
+        } catch(StaleElementReferenceException e) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            getPageHelper().findElementById(NAME_INPUT_ID).sendKeys(name);
+        }
     }
 
     public void clickWelcomeButton() {
