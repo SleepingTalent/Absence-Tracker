@@ -1,0 +1,66 @@
+<script type="application/javascript">
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+        if (window.__init__reports__) {
+            return;
+        }
+
+        window.__init__reports__ = true;
+
+        function loadScript(url, callback) {
+
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.onload = function () {
+                callback();
+            };
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+
+        function processReport() {
+
+            var BUTTON_BUSINESS = 'Show Business View';
+            var BUTTON_DEVELOPER = 'Show Developer View';
+            var developerMode = true;
+
+            var toggleDeveloperMode = function() {
+
+                developerMode = !developerMode;
+
+                if (developerMode) {
+                    $('#toggle_dev_mode').text(BUTTON_BUSINESS);
+                    $('.devView').show();
+                    $('a').filter(':contains("Screenshot 1")').show();
+                } else{
+                    $('#toggle_dev_mode').text(BUTTON_DEVELOPER);
+                    $('.devView').hide();
+                    $('.devViewDetail').hide();
+                    $('a').filter(':contains("Screenshot 1")').hide();
+                }
+
+            };
+
+            var addToggleButton = function () {
+
+                var developerModeButton = '<li><a href="javascript:;" id="toggle_dev_mode" style="width: 150px;"></a>';
+
+                $('#nav').removeClass('grid_6').addClass('grid_8');
+                $('#nav').children().first().append(developerModeButton);
+                $('#toggle_dev_mode').on('click', toggleDeveloperMode);
+            };
+
+            function initialize() {
+                addToggleButton();
+                toggleDeveloperMode();
+            }
+
+            initialize();
+        }
+
+        loadScript("http://code.jquery.com/jquery-1.11.0.min.js", function () {
+            processReport();
+        });
+    });
+</script>
