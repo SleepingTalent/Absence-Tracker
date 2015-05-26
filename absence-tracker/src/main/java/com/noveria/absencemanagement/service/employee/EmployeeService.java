@@ -1,6 +1,6 @@
-package com.noveria.absencemanagement.controller.employee;
+package com.noveria.absencemanagement.service.employee;
 
-import com.noveria.absencemanagement.controller.employee.exception.EmployeeNotFoundException;
+import com.noveria.absencemanagement.service.employee.exception.EmployeeNotFoundException;
 import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,11 @@ public class EmployeeService {
     EmployeeDAO employeeDAO;
 
     public Employee createEmployee(Employee employee) {
-       return employeeDAO.create(employee);
+        return employeeDAO.create(employee);
     }
 
     public Employee findEmployee(Long employeeId) throws EmployeeNotFoundException {
+
         try {
             return employeeDAO.getEmployeeDetails(employeeId);
         } catch (NoResultException e) {
