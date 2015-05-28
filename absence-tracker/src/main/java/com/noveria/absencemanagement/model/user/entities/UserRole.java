@@ -13,36 +13,31 @@ public class UserRole extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
+
     private String role;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
-    private User user;
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+    private User userId;
 
     public UserRole() {
-
     }
 
-    public UserRole(User user, String role){
-        this.user = user;
-        this.role = role;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer userRoleId) {
+    public void setId(Long userRoleId) {
         this.id = userRoleId;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(User user) {
+        this.userId = user;
     }
 
     public String getRole() {

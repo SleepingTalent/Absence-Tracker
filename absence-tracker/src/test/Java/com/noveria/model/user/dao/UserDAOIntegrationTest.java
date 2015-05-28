@@ -51,7 +51,11 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
         List<UserRole> userRoles = new ArrayList<UserRole>();
 
         for(String role : roles) {
-            userRoles.add(new UserRole(user,role));
+            UserRole userRole = new UserRole();
+            userRole.setRole(role);
+            userRole.setUserId(user);
+
+            userRoles.add(userRole);
         }
 
         return userRoles;
@@ -76,12 +80,12 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
         Assert.assertEquals(2, actual.getUserRole().size());
 
         Assert.assertEquals("admin", actual.getUserRole().get(0).getRole());
-        //Assert.assertEquals("wrong", actual.getUserRole().get(0).getUserRoleId());
-        Assert.assertEquals("adminUser", actual.getUserRole().get(0).getUser().getUsername());
+        Assert.assertEquals(6, actual.getUserRole().get(0).getId().intValue());
+        Assert.assertEquals("adminUser", actual.getUserRole().get(0).getUserId().getUsername());
 
         Assert.assertEquals("employee", actual.getUserRole().get(1).getRole());
-        //Assert.assertEquals("wrong", actual.getUserRole().get(1).getUserRoleId());
-        Assert.assertEquals("adminUser", actual.getUserRole().get(1).getUser().getUsername());
+        Assert.assertEquals(7, actual.getUserRole().get(1).getId().intValue());
+        Assert.assertEquals("adminUser", actual.getUserRole().get(1).getUserId().getUsername());
 
     }
 

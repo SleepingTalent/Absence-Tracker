@@ -16,7 +16,6 @@ import java.util.Set;
 @Entity
 public class User extends BaseEntity {
 
-
     @Id
     @GeneratedValue
     protected Long id;
@@ -25,7 +24,7 @@ public class User extends BaseEntity {
     private String password;
     private boolean enabled;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<UserRole> userRole;
 
     public User() {
@@ -71,6 +70,4 @@ public class User extends BaseEntity {
     public void setUserRole(List<UserRole> userRole) {
         this.userRole = userRole;
     }
-
-
 }
