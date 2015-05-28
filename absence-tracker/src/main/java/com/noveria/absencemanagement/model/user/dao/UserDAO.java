@@ -12,8 +12,8 @@ import javax.persistence.NoResultException;
 @Repository
 public class UserDAO extends BaseDAO<User>{
 
-    public User getUserDetails(String username) throws NoResultException {
-        return findById(username);
+    public User getUserDetailsbyId(Long id) throws NoResultException {
+        return findById(id);
     }
 
     @Override

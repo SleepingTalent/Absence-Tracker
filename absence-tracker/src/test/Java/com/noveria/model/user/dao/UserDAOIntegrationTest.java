@@ -4,7 +4,7 @@ import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.model.user.entities.UserRole;
 import com.noveria.common.BaseIntegrationTest;
-import com.noveria.helper.PersitenceHelper;
+import com.noveria.helper.PersistenceHelper;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,9 +17,9 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/test-applicationContext.xml"})
@@ -31,7 +31,7 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
     UserDAO userDAO;
 
     @Autowired
-    PersitenceHelper persitenceHelper;
+    PersistenceHelper persistenceHelper;
 
     User user;
 
@@ -44,7 +44,7 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
         user.setPassword("adminPassword");
         user.setUserRole(createRoles(user,"admin","employee"));
 
-        user = persitenceHelper.persistNewUser(user);
+        user = persistenceHelper.persistNewUser(user);
     }
 
     private List<UserRole> createRoles(User user, String... roles) {
@@ -62,8 +62,13 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    public void count_returnsAsExpected() {
+        assertEquals(4, userDAO.countAll());
+    }
+
+    @Test
     public void findById_returns_AsExpected() {
-        User actual = userDAO.findById(user.getUsername());
+        User actual = userDAO.findById(user.getId());
 
         Assert.assertEquals("adminUser", actual.getUsername());
         Assert.assertEquals("adminPassword", actual.getPassword());

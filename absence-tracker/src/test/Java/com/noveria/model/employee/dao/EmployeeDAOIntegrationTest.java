@@ -3,7 +3,7 @@ package com.noveria.model.employee.dao;
 import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.common.BaseIntegrationTest;
-import com.noveria.helper.PersitenceHelper;
+import com.noveria.helper.PersistenceHelper;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -28,7 +28,7 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
     EmployeeDAO employeeDAO;
 
     @Autowired
-    PersitenceHelper persitenceHelper;
+    PersistenceHelper persistenceHelper;
 
     Employee employee;
 
@@ -40,7 +40,7 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
         employee.setLastName("Smith");
         employee.setDateOfBirth(new Date());
 
-        employee = persitenceHelper.persistNewEmployee(employee);
+        employee = persistenceHelper.persistNewEmployee(employee);
     }
 
     @After

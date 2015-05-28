@@ -11,9 +11,14 @@ import javax.persistence.*;
 @Entity
 public class UserRole extends BaseEntity {
 
+    @Id
+    @GeneratedValue
     private Integer id;
-    private User user;
     private String role;
+
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+    private User user;
 
     public UserRole() {
 
@@ -24,7 +29,6 @@ public class UserRole extends BaseEntity {
         this.role = role;
     }
 
-    @Id
     public Integer getId() {
         return id;
     }
@@ -33,8 +37,6 @@ public class UserRole extends BaseEntity {
         this.id = userRoleId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username")
     public User getUser() {
         return user;
     }

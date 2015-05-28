@@ -3,10 +3,7 @@ package com.noveria.absencemanagement.model.user.entities;
 import com.noveria.absencemanagement.model.common.entities.BaseEntity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,30 +17,28 @@ import java.util.Set;
 public class User extends BaseEntity {
 
 
+    @Id
+    @GeneratedValue
+    protected Long id;
+
     private String username;
     private String password;
     private boolean enabled;
-    private List<UserRole> userRole = new ArrayList<UserRole>(0);
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<UserRole> userRole;
 
     public User() {
     }
 
-    public User(String username, String password, boolean enabled) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
+    public Long getId() {
+        return id;
     }
 
-    public User(String username, String password, boolean enabled, List<UserRole> userRole) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.userRole = userRole;
-
+    public void setId(Long id) {
+        this.id = id;
     }
 
-
-    @Id
     public String getUsername() {
         return username;
     }
@@ -68,7 +63,7 @@ public class User extends BaseEntity {
         this.enabled = enabled;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+
     public List<UserRole> getUserRole() {
         return userRole;
     }
