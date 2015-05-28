@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 public class UserRole extends BaseEntity {
 
-    private Integer userRoleId;
+    private Integer id;
     private User user;
     private String role;
 
@@ -25,12 +25,12 @@ public class UserRole extends BaseEntity {
     }
 
     @Id
-    public Integer getUserRoleId() {
-        return userRoleId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserRoleId(Integer userRoleId) {
-        this.userRoleId = userRoleId;
+    public void setId(Integer userRoleId) {
+        this.id = userRoleId;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
