@@ -7,6 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +44,18 @@ public class UserDAO extends BaseDAO<User>{
         return user;
     }
 
-    public User getUserDetailsbyId(Long id) throws NoResultException {
+    public User findUserDetailsbyId(Long id) throws NoResultException {
         return findById(id);
+    }
+
+    public User findUserByUsernameAndPassword(String username, String password) {
+        String sql = "select u from User u where u.username = :username and u.password = :password";
+
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("username",username);
+        query.setParameter("password",password);
+
+        return (User) query.getSingleResult();
     }
 
     @Override

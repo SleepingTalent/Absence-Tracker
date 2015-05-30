@@ -35,9 +35,9 @@ public abstract class BaseDAO<T> {
     public T findById(final Object id) {
         T result = (T) entityManager.find(getEntityClass(), id);
 
-        if(result == null) {
-            throw new NoResultException("No Results found for "+
-                    getEntityClass().getName()+" with id "+id);
+        if (result == null) {
+            throw new NoResultException("No Results found for " +
+                    getEntityClass().getName() + " with id " + id);
         }
 
         return result;

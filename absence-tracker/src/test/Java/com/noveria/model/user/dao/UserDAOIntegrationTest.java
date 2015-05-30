@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,13 +81,40 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
         Assert.assertEquals(2, actual.getUserRole().size());
 
         Assert.assertEquals("admin", actual.getUserRole().get(0).getRole());
-        Assert.assertEquals(6, actual.getUserRole().get(0).getId().intValue());
+        Assert.assertNotNull("User Role has not been persisted", actual.getUserRole().get(0).getId().intValue());
         Assert.assertEquals("adminUser", actual.getUserRole().get(0).getUserId().getUsername());
 
         Assert.assertEquals("employee", actual.getUserRole().get(1).getRole());
-        Assert.assertEquals(7, actual.getUserRole().get(1).getId().intValue());
+        Assert.assertNotNull("User Role has not been persisted", actual.getUserRole().get(1).getId().intValue());
         Assert.assertEquals("adminUser", actual.getUserRole().get(1).getUserId().getUsername());
+    }
 
+    @Test
+    public void findUsernameAndPassword_returns_AsExpected() {
+        User actual = userDAO.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
+
+        Assert.assertEquals("adminUser", actual.getUsername());
+        Assert.assertEquals("adminPassword", actual.getPassword());
+        Assert.assertTrue("Expected Enabled to be TRUE!", actual.isEnabled());
+        Assert.assertEquals(2, actual.getUserRole().size());
+
+        Assert.assertEquals("admin", actual.getUserRole().get(0).getRole());
+        Assert.assertNotNull("User Role has not been persisted!", actual.getUserRole().get(0).getId());
+        Assert.assertEquals("adminUser", actual.getUserRole().get(0).getUserId().getUsername());
+
+        Assert.assertEquals("employee", actual.getUserRole().get(1).getRole());
+        Assert.assertNotNull("User Role has not been persisted!", actual.getUserRole().get(1).getId());
+        Assert.assertEquals("adminUser", actual.getUserRole().get(1).getUserId().getUsername());
+    }
+
+    @Test(expected = NoResultException.class)
+    public void findUsernameAndPassword_throwsException_whenUsernameNotFound() {
+        userDAO.findUserByUsernameAndPassword("notFound", user.getPassword());
+    }
+
+    @Test(expected = NoResultException.class)
+    public void findUsernameAndPassword_throwsException_whenPasswordNotFound() {
+        userDAO.findUserByUsernameAndPassword(user.getUsername(), "notFound");
     }
 
 }
