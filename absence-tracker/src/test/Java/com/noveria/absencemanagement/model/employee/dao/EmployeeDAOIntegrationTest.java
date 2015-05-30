@@ -1,6 +1,5 @@
-package com.noveria.model.employee.dao;
+package com.noveria.absencemanagement.model.employee.dao;
 
-import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.common.BaseIntegrationTest;
 import com.noveria.helper.PersistenceHelper;

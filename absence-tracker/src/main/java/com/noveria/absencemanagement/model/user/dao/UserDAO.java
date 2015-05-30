@@ -21,9 +21,6 @@ import java.util.List;
 @Repository
 public class UserDAO extends BaseDAO<User>{
 
-    @Autowired
-    UserRoleDAO userRoleDAO;
-
     public User create(User user) {
         user = super.create(user);
 
@@ -34,7 +31,7 @@ public class UserDAO extends BaseDAO<User>{
 
             userRole.setUserId(user);
 
-            userRole = userRoleDAO.create(userRole);
+            entityManager.persist(userRole);
 
             persistedRoles.add(userRole);
         }
@@ -44,16 +41,11 @@ public class UserDAO extends BaseDAO<User>{
         return user;
     }
 
-    public User findUserDetailsbyId(Long id) throws NoResultException {
-        return findById(id);
-    }
-
-    public User findUserByUsernameAndPassword(String username, String password) {
-        String sql = "select u from User u where u.username = :username and u.password = :password";
+    public User findUserByUsername(String username) {
+        String sql = "select u from User u where u.username = :username";
 
         Query query = entityManager.createQuery(sql);
         query.setParameter("username",username);
-        query.setParameter("password",password);
 
         return (User) query.getSingleResult();
     }

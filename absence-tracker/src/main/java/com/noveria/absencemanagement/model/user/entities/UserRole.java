@@ -1,7 +1,5 @@
 package com.noveria.absencemanagement.model.user.entities;
 
-import com.noveria.absencemanagement.model.common.entities.BaseEntity;
-
 import javax.persistence.*;
 
 /**
@@ -9,7 +7,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class UserRole extends BaseEntity {
+public class UserRole {
 
     @Id
     @GeneratedValue
@@ -26,10 +24,6 @@ public class UserRole extends BaseEntity {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long userRoleId) {
-        this.id = userRoleId;
     }
 
     public User getUserId() {

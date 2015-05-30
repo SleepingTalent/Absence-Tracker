@@ -1,20 +1,15 @@
 package com.noveria.absencemanagement.model.user.entities;
 
-import com.noveria.absencemanagement.model.common.entities.BaseEntity;
-
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by lynseymcgregor on 26/05/2015.
  */
 
 @Entity
-public class User extends BaseEntity {
+public class User {
 
     @Id
     @GeneratedValue

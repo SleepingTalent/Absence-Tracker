@@ -1,11 +1,10 @@
-package com.noveria.service.employee;
+package com.noveria.absencemanagement.service.employee;
 
 import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
-import com.noveria.absencemanagement.model.user.entities.User;
-import com.noveria.absencemanagement.service.employee.EmployeeService;
 import com.noveria.absencemanagement.service.employee.exception.EmployeeNotFoundException;
-import com.noveria.absencemanagement.service.user.exception.UserNotFoundException;
+import com.noveria.common.BaseUnitTest;
+import com.noveria.common.groups.UnitTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -24,7 +23,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * Created by lynseymcgregor on 30/05/2015.
  */
-public class EmployeeServiceTest {
+public class EmployeeServiceTest extends BaseUnitTest {
 
     @InjectMocks
     EmployeeService employeeService;
@@ -36,7 +35,6 @@ public class EmployeeServiceTest {
 
     @Before
     public void setUp() {
-        initMocks(this);
 
         employee = new Employee();
         employee.setId(1234l);

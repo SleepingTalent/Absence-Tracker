@@ -3,7 +3,6 @@ package com.noveria.helper;
 import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.user.dao.UserDAO;
-import com.noveria.absencemanagement.model.user.dao.UserRoleDAO;
 import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.model.user.entities.UserRole;
 import org.junit.Assert;
@@ -18,9 +17,6 @@ public class PersistenceHelper {
 
     @Autowired
     UserDAO userDAO;
-
-    @Autowired
-    UserRoleDAO userRoleDAO;
 
     public Employee persistNewEmployee(Employee employee) {
 
@@ -43,14 +39,4 @@ public class PersistenceHelper {
         return user;
     }
 
-    public UserRole persistNewUserRole(UserRole role) {
-        Assert.assertNull("Expected Id to be Null!", role.getId());
-
-        role = userRoleDAO.create(role);
-
-        Assert.assertNotNull("Expected Id to be populated!", role.getId());
-
-        return role;
-
-    }
 }

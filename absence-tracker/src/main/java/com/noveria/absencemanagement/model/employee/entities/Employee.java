@@ -1,13 +1,11 @@
 package com.noveria.absencemanagement.model.employee.entities;
 
 
-import com.noveria.absencemanagement.model.common.entities.BaseEntity;
-
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Employee extends BaseEntity {
+public class Employee {
 
     @Id
     @GeneratedValue

@@ -1,6 +1,5 @@
-package com.noveria.model.user.dao;
+package com.noveria.absencemanagement.model.user.dao;
 
-import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.model.user.entities.UserRole;
 import com.noveria.common.BaseIntegrationTest;
@@ -91,7 +90,7 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void findUsernameAndPassword_returns_AsExpected() {
-        User actual = userDAO.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
+        User actual = userDAO.findUserByUsername(user.getUsername());
 
         Assert.assertEquals("adminUser", actual.getUsername());
         Assert.assertEquals("adminPassword", actual.getPassword());
@@ -109,12 +108,7 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
 
     @Test(expected = NoResultException.class)
     public void findUsernameAndPassword_throwsException_whenUsernameNotFound() {
-        userDAO.findUserByUsernameAndPassword("notFound", user.getPassword());
-    }
-
-    @Test(expected = NoResultException.class)
-    public void findUsernameAndPassword_throwsException_whenPasswordNotFound() {
-        userDAO.findUserByUsernameAndPassword(user.getUsername(), "notFound");
+        userDAO.findUserByUsername("notFound");
     }
 
 }
