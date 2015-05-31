@@ -11,8 +11,11 @@
 </h:head>
 <h:body>
     <h2>Welcome to the Dashboard</h2>
+
+    <p:outputLabel id="adminrole" value="You have admin access!" />
+
     <!-- View element level Spring Security : only can view for who has the role 'ROLE_ADMIN' -->
-    <sec:authorize access="hasRole('ADMIN')">
+    <!-- <sec:authorize access="hasRole('ADMIN')">
         <p:outputLabel id="adminrole" value="You have admin access!" />
     </sec:authorize>
     <sec:authorize access="hasRole('MANAGER')">
@@ -20,6 +23,6 @@
     </sec:authorize>
     <sec:authorize access="hasRole('EMPLOYEE')">
         <p:outputLabel id="employeeole" value="You have employee access!" />
-    </sec:authorize>
+    </sec:authorize> -->
 </h:body>
 </html>
