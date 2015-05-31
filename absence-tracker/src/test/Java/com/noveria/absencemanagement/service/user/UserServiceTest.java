@@ -5,7 +5,6 @@ import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.model.user.entities.UserRole;
 import com.noveria.common.BaseUnitTest;
 import com.noveria.common.groups.UnitTest;
-import com.sun.xml.internal.rngom.parse.host.Base;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
