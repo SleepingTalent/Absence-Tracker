@@ -6,10 +6,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-
+import javax.faces.context.FacesContext;
 /**
  * Created by lynseymcgregor on 31/05/2015.
  */
@@ -29,9 +30,12 @@ public class LoginData {
             Authentication result = authenticationManager.authenticate(request);
             SecurityContextHolder.getContext().setAuthentication(result);
         } catch (AuthenticationException e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login Unsuccessful",  "Username or Password is Incorrect") );
             e.printStackTrace();
             return "incorrect";
         }
+
         return "correct";
     }
 

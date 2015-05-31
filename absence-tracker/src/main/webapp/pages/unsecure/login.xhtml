@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+    <div align="center" style="">
+
+        <h:form  id="loginForm" prependId="false">
+
+            <p:growl id="messages" showDetail="true"/>
+
+            <p:panel id="mainPanel" header="This is the login panel">
+            <p:panelGrid columns="2" columnClasses="alignTop">
+                <p:column>
+                    <h:outputText id="userNameLbl" value="Username: "/>
+                </p:column>
+                <p:column>
+                    <h:inputText id="userName" required="true" value="#{loginData.userName}" requiredMessage="Please enter username"/>
+                </p:column>
+                <p:column>
+                    <h:outputText id="psswordLbl" value="Password: "/>
+                </p:column>
+                <p:column>
+                    <h:inputSecret id="password"  required="true" value="#{loginData.password}" requiredMessage="Please enter password" />
+                </p:column>
+                <p:column>
+                    <h:commandButton id="loginBtn" value="Login" action="#{loginData.login}" update="messages"/>
+                </p:column>
+            </p:panelGrid>
+            </p:panel>
+        </h:form>
+
+    </div>
+</h:body>
+</html>

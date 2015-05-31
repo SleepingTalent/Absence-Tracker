@@ -9,8 +9,9 @@
     </appender>
 
     <logger name="o.e.jetty.webapp.WebAppClassLoader" level="INFO"/>
+    <logger name="org.springframework.security" level="DEBUG"/>
 
-    <root level="ERROR">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
 

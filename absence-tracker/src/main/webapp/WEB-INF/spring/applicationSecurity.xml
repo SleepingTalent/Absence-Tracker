@@ -13,17 +13,25 @@
 
 
     <sec:http auto-config="true" use-expressions="true">
-        <!-- Page level Spring Security : Intercept access to resources in /pages/secure/** -->
-        <sec:intercept-url pattern="/**" access="hasAnyRole({'ADMIN','MANAGER','EMPLOYEE'})" />
+        <!-- Page level Spring Security : Intercept access to resources in ** -->
+        <sec:intercept-url pattern="/pages/secure/**" access="hasAnyRole({'ADMIN','MANAGER','EMPLOYEE'})" />
+
+        <!-- Page level Spring Security : Intercept access to resources in ** -->
+        <!-- <sec:intercept-url pattern="/**" access="hasAnyRole({'ADMIN','MANAGER','EMPLOYEE'})" /> -->
 
         <!-- Page level Spring Security : Enable Primefaces -->
         <sec:intercept-url pattern="/javax.faces.resource/**" access="permitAll"/>
 
+        <!-- Page level Spring Security : Permit access to resources in /pages/unsecure/** -->
+        <sec:intercept-url pattern="/pages/unsecure/**" access="permitAll"/>
+
         <!-- Define login page for Spring Security -->
-        <sec:form-login login-page="/login.xhtml"/>
+        <sec:form-login login-page="/pages/unsecure/login.xhtml"/>
 
         <!-- Define logout properties for Spring Security -->
         <sec:logout invalidate-session="true" delete-cookies="true" logout-success-url="/"/>
+
+        <sec:csrf disabled="true"/>
     </sec:http>
 
     <!-- Set UserService class as the authentication Manager for Spring Security-->
