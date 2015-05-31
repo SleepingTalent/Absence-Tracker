@@ -45,7 +45,7 @@ public class RuntimeState {
     }
 
     public LoginPage getLoginPage() {
-        return new LoginPage(webDriver,ABSENCE_TRACKER_URL);
+        return new LoginPage(webDriver);
     }
 
     public void setLoginDetails(LoginDetails loginDetails) {

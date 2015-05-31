@@ -14,6 +14,6 @@ public class FirefoxCucumberWebDriver extends FirefoxDriver implements CucumberW
     }
 
     public void closeBrowser() {
-        quit();
+        close();
     }
 }

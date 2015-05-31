@@ -54,6 +54,7 @@ public class LoginStep {
     @When("^the user logs in$")
     public void the_user_logs_in() throws Throwable {
         LoginPage loginPage =runtimeState.getLoginPage();
+        loginPage.navigateToLoginPage();
 
         loginPage.inputUserName(runtimeState.getLoginDetails().getUsername());
         loginPage.inputPassword(runtimeState.getLoginDetails().getPassword());
@@ -70,9 +71,11 @@ public class LoginStep {
         dashboardPage.assertAdminTextPresent();
     }
 
-    @Then("^then a login error is displayed$")
-    public void then_a_login_error_is_displayed() throws Throwable {
-        fail("TODO : IMPLEMEMENT ME!");
+    @Then("^a login error is displayed$")
+    public void a_login_error_is_displayed() throws Throwable {
+        LoginPage loginPage = runtimeState.getLoginPage();
+        loginPage.assertLoginErrorIsDisplayed();
+        runtimeState.takeScreenShot();
     }
 
 }

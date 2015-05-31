@@ -46,6 +46,6 @@ public class PhantomCucumberWebDriver extends PhantomJSDriver implements Cucumbe
     }
 
     public void closeBrowser() {
-        quit();
+        close();
     }
 }

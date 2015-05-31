@@ -11,17 +11,14 @@ import static org.junit.Assert.fail;
 
 public final class WebDriverFactory {
 
-    private static CucumberWebDriver webDriver = null;
-
     public enum Browser {
         FIREFOX, PHANTOM;
     }
 
     public static CucumberWebDriver getWebDriver() {
 
-        if(webDriver == null) {
-
-            Browser browserType = getBrowser();
+        Browser browserType = getBrowser();
+        CucumberWebDriver webDriver = null;
 
             switch (browserType) {
                 case FIREFOX:
@@ -35,7 +32,6 @@ public final class WebDriverFactory {
             webDriver.getWindowHandle();
             webDriver.manage().window().maximize();
             webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        }
 
         return webDriver;
     }
