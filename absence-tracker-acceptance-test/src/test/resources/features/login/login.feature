@@ -1,5 +1,5 @@
 @login
-Feature: Example Feature
+Feature: Application Login Features
 
   Scenario: A valid Admin User logs in
     Given a valid "Admin" user

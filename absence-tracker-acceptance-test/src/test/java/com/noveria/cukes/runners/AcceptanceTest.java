@@ -5,6 +5,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import org.springframework.core.io.ClassRelativeResourceLoader;
 
 import java.io.File;
 
@@ -17,18 +18,12 @@ import static org.junit.Assert.assertTrue;
 public class AcceptanceTest {
 
         static {
-                //System.setProperty("browser", "Firefox");
                 System.setProperty("browser", "Phantom");
-
-
+                //System.setProperty("browser", "Chrome");
         }
 
         @BeforeClass
         public static void setUp() {
-                /*String phantomJsBinary = System.getProperty("phantomjs.binary");
-
-                assertNotNull(phantomJsBinary);
-                assertTrue(new File(phantomJsBinary).exists());*/
         }
 
 }

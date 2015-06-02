@@ -1,6 +1,7 @@
 package com.noveria.cukes.helpers.selenium;
 
 
+import com.noveria.cukes.helpers.selenium.webdriver.ChromeCucumberWebDriver;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
 import com.noveria.cukes.helpers.selenium.webdriver.FirefoxCucumberWebDriver;
 import com.noveria.cukes.helpers.selenium.webdriver.PhantomCucumberWebDriver;
@@ -12,7 +13,7 @@ import static org.junit.Assert.fail;
 public final class WebDriverFactory {
 
     public enum Browser {
-        FIREFOX, PHANTOM;
+        FIREFOX, PHANTOM, CHROME;
     }
 
     public static CucumberWebDriver getWebDriver() {
@@ -27,6 +28,8 @@ public final class WebDriverFactory {
                 case PHANTOM:
                     webDriver = new PhantomCucumberWebDriver();
                     break;
+                case CHROME:
+                    webDriver = new ChromeCucumberWebDriver();
             }
 
             webDriver.getWindowHandle();
@@ -43,6 +46,8 @@ public final class WebDriverFactory {
            return Browser.FIREFOX;
         }else if ("PHANTOM".equalsIgnoreCase(browserType)) {
            return Browser.PHANTOM;
+        }else if ("CHROME".equalsIgnoreCase(browserType)) {
+            return Browser.CHROME;
         }else {
             fail("Web Browser not supported : "+browserType);
             return null;
