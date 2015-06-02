@@ -11,8 +11,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+
 /**
- * Created by lynseymcgregor on 31/05/2015.
+ * This class Manages Login Actions
+ *
+ * @author lynseymcgregor
  */
 @ManagedBean(name = "loginData")
 @RequestScoped
@@ -24,6 +27,11 @@ public class LoginData {
     @ManagedProperty(value = "#{authenticationManager}")
     private AuthenticationManager authenticationManager = null;
 
+    /**
+     * Login method, authenticates username and password
+     *
+     * @return String "correct" if successful otherwise "incorrect"
+     */
     public String login() {
         try {
             Authentication request = new UsernamePasswordAuthenticationToken(this.getUserName(), this.getPassword());
@@ -39,10 +47,12 @@ public class LoginData {
         return "correct";
     }
 
-    public String cancel() {
-        return null;
-    }
 
+    /**
+     * Logs the User out by clearing the SecurityContext
+     *
+     * @return String "loggedout"
+     */
     public String logout() {
         SecurityContextHolder.clearContext();
         return "loggedout";

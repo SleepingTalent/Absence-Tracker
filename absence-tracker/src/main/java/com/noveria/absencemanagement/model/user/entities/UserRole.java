@@ -3,7 +3,15 @@ package com.noveria.absencemanagement.model.user.entities;
 import javax.persistence.*;
 
 /**
- * Created by lynseymcgregor on 26/05/2015.
+ * This class represents a single row in the
+ * UserRole Table which maps to the primary key
+ * of the Users Table.
+ *
+ * This table contains two columns;
+ * a foreign key which maps to the ID in Users
+ * Table. And a String representing the role.
+ *
+ * @author lynseymcgregor
  */
 
 @Entity

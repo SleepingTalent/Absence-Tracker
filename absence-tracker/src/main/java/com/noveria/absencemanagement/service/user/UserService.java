@@ -19,14 +19,35 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by lynseymcgregor on 30/05/2015.
+ * This class performs authorisation actions against
+ * users and roles.
+ *
+ * @author lynseymcgregor
  */
+
 @Service
 public class UserService implements UserDetailsService {
 
+    /**
+     * Autowired; is a spring command which
+     * automatically injects an instance of
+     * the named object into the class.
+     */
     @Autowired
     UserDAO userDAO;
 
+    /**
+     * This method finds all the roles associated
+     * for each user and grants them those authorities
+     * associated with those roles.
+     *
+     * If the username is not found it throws an
+     * exception.
+     *
+     * @param username
+     * @return UserDetails - including UserRoles
+     * @throws UsernameNotFoundException
+     */
     @Transactional(readOnly=true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -42,19 +63,32 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    // Converts com.mkyong.users.model.User user to
-    // org.springframework.security.core.userdetails.User
+
+    /**
+     * Builds a Spring UserDetails object containing
+     * granted authorities
+     *
+     * @param user - Logged in User
+     * @param authorities - Roles assigned to the User
+     * @return Spring Framework User
+     */
     private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(), user.getPassword(),
                 user.isEnabled(), true, true, true, authorities);
     }
 
+    /**
+     * Builds a list of all granted authorities
+     * based on the user roles
+     * @param userRoles - Roles assigned to the User
+     * @return A list of granted authorities
+     */
     private List<GrantedAuthority> buildUserAuthority(List<UserRole> userRoles) {
 
         Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
-        // Build user's authorities
+
         for (UserRole userRole : userRoles) {
             setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
         }

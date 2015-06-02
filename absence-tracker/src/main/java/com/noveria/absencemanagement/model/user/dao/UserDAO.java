@@ -16,11 +16,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lynseymcgregor on 26/05/2015.
+ * This is a data access class that performs operations
+ * on the Users Table.
+ *
+ * The DAO contains methods for creating, updating, and
+ * retrieving rows.
+ *
+ * @author lynseymcgregor
+ *
  */
+
 @Repository
 public class UserDAO extends BaseDAO<User>{
 
+    /**
+     * This method wil create a new user row in the Users Table.
+     * If the user has any associated user roles these will
+     * also be created.
+     *
+     * @param user A user and roles to be persisted.
+     * @return A persisted User Entity.
+     */
     public User create(User user) {
         user = super.create(user);
 
@@ -41,6 +57,13 @@ public class UserDAO extends BaseDAO<User>{
         return user;
     }
 
+    /**
+     * This method searches for a User row that has a User
+     * name column matching the parameter.
+     *
+     * @param username The username of the user we wish to find.
+     * @return A persisted user entity.
+     */
     public User findUserByUsername(String username) {
         String sql = "select u from User u where u.username = :username";
 

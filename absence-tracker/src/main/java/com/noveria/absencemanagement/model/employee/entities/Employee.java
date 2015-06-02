@@ -4,6 +4,17 @@ package com.noveria.absencemanagement.model.employee.entities;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * This class represents a single row in the
+ * employee Table.
+ *
+ * The table contains the following columns;
+ * String first name and last name. Date Date of
+ * birth.
+ *
+ * @author lynseymcgregor
+ */
+
 @Entity
 public class Employee {
 

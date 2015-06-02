@@ -5,9 +5,17 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Created by lynseymcgregor on 26/05/2015.
+ * This class represents a single row in the Users Table.
+ *
+ * The Table contains the following columns; ID, Username,
+ * Password and enabled.
+ *
+ * The table has a one to many mapping against the UserRole
+ * Table.
+ *
+ * @author lynseymcgregor
+ *
  */
-
 @Entity
 public class User {
 
