@@ -55,4 +55,5 @@ public class RuntimeState {
     public LoginDetails getLoginDetails() {
         return loginDetails;
     }
+
 }

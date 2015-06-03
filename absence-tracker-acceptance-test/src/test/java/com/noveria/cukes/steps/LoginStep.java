@@ -1,6 +1,7 @@
 package com.noveria.cukes.steps;
 
 import com.noveria.cukes.helpers.LoginDetails;
+import com.noveria.cukes.helpers.UserType;
 import com.noveria.cukes.helpers.selenium.page.DashboardPage;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.runtime.RuntimeState;
@@ -36,16 +37,20 @@ public class LoginStep {
     public void a_valid_user(String userType) throws Throwable {
         LoginDetails validUser = new LoginDetails();
 
-        if (userType.equalsIgnoreCase("admin")) {
+        UserType foundUserType = UserType.findByName(userType);
+
+        if (foundUserType.equals(UserType.ADMIN)) {
             validUser.setUsername("admin");
             validUser.setPassword("password");
-        } else if (userType.equalsIgnoreCase("manager")) {
+            validUser.setUserType(foundUserType);
+        } else if (foundUserType.equals(UserType.MANAGER)) {
             validUser.setUsername("manager");
             validUser.setPassword("password");
-
-        } else if (userType.equalsIgnoreCase("employee")) {
+            validUser.setUserType(foundUserType);
+        } else if (foundUserType.equals(UserType.EMPLOYEE)) {
             validUser.setUsername("employee");
             validUser.setPassword("password");
+            validUser.setUserType(foundUserType);
         }
 
         runtimeState.setLoginDetails(validUser);
@@ -68,7 +73,14 @@ public class LoginStep {
     public void they_are_redirected_to_the_dashboard() throws Throwable {
         runtimeState.takeScreenShot();
         DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
-        dashboardPage.assertAdminTextPresent();
+
+        if(runtimeState.getLoginDetails().getUserType().equals(UserType.ADMIN)) {
+            dashboardPage.assertAdminTextPresent();
+        } else if (runtimeState.getLoginDetails().getUserType().equals(UserType.MANAGER)) {
+           dashboardPage.assertManagerTextPresent();
+        } else if (runtimeState.getLoginDetails().getUserType().equals(UserType.EMPLOYEE)) {
+           dashboardPage.assertEmployeeTextPresent();
+        }
     }
 
     @Then("^a login error is displayed$")

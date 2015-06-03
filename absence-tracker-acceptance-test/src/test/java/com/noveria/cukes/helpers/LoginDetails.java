@@ -7,6 +7,7 @@ public class LoginDetails {
 
     String username;
     String password;
+    private UserType userType;
 
     public String getUsername() {
         return username;
@@ -22,5 +23,13 @@ public class LoginDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public UserType getUserType() {
+        return userType;
     }
 }

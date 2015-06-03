@@ -6,6 +6,16 @@ Feature: Application Login Features
     When the user logs in
     Then they are redirected to the appropriate dashboard
 
+  Scenario: A valid Manager User logs in
+    Given a valid "Manager" user
+    When the user logs in
+    Then they are redirected to the appropriate dashboard
+
+  Scenario: A valid Employee User logs in
+    Given a valid "Employee" user
+    When the user logs in
+    Then they are redirected to the appropriate dashboard
+
   Scenario: An invalid User logs in
     Given an invalid user
     When the user logs in

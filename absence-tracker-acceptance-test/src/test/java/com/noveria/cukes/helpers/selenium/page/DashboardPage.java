@@ -7,6 +7,8 @@ import static org.junit.Assert.assertEquals;
 public class DashboardPage extends Page {
 
     private static final String ADMIN_TEXT_LABEL_ID  = "adminrole";
+    private static final String MANAGER_TEXT_LABEL_ID  = "managerrole";
+    private static final String EMPLOYEE_TEXT_LABEL_ID  = "employerole";
 
     public DashboardPage(CucumberWebDriver webDriver) {
 
@@ -16,6 +18,16 @@ public class DashboardPage extends Page {
     public void assertAdminTextPresent(){
         String adminText = getPageHelper().findElementById(ADMIN_TEXT_LABEL_ID).getText();
         assertEquals("You have admin access!",adminText);
+    }
+
+    public void assertManagerTextPresent(){
+        String adminText = getPageHelper().findElementById(MANAGER_TEXT_LABEL_ID).getText();
+        assertEquals("You have manager access!",adminText);
+    }
+
+    public void assertEmployeeTextPresent(){
+        String adminText = getPageHelper().findElementById(EMPLOYEE_TEXT_LABEL_ID).getText();
+        assertEquals("You have employee access!",adminText);
     }
 
 }
