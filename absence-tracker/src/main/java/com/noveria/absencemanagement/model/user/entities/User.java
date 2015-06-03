@@ -21,10 +21,16 @@ public class User {
 
     @Id
     @GeneratedValue
+    @Column(name = "ID")
     protected Long id;
 
+    @Column(name = "USERNAME")
     private String username;
+
+    @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "ENABLED")
     private boolean enabled;
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)

@@ -19,8 +19,10 @@ public class UserRole {
 
     @Id
     @GeneratedValue
+    @Column(name = "ID")
     private Long id;
 
+    @Column(name = "ROLE")
     private String role;
 
     @ManyToOne

@@ -1,6 +1,8 @@
 package com.noveria.absencemanagement.model.employee.entities;
 
 
+import com.noveria.absencemanagement.model.department.entities.Department;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,11 +22,18 @@ public class Employee {
 
     @Id
     @GeneratedValue
+    @Column(name = "ID")
     protected Long id;
 
+    @Column(name = "FIRST_NAME")
     private String firstName;
+
+    @Column(name = "LAST_NAME")
     private String lastName;
-    private Date dateOfBirth;
+
+    @ManyToOne
+    @JoinColumn(name = "DEPARTMENT_ID", referencedColumnName = "ID")
+    private Department department;
 
     public void setId(Long id) {
         this.id = id;
@@ -42,10 +51,6 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -54,8 +59,11 @@ public class Employee {
         return lastName;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public Department getDepartment() {
+        return department;
     }
 
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 }

@@ -1,5 +1,7 @@
 package com.noveria.absencemanagement.model.employee.dao;
 
+import com.noveria.absencemanagement.model.department.dao.DepartmentDAO;
+import com.noveria.absencemanagement.model.department.entities.Department;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.common.BaseIntegrationTest;
 import com.noveria.helper.PersistenceHelper;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/test-applicationContext.xml"})
@@ -25,6 +28,9 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
 
     @Autowired
     EmployeeDAO employeeDAO;
+
+    @Autowired
+    DepartmentDAO departmentDAO;
 
     @Autowired
     PersistenceHelper persistenceHelper;
@@ -37,7 +43,6 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
         employee = new Employee();
         employee.setFirstName("Dave");
         employee.setLastName("Smith");
-        employee.setDateOfBirth(new Date());
 
         employee = persistenceHelper.persistNewEmployee(employee);
     }
@@ -51,7 +56,6 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
         Employee employee = new Employee();
         employee.setFirstName("Rachel");
         employee.setLastName("Smith");
-        employee.setDateOfBirth(new Date());
 
         Assert.assertNull("Expected Id to be Null!", employee.getId());
 
@@ -68,7 +72,7 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void countAll_returns_AsExpected() {
-        Assert.assertEquals(1, employeeDAO.countAll());
+        Assert.assertEquals(4, employeeDAO.countAll());
     }
 
     @Test
@@ -82,7 +86,6 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
         Assert.assertEquals(employee.getId(), actual.getId());
         Assert.assertEquals(employee.getFirstName(), actual.getFirstName());
         Assert.assertEquals("modified", actual.getLastName());
-        Assert.assertEquals(employee.getDateOfBirth(), actual.getDateOfBirth());
     }
 
     @Test
@@ -92,7 +95,6 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
         Assert.assertEquals(employee.getId(), actual.getId());
         Assert.assertEquals(employee.getFirstName(), actual.getFirstName());
         Assert.assertEquals(employee.getLastName(), actual.getLastName());
-        Assert.assertEquals(employee.getDateOfBirth(), actual.getDateOfBirth());
     }
 
     @Test
@@ -102,7 +104,24 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
         Assert.assertEquals(employee.getId(), actual.getId());
         Assert.assertEquals(employee.getFirstName(), actual.getFirstName());
         Assert.assertEquals(employee.getLastName(), actual.getLastName());
-        Assert.assertEquals(employee.getDateOfBirth(), actual.getDateOfBirth());
+    }
+
+    @Test
+    public void findByDepartment_returns_AsExpected(){
+        Department department = departmentDAO.findDepartmentbyName("Software Development");
+        Assert.assertNotNull(department);
+
+        List<Employee> actual = employeeDAO.findEmployeesbyDepartmentId(department);
+
+        Assert.assertNotNull(actual);
+        Assert.assertEquals(2, actual.size());
+
+        Assert.assertEquals("Dave", actual.get(0).getFirstName());
+        Assert.assertEquals("Worker", actual.get(0).getLastName());
+
+        Assert.assertEquals("Jane", actual.get(1).getFirstName());
+        Assert.assertEquals("Worker", actual.get(1).getLastName());
+
     }
 
 }
