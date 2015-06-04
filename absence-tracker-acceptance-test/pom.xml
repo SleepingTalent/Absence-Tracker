@@ -254,7 +254,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+        <!--    <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
                 <version>0.0.5</version>
@@ -271,7 +271,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
         </plugins>
     </build>
 </project>
