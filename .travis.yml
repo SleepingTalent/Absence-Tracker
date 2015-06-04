@@ -1,2 +1,2 @@
 language: java
-script: mvn verify -p generate-reports
+script: mvn verify -P generate-reports
