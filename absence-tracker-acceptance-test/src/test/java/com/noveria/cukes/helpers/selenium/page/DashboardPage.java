@@ -6,9 +6,9 @@ import static org.junit.Assert.assertEquals;
 
 public class DashboardPage extends Page {
 
-    private static final String ADMIN_TEXT_LABEL_ID  = "adminrole";
-    private static final String MANAGER_TEXT_LABEL_ID  = "managerrole";
-    private static final String EMPLOYEE_TEXT_LABEL_ID  = "employerole";
+    private static final String ADMIN_TEXT_LABEL_ID  = "tabPanel:adminrole";
+    private static final String MANAGER_TEXT_LABEL_ID  = "tabPanel:managerrole";
+    private static final String EMPLOYEE_TEXT_LABEL_ID  = "tabPanel:employerole";
 
     public DashboardPage(CucumberWebDriver webDriver) {
 

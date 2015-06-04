@@ -17,7 +17,7 @@
 
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>glass-x</param-value>
+        <param-value>start</param-value>
     </context-param>
 
     <!-- Spring Security Facelets Tag Library -->

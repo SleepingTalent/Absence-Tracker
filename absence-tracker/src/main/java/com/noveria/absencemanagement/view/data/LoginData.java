@@ -55,7 +55,7 @@ public class LoginData {
      */
     public String logout() {
         SecurityContextHolder.clearContext();
-        return "loggedout";
+        return "logout";
     }
 
     public AuthenticationManager getAuthenticationManager() {

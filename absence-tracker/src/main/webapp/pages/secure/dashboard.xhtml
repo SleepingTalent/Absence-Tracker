@@ -3,24 +3,51 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:p="http://primefaces.org/ui"
-      xmlns:sec="http://www.springframework.org/security/tags">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <title>JSF 2.0 Hello World</title>
 </h:head>
 <h:body>
-    <h2>Welcome to the Dashboard</h2>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:form id="dashboardForm" prependId="false">
 
-    <!-- View element level Spring Security : only can view for who has the role 'ROLE_ADMIN' -->
-     <sec:authorize ifAllGranted="ADMIN">
-        <p:outputLabel id="adminrole" value="You have admin access!" />
-    </sec:authorize>
-    <sec:authorize ifAllGranted="MANAGER">
-        <p:outputLabel id="managerrole" value="You have manager access!" />
-    </sec:authorize>
-    <sec:authorize ifAllGranted="EMPLOYEE">
-        <p:outputLabel id="employerole" value="You have employee access!" />
-    </sec:authorize>
+        <p:growl id="messages" showDetail="true"/>
+
+        <p:panel id="mainPanel" header="Absence Tracker">
+
+            <f:facet name="header">
+                <p:outputLabel id="mainLbl" value="Absence Tracker" style="float :left"/>
+                <p:commandButton id="logoutBtn" value="Logout" action="#{loginData.logout}" style="float :right"/>
+            </f:facet>
+
+            <p:tabView id="tabPanel">
+
+                <sec:authorize ifAllGranted="ADMIN">
+                    <p:tab id="adminTab" title="Administration">
+                        <ui:include src="admin/admin.xhtml"/>
+                    </p:tab>
+                </sec:authorize>
+
+                <sec:authorize ifAllGranted="MANAGER">
+                    <p:tab id="authoriseTab" title="Holiday Authorisation">
+                        <ui:include src="holiday/authorise.xhtml"/>
+                    </p:tab>
+                </sec:authorize>
+
+                <sec:authorize ifAllGranted="EMPLOYEE">
+                    <p:tab id="management" title="Holiday Management">
+                        <ui:include src="holiday/management.xhtml"/>
+                    </p:tab>
+                </sec:authorize>
+
+            </p:tabView>
+
+        </p:panel>
+
+    </h:form>
 </h:body>
 </html>
