@@ -21,6 +21,7 @@ Feature: Application Login Features
     When the user logs in
     Then a login error is displayed
 
+  @wip
   Scenario: An valid User logs in and out
     Given a valid "Admin" user
     When the user logs in
