@@ -14,6 +14,7 @@
 
     <sec:http auto-config="true" use-expressions="true">
         <!-- Page level Spring Security : Intercept access to resources in ** -->
+
         <sec:intercept-url pattern="/pages/secure/**" access="hasAnyRole({'ADMIN','MANAGER','EMPLOYEE'})" />
 
         <!-- Page level Spring Security : Intercept access to resources in ** -->
@@ -29,7 +30,7 @@
         <sec:form-login login-page="/pages/unsecure/login.xhtml"/>
 
         <!-- Define logout properties for Spring Security -->
-        <sec:logout invalidate-session="true" delete-cookies="true" logout-success-url="/"/>
+        <sec:logout invalidate-session="true" delete-cookies="true" logout-success-url="/pages/unsecure/login.xhtml"/>
 
         <sec:csrf disabled="true"/>
     </sec:http>
@@ -41,8 +42,9 @@
         </sec:authentication-provider>
     </sec:authentication-manager>
 
-    <!-- Inject authentication Manager to our LoginBean -->
+    <!--
     <bean id="loginBean" name="loginBean" class="com.noveria.absencemanagement.view.data.LoginData" scope="prototype">
         <property name="authenticationManager" ref="authenticationManager"/>
     </bean>
+    -->
 </beans>

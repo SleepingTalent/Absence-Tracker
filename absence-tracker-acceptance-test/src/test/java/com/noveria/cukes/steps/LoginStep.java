@@ -5,6 +5,7 @@ import com.noveria.cukes.helpers.UserType;
 import com.noveria.cukes.helpers.selenium.page.DashboardPage;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.runtime.RuntimeState;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -90,4 +91,15 @@ public class LoginStep {
         runtimeState.takeScreenShot();
     }
 
+    @When("^the user logs out$")
+    public void the_user_logs_out() throws Throwable {
+        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        dashboardPage.clickLogoutBtn();
+    }
+
+    @Then("^they are redirected to the login page$")
+    public void they_are_redirected_to_the_login_page() throws Throwable {
+        LoginPage loginPage = runtimeState.getLoginPage();
+        loginPage.assertPagePresent();
+    }
 }

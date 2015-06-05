@@ -63,7 +63,6 @@ public class UserService implements UserDetailsService {
         }
     }
 
-
     /**
      * Builds a Spring UserDetails object containing
      * granted authorities
@@ -87,7 +86,6 @@ public class UserService implements UserDetailsService {
     private List<GrantedAuthority> buildUserAuthority(List<UserRole> userRoles) {
 
         Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-
 
         for (UserRole userRole : userRoles) {
             setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));

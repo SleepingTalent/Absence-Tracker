@@ -21,5 +21,12 @@ Feature: Application Login Features
     When the user logs in
     Then a login error is displayed
 
+  Scenario: An valid User logs in and out
+    Given a valid "Admin" user
+    When the user logs in
+    Then they are redirected to the appropriate dashboard
+    When the user logs out
+    Then they are redirected to the login page
+
 
 
