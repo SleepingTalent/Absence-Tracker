@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 /**
  * This class represents a single row in the
- * UserRole Table which maps to the primary key
+ * ApplicationRole Table which maps to the primary key
  * of the Users Table.
  *
  * This table contains two columns;

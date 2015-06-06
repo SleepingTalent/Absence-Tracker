@@ -10,7 +10,7 @@ import java.util.List;
  * The Table contains the following columns; ID, Username,
  * Password and enabled.
  *
- * The table has a one to many mapping against the UserRole
+ * The table has a one to many mapping against the ApplicationRole
  * Table.
  *
  * @author lynseymcgregor

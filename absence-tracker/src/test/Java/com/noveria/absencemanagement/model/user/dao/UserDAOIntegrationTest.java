@@ -80,11 +80,11 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
         Assert.assertEquals(2, actual.getUserRole().size());
 
         Assert.assertEquals("admin", actual.getUserRole().get(0).getRole());
-        Assert.assertNotNull("User Role has not been persisted", actual.getUserRole().get(0).getId().intValue());
+        Assert.assertNotNull("User ApplicationRole has not been persisted", actual.getUserRole().get(0).getId().intValue());
         Assert.assertEquals("adminUser", actual.getUserRole().get(0).getUserId().getUsername());
 
         Assert.assertEquals("employee", actual.getUserRole().get(1).getRole());
-        Assert.assertNotNull("User Role has not been persisted", actual.getUserRole().get(1).getId().intValue());
+        Assert.assertNotNull("User ApplicationRole has not been persisted", actual.getUserRole().get(1).getId().intValue());
         Assert.assertEquals("adminUser", actual.getUserRole().get(1).getUserId().getUsername());
     }
 
@@ -98,11 +98,11 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
         Assert.assertEquals(2, actual.getUserRole().size());
 
         Assert.assertEquals("admin", actual.getUserRole().get(0).getRole());
-        Assert.assertNotNull("User Role has not been persisted!", actual.getUserRole().get(0).getId());
+        Assert.assertNotNull("User ApplicationRole has not been persisted!", actual.getUserRole().get(0).getId());
         Assert.assertEquals("adminUser", actual.getUserRole().get(0).getUserId().getUsername());
 
         Assert.assertEquals("employee", actual.getUserRole().get(1).getRole());
-        Assert.assertNotNull("User Role has not been persisted!", actual.getUserRole().get(1).getId());
+        Assert.assertNotNull("User ApplicationRole has not been persisted!", actual.getUserRole().get(1).getId());
         Assert.assertEquals("adminUser", actual.getUserRole().get(1).getUserId().getUsername());
     }
 

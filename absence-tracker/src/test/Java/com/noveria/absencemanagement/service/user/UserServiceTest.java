@@ -41,13 +41,9 @@ public class UserServiceTest extends BaseUnitTest {
         List<UserRole> roleList = new ArrayList<UserRole>();
 
         UserRole roleOne = new UserRole();
-        roleOne.setRole("roleOne");
-
-        UserRole roleTwo = new UserRole();
-        roleTwo.setRole("roleTwo");
+        roleOne.setRole("ADMIN");
 
         roleList.add(roleOne);
-        roleList.add(roleTwo);
 
         user = new User();
         user.setId(1234l);
@@ -59,12 +55,69 @@ public class UserServiceTest extends BaseUnitTest {
     }
 
     @Test
-    public void login_whenLoginValid_returnsUser() {
+    public void login_whenLoginValid_withAdminRole_returnsUser() {
         org.springframework.security.core.userdetails.UserDetails actual = userService.loadUserByUsername("admin");
         assertEquals(user.getUsername(),actual.getUsername());
         assertEquals(user.getPassword(),actual.getPassword());
 
         assertEquals(user.getUserRole().size(),actual.getAuthorities().size());
+    }
+
+    @Test
+    public void login_whenLoginValid_withManagerRole_returnsUser() {
+        List<UserRole> roleList = new ArrayList<UserRole>();
+
+        UserRole roleOne = new UserRole();
+        roleOne.setRole("MANAGER");
+
+        roleList.add(roleOne);
+
+        user.setUserRole(roleList);
+
+        org.springframework.security.core.userdetails.UserDetails actual = userService.loadUserByUsername("admin");
+        assertEquals(user.getUsername(),actual.getUsername());
+        assertEquals(user.getPassword(),actual.getPassword());
+
+        assertEquals(user.getUserRole().size(),actual.getAuthorities().size());
+    }
+
+    @Test
+    public void login_whenLoginValid_withEmployeeRole_returnsUser() {
+        List<UserRole> roleList = new ArrayList<UserRole>();
+
+        UserRole roleOne = new UserRole();
+        roleOne.setRole("EMPLOYEE");
+
+        roleList.add(roleOne);
+
+        user.setUserRole(roleList);
+
+        org.springframework.security.core.userdetails.UserDetails actual = userService.loadUserByUsername("admin");
+        assertEquals(user.getUsername(),actual.getUsername());
+        assertEquals(user.getPassword(),actual.getPassword());
+
+        assertEquals(user.getUserRole().size(),actual.getAuthorities().size());
+    }
+
+    @Test(expected = UsernameNotFoundException.class)
+    public void login_whenLoginHasNoRoles_throwsException() {
+        user.setUserRole(new ArrayList<UserRole>());
+        userService.loadUserByUsername("admin");
+
+    }
+
+    @Test(expected = UsernameNotFoundException.class)
+    public void login_whenLoginHasInvalidRoles_throwsException() {
+        List<UserRole> roleList = new ArrayList<UserRole>();
+
+        UserRole roleOne = new UserRole();
+        roleOne.setRole("invalid");
+
+        roleList.add(roleOne);
+
+        user.setUserRole(roleList);
+        userService.loadUserByUsername("admin");
+
     }
 
     @Test(expected = UsernameNotFoundException.class)

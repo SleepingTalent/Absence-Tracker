@@ -4,6 +4,7 @@ import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.model.user.entities.UserRole;
 import com.noveria.absencemanagement.service.user.exception.InvalidRolesException;
+import com.noveria.absencemanagement.service.user.userrole.ApplicationRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,9 +76,20 @@ public class UserService implements UserDetailsService {
     }
 
     private void verifyRolesValid(User user) throws InvalidRolesException {
-        if(user.getUserRole().isEmpty()) {
+        if(user.getUserRole().isEmpty() || doesNotHaveAValidRole(user.getUserRole())) {
             throw new InvalidRolesException("Invalid User Roles");
         }
+    }
+
+    private boolean doesNotHaveAValidRole(List<UserRole> userRoles) {
+
+        for(UserRole userRole : userRoles) {
+            if(ApplicationRole.isValidRole(userRole.getRole())){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -106,7 +118,7 @@ public class UserService implements UserDetailsService {
 
         for (UserRole userRole : userRoles) {
 
-            logger.debug("Adding Role to Authority: "+userRole.getRole());
+            logger.debug("Adding ApplicationRole to Authority: "+userRole.getRole());
             setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
         }
 
