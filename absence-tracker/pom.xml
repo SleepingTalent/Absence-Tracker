@@ -15,12 +15,19 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <springframework.version>4.0.3.RELEASE</springframework.version>
         <springframework.security.version>4.0.1.RELEASE</springframework.security.version>
+
         <jacoco.version>0.6.3.201306030806</jacoco.version>
+
+        <slf4j.version>1.6.4</slf4j.version>
+        <logback.version>1.0.1</logback.version>
+
         <skip.jacoco>true</skip.jacoco>
         <skip.integration.tests>false</skip.integration.tests>
         <skip.mutation.tests>true</skip.mutation.tests>
+
         <mutation.threshold>100</mutation.threshold>
         <instruction.coverage.threshold>1.0</instruction.coverage.threshold>
         <class.linecoverage.threshold>1.0</class.linecoverage.threshold>
@@ -35,6 +42,25 @@
     </repositories>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

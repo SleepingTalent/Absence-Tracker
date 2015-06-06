@@ -3,6 +3,9 @@ package com.noveria.absencemanagement.service.user;
 import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.model.user.entities.UserRole;
+import com.noveria.absencemanagement.service.user.exception.InvalidRolesException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,6 +30,8 @@ import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     /**
      * Autowired; is a spring command which
@@ -54,12 +59,24 @@ public class UserService implements UserDetailsService {
         try {
             User user = userDAO.findUserByUsername(username);
 
+            logger.debug("User found with username: "+username);
+
+            verifyRolesValid(user);
+
             List<GrantedAuthority> authorities =
                     buildUserAuthority(user.getUserRole());
 
             return buildUserForAuthentication(user, authorities);
         } catch (NoResultException nre) {
             throw new UsernameNotFoundException(nre.getMessage());
+        } catch (InvalidRolesException ire) {
+            throw new UsernameNotFoundException(ire.getMessage());
+        }
+    }
+
+    private void verifyRolesValid(User user) throws InvalidRolesException {
+        if(user.getUserRole().isEmpty()) {
+            throw new InvalidRolesException("Invalid User Roles");
         }
     }
 
@@ -88,6 +105,8 @@ public class UserService implements UserDetailsService {
         Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
         for (UserRole userRole : userRoles) {
+
+            logger.debug("Adding Role to Authority: "+userRole.getRole());
             setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
         }
 

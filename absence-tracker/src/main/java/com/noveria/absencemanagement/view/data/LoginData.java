@@ -1,5 +1,7 @@
 package com.noveria.absencemanagement.view.data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,6 +23,8 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class LoginData {
 
+    private static final Logger logger = LoggerFactory.getLogger(LoginData.class);
+
     private String userName = null;
     private String password = null;
 
@@ -38,9 +42,10 @@ public class LoginData {
             Authentication result = authenticationManager.authenticate(request);
             SecurityContextHolder.getContext().setAuthentication(result);
         } catch (AuthenticationException e) {
+            logger.error(e.getMessage()+":"+this.getUserName()+":"+this.getPassword());
+
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login Unsuccessful",  "Username or Password is Incorrect") );
-            e.printStackTrace();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login Unsuccessful", e.getMessage()) );
             return "incorrect";
         }
 
