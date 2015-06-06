@@ -52,7 +52,15 @@ public class LoginStep {
             validUser.setUsername("employee");
             validUser.setPassword("password");
             validUser.setUserType(foundUserType);
-        }
+        } else if (foundUserType.equals(UserType.NOROLE)) {
+            validUser.setUsername("norole");
+            validUser.setPassword("password");
+            validUser.setUserType(foundUserType);
+        } else if (foundUserType.equals(UserType.UNKNOWNROLE)) {
+        validUser.setUsername("unknownrole");
+        validUser.setPassword("password");
+        validUser.setUserType(foundUserType);
+    }
 
         runtimeState.setLoginDetails(validUser);
     }

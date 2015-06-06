@@ -44,6 +44,6 @@ public class LoginPage extends Page {
     public void assertLoginErrorIsDisplayed() {
         WebElement element = getPageHelper().findElementById("messages_container");
         assertEquals("Login Unsuccessful\n" +
-                "Username or Password is Incorrect",element.getText());
+                "Bad credentials",element.getText());
     }
 }

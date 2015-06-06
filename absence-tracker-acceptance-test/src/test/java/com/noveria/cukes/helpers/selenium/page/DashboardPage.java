@@ -9,7 +9,7 @@ public class DashboardPage extends Page {
     private static final String ADMIN_TEXT_LABEL_ID  = "tabPanel:adminrole";
     private static final String MANAGER_TEXT_LABEL_ID  = "tabPanel:managerrole";
     private static final String EMPLOYEE_TEXT_LABEL_ID  = "tabPanel:employerole";
-    private static final String LOGOUT_BTN_ID = "mainPanel:logoutBtn";
+    private static final String LOGOUT_BTN_ID = "logoutBtn";
 
     public DashboardPage(CucumberWebDriver webDriver) {
 

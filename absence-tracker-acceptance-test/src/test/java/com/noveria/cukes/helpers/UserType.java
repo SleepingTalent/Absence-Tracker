@@ -2,7 +2,7 @@ package com.noveria.cukes.helpers;
 
 
 public enum UserType {
-    ADMIN, MANAGER, EMPLOYEE;
+    ADMIN, MANAGER, EMPLOYEE,NOROLE, UNKNOWNROLE;
 
     public static UserType findByName(String name) {
         for(UserType type : UserType.values()) {

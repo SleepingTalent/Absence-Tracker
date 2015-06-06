@@ -32,26 +32,25 @@
             <artifactId>xml-apis</artifactId>
             <version>1.4.01</version>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-access</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback.version}</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -189,31 +188,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.0-alpha-2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>set-system-properties</goal>
-                        </goals>
-                        <configuration>
-                            <properties>
-                                <property>
-                                    <name>logback.configurationFile</name>
-                                    <value>${basedir}/src/main/resources/logging/logback.xml</value>
-                                </property>
-                                <property>
-                                    <name>org.eclipse.jetty.util.log.Log</name>
-                                    <value>org.eclipse.jetty.util.log.Slf4jLog</value>
-                                </property>
-                            </properties>
-
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.2.2.v20140723</version>
@@ -222,6 +196,7 @@
                     <war>${basedir}/../absence-tracker/target/absence-tracker-${project.version}.war</war>
                     <webApp>
                         <contextPath>/absence-tracker</contextPath>
+                        <extraClasspath>${basedir}/src/main/resources/logging/logback-test.xml</extraClasspath>
                     </webApp>
                     <stopPort>4005</stopPort>
                     <stopKey>STOP</stopKey>
@@ -230,8 +205,24 @@
                         <port>4094</port>
                         <idleTimeout>60000</idleTimeout>
                     </httpConnector>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>org.eclipse.jetty.util.log.Log</name>
+                            <value>org.eclipse.jetty.util.log.Slf4jLog</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>logback.configurationFile</name>
+                            <value>src/main/resources/logging/logback.xml</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
                 <dependencies>
+                    <!--
+                    <dependency>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                        <version>${slf4j.version}</version>
+                    </dependency>
                     <dependency>
                         <groupId>ch.qos.logback</groupId>
                         <artifactId>logback-classic</artifactId>
@@ -239,14 +230,10 @@
                     </dependency>
                     <dependency>
                         <groupId>ch.qos.logback</groupId>
-                        <artifactId>logback-access</artifactId>
+                        <artifactId>logback-core</artifactId>
                         <version>${logback.version}</version>
                     </dependency>
-                    <dependency>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-api</artifactId>
-                        <version>${slf4j.version}</version>
-                    </dependency>
+                    -->
                     <dependency>
                         <groupId>com.sun.faces</groupId>
                         <artifactId>jsf-api</artifactId>
