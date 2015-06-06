@@ -26,7 +26,6 @@ Feature: Application Login Features
     When the user logs in
     Then a login error is displayed
 
-  @wip
   Scenario: An valid User logs in with an unknown role
     Given a valid "UnknownRole" user
     When the user logs in

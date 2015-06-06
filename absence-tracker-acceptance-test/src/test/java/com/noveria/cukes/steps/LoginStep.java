@@ -109,5 +109,6 @@ public class LoginStep {
     public void they_are_redirected_to_the_login_page() throws Throwable {
         LoginPage loginPage = runtimeState.getLoginPage();
         loginPage.assertPagePresent();
+        runtimeState.takeScreenShot();
     }
 }
