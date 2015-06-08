@@ -1,12 +1,15 @@
-package com.noveria.absencemanagement.view.data;
+package com.noveria.absencemanagement.view.authentication.controller;
 
+import com.noveria.absencemanagement.view.helper.MessageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -21,15 +24,18 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "loginData")
 @RequestScoped
-public class LoginData {
+public class AuthenticationController {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginData.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     private String userName = null;
     private String password = null;
 
     @ManagedProperty(value = "#{authenticationManager}")
     private AuthenticationManager authenticationManager = null;
+
+    @ManagedProperty(value = "#{messageHelper}")
+    private MessageHelper messageHelper;
 
     /**
      * Login method, authenticates username and password
@@ -44,8 +50,7 @@ public class LoginData {
         } catch (AuthenticationException e) {
             logger.error(e.getMessage()+":"+this.getUserName()+":"+this.getPassword());
 
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login Unsuccessful", e.getMessage()) );
+            messageHelper.addErrorMessage("Login Unsuccessful", e.getMessage());
             return "incorrect";
         }
 
@@ -69,6 +74,14 @@ public class LoginData {
 
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
+    }
+
+    public MessageHelper getMessageHelper() {
+        return messageHelper;
+    }
+
+    public void setMessageHelper(MessageHelper messageHelper) {
+        this.messageHelper = messageHelper;
     }
 
     public String getUserName() {

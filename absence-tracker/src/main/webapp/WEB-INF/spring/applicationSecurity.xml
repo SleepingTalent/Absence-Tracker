@@ -49,7 +49,7 @@
     </sec:authentication-manager>
 
     <!--
-    <bean id="loginBean" name="loginBean" class="com.noveria.absencemanagement.view.data.LoginData" scope="prototype">
+    <bean id="loginBean" name="loginBean" class="com.noveria.absencemanagement.view.authenticationentication.AuthenticationController" scope="prototype">
         <property name="authenticationManager" ref="authenticationManager"/>
     </bean>
     -->
