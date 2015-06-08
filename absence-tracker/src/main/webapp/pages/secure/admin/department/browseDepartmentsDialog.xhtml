@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="browseDepartmentsDialog" widgetVar="_browseDepartmentsDialog" header="Departments" modal="true"
+              dynamic="true" resizable="false" closable="true">
+
+        <h:form id="browseDepartments">
+            <p:dataTable var="row" styleClass="browseTable" value="#{browseDepartmentController.lazyModel}" paginator="true" rows="10"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                         rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{browseDepartmentController.selectedDepartment}"
+                         id="browseDepartmentsTable" lazy="true" rowKey="#{row.id}">
+
+                <p:column id="deptId" headerText="Department Id">
+                    <h:outputText value="#{row.id}"/>
+                </p:column>
+
+                <p:column id="deptName" headerText="Name">
+                    <h:outputText value="#{row.name}"/>
+                </p:column>
+
+                <p:column id="managerName" headerText="Manager">
+                    <h:outputText value="TODO: Manager Name"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:contextMenu id="browseDepartmentsContext" for="browseDepartmentsTable">
+                <p:menuitem id="departmentEditMenuItem" value="Edit" icon="ui-icon-pencil" actionListener="#{browseDepartmentController.loadDepartment}"
+                            action="#{navigationController.showEditDepartmentDialog}"/>
+                <p:menuitem id="departmentDeleteMenuItem" value="Delete" icon="ui-icon-close"  actionListener="#{browseDepartmentController.loadDepartment}"
+                            action="#{navigationController.showDeleteDepartmentDialog}"/>
+            </p:contextMenu>
+        </h:form>
+    </p:dialog>
+</ui:composition>

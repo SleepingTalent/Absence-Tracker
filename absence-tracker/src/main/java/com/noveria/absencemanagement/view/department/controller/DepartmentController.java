@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.AbortProcessingException;
 
 /**
  * Created by lynseymcgregor on 08/06/2015.

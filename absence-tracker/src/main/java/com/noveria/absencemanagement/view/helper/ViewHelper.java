@@ -26,5 +26,15 @@ public class ViewHelper {
         dialogHelper.hideDialog(Dialogs.ADD_DEPARTMENT);
     }
 
+    public void showDeleteDepartmentDialog() {
+        dialogHelper.showDialog(Dialogs.DELETE_DEPARTMENT);
+    }
 
+    public void showEditDepartmentDialog() {
+        dialogHelper.showDialog(Dialogs.EDIT_DEPARTMENT);
+    }
+
+    public void showBrowseDepartmentsDialog() {
+        dialogHelper.showDialog(Dialogs.BROWSE_DEPARTMENTS);
+    }
 }

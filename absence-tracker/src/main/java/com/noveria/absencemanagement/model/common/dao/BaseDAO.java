@@ -25,11 +25,13 @@ public abstract class BaseDAO<T> {
 
     public T create(final T entity) {
         entityManager.persist(entity);
+        entityManager.flush();
         return entity;
     }
 
     public void delete(final T entity) {
         entityManager.remove(entityManager.merge(entity));
+        entityManager.flush();
     }
 
     public T findById(final Object id) {
@@ -44,7 +46,9 @@ public abstract class BaseDAO<T> {
     }
 
     public T update(final T entity) {
-        return entityManager.merge(entity);
+        entityManager.merge(entity);
+        entityManager.flush();
+        return entity;
     }
 }
 

@@ -21,6 +21,18 @@ public class NavigationController {
         viewHelper.showAddDepartmentDialog();
     }
 
+    public void showEditDepartmentDialog() {
+        viewHelper.showEditDepartmentDialog();
+    }
+
+    public void showDeleteDepartmentDialog() {
+        viewHelper.showDeleteDepartmentDialog();
+    }
+
+    public void showBrowseDepartmentsDialog() {
+        viewHelper.showBrowseDepartmentsDialog();
+    }
+
     public void hideAddDepartmentDialog() {
         viewHelper.hideAddDepartmentDialog();
     }

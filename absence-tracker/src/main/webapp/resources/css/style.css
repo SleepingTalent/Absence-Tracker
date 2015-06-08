@@ -32,3 +32,8 @@ body {
     padding-top: 2px;
     padding-right: 2px;
 }
+
+.browseTable {
+    width: 600px;
+    min-height: 200px;
+}

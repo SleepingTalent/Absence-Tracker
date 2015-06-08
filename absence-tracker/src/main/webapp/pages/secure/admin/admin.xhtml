@@ -6,18 +6,22 @@
 
 <h:form id="adminForm" prependId="false">
 <p:menubar>
-    <p:submenu label="Department">
-        <p:menuitem id="CreateDept" value="Create"
+    <p:submenu label="Create">
+        <p:menuitem id="CreateDept" value="Department"
                     actionListener="#{departmentController.clearDepartment}"
-                    action="#{navigationController.showAddDepartmentDialog}"/>
+                    action="#{navigationController.showAddDepartmentDialog}"
+                    update=":tabPanel:addDepartment"/>
         <p:separator />
-        <p:menuitem value="Browse" url="#"/>
+        <p:menuitem value="Employee" url="#"/>
     </p:submenu>
 
-    <p:submenu label="Employee">
-        <p:menuitem value="Create" url="#"/>
+    <p:submenu label="Browse">
+        <p:menuitem id="BrowseDept" value="Department"
+                    actionListener="#{browseDepartmentController.clearDataModel}"
+                    action="#{navigationController.showBrowseDepartmentsDialog}"
+                    icon="ui-icon-folder-open" update=":tabPanel:browseDepartments"/>
         <p:separator />
-        <p:menuitem value="Browse" url="#"/>
+        <p:menuitem value="Employee" url="#"/>
     </p:submenu>
 
 </p:menubar>
@@ -25,6 +29,7 @@
 </h:form>
 
 <ui:include src="department/addDepartmentDialog.xhtml"/>
+<ui:include src="department/browseDepartmentsDialog.xhtml"/>
 </html>
 
 
