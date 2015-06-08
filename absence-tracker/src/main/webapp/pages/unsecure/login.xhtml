@@ -9,33 +9,37 @@
 </h:head>
 <h:body>
     <h:outputStylesheet library="css" name="style.css"/>
-    <div align="center" style="">
-
         <h:form  id="loginForm" prependId="false">
 
             <p:growl id="messages" showDetail="true"/>
 
-            <p:panel id="mainPanel" header="This is the login panel">
-            <p:panelGrid columns="2" columnClasses="alignTop">
-                <p:column>
-                    <h:outputText id="userNameLbl" value="Username: "/>
-                </p:column>
-                <p:column>
-                    <h:inputText id="userName" required="true" value="#{authController.userName}" requiredMessage="Please enter username"/>
-                </p:column>
-                <p:column>
-                    <h:outputText id="psswordLbl" value="Password: "/>
-                </p:column>
-                <p:column>
-                    <h:inputSecret id="password"  required="true" value="#{authController.password}" requiredMessage="Please enter password" />
-                </p:column>
-                <p:column>
-                    <h:commandButton id="loginBtn" value="Login" action="#{authController.login}" update="messages"/>
-                </p:column>
-            </p:panelGrid>
+            <p:panel id="mainPanel" styleClass="mainPanel" header="This is the login panel">
+
+                <f:facet name="header">
+                    <p:outputLabel id="mainLbl" value="Absence Tracker" style="float :left"/>
+                </f:facet>
+
+            <p:panel id="loginPanel" styleClass="loginPanel" header="Login">
+                <p:panelGrid columns="2" columnClasses="alignTop">
+                    <p:column>
+                        <h:outputText id="userNameLbl" value="Username: "/>
+                    </p:column>
+                    <p:column>
+                        <h:inputText id="userName" required="true" value="#{authController.userName}" requiredMessage="Please enter username"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText id="psswordLbl" value="Password: "/>
+                    </p:column>
+                    <p:column>
+                        <h:inputSecret id="password"  required="true" value="#{authController.password}" requiredMessage="Please enter password" />
+                    </p:column>
+                    <p:column>
+                        <h:commandButton id="loginBtn" value="Login" action="#{authController.login}" update="messages"/>
+                    </p:column>
+                </p:panelGrid>
+            </p:panel>
+
             </p:panel>
         </h:form>
-
-    </div>
 </h:body>
 </html>

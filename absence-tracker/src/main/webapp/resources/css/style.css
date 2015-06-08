@@ -6,3 +6,19 @@ body {
 {
     font-size: 100% !important;
 }
+
+.mainPanel {
+    border: none;
+    width: 900px;
+}
+
+.loginPanel {
+    width: 270px;
+    height: 135px;
+    position: absolute;
+    left: 300px;
+}
+
+.formElement {
+    border: none;
+}
