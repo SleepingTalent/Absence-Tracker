@@ -15,4 +15,9 @@ public class MessageHelper {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));
     }
+
+    public void addInfoMessage(String summary, String detail) {
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail));
+    }
 }

@@ -7,6 +7,15 @@ body {
     font-size: 100% !important;
 }
 
+.ui-layout-unit {
+    border: 0;
+}
+
+.ui-panelgrid {
+    border: 0;
+    padding: 5px;
+}
+
 .mainPanel {
     border: none;
     width: 900px;
@@ -20,5 +29,6 @@ body {
 }
 
 .formElement {
-    border: none;
+    padding-top: 2px;
+    padding-right: 2px;
 }

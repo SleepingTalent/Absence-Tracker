@@ -13,7 +13,7 @@
 </h:head>
 <h:body>
     <h:outputStylesheet library="css" name="style.css"/>
-    <h:form id="dashboardForm" prependId="false">
+
 
         <p:growl id="messages" showDetail="true"/>
 
@@ -21,7 +21,9 @@
 
             <f:facet name="header">
                 <p:outputLabel id="mainLbl" value="Absence Tracker" style="float :left"/>
-                <h:commandButton id="logoutBtn" value="Logout" action="#{authController.logout}" style="float :right"/>
+                <h:form id="logoutForm" prependId="false">
+                    <h:commandButton id="logoutBtn" value="Logout" action="#{authController.logout}" style="float :right"/>
+                </h:form>
             </f:facet>
 
             <p:tabView id="tabPanel">
@@ -47,7 +49,5 @@
             </p:tabView>
 
         </p:panel>
-
-    </h:form>
 </h:body>
 </html>
