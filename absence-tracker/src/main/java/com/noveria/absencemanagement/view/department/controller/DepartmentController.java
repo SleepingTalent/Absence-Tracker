@@ -3,6 +3,8 @@ package com.noveria.absencemanagement.view.department.controller;
 import com.noveria.absencemanagement.service.department.DepartmentService;
 import com.noveria.absencemanagement.view.department.model.DepartmentModel;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -16,6 +18,8 @@ import javax.faces.event.AbortProcessingException;
 @RequestScoped
 public class DepartmentController {
 
+    private static final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
+
     @ManagedProperty(value = "#{departmentModel}")
     DepartmentModel departmentModel;
 
@@ -23,7 +27,11 @@ public class DepartmentController {
     DepartmentService departmentService;
 
     public void saveDepartment() {
-        departmentService.saveDepartment(getDepartment());
+        DepartmentViewBean departmentView = getDepartmentModel().getDepartment();
+
+        logger.debug("Saving Department ("+departmentView.getName()+")");
+
+        departmentService.saveDepartment(departmentView);
     }
 
     public void clearDepartment() {

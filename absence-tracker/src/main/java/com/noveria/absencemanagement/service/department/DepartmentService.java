@@ -21,7 +21,7 @@ public class DepartmentService {
 
     public void saveDepartment(DepartmentViewBean department) {
         Department toPersist = new Department();
-        department.setName(department.getName());
+        toPersist.setDepartmentName(department.getName());
 
         logger.debug("Creating Department ("+toPersist.getDepartmentName()+")");
 
