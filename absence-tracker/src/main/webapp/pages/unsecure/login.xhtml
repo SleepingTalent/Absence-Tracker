@@ -21,16 +21,16 @@
                     <h:outputText id="userNameLbl" value="Username: "/>
                 </p:column>
                 <p:column>
-                    <h:inputText id="userName" required="true" value="#{loginData.userName}" requiredMessage="Please enter username"/>
+                    <h:inputText id="userName" required="true" value="#{authController.userName}" requiredMessage="Please enter username"/>
                 </p:column>
                 <p:column>
                     <h:outputText id="psswordLbl" value="Password: "/>
                 </p:column>
                 <p:column>
-                    <h:inputSecret id="password"  required="true" value="#{loginData.password}" requiredMessage="Please enter password" />
+                    <h:inputSecret id="password"  required="true" value="#{authController.password}" requiredMessage="Please enter password" />
                 </p:column>
                 <p:column>
-                    <h:commandButton id="loginBtn" value="Login" action="#{loginData.login}" update="messages"/>
+                    <h:commandButton id="loginBtn" value="Login" action="#{authController.login}" update="messages"/>
                 </p:column>
             </p:panelGrid>
             </p:panel>

@@ -22,7 +22,7 @@ import javax.faces.context.FacesContext;
  *
  * @author lynseymcgregor
  */
-@ManagedBean(name = "loginData")
+@ManagedBean(name = "authController")
 @RequestScoped
 public class AuthenticationController {
 
