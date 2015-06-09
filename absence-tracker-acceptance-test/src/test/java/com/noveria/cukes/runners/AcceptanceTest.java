@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(strict=false, format={"pretty","html:target/report/cucumber","json:target/report/cucumber/result.json"}, glue="com.noveria.cukes",
-        features="classpath:features", tags={"~@wip","@login"}, monochrome = true)
+        features="classpath:features", tags={"~@wip"}, monochrome = true)
 public class AcceptanceTest {
 
         static {

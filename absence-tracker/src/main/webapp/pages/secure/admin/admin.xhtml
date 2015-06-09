@@ -6,7 +6,7 @@
 
 <h:form id="adminForm" prependId="false">
 <p:menubar>
-    <p:submenu label="Create">
+    <p:submenu id="createMenu" label="Create">
         <p:menuitem id="CreateDept" value="Department"
                     actionListener="#{departmentController.clearDepartment}"
                     action="#{navigationController.showAddDepartmentDialog}"
@@ -15,7 +15,7 @@
         <p:menuitem value="Employee" url="#"/>
     </p:submenu>
 
-    <p:submenu label="Browse">
+    <p:submenu id="browseMenu" label="Browse">
         <p:menuitem id="BrowseDept" value="Department"
                     actionListener="#{browseDepartmentController.clearDataModel}"
                     action="#{navigationController.showBrowseDepartmentsDialog}"

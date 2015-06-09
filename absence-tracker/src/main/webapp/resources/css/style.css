@@ -37,3 +37,7 @@ body {
     width: 600px;
     min-height: 200px;
 }
+
+.borderLessPanelGrid tr, .borderLessPanelGrid td {
+    border: none !important;
+}

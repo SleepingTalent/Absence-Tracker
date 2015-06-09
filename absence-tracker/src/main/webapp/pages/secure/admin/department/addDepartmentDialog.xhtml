@@ -6,7 +6,7 @@
 
     <p:dialog id="addDepartmentDialog" widgetVar="_addDepartmentDialog" header="Create Department" modal="true" dynamic="true" resizable="false" closable="true">
         <h:form id="addDepartment">
-            <p:panelGrid columns="2">
+            <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
                 <h:outputText id="deptNamelbl" value="Department Name:"/>
                 <p:inputText label="firstName" id="deptName" required="true"
                              value="#{departmentController.department.name}"

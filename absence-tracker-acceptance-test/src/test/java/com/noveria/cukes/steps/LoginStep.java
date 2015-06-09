@@ -2,10 +2,9 @@ package com.noveria.cukes.steps;
 
 import com.noveria.cukes.helpers.LoginDetails;
 import com.noveria.cukes.helpers.UserType;
-import com.noveria.cukes.helpers.selenium.page.DashboardPage;
+import com.noveria.cukes.helpers.selenium.page.dashboard.DashboardPage;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.runtime.RuntimeState;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -82,6 +81,7 @@ public class LoginStep {
     public void they_are_redirected_to_the_dashboard() throws Throwable {
         runtimeState.takeScreenShot();
         DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        dashboardPage.assertPagePresent();
 
         if(runtimeState.getLoginDetails().getUserType().equals(UserType.ADMIN)) {
             dashboardPage.assertAdminTextPresent();
@@ -102,6 +102,7 @@ public class LoginStep {
     @When("^the user logs out$")
     public void the_user_logs_out() throws Throwable {
         DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        dashboardPage.assertPagePresent();
         dashboardPage.clickLogoutBtn();
     }
 

@@ -6,6 +6,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
+    <title>Absence Tracker</title>
 </h:head>
 <h:body>
     <h:outputStylesheet library="css" name="style.css"/>
@@ -20,7 +21,7 @@
                 </f:facet>
 
             <p:panel id="loginPanel" styleClass="loginPanel" header="Login">
-                <p:panelGrid columns="2" columnClasses="alignTop">
+                <p:panelGrid styleClass="borderLessPanelGrid" columns="2" columnClasses="alignTop">
                     <p:column>
                         <h:outputText id="userNameLbl" value="Username: "/>
                     </p:column>

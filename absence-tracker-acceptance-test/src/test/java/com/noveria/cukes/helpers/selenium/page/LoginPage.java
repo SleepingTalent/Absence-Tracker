@@ -13,7 +13,6 @@ public class LoginPage extends Page {
     private static final String PASSWORD_INPUT_ID = "password";
     private static final String LOGIN_BTN_ID = "loginBtn";
     private static final String MAIN_PANEL_ID  = "mainPanel";
-    private static final String MESSAGS_ID = "messages";
 
     public LoginPage(CucumberWebDriver webDriver) {
         super(webDriver);
@@ -42,8 +41,6 @@ public class LoginPage extends Page {
     }
 
     public void assertLoginErrorIsDisplayed() {
-        WebElement element = getPageHelper().findElementById("messages_container");
-        assertEquals("Login Unsuccessful\n" +
-                "Bad credentials",element.getText());
+        assertValidationErrorDisplayed("Login Unsuccessful","Bad credentials");
     }
 }
