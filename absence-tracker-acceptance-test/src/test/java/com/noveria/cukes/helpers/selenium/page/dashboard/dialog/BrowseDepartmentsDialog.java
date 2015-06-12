@@ -21,7 +21,7 @@ public class BrowseDepartmentsDialog extends Page {
     }
 
     public void closeDialog() {
-        getPageHelper().findLinkByText("<span class=\"ui-icon ui-icon-closethick\"></span>").click();
+        getPageHelper().findByLinkWithinDivById("tabPanel:browseDepartmentsDialog",false).click();
     }
 
     public void assertDialogPresent(boolean reThrow) {

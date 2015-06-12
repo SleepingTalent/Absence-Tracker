@@ -94,7 +94,6 @@ public class DashboardPage extends Page {
         runtimeState.takeScreenShot();
 
         getBrowseDepartmentsDialog().closeDialog();
-        runtimeState.takeScreenShot();
     }
 
     public void createDepartmentWithName(RuntimeState runtimeState, String departmentName, boolean reThrow) {
@@ -116,7 +115,6 @@ public class DashboardPage extends Page {
         getBrowseDepartmentsDialog().assertDepartmentPresent(departmentName, reThrow);
         runtimeState.takeScreenShot();
 
-        //getBrowseDepartmentsDialog().closeDialog();
-        //runtimeState.takeScreenShot();
+        getBrowseDepartmentsDialog().closeDialog();
     }
 }

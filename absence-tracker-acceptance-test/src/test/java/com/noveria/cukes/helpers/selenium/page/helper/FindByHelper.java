@@ -20,6 +20,10 @@ public class FindByHelper {
         return By.xpath("//*[(@id='"+id+"') and (@"+attributeName+"='"+attributeValue+"')");
     }
 
+    public static By findByLinkWithinDivById(String id) {
+        return By.xpath("//div[@id='"+id+"']//a");
+    }
+
     public static By findByClass(String cssClass) {
         return By.className(cssClass);
     }

@@ -39,6 +39,10 @@ public class PageHelper {
         return elementHelper.findTableRowWithText(text, reThrow);
     }
 
+    public WebElement findByLinkWithinDivById(String id, boolean reThrow) {
+        return elementHelper.findByLinkWithinDivById(id, reThrow);
+    }
+
     public WebElement findTableRowWithText(String text) {
         return elementHelper.findTableRowWithText(text, false);
     }

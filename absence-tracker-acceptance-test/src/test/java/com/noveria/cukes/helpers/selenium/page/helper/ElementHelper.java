@@ -44,6 +44,10 @@ public class ElementHelper {
         return webElements;
     }
 
+    public WebElement findByLinkWithinDivById(String id, boolean reThrowError) {
+        return waitUntilConditionReturnElement(ExpectedConditions.visibilityOfElementLocated(FindByHelper.findByLinkWithinDivById(id)), reThrowError);
+    }
+
     public WebElement findByIdAndClass(String id, String cssClass, boolean reThrowError) {
         return waitUntilConditionReturnElement(ExpectedConditions.visibilityOfElementLocated(FindByHelper.findByIdAndClass(id,cssClass)), reThrowError);
     }
