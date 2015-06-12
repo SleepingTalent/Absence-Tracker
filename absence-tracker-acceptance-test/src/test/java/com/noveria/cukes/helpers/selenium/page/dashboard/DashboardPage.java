@@ -112,7 +112,6 @@ public class DashboardPage extends Page {
         getAdminMenu().clickOnBrowseDepartment();
 
         getBrowseDepartmentsDialog().assertDialogPresent(reThrow);
-        runtimeState.takeScreenShot();
 
         getBrowseDepartmentsDialog().assertDepartmentPresent(departmentName, reThrow);
         runtimeState.takeScreenShot();
