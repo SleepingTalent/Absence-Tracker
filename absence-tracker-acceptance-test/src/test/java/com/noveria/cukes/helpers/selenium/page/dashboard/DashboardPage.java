@@ -1,10 +1,13 @@
 package com.noveria.cukes.helpers.selenium.page.dashboard;
 
 import com.noveria.cukes.helpers.selenium.page.Page;
+import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.BrowseDepartmentsDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.CreateDepartmentDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.menu.AdminMenu;
+import com.noveria.cukes.helpers.selenium.page.helper.SeleniumTimeoutException;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
 import com.noveria.cukes.runtime.RuntimeState;
+import org.openqa.selenium.WebDriverException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -21,11 +24,14 @@ public class DashboardPage extends Page {
 
     private CreateDepartmentDialog createDepartmentDialog;
 
+    private BrowseDepartmentsDialog browseDepartmentsDialog;
+
     public DashboardPage(CucumberWebDriver webDriver) {
         super(webDriver);
 
         adminMenu = new AdminMenu(webDriver); ;
         createDepartmentDialog = new CreateDepartmentDialog(webDriver);
+        browseDepartmentsDialog = new BrowseDepartmentsDialog(webDriver);
     }
 
     public void assertPagePresent() {
@@ -66,8 +72,52 @@ public class DashboardPage extends Page {
     public void createDepartmentWithEmptyName(RuntimeState runtimeState, boolean reThrow) {
         getAdminMenu().openCreateMenu();
         getAdminMenu().clickOnCreateDepartment();
+
         getCreateDepartmentDialog().setName("",reThrow);
         runtimeState.takeScreenShot();
+
         getCreateDepartmentDialog().clickCreateBtn();
+    }
+
+    public BrowseDepartmentsDialog getBrowseDepartmentsDialog() {
+        return browseDepartmentsDialog;
+    }
+
+    public void checkThatTheDepartmentDoesNotExist(RuntimeState runtimeState, String departmentName, boolean reThrow) {
+        getAdminMenu().openBrowseMenu();
+        getAdminMenu().clickOnBrowseDepartment();
+
+        getBrowseDepartmentsDialog().assertDialogPresent(reThrow);
+        runtimeState.takeScreenShot();
+
+        getBrowseDepartmentsDialog().assertDepartmentNotPresent(departmentName, reThrow);
+        runtimeState.takeScreenShot();
+
+        getBrowseDepartmentsDialog().closeDialog();
+        runtimeState.takeScreenShot();
+    }
+
+    public void createDepartmentWithName(RuntimeState runtimeState, String departmentName, boolean reThrow) {
+        getAdminMenu().openCreateMenu();
+        getAdminMenu().clickOnCreateDepartment();
+
+        getCreateDepartmentDialog().setName(departmentName,reThrow);
+        runtimeState.takeScreenShot();
+
+        getCreateDepartmentDialog().clickCreateBtn();
+    }
+
+    public void checkThatTheDepartmentExist(RuntimeState runtimeState, String departmentName, boolean reThrow) {
+        getAdminMenu().openBrowseMenu();
+        getAdminMenu().clickOnBrowseDepartment();
+
+        getBrowseDepartmentsDialog().assertDialogPresent(reThrow);
+        runtimeState.takeScreenShot();
+
+        getBrowseDepartmentsDialog().assertDepartmentPresent(departmentName, reThrow);
+        runtimeState.takeScreenShot();
+
+        //getBrowseDepartmentsDialog().closeDialog();
+        //runtimeState.takeScreenShot();
     }
 }

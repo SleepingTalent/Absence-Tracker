@@ -6,6 +6,7 @@ import com.noveria.cukes.runtime.RuntimeState;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,11 @@ public class AdminStep {
             try {
                 dashboardPage.createDepartmentWithEmptyName(runtimeState,true);
             } catch(SeleniumTimeoutException set) {
-                dashboardPage.createDepartmentWithEmptyName(runtimeState, false);
+                try {
+                    dashboardPage.createDepartmentWithEmptyName(runtimeState,true);
+                } catch(SeleniumTimeoutException setoo) {
+                    dashboardPage.createDepartmentWithEmptyName(runtimeState, false);
+                }
             }
     }
 
@@ -45,19 +50,42 @@ public class AdminStep {
 
     @And("^checks that the \"([^\"]*)\" department does not exist$")
     public void checks_that_the_department_does_not_exist(String departmentName) throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        throw new PendingException();
+        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        dashboardPage.assertPagePresent();
+
+        try {
+            dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, true);
+        }catch(SeleniumTimeoutException set) {
+            try {
+                dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, true);
+            }catch(SeleniumTimeoutException setoo) {
+                dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, false);
+
+            }
+        }
     }
 
     @And("^they create a Department called \"([^\"]*)\"$")
     public void they_create_a_Department_called(String departmentName) throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        throw new PendingException();
+        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        dashboardPage.assertPagePresent();
+
+        try {
+            dashboardPage.createDepartmentWithName(runtimeState, departmentName, true);
+        } catch(SeleniumTimeoutException set) {
+            dashboardPage.createDepartmentWithName(runtimeState,departmentName,false);
+        }
     }
 
     @Then("^the \"([^\"]*)\" Department is created$")
     public void the_Department_is_created(String departmentName) throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        throw new PendingException();
+        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        dashboardPage.assertPagePresent();
+
+        try {
+        dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
+    } catch(SeleniumTimeoutException set) {
+        dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
+    }
     }
 }

@@ -11,12 +11,19 @@ public class CreateDepartmentDialog extends Page {
 
     public static final String DEPARTMENT_NAME_FIELD = "tabPanel:addDepartment:deptName";
     public static final String CREATE_DEPARTMENT_BTN = "tabPanel:addDepartment:addDepartmentBtn";
+    public static final String CREATE_DEPARTMENT_DIALOG_ID = "tabPanel:addDepartmentDialog";
+
 
     public CreateDepartmentDialog(CucumberWebDriver webDriver) {
         super(webDriver);
     }
 
+    public void assertDialogPresent(boolean reThrow) {
+        getPageHelper().findElementById(CREATE_DEPARTMENT_DIALOG_ID,reThrow);
+    }
+
     public void setName(String name, boolean reThrow) {
+        assertDialogPresent(reThrow);
         getPageHelper().findElementById(DEPARTMENT_NAME_FIELD,reThrow).sendKeys(name);
     }
 

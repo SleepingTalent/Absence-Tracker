@@ -35,6 +35,14 @@ public class PageHelper {
         return elementHelper.findElementsByClass(className, false);
     }
 
+    public WebElement findTableRowWithText(String text, boolean reThrow) {
+        return elementHelper.findTableRowWithText(text, reThrow);
+    }
+
+    public WebElement findTableRowWithText(String text) {
+        return elementHelper.findTableRowWithText(text, false);
+    }
+
     public void takeScreenShot(Scenario scenario) {
         webDriver.takeScreenShot(scenario);
     }
