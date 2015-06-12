@@ -16,8 +16,8 @@ public class CreateDepartmentDialog extends Page {
         super(webDriver);
     }
 
-    public void setName(String name) {
-        getPageHelper().findElementById(DEPARTMENT_NAME_FIELD).sendKeys(name);
+    public void setName(String name, boolean reThrow) {
+        getPageHelper().findElementById(DEPARTMENT_NAME_FIELD,reThrow).sendKeys(name);
     }
 
     public void clickCreateBtn() {

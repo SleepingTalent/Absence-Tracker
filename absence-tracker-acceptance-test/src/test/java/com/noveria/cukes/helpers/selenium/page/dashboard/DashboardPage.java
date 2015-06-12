@@ -4,6 +4,7 @@ import com.noveria.cukes.helpers.selenium.page.Page;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.CreateDepartmentDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.menu.AdminMenu;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
+import com.noveria.cukes.runtime.RuntimeState;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -60,5 +61,13 @@ public class DashboardPage extends Page {
 
     public void assertValidationErrorIsDisplayed(String title, String message) {
         assertValidationErrorDisplayed(title, message);
+    }
+
+    public void createDepartmentWithEmptyName(RuntimeState runtimeState, boolean reThrow) {
+        getAdminMenu().openCreateMenu();
+        getAdminMenu().clickOnCreateDepartment();
+        getCreateDepartmentDialog().setName("",reThrow);
+        runtimeState.takeScreenShot();
+        getCreateDepartmentDialog().clickCreateBtn();
     }
 }

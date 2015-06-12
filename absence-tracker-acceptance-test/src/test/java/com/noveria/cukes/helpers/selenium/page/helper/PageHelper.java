@@ -20,7 +20,11 @@ public class PageHelper {
     }
 
     public WebElement findElementById(String id) {
-        return elementHelper.findElementById(id,false);
+        return findElementById(id,false);
+    }
+
+    public WebElement findElementById(String id,boolean reThrow) {
+        return elementHelper.findElementById(id,reThrow);
     }
 
     public WebElement findElementByClass(String className) {

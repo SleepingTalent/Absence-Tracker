@@ -1,6 +1,7 @@
 package com.noveria.cukes.steps;
 
 import com.noveria.cukes.helpers.selenium.page.dashboard.DashboardPage;
+import com.noveria.cukes.helpers.selenium.page.helper.SeleniumTimeoutException;
 import com.noveria.cukes.runtime.RuntimeState;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
@@ -21,24 +22,17 @@ public class AdminStep {
     @Autowired
     RuntimeState runtimeState;
 
-    @And("^they create a \"([^\"]*)\" without a \"([^\"]*)\"$")
-    public void they_create_a_without_a(String entity, String missingField) throws Throwable {
+    @And("^they create a Department without a name$")
+    public void they_create_a_without_a() throws Throwable {
 
         DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
         dashboardPage.assertPagePresent();
 
-        if(entity.equalsIgnoreCase("Department")) {
-            dashboardPage.getAdminMenu().openCreateMenu();
-            dashboardPage.getAdminMenu().clickOnCreateDepartment();
-
-            if(missingField.equalsIgnoreCase("name")) {
-                dashboardPage.getCreateDepartmentDialog().setName("");
+            try {
+                dashboardPage.createDepartmentWithEmptyName(runtimeState,true);
+            } catch(SeleniumTimeoutException set) {
+                dashboardPage.createDepartmentWithEmptyName(runtimeState, false);
             }
-
-            runtimeState.takeScreenShot();
-            dashboardPage.getCreateDepartmentDialog().clickCreateBtn();
-        }
-
     }
 
     @Then("^a \"([^\"]*)\" \"([^\"]*)\" validation error is displayed$")
@@ -47,5 +41,23 @@ public class AdminStep {
         dashboardPage.assertPagePresent();
         dashboardPage.assertValidationErrorIsDisplayed(title,message);
         runtimeState.takeScreenShot();
+    }
+
+    @And("^checks that the \"([^\"]*)\" department does not exist$")
+    public void checks_that_the_department_does_not_exist(String departmentName) throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        throw new PendingException();
+    }
+
+    @And("^they create a Department called \"([^\"]*)\"$")
+    public void they_create_a_Department_called(String departmentName) throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        throw new PendingException();
+    }
+
+    @Then("^the \"([^\"]*)\" Department is created$")
+    public void the_Department_is_created(String departmentName) throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        throw new PendingException();
     }
 }
