@@ -110,30 +110,14 @@ public class DashboardPage extends Page {
     }
 
     private void openCreateDepartmentDialog(boolean reThrow) {
-        try {
             getAdminMenu().openCreateMenu(reThrow);
             getAdminMenu().clickOnCreateDepartment(reThrow);
-
             getCreateDepartmentDialog().assertDialogPresent(reThrow);
-        } catch (SeleniumTimeoutException ste) {
-            getAdminMenu().openCreateMenu(reThrow);
-            getAdminMenu().clickOnCreateDepartment(reThrow);
-
-            getCreateDepartmentDialog().assertDialogPresent(reThrow);
-        }
     }
 
     private void openBrowseDepartmentsDialog(boolean reThrow) {
-        try{
             getAdminMenu().openBrowseMenu(reThrow);
             getAdminMenu().clickOnBrowseDepartment(reThrow);
-
             getBrowseDepartmentsDialog().assertDialogPresent(reThrow);
-        } catch (SeleniumTimeoutException ste) {
-            getAdminMenu().openBrowseMenu(reThrow);
-            getAdminMenu().clickOnBrowseDepartment(reThrow);
-
-            getBrowseDepartmentsDialog().assertDialogPresent(reThrow);
-        }
     }
 }

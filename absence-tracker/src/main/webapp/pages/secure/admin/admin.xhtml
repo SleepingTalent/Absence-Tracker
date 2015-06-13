@@ -5,26 +5,26 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
 <h:form id="adminForm" prependId="false">
-<p:menubar>
+<p:panelMenu id="adminMenu" styleClass="menuPanel">
     <p:submenu id="createMenu" label="Create">
         <p:menuitem id="CreateDept" value="Department"
                     actionListener="#{departmentController.clearDepartment}"
                     action="#{navigationController.showAddDepartmentDialog}"
-                    update=":tabPanel:addDepartment"/>
+                    update=":tabPanel:addDepartment" icon="ui-icon-folder-collapsed"/>
         <p:separator />
-        <p:menuitem value="Employee" url="#"/>
+        <p:menuitem value="Employee" url="#" icon="ui-icon-person"/>
     </p:submenu>
 
     <p:submenu id="browseMenu" label="Browse">
         <p:menuitem id="BrowseDept" value="Department"
                     actionListener="#{browseDepartmentController.clearDataModel}"
                     action="#{navigationController.showBrowseDepartmentsDialog}"
-                    icon="ui-icon-folder-open" update=":tabPanel:browseDepartments"/>
+                    icon="ui-icon-search" update=":tabPanel:browseDepartments"/>
         <p:separator />
-        <p:menuitem value="Employee" url="#"/>
+        <p:menuitem value="Employee" url="#" icon="ui-icon-search"/>
     </p:submenu>
 
-</p:menubar>
+</p:panelMenu>
 <p:outputLabel id="adminrole" value="You have admin access!"/>
 </h:form>
 

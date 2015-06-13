@@ -29,22 +29,18 @@ public class AdminStep {
         DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
         dashboardPage.assertPagePresent();
 
-            try {
-                dashboardPage.createDepartmentWithEmptyName(runtimeState,true);
-            } catch(SeleniumTimeoutException set) {
-                try {
-                    dashboardPage.createDepartmentWithEmptyName(runtimeState,true);
-                } catch(SeleniumTimeoutException setoo) {
-                    dashboardPage.createDepartmentWithEmptyName(runtimeState, false);
-                }
-            }
+        try {
+            dashboardPage.createDepartmentWithEmptyName(runtimeState, true);
+        } catch (SeleniumTimeoutException set) {
+            dashboardPage.createDepartmentWithEmptyName(runtimeState, false);
+        }
     }
 
     @Then("^a \"([^\"]*)\" \"([^\"]*)\" validation error is displayed$")
     public void a_validation_error_is_displayed(String title, String message) throws Throwable {
         DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
         dashboardPage.assertPagePresent();
-        dashboardPage.assertValidationErrorIsDisplayed(title,message);
+        dashboardPage.assertValidationErrorIsDisplayed(title, message);
         runtimeState.takeScreenShot();
     }
 
@@ -55,13 +51,8 @@ public class AdminStep {
 
         try {
             dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, true);
-        }catch(SeleniumTimeoutException set) {
-            try {
-                dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, true);
-            }catch(SeleniumTimeoutException setoo) {
-                dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, false);
-
-            }
+        } catch (SeleniumTimeoutException set) {
+            dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, false);
         }
     }
 
@@ -72,8 +63,8 @@ public class AdminStep {
 
         try {
             dashboardPage.createDepartmentWithName(runtimeState, departmentName, true);
-        } catch(SeleniumTimeoutException set) {
-            dashboardPage.createDepartmentWithName(runtimeState,departmentName,false);
+        } catch (SeleniumTimeoutException set) {
+            dashboardPage.createDepartmentWithName(runtimeState, departmentName, false);
         }
     }
 
@@ -83,13 +74,9 @@ public class AdminStep {
         dashboardPage.assertPagePresent();
 
         try {
-        dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
-        } catch(SeleniumTimeoutException set) {
-            try {
-                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
-            } catch(SeleniumTimeoutException setoo) {
-                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
-            }
+            dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
+        } catch (SeleniumTimeoutException set) {
+            dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
         }
     }
 
@@ -100,12 +87,8 @@ public class AdminStep {
 
         try {
             dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
-        } catch(SeleniumTimeoutException set) {
-            try {
-                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
-            } catch(SeleniumTimeoutException setoo) {
-                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
-            }
+        } catch (SeleniumTimeoutException set) {
+            dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
         }
     }
 }

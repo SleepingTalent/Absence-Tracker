@@ -18,33 +18,11 @@ public class AdminMenu extends Page {
     }
 
     public void openCreateMenu(boolean reThrow) {
-        try {
-            //getPageHelper().moveToAndClickElement(assertCreateMenuDisplayed(reThrow));
-            getPageHelper().moveToElement(assertCreateMenuDisplayed(reThrow));
-            assertCreateMenuDisplayed(reThrow).click();
-        } catch (SeleniumTimeoutException wbe) {
-            getPageHelper().moveToElement(assertCreateMenuDisplayed(reThrow));
-            assertCreateMenuDisplayed(reThrow).click();
-        }
+            getPageHelper().findLinkByText("Create",reThrow).click();
     }
 
     public void openBrowseMenu(boolean reThrow) {
-        try {
-            //getPageHelper().moveToAndClickElement(assertBrowseMenuDisplayed(reThrow));
-            getPageHelper().moveToElement(assertBrowseMenuDisplayed(reThrow));
-            assertBrowseMenuDisplayed(reThrow).click();
-        } catch (SeleniumTimeoutException wbe) {
-            getPageHelper().moveToElement(assertBrowseMenuDisplayed(reThrow));
-            assertBrowseMenuDisplayed(reThrow).click();
-        }
-    }
-
-    private WebElement assertCreateMenuDisplayed(boolean reThrow) {
-        return getPageHelper().assertMenuDisplayed("Create", reThrow);
-    }
-
-    private WebElement assertBrowseMenuDisplayed(boolean reThrow) {
-        return getPageHelper().assertMenuDisplayed("Browse", reThrow);
+            getPageHelper().findLinkByText("Browse",reThrow).click();
     }
 
     public void clickOnCreateDepartment(boolean reThrow) {
