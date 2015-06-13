@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * Created by lynseymcgregor on 08/06/2015.
  */
-
 public class BrowseDepartmentPagenatedResults extends PagenatedResults<DepartmentViewBean,Department>{
 
     @Override

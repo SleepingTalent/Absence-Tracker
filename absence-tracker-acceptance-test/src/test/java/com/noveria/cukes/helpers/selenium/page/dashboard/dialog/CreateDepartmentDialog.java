@@ -27,7 +27,7 @@ public class CreateDepartmentDialog extends Page {
         try {
             getPageHelper().findElementById(DEPARTMENT_NAME_FIELD, true).sendKeys(name);
         } catch (SeleniumTimeoutException ste) {
-            getPageHelper().findElementById(DEPARTMENT_NAME_FIELD, false).sendKeys(name);
+            getPageHelper().findElementById(DEPARTMENT_NAME_FIELD, true).sendKeys(name);
         }
     }
 

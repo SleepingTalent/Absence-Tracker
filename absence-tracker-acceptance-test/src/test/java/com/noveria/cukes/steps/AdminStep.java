@@ -3,10 +3,8 @@ package com.noveria.cukes.steps;
 import com.noveria.cukes.helpers.selenium.page.dashboard.DashboardPage;
 import com.noveria.cukes.helpers.selenium.page.helper.SeleniumTimeoutException;
 import com.noveria.cukes.runtime.RuntimeState;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
-import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +28,9 @@ public class AdminStep {
         dashboardPage.assertPagePresent();
 
         try {
-            dashboardPage.createDepartmentWithEmptyName(runtimeState, true);
+            dashboardPage.createDepartmentWithName(runtimeState, "", true);
         } catch (SeleniumTimeoutException set) {
-            dashboardPage.createDepartmentWithEmptyName(runtimeState, false);
+            dashboardPage.createDepartmentWithName(runtimeState, "", false);
         }
     }
 
@@ -52,7 +50,7 @@ public class AdminStep {
         try {
             dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, true);
         } catch (SeleniumTimeoutException set) {
-            dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, false);
+                dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, false);
         }
     }
 
@@ -64,7 +62,7 @@ public class AdminStep {
         try {
             dashboardPage.createDepartmentWithName(runtimeState, departmentName, true);
         } catch (SeleniumTimeoutException set) {
-            dashboardPage.createDepartmentWithName(runtimeState, departmentName, false);
+                dashboardPage.createDepartmentWithName(runtimeState, departmentName, false);
         }
     }
 
@@ -76,7 +74,7 @@ public class AdminStep {
         try {
             dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
         } catch (SeleniumTimeoutException set) {
-            dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
+                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
         }
     }
 
@@ -88,7 +86,7 @@ public class AdminStep {
         try {
             dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
         } catch (SeleniumTimeoutException set) {
-            dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
+                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
         }
     }
 }

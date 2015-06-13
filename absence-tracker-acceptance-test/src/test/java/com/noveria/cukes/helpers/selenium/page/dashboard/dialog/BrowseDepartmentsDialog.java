@@ -41,7 +41,7 @@ public class BrowseDepartmentsDialog extends Page {
         try {
             getPageHelper().findTableRowWithText(departmentName, true);
         } catch (SeleniumTimeoutException ste) {
-            getPageHelper().findTableRowWithText(departmentName, false);
+            getPageHelper().findTableRowWithText(departmentName, true);
         }
     }
 }

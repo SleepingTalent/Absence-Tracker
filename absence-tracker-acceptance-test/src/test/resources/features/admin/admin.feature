@@ -7,7 +7,6 @@ Feature: Administrator Features
     And they create a Department without a name
     Then a "Department Name is required" "Department Name is required" validation error is displayed
 
-  @wip
   Scenario: An Admin User Creates a Department
     Given a valid "Admin" user
     When the user logs in
