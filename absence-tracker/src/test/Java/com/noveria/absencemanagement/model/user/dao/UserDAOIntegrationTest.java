@@ -63,11 +63,12 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
 
     @After
     public void tearDown() {
+
     }
 
     @Test
     public void count_returnsAsExpected() {
-        assertEquals(4, userDAO.countAll());
+        assertEquals(6, userDAO.countAll());
     }
 
     @Test

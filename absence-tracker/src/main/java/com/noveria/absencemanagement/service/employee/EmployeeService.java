@@ -1,5 +1,6 @@
 package com.noveria.absencemanagement.service.employee;
 
+import com.noveria.absencemanagement.model.employee.dao.BrowseEmployeePagenatedResults;
 import com.noveria.absencemanagement.service.employee.exception.EmployeeNotFoundException;
 import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
@@ -21,6 +22,12 @@ public class EmployeeService {
     public Employee createEmployee(Employee employee) {
         logger.debug("Creating Employee : "+employee.getFirstName()+" "+employee.getLastName());
         return employeeDAO.create(employee);
+    }
+
+    public BrowseEmployeePagenatedResults findAllEmployees(int first, int pageSize){
+
+        logger.debug("Finding Employees (starts: " + first + ") (pageSize " +pageSize + ")");
+        return employeeDAO.findAllEmployees(first, pageSize);
     }
 
     public Employee findEmployee(Long employeeId) throws EmployeeNotFoundException {

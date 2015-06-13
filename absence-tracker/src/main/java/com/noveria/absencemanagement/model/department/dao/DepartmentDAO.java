@@ -1,6 +1,7 @@
 package com.noveria.absencemanagement.model.department.dao;
 
 import com.noveria.absencemanagement.model.common.dao.BaseDAO;
+import com.noveria.absencemanagement.model.common.dao.PagenatedResults;
 import com.noveria.absencemanagement.model.department.entities.Department;
 import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
@@ -39,41 +40,13 @@ public class DepartmentDAO extends BaseDAO<Department> {
     public BrowseDepartmentPagenatedResults findAllDepartments(int first, int pageSize) {
         BrowseDepartmentPagenatedResults results = new BrowseDepartmentPagenatedResults();
 
-        String sql = "select d from Department d";
-        Query query = entityManager.createQuery(sql);
-        query.setFirstResult(first);
-        query.setMaxResults(pageSize);
+        String selectSql = "select d from Department d";
+        String countSql = "select count(d) from Department d";
 
-        List<Department> foundDepartments = query.getResultList();
-
-        logger.debug("Paginated Results Count ("+foundDepartments.size()+")");
-
-        results.setResultList(createViewBeanList(foundDepartments));
-
-        int totalCount = (int)countAll();
-
-        logger.debug("Total Count ("+totalCount+")");
-
-        results.setTotalCount(totalCount);
-
-        return results;
+        return (BrowseDepartmentPagenatedResults) findPagenatedResults(first, pageSize, results, selectSql, countSql);
     }
 
 
-    private List<DepartmentViewBean> createViewBeanList(List<Department> departmentList) {
-        List<DepartmentViewBean> viewBeanList = new ArrayList<DepartmentViewBean>();
-
-        for(Department department : departmentList) {
-            DepartmentViewBean departmentViewBean = new DepartmentViewBean();
-            departmentViewBean.setId(department.getId());
-            departmentViewBean.setName(department.getDepartmentName());
-
-            viewBeanList.add(departmentViewBean);
-        }
-
-        return viewBeanList;
-
-    }
 
     @Override
     protected Class<Department> getEntityClass() {

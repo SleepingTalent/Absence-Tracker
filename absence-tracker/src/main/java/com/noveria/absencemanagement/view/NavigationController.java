@@ -37,4 +37,14 @@ public class NavigationController {
         viewHelper.hideAddDepartmentDialog();
     }
 
+    public void showBrowseEmployeesDialog() {viewHelper.showBrowseEmployeeDialog();}
+
+    public void showEditEmployeeDialog() {
+        viewHelper.showEditEmployeeDialog();
+    }
+
+    public void showDeleteEmployeeDialog() {
+        viewHelper.showDeleteEmployeeDialog();
+    }
+
 }

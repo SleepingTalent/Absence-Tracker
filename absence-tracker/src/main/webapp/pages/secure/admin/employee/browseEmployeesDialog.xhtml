@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="browseEmployeesDialog" widgetVar="_browseEmployeesDialog" header="Employees" modal="true"
+              dynamic="true" resizable="false" closable="true">
+
+        <h:form id="browseEmployees">
+            <p:dataTable var="row" styleClass="browseTable" value="#{browseEmployeeController.lazyModel}" paginator="true" rows="10"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                         rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{browseEmployeeController.employeeViewBean}"
+                         id="browseEmployeesTable" lazy="true" rowKey="#{row.id}">
+
+                <p:column id="empId" headerText="Employee Id">
+                    <h:outputText value="#{row.id}"/>
+                </p:column>
+
+                <p:column id="empName" headerText="Name">
+                    <h:outputText value="#{row.name}"/>
+                </p:column>
+
+                <p:column id="deptName" headerText="Department">
+                    <h:outputText value="#{row.department}"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:contextMenu id="browseEmployeesContext" for="browseEmployeesTable">
+                <p:menuitem id="employeeEditMenuItem" value="Edit" icon="ui-icon-pencil" actionListener="#{browseEmployeeController.loadEmployee}"
+                            action="#{navigationController.showEditEmployeeDialog}"/>
+                <p:menuitem id="employeeDeleteMenuItem" value="Delete" icon="ui-icon-close"  actionListener="#{browseEmployeeController.loadEmployee}"
+                            action="#{navigationController.showDeleteEmployeeDialog}"/>
+            </p:contextMenu>
+        </h:form>
+    </p:dialog>
+</ui:composition>

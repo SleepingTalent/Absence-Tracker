@@ -1,6 +1,7 @@
 package com.noveria.absencemanagement.model.department.dao;
 
 import com.noveria.absencemanagement.model.department.entities.Department;
+import com.noveria.absencemanagement.model.employee.dao.BrowseEmployeePagenatedResults;
 import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.common.BaseIntegrationTest;
@@ -18,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/test-applicationContext.xml"})
@@ -43,6 +46,13 @@ public class DepartmentDAOIntegrationTest extends BaseIntegrationTest {
 
         Assert.assertEquals("Jane", actual.getEmployees().get(1).getFirstName());
         Assert.assertEquals("Worker", actual.getEmployees().get(1).getLastName());
+    }
+
+    @Test
+    public void findAllDepartments_returnsAsExpected() {
+        BrowseDepartmentPagenatedResults results = departmentDAO.findAllDepartments(0, 10);
+        assertEquals(2, results.getTotalCount());
+        assertEquals(2, results.getResultList().size());
     }
 
 }

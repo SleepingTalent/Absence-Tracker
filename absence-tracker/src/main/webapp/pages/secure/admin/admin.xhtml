@@ -21,7 +21,10 @@
                     action="#{navigationController.showBrowseDepartmentsDialog}"
                     icon="ui-icon-search" update=":tabPanel:browseDepartments"/>
         <p:separator />
-        <p:menuitem value="Employee" url="#" icon="ui-icon-search"/>
+        <p:menuitem id="BrowseEmployee" value="Employee"
+                    actionListener="#{browseEmployeeController.clearDataModel}"
+                    action="#{navigationController.showBrowseEmployeesDialog}"
+                    icon="ui-icon-search" update=":tabPanel:browseEmployees"/>
     </p:submenu>
 
 </p:panelMenu>
@@ -30,6 +33,7 @@
 
 <ui:include src="department/addDepartmentDialog.xhtml"/>
 <ui:include src="department/browseDepartmentsDialog.xhtml"/>
+<ui:include src="employee/browseEmployeesDialog.xhtml"/>
 </html>
 
 

@@ -37,4 +37,17 @@ public class ViewHelper {
     public void showBrowseDepartmentsDialog() {
         dialogHelper.showDialog(Dialogs.BROWSE_DEPARTMENTS);
     }
+
+    public void showBrowseEmployeeDialog() {
+        dialogHelper.showDialog(Dialogs.BROWSE_EMPLOYEES);
+    }
+
+    public void showEditEmployeeDialog() {
+        dialogHelper.showDialog(Dialogs.EDIT_EMPLOYEE);
+
+    }
+
+    public void showDeleteEmployeeDialog() {
+        dialogHelper.showDialog(Dialogs.DELETE_EMPLOYEE);
+    }
 }

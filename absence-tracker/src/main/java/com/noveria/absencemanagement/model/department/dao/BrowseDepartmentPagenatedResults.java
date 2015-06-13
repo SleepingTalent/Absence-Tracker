@@ -1,30 +1,43 @@
 package com.noveria.absencemanagement.model.department.dao;
 
+import com.noveria.absencemanagement.model.common.dao.PagenatedResults;
+import com.noveria.absencemanagement.model.department.entities.Department;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by lynseymcgregor on 08/06/2015.
  */
 
-public class BrowseDepartmentPagenatedResults {
-    private List<DepartmentViewBean> resultList;
-    private int totalCount;
+public class BrowseDepartmentPagenatedResults extends PagenatedResults<DepartmentViewBean,Department>{
 
-    public void setResultList(List<DepartmentViewBean> resultList) {
-        this.resultList = resultList;
+    @Override
+    public void setResultsList(List<Department> results) {
+        this.resultList = createViewBeanList(results);
     }
 
-    public List<DepartmentViewBean> getResultList() {
-        return resultList;
-    }
+    private List<DepartmentViewBean> createViewBeanList(List<Department> departmentList) {
+        List<DepartmentViewBean> viewBeanList = new ArrayList<DepartmentViewBean>();
 
-    public void setTotalCount(int totalCount) {
-        this.totalCount = totalCount;
-    }
+        for(Department department : departmentList) {
+            DepartmentViewBean departmentViewBean = new DepartmentViewBean();
+            departmentViewBean.setId(department.getId());
+            departmentViewBean.setName(department.getDepartmentName());
 
-    public int getTotalCount() {
-        return totalCount;
+            if(department.getManager() != null) {
+                departmentViewBean.setManager(
+                        department.getManager().getFirstName() + " " + department.getManager().getLastName());
+            } else {
+                departmentViewBean.setManager("");
+            }
+
+
+            viewBeanList.add(departmentViewBean);
+        }
+
+        return viewBeanList;
+
     }
 }

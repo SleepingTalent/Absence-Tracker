@@ -7,6 +7,7 @@ public class DepartmentViewBean {
 
     String name;
     private Long id;
+    private String manager;
 
     public String getName() {
         return name;
@@ -22,5 +23,13 @@ public class DepartmentViewBean {
 
     public Long getId() {
         return id;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
+    public String getManager() {
+        return manager;
     }
 }
