@@ -3,12 +3,14 @@ package com.noveria.absencemanagement.view.department.controller;
 import com.noveria.absencemanagement.service.department.DepartmentService;
 import com.noveria.absencemanagement.view.department.model.DepartmentModel;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
+import com.noveria.absencemanagement.view.helper.MessageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.AbortProcessingException;
 
 /**
  * Created by lynseymcgregor on 08/06/2015.
@@ -25,12 +27,24 @@ public class DepartmentController {
     @ManagedProperty(value = "#{departmentService}")
     DepartmentService departmentService;
 
+    @ManagedProperty(value = "#{messageHelper}")
+    private MessageHelper messageHelper;
+
     public void saveDepartment() {
         DepartmentViewBean departmentView = getDepartmentModel().getDepartment();
 
-        logger.debug("Saving Department ("+departmentView.getName()+")");
+        if(departmentService.departmentAlreadyExists(departmentView.getName())) {
+            logger.debug("Create Department Failed : "+departmentView.getName()+" already exists");
 
-        departmentService.saveDepartment(departmentView);
+            messageHelper.addErrorMessage("Create Department Failed",
+                    departmentView.getName()+" Already Exists");
+
+            throw new AbortProcessingException(departmentView.getName()+" Already Exists");
+        } else {
+            logger.debug("Saving Department ("+departmentView.getName()+")");
+
+            departmentService.saveDepartment(departmentView);
+        }
     }
 
     public void clearDepartment() {
@@ -55,5 +69,13 @@ public class DepartmentController {
 
     public void setDepartmentService(DepartmentService departmentService) {
         this.departmentService = departmentService;
+    }
+
+    public MessageHelper getMessageHelper() {
+        return messageHelper;
+    }
+
+    public void setMessageHelper(MessageHelper messageHelper) {
+        this.messageHelper = messageHelper;
     }
 }

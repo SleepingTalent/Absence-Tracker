@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,14 +30,23 @@ public class DepartmentService {
         Department toPersist = new Department();
         toPersist.setDepartmentName(department.getName());
 
-        logger.debug("Creating Department ("+toPersist.getDepartmentName()+")");
+        logger.debug("Creating Department (" + toPersist.getDepartmentName() + ")");
 
         departmentDAO.create(toPersist);
     }
 
     public BrowseDepartmentPagenatedResults findAllDepartments(int first, int pageSize) {
 
-        logger.debug("Finding Departments (start: "+first+") (pageSize: "+pageSize+")");
-        return departmentDAO.findAllDepartments(first,pageSize);
+        logger.debug("Finding Departments (start: " + first + ") (pageSize: " + pageSize + ")");
+        return departmentDAO.findAllDepartments(first, pageSize);
+    }
+
+    public boolean departmentAlreadyExists(String name) {
+        try {
+            departmentDAO.findDepartmentbyName(name);
+            return true;
+        } catch (NoResultException e) {
+            return false;
+        }
     }
 }

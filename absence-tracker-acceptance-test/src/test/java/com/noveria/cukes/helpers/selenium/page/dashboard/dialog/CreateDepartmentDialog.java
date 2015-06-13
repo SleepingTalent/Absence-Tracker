@@ -1,6 +1,7 @@
 package com.noveria.cukes.helpers.selenium.page.dashboard.dialog;
 
 import com.noveria.cukes.helpers.selenium.page.Page;
+import com.noveria.cukes.helpers.selenium.page.helper.SeleniumTimeoutException;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
 
 
@@ -22,9 +23,12 @@ public class CreateDepartmentDialog extends Page {
         getPageHelper().findElementById(CREATE_DEPARTMENT_DIALOG_ID,reThrow);
     }
 
-    public void setName(String name, boolean reThrow) {
-        assertDialogPresent(reThrow);
-        getPageHelper().findElementById(DEPARTMENT_NAME_FIELD,reThrow).sendKeys(name);
+    public void setName(String name) {
+        try {
+            getPageHelper().findElementById(DEPARTMENT_NAME_FIELD, true).sendKeys(name);
+        } catch (SeleniumTimeoutException ste) {
+            getPageHelper().findElementById(DEPARTMENT_NAME_FIELD, false).sendKeys(name);
+        }
     }
 
     public void clickCreateBtn() {

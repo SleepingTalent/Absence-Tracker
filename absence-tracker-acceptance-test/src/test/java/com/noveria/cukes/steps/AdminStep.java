@@ -84,8 +84,28 @@ public class AdminStep {
 
         try {
         dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
-    } catch(SeleniumTimeoutException set) {
-        dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
+        } catch(SeleniumTimeoutException set) {
+            try {
+                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
+            } catch(SeleniumTimeoutException setoo) {
+                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
+            }
+        }
     }
+
+    @And("^the \"([^\"]*)\" Department is already created$")
+    public void the_Department_is_already_created(String departmentName) throws Throwable {
+        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        dashboardPage.assertPagePresent();
+
+        try {
+            dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
+        } catch(SeleniumTimeoutException set) {
+            try {
+                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
+            } catch(SeleniumTimeoutException setoo) {
+                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
+            }
+        }
     }
 }

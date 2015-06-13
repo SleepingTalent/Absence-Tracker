@@ -28,20 +28,20 @@ public class BrowseDepartmentsDialog extends Page {
         getPageHelper().findElementById(BROWSE_DEPARTMENT_DIALOG_ID,reThrow);
     }
 
-    public void assertDepartmentNotPresent(String departmentName, boolean reThrow) {
+    public void assertDepartmentNotPresent(String departmentName) {
         try {
-            getPageHelper().findTableRowWithText(departmentName, reThrow);
+            getPageHelper().findTableRowWithText(departmentName, true);
             fail(departmentName+" already exists!");
         } catch (SeleniumTimeoutException ste) {
             //Pass department not found!
         }
     }
 
-    public void assertDepartmentPresent(String departmentName, boolean reThrow) {
+    public void assertDepartmentPresent(String departmentName) {
         try {
-            getPageHelper().findTableRowWithText(departmentName, reThrow);
+            getPageHelper().findTableRowWithText(departmentName, true);
         } catch (SeleniumTimeoutException ste) {
-            getPageHelper().findTableRowWithText(departmentName, reThrow);
+            getPageHelper().findTableRowWithText(departmentName, false);
         }
     }
 }

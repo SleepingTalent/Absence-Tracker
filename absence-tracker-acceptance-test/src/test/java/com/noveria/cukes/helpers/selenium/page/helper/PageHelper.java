@@ -59,12 +59,16 @@ public class PageHelper {
         new Actions(webDriver).moveToElement(element).perform();
     }
 
-    public WebElement assertMenuDisplayed(String labelText) {
-        return findLinkByText(labelText);
+    public void moveToAndClickElement(WebElement element) {
+        new Actions(webDriver).moveToElement(element).click().perform();
     }
 
-    public WebElement findLinkByText(String text) {
-            return elementHelper.findByLinkText(text, true);
+    public WebElement assertMenuDisplayed(String labelText, boolean reThrow) {
+        return findLinkByText(labelText, reThrow);
+    }
+
+    public WebElement findLinkByText(String text, boolean reThrow) {
+            return elementHelper.findByLinkText(text, reThrow);
     }
 
 }
