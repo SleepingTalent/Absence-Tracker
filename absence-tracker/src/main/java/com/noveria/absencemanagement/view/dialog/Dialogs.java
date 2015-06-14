@@ -4,8 +4,8 @@ public enum Dialogs {
 
     ADD_DEPARTMENT("_addDepartmentDialog"), DELETE_DEPARTMENT("_deleteDepartmentDialog"),
     EDIT_DEPARTMENT("_editDepartmentDialog"), BROWSE_DEPARTMENTS("_browseDepartmentsDialog"),
-    BROWSE_EMPLOYEES("_browseEmployeesDialog"), EDIT_EMPLOYEE("_editEmployeeDialog"),
-    DELETE_EMPLOYEE("_deleteEmployeeDialog");
+    ADD_EMPLOYEE("_addEmployeeDialog"), DELETE_EMPLOYEE("_deleteEmployeeDialog"), EDIT_EMPLOYEE("_editEmployeeDialog"),
+    BROWSE_EMPLOYEES("_browseEmployeesDialog");
 
     private final String dialogWidgetVar;
 

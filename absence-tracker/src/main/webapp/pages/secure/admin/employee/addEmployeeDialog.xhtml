@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="addEmployeeDialog" widgetVar="_addEmployeeDialog" header="Create Employee" modal="true" dynamic="true" resizable="false" closable="true">
+        <h:form id="addEmployee">
+
+            <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
+
+                <p:outputLabel id="empFirstNamelbl" for="firstName" value="Firstname:"/>
+                <p:inputText label="firstName" id="firstName" required="true"
+                             value="#{employeeController.employee.firstname}"
+                             requiredMessage="Firstname is required"/>
+
+                <p:outputLabel id="empLastNamelbl" for="lastName" value="Lastname:"/>
+                <p:inputText label="LastName" id="lastName" required="true"
+                             value="#{employeeController.employee.lastname}"
+                             requiredMessage="Lastname is required"/>
+
+                <p:outputLabel id="departmentlbl" for="department" value="Department:" />
+                <p:selectOneMenu id="department" value="#{employeeController.departmentId}"
+                                 required="true" requiredMessage="Please Select Department">
+                    <f:selectItem itemLabel="Select Department" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{employeeController.departments}" />
+                </p:selectOneMenu>
+
+                <p:separator />
+                <p:separator />
+
+                <p:outputLabel id="userNamelbl" for="username" value="Username:"/>
+                <p:inputText label="username" id="username" required="true"
+                             value="#{employeeController.user.username}"
+                             requiredMessage="Username is required"/>
+
+                <p:outputLabel id="passwordlbl" for="password" value="Password:"/>
+                <p:inputText label="password" id="password" required="true"
+                             value="#{employeeController.user.password}"
+                             requiredMessage="Password is required"/>
+
+                <p:outputLabel id="roleslbl" for="roles" value="Roles:" />
+                <p:selectOneMenu id="roles" value="#{employeeController.role}"
+                                 required="true" requiredMessage="Please Select a User Role">
+                    <f:selectItem itemLabel="Select Role" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{employeeController.roles}" />
+                </p:selectOneMenu>
+
+                <f:facet name="footer">
+                    <h:commandButton id="addEmployeeBtn" value="Create Employee"
+                                     actionListener="#{employeeController.saveEmployee}"
+                                     action="#{navigationController.hideAddEmployeeDialog}">
+                        <f:ajax execute="@form" render=":messages" />
+                    </h:commandButton>
+                </f:facet>
+
+            </p:panelGrid>
+
+        </h:form>
+    </p:dialog>
+</ui:composition>

@@ -65,7 +65,7 @@ public class BrowserDepartmentModel {
 
                 lazyLoadedData.clear();
 
-                BrowseDepartmentPagenatedResults results = departmentService.findAllDepartments(first, pageSize);
+                BrowseDepartmentPagenatedResults results = departmentService.findAllDepartmentsPagenated(first, pageSize);
 
                 for(DepartmentViewBean departmentViewBean : results.getResultList()) {
                     lazyLoadedData.add(departmentViewBean);

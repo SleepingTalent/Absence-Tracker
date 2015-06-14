@@ -7,10 +7,16 @@
     <p:dialog id="addDepartmentDialog" widgetVar="_addDepartmentDialog" header="Create Department" modal="true" dynamic="true" resizable="false" closable="true">
         <h:form id="addDepartment">
             <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
-                <h:outputText id="deptNamelbl" value="Department Name:"/>
+                <p:outputLabel id="deptNamelbl" for="deptName" value="Department Name:"/>
                 <p:inputText label="firstName" id="deptName" required="true"
                              value="#{departmentController.department.name}"
                              requiredMessage="Department Name is required"/>
+
+                <p:outputLabel id="managerlbl" for="deptManager" value="Manager" />
+                <p:selectOneMenu id="deptManager" value="#{departmentController.managerId}">
+                    <f:selectItem itemLabel="Select Manager" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{departmentController.managers}" />
+                </p:selectOneMenu>
 
                 <f:facet name="footer">
                     <h:commandButton id="addDepartmentBtn" value="Create Department"

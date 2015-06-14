@@ -38,6 +38,15 @@ public class ViewHelper {
         dialogHelper.showDialog(Dialogs.BROWSE_DEPARTMENTS);
     }
 
+    public void showAddEmployeeDialog() {
+        dialogHelper.showDialog(Dialogs.ADD_EMPLOYEE);
+    }
+
+    public void hideAddEmployeeDialog() {
+        dialogHelper.hideDialog(Dialogs.ADD_EMPLOYEE);
+    }
+
+
     public void showBrowseEmployeeDialog() {
         dialogHelper.showDialog(Dialogs.BROWSE_EMPLOYEES);
     }

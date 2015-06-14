@@ -81,6 +81,19 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    public void findAllManagers_returnsAsExpected() {
+        List<Employee> results = employeeDAO.findAllManagers();
+        assertEquals(1, results.size());
+
+        assertEquals("Bob",results.get(0).getFirstName());
+        assertEquals("Gaffer",results.get(0).getLastName());
+        assertEquals("bgaffer",results.get(0).getUser().getUsername());
+
+        assertEquals(1,results.get(0).getUser().getUserRole().size());
+        assertEquals("MANAGER",results.get(0).getUser().getUserRole().get(0).getRole());
+    }
+
+    @Test
     public void update_updatesEmployee_AsExpected() {
         employee.setLastName("modified");
 

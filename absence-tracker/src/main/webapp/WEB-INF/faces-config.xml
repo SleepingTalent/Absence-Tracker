@@ -10,6 +10,12 @@
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
 
+    <!--
+    <converter>
+        <converter-for-class>com.noveria.absencemanagement.view.employee.view.EmployeeViewBean</converter-for-class>
+        <converter-class>com.noveria.absencemanagement.view.employee.view.converter.EmployeeViewConverter</converter-class>
+    </converter>
+    -->
 
     <!-- navigation-rule for login.xhtml -->
     <navigation-rule>

@@ -68,7 +68,7 @@ public class UserDAOIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void count_returnsAsExpected() {
-        assertEquals(6, userDAO.countAll());
+        assertEquals(9, userDAO.countAll());
     }
 
     @Test

@@ -1,8 +1,10 @@
 package com.noveria.absencemanagement.view.department.controller;
 
 import com.noveria.absencemanagement.service.department.DepartmentService;
+import com.noveria.absencemanagement.service.employee.EmployeeService;
 import com.noveria.absencemanagement.view.department.model.DepartmentModel;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
+import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
 import com.noveria.absencemanagement.view.helper.MessageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.AbortProcessingException;
+import javax.faces.model.SelectItem;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lynseymcgregor on 08/06/2015.
@@ -27,8 +32,13 @@ public class DepartmentController {
     @ManagedProperty(value = "#{departmentService}")
     DepartmentService departmentService;
 
+    @ManagedProperty(value = "#{employeeService}")
+    EmployeeService employeeService;
+
     @ManagedProperty(value = "#{messageHelper}")
     private MessageHelper messageHelper;
+
+    private String managerId;
 
     public void saveDepartment() {
         DepartmentViewBean departmentView = getDepartmentModel().getDepartment();
@@ -43,6 +53,13 @@ public class DepartmentController {
         } else {
             logger.debug("Saving Department ("+departmentView.getName()+")");
 
+            if(managerId != null) {
+                logger.debug("Setting Manager ("+managerId+")");
+                EmployeeViewBean manager = new EmployeeViewBean();
+                manager.setId(new Long(managerId));
+                departmentView.setManager(manager);
+            }
+
             departmentService.saveDepartment(departmentView);
         }
     }
@@ -53,6 +70,17 @@ public class DepartmentController {
 
     public DepartmentModel getDepartmentModel() {
         return departmentModel;
+    }
+
+    public List<SelectItem> getManagers() {
+        List<SelectItem> managers = new ArrayList<SelectItem>();
+
+        for(EmployeeViewBean employeeViewBean : employeeService.findAllManagers()) {
+            SelectItem manager = new SelectItem(employeeViewBean.getId().toString(),employeeViewBean.getFullname());
+            managers.add(manager);
+        }
+
+        return managers;
     }
 
     public DepartmentViewBean getDepartment() {
@@ -71,11 +99,29 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
+    public EmployeeService getEmployeeService() {
+        return employeeService;
+    }
+
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
     public MessageHelper getMessageHelper() {
         return messageHelper;
     }
 
     public void setMessageHelper(MessageHelper messageHelper) {
         this.messageHelper = messageHelper;
+    }
+
+    public void setManagerId(String managerId) {
+
+        this.managerId = managerId;
+    }
+
+    public String getManagerId() {
+
+        return managerId;
     }
 }

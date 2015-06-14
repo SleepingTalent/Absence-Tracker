@@ -24,7 +24,8 @@ public class BrowseEmployeePagenatedResults extends PagenatedResults<EmployeeVie
         for(Employee employee : employeeList) {
             EmployeeViewBean employeeViewBean = new EmployeeViewBean();
             employeeViewBean.setId(employee.getId());
-            employeeViewBean.setName(employee.getFirstName()+" "+employee.getLastName());
+            employeeViewBean.setFirstname(employee.getFirstName());
+            employeeViewBean.setLastname(employee.getLastName());
 
             if(employee.getDepartment() != null) {
                 employeeViewBean.setDepartment(employee.getDepartment().getDepartmentName());

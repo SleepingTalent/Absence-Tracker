@@ -2,6 +2,7 @@ package com.noveria.absencemanagement.model.employee.entities;
 
 
 import com.noveria.absencemanagement.model.department.entities.Department;
+import com.noveria.absencemanagement.model.user.entities.User;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,6 +36,9 @@ public class Employee {
     @JoinColumn(name = "DEPARTMENT_ID", referencedColumnName = "ID")
     private Department department;
 
+    @OneToOne
+    private User user;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -65,5 +69,13 @@ public class Employee {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -1,5 +1,7 @@
 package com.noveria.absencemanagement.view.department.view;
 
+import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
+
 /**
  * Created by lynseymcgregor on 08/06/2015.
  */
@@ -7,7 +9,7 @@ public class DepartmentViewBean {
 
     String name;
     private Long id;
-    private String manager;
+    private EmployeeViewBean manager;
 
     public String getName() {
         return name;
@@ -25,11 +27,11 @@ public class DepartmentViewBean {
         return id;
     }
 
-    public void setManager(String manager) {
+    public void setManager(EmployeeViewBean manager) {
         this.manager = manager;
     }
 
-    public String getManager() {
+    public EmployeeViewBean getManager() {
         return manager;
     }
 }

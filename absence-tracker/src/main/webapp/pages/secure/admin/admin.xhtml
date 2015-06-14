@@ -12,7 +12,10 @@
                     action="#{navigationController.showAddDepartmentDialog}"
                     update=":tabPanel:addDepartment" icon="ui-icon-folder-collapsed"/>
         <p:separator />
-        <p:menuitem value="Employee" url="#" icon="ui-icon-person"/>
+        <p:menuitem id="CreateEmployee" value="Employee"
+                    actionListener="#{employeeController.clearEmployee}"
+                    action="#{navigationController.showAddEmployeeDialog}"
+                    update=":tabPanel:addEmployee" icon="ui-icon-person"/>
     </p:submenu>
 
     <p:submenu id="browseMenu" label="Browse">
@@ -34,6 +37,7 @@
 <ui:include src="department/addDepartmentDialog.xhtml"/>
 <ui:include src="department/browseDepartmentsDialog.xhtml"/>
 <ui:include src="employee/browseEmployeesDialog.xhtml"/>
+<ui:include src="employee/addEmployeeDialog.xhtml"/>
 </html>
 
 

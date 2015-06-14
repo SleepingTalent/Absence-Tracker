@@ -3,6 +3,7 @@ package com.noveria.absencemanagement.model.department.dao;
 import com.noveria.absencemanagement.model.common.dao.PagenatedResults;
 import com.noveria.absencemanagement.model.department.entities.Department;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
+import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,12 @@ public class BrowseDepartmentPagenatedResults extends PagenatedResults<Departmen
             departmentViewBean.setName(department.getDepartmentName());
 
             if(department.getManager() != null) {
-                departmentViewBean.setManager(
-                        department.getManager().getFirstName() + " " + department.getManager().getLastName());
-            } else {
-                departmentViewBean.setManager("");
+                EmployeeViewBean manager = new EmployeeViewBean();
+                manager.setId(department.getManager().getId());
+                manager.setFirstname(department.getManager().getFirstName());
+                manager.setLastname(department.getManager().getLastName());
+
+                departmentViewBean.setManager(manager);
             }
 
 

@@ -37,7 +37,7 @@ public class DepartmentDAO extends BaseDAO<Department> {
         return (Department) query.getSingleResult();
     }
 
-    public BrowseDepartmentPagenatedResults findAllDepartments(int first, int pageSize) {
+    public BrowseDepartmentPagenatedResults findAllDepartmentsPagenated(int first, int pageSize) {
         BrowseDepartmentPagenatedResults results = new BrowseDepartmentPagenatedResults();
 
         String selectSql = "select d from Department d";
@@ -51,5 +51,12 @@ public class DepartmentDAO extends BaseDAO<Department> {
     @Override
     protected Class<Department> getEntityClass() {
         return Department.class;
+    }
+
+    public List<Department> findAllDepartments() {
+        String sql = "select d from Department d";
+        Query query = entityManager.createQuery(sql);
+
+        return query.getResultList();
     }
 }

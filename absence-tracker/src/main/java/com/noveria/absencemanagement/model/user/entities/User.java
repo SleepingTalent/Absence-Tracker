@@ -33,7 +33,7 @@ public class User {
     @Column(name = "ENABLED")
     private boolean enabled;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UserRole> userRole;
 
     public User() {
