@@ -61,6 +61,9 @@ public class DepartmentController {
             }
 
             departmentService.saveDepartment(departmentView);
+
+            messageHelper.addInfoMessage("Department Created",
+                    departmentView.getName()+" Created Successfully");
         }
     }
 

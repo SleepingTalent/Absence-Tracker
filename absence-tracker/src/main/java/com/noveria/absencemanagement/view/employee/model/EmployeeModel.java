@@ -22,8 +22,8 @@ public class EmployeeModel {
 
     private EmployeeViewBean employee;
     private UserViewBean user;
-    private String role;
     private String departmentId;
+    private boolean hasManagerRole;
 
     public EmployeeViewBean getEmployee() {
         return employee;
@@ -41,18 +41,9 @@ public class EmployeeModel {
         this.user = user;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
-
 
     public String getDepartmentId() {
         return departmentId;
@@ -65,11 +56,17 @@ public class EmployeeModel {
         userEntity.setPassword(user.getPassword());
         userEntity.setEnabled(true);
 
-        UserRole userRole = new UserRole();
-        userRole.setRole(Role.findById(role).getName());
-
         List<UserRole> roles = new ArrayList<UserRole>();
-        roles.add(userRole);
+
+        UserRole employeeRole = new UserRole();
+        employeeRole.setRole(Role.EMPLOYEE.getName());
+        roles.add(employeeRole);
+
+        if(hasManagerRole) {
+            UserRole managerRole = new UserRole();
+            managerRole.setRole(Role.MANAGER.getName());
+            roles.add(managerRole);
+        }
 
         userEntity.setUserRole(roles);
 
@@ -81,5 +78,13 @@ public class EmployeeModel {
         employeeEntity.setFirstName(employee.getFirstname());
         employeeEntity.setLastName(employee.getLastname());
         return employeeEntity;
+    }
+
+    public void setManagerRole(boolean hasManagerRole) {
+        this.hasManagerRole = hasManagerRole;
+    }
+
+    public boolean hasManagerRole() {
+        return hasManagerRole;
     }
 }

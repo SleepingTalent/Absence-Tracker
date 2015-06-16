@@ -73,6 +73,15 @@ public class UserDAO extends BaseDAO<User>{
         return (User) query.getSingleResult();
     }
 
+    public boolean usernameAlreadyExists(String username) {
+        try {
+            findUserByUsername(username);
+            return true;
+        } catch (NoResultException e) {
+            return false;
+        }
+    }
+
     @Override
     protected Class<User> getEntityClass() {
         return User.class;

@@ -5,19 +5,21 @@ package com.noveria.absencemanagement.view.employee.controller;
  */
 
 import com.noveria.absencemanagement.model.common.Role;
+import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.service.department.DepartmentService;
 import com.noveria.absencemanagement.service.employee.EmployeeService;
 import com.noveria.absencemanagement.view.authentication.view.UserViewBean;
-import com.noveria.absencemanagement.view.department.model.DepartmentModel;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
 import com.noveria.absencemanagement.view.employee.model.EmployeeModel;
 import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
+import com.noveria.absencemanagement.view.helper.MessageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.AbortProcessingException;
 import javax.faces.model.SelectItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,16 +42,36 @@ public class EmployeeController {
     @ManagedProperty(value = "#{employeeService}")
     EmployeeService employeeService;
 
+    @ManagedProperty(value = "#{userDAO}")
+    UserDAO userDAO;
+
+    @ManagedProperty(value = "#{messageHelper}")
+    private MessageHelper messageHelper;
+    private String managerrole;
+
     public void clearEmployee() {
         employeeModel.setDepartmentId("");
         employeeModel.setUser(new UserViewBean());
-        employeeModel.setRole("");
+        employeeModel.setManagerRole(false);
         employeeModel.setEmployee(new EmployeeViewBean());
     }
 
     public void saveEmployee() {
        logger.debug("Saving Employee");
-       employeeService.createEmployee(employeeModel);
+
+       if(userDAO.usernameAlreadyExists(employeeModel.getUser().getUsername())) {
+           logger.debug("Create Employee Failed : "+employeeModel.getUser().getUsername()+" already exists");
+
+           messageHelper.addErrorMessage("Create Employee Failed",
+                   employeeModel.getUser().getUsername()+" Already Exists");
+
+           throw new AbortProcessingException(employeeModel.getUser().getUsername()+" Already Exists");
+       }else {
+           employeeService.createEmployee(employeeModel);
+
+           messageHelper.addInfoMessage("Employee Created",
+                   employeeModel.getEmployee().getFullname()+" Created Successfully");
+       }
     }
 
     public List<SelectItem> getDepartments() {
@@ -97,14 +119,6 @@ public class EmployeeController {
         return employeeModel.getDepartmentId();
     }
 
-    public void setRole(String role) {
-        this.employeeModel.setRole(role);
-    }
-
-    public String getRole() {
-        return employeeModel.getRole();
-    }
-
     public UserViewBean getUser() {
         return employeeModel.getUser();
     }
@@ -124,5 +138,30 @@ public class EmployeeController {
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
+
+    public UserDAO getUserDAO() {
+        return userDAO;
+    }
+
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
+    public MessageHelper getMessageHelper() {
+        return messageHelper;
+    }
+
+    public void setMessageHelper(MessageHelper messageHelper) {
+        this.messageHelper = messageHelper;
+    }
+
+    public void setManagerrole(boolean hasManagerRole) {
+        employeeModel.setManagerRole(hasManagerRole);
+    }
+
+    public boolean getManagerrole() {
+        return employeeModel.hasManagerRole();
+    }
 }
+
 

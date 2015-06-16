@@ -39,12 +39,8 @@
                              value="#{employeeController.user.password}"
                              requiredMessage="Password is required"/>
 
-                <p:outputLabel id="roleslbl" for="roles" value="Roles:" />
-                <p:selectOneMenu id="roles" value="#{employeeController.role}"
-                                 required="true" requiredMessage="Please Select a User Role">
-                    <f:selectItem itemLabel="Select Role" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{employeeController.roles}" />
-                </p:selectOneMenu>
+                <p:outputLabel id="roleslbl" for="mangerrole" value="Manager:" />
+                <p:selectBooleanCheckbox id="mangerrole" value="#{employeeController.managerrole}" />
 
                 <f:facet name="footer">
                     <h:commandButton id="addEmployeeBtn" value="Create Employee"
