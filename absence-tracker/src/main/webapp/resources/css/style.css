@@ -45,3 +45,11 @@ body {
     width: 180px;
     min-height: 600px;
 }
+
+.holidayAllowancePanel {
+    width: 134px;
+}
+
+.holidayCalendarPanel {
+    width: 600px;
+}

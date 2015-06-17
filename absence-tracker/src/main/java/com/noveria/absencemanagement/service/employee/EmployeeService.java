@@ -5,6 +5,8 @@ import com.noveria.absencemanagement.model.department.entities.Department;
 import com.noveria.absencemanagement.model.employee.dao.BrowseEmployeePagenatedResults;
 import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
+import com.noveria.absencemanagement.model.holiday.allowance.dao.HolidayAllowanceDAO;
+import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance;
 import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.service.employee.exception.EmployeeNotFoundException;
@@ -35,6 +37,9 @@ public class EmployeeService {
     @Autowired
     UserDAO userDAO;
 
+    @Autowired
+    HolidayAllowanceDAO holidayAllowanceDAO;
+
     @Transactional
     public Employee createEmployee(EmployeeModel employeeModel) {
         User user = employeeModel.getUserEntity();
@@ -50,7 +55,19 @@ public class EmployeeService {
         employee.setUser(user);
 
         logger.debug("Creating Employee : " + employee.getFirstName() + " " + employee.getLastName());
-        return employeeDAO.create(employee);
+
+        employee = employeeDAO.create(employee);
+
+        HolidayAllowance holidayAllowance = new HolidayAllowance();
+        holidayAllowance.initialise(employee);
+
+        holidayAllowanceDAO.create(holidayAllowance);
+
+        return employee;
+    }
+
+    public HolidayAllowance getHolidayAllowance(Employee employee) {
+        return holidayAllowanceDAO.findHolidayAllowanceByEmployee(employee);
     }
 
     public BrowseEmployeePagenatedResults findAllEmployees(int first, int pageSize) {

@@ -2,7 +2,35 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 
-
 <p:outputLabel id="employerole" value="You have employee access!"/>
+
+<h:panelGrid columns="2">
+    <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Holiday Balance">
+
+        <h:panelGrid columns="2">
+
+            <p:outputLabel id="holidayTotalLbl" for="holidayTotal" value="Total:"/>
+            <h:outputText id="holidayTotal" value="256" style="color: black"/>
+
+            <p:separator/>
+            <p:separator/>
+
+            <p:outputLabel id="holidayUsedLbl" for="holidayUsed" value="Used:"/>
+            <h:outputText id="holidayUsed" value="50" style="color: red"/>
+
+            <p:separator/>
+            <p:separator/>
+
+            <p:outputLabel id="holidayRemainingLbl" for="holidayRemaining" value="Remaining:"/>
+            <h:outputText id="holidayRemaining" value="206" style="color: green"/>
+        </h:panelGrid>
+
+    </p:panel>
+
+    <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Holiday Calendar">
+        <p:schedule value=""/>
+    </p:panel>
+</h:panelGrid>
+
 
 </html>
