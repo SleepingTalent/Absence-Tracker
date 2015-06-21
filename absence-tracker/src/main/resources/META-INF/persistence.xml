@@ -12,7 +12,6 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
         <class>com.noveria.absencemanagement.model.department.entities.Department</class>
         <class>com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance</class>
 
-
         <properties>
             <property name="hibernate.archive.autodetection" value="class, hbm"/>
             <property name="hibernate.format_sql" value="true"/>
