@@ -23,6 +23,10 @@ public class CreateDepartmentDialog extends Page {
         getPageHelper().findElementById(CREATE_DEPARTMENT_DIALOG_ID,reThrow);
     }
 
+    public void assertDialogPresent() {
+        getPageHelper().findElementById(CREATE_DEPARTMENT_DIALOG_ID,false);
+    }
+
     public void setName(String name) {
         try {
             getPageHelper().findElementById(DEPARTMENT_NAME_FIELD, true).sendKeys(name);

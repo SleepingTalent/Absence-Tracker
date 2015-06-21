@@ -12,13 +12,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @ManagedBean(name = "browserDepartmentModel")
 @SessionScoped
-public class BrowserDepartmentModel {
+public class BrowserDepartmentModel implements Serializable {
 
     private List<DepartmentViewBean> lazyLoadedData;
 

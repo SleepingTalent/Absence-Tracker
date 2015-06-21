@@ -71,4 +71,8 @@ public class PageHelper {
             return elementHelper.findByLinkText(text, reThrow);
     }
 
+    public WebElement findLinkByText(String text) {
+        return elementHelper.findByLinkText(text, false);
+    }
+
 }

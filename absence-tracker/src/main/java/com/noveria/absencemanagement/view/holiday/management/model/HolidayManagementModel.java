@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  */
 @ManagedBean(name = "holidayManagementModel")
 @SessionScoped
-public class HolidayManagementModel {
+public class HolidayManagementModel implements Serializable {
 
     @ManagedProperty(value = "#{employeeService}")
     EmployeeService employeeService;

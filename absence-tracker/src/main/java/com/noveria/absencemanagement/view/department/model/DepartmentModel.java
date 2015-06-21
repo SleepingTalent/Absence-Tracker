@@ -5,10 +5,11 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
 
 @ManagedBean(name = "departmentModel")
 @SessionScoped
-public class DepartmentModel {
+public class DepartmentModel implements Serializable {
 
     DepartmentViewBean department;
 

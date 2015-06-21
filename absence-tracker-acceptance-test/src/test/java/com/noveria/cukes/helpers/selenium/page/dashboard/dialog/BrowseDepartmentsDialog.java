@@ -28,6 +28,10 @@ public class BrowseDepartmentsDialog extends Page {
         getPageHelper().findElementById(BROWSE_DEPARTMENT_DIALOG_ID,reThrow);
     }
 
+    public void assertDialogPresent() {
+        getPageHelper().findElementById(BROWSE_DEPARTMENT_DIALOG_ID,false);
+    }
+
     public void assertDepartmentNotPresent(String departmentName) {
         try {
             getPageHelper().findTableRowWithText(departmentName, true);

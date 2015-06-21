@@ -1,6 +1,7 @@
 package com.noveria.cukes.runtime;
 
 import com.noveria.cukes.helpers.LoginDetails;
+import com.noveria.cukes.helpers.selenium.PageFactory;
 import com.noveria.cukes.helpers.selenium.WebDriverFactory;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
@@ -19,6 +20,7 @@ public class RuntimeState {
     private CucumberWebDriver webDriver;
     private Scenario scenario;
     private LoginDetails loginDetails;
+    private PageFactory pageFactory;
 
     public Scenario getScenario() {
         return scenario;
@@ -30,6 +32,7 @@ public class RuntimeState {
 
     public void initialise() {
         webDriver = WebDriverFactory.getWebDriver();
+        pageFactory = new PageFactory(webDriver);
     }
 
     public void takeScreenShot() {
@@ -44,9 +47,10 @@ public class RuntimeState {
         }
     }
 
-    public LoginPage getLoginPage() {
-        return new LoginPage(webDriver);
+    public PageFactory getPageFactory() {
+        return pageFactory;
     }
+
 
     public void setLoginDetails(LoginDetails loginDetails) {
         this.loginDetails = loginDetails;

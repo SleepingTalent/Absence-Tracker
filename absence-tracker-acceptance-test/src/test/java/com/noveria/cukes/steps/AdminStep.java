@@ -24,14 +24,9 @@ public class AdminStep {
     @And("^they create a Department without a name$")
     public void they_create_a_without_a() throws Throwable {
 
-        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
         dashboardPage.assertPagePresent();
-
-        try {
-            dashboardPage.createDepartmentWithName(runtimeState, "", true);
-        } catch (SeleniumTimeoutException set) {
-            dashboardPage.createDepartmentWithName(runtimeState, "", false);
-        }
+        dashboardPage.createDepartmentWithName(runtimeState, "");
     }
 
     @Then("^a \"([^\"]*)\" \"([^\"]*)\" validation error is displayed$")
@@ -44,14 +39,10 @@ public class AdminStep {
 
     @And("^checks that the \"([^\"]*)\" department does not exist$")
     public void checks_that_the_department_does_not_exist(String departmentName) throws Throwable {
-        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
         dashboardPage.assertPagePresent();
 
-        try {
-            dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, true);
-        } catch (SeleniumTimeoutException set) {
-                dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName, false);
-        }
+        dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName);
     }
 
     @And("^they create a Department called \"([^\"]*)\"$")
@@ -59,34 +50,20 @@ public class AdminStep {
         DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
         dashboardPage.assertPagePresent();
 
-        try {
-            dashboardPage.createDepartmentWithName(runtimeState, departmentName, true);
-        } catch (SeleniumTimeoutException set) {
-                dashboardPage.createDepartmentWithName(runtimeState, departmentName, false);
-        }
+        dashboardPage.createDepartmentWithName(runtimeState, departmentName);
     }
 
     @Then("^the \"([^\"]*)\" Department is created$")
     public void the_Department_is_created(String departmentName) throws Throwable {
         DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
         dashboardPage.assertPagePresent();
-
-        try {
-            dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
-        } catch (SeleniumTimeoutException set) {
-                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
-        }
+        dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName);
     }
 
     @And("^the \"([^\"]*)\" Department is already created$")
     public void the_Department_is_already_created(String departmentName) throws Throwable {
         DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
         dashboardPage.assertPagePresent();
-
-        try {
-            dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, true);
-        } catch (SeleniumTimeoutException set) {
-                dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName, false);
-        }
+        dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName);
     }
 }

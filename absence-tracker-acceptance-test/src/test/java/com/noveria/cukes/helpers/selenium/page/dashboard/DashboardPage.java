@@ -71,8 +71,8 @@ public class DashboardPage extends Page {
         return browseDepartmentsDialog;
     }
 
-    public void checkThatTheDepartmentDoesNotExist(RuntimeState runtimeState, String departmentName, boolean reThrow) {
-        openBrowseDepartmentsDialog(reThrow);
+    public void checkThatTheDepartmentDoesNotExist(RuntimeState runtimeState, String departmentName) {
+        openBrowseDepartmentsDialog();
 
         getBrowseDepartmentsDialog().assertDepartmentNotPresent(departmentName);
         runtimeState.takeScreenShot();
@@ -80,8 +80,8 @@ public class DashboardPage extends Page {
         getBrowseDepartmentsDialog().closeDialog();
     }
 
-    public void createDepartmentWithName(RuntimeState runtimeState, String departmentName, boolean reThrow) {
-        openCreateDepartmentDialog(reThrow);
+    public void createDepartmentWithName(RuntimeState runtimeState, String departmentName) {
+        openCreateDepartmentDialog();
 
         getCreateDepartmentDialog().setName(departmentName);
         runtimeState.takeScreenShot();
@@ -89,8 +89,8 @@ public class DashboardPage extends Page {
         getCreateDepartmentDialog().clickCreateBtn();
     }
 
-    public void checkThatTheDepartmentExist(RuntimeState runtimeState, String departmentName, boolean reThrow) {
-        openBrowseDepartmentsDialog(reThrow);
+    public void checkThatTheDepartmentExist(RuntimeState runtimeState, String departmentName) {
+        openBrowseDepartmentsDialog();
 
         getBrowseDepartmentsDialog().assertDepartmentPresent(departmentName);
         runtimeState.takeScreenShot();
@@ -98,25 +98,25 @@ public class DashboardPage extends Page {
         getBrowseDepartmentsDialog().closeDialog();
     }
 
-    private void openCreateDepartmentDialog(boolean reThrow) {
-        try {
-            getAdminMenu().clickOnCreateDepartment(reThrow);
-        } catch (SeleniumTimeoutException ste) {
-            getAdminMenu().openCreateMenu(reThrow);
-            getAdminMenu().clickOnCreateDepartment(reThrow);
-        }
+    private void openCreateDepartmentDialog() {
 
-        getCreateDepartmentDialog().assertDialogPresent(reThrow);
+        try {
+            getAdminMenu().clickOnCreateDepartment();
+            getCreateDepartmentDialog().assertDialogPresent(true);
+        } catch (SeleniumTimeoutException ste) {
+            getAdminMenu().clickOnCreateDepartment();
+            getCreateDepartmentDialog().assertDialogPresent();
+        }
     }
 
-    private void openBrowseDepartmentsDialog(boolean reThrow) {
-        try {
-            getAdminMenu().clickOnBrowseDepartment(reThrow);
-        } catch (SeleniumTimeoutException ste) {
-            getAdminMenu().openBrowseMenu(reThrow);
-            getAdminMenu().clickOnBrowseDepartment(reThrow);
-        }
+    private void openBrowseDepartmentsDialog() {
 
-        getBrowseDepartmentsDialog().assertDialogPresent(reThrow);
+        try {
+            getAdminMenu().clickOnBrowseDepartment();
+            getBrowseDepartmentsDialog().assertDialogPresent(true);
+        } catch (SeleniumTimeoutException ste) {
+            getAdminMenu().clickOnBrowseDepartment();
+            getBrowseDepartmentsDialog().assertDialogPresent();
+        }
     }
 }

@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ import java.util.Map;
 
 @ManagedBean(name = "browseEmployeeModel")
 @SessionScoped
-public class BrowseEmployeeModel {
+public class BrowseEmployeeModel implements Serializable {
 
     private List<EmployeeViewBean> lazyLoadedData;
 

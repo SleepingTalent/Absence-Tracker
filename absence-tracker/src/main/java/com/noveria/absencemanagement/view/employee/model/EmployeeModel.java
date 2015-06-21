@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @ManagedBean(name = "employeeModel")
 @SessionScoped
-public class EmployeeModel {
+public class EmployeeModel implements Serializable {
 
     private EmployeeViewBean employee;
     private UserViewBean user;

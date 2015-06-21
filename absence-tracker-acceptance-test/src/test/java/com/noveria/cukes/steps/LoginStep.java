@@ -30,7 +30,6 @@ public class LoginStep {
         invalidUser.setPassword("wrong");
 
         runtimeState.setLoginDetails(invalidUser);
-
     }
 
     @Given("^a valid \"(.*?)\" user$")
@@ -39,36 +38,18 @@ public class LoginStep {
 
         UserType foundUserType = UserType.findByName(userType);
 
-        if (foundUserType.equals(UserType.ADMIN)) {
-            validUser.setUsername("admin");
-            validUser.setPassword("password");
-            validUser.setUserType(foundUserType);
-        } else if (foundUserType.equals(UserType.MANAGER)) {
-            validUser.setUsername("manager");
-            validUser.setPassword("password");
-            validUser.setUserType(foundUserType);
-        } else if (foundUserType.equals(UserType.EMPLOYEE)) {
-            validUser.setUsername("employee");
-            validUser.setPassword("password");
-            validUser.setUserType(foundUserType);
-        } else if (foundUserType.equals(UserType.NOROLE)) {
-            validUser.setUsername("norole");
-            validUser.setPassword("password");
-            validUser.setUserType(foundUserType);
-        } else if (foundUserType.equals(UserType.UNKNOWNROLE)) {
-        validUser.setUsername("unknownrole");
-        validUser.setPassword("password");
+        validUser.setUsername(foundUserType.getUsername());
+        validUser.setPassword(foundUserType.getPassword());
         validUser.setUserType(foundUserType);
-    }
 
         runtimeState.setLoginDetails(validUser);
     }
 
     @When("^the user logs in$")
     public void the_user_logs_in() throws Throwable {
-        LoginPage loginPage =runtimeState.getLoginPage();
-        loginPage.navigateToLoginPage();
+        LoginPage loginPage = runtimeState.getPageFactory().getLoginPage();
 
+        loginPage.navigateToLoginPage();
         loginPage.inputUserName(runtimeState.getLoginDetails().getUsername());
         loginPage.inputPassword(runtimeState.getLoginDetails().getPassword());
 
@@ -80,7 +61,8 @@ public class LoginStep {
     @Then("^they are redirected to the appropriate dashboard$")
     public void they_are_redirected_to_the_dashboard() throws Throwable {
         runtimeState.takeScreenShot();
-        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
         dashboardPage.assertPagePresent();
 
         if(runtimeState.getLoginDetails().getUserType().equals(UserType.ADMIN)) {
@@ -94,22 +76,24 @@ public class LoginStep {
 
     @Then("^a login error is displayed$")
     public void a_login_error_is_displayed() throws Throwable {
-        LoginPage loginPage = runtimeState.getLoginPage();
+        LoginPage loginPage = runtimeState.getPageFactory().getLoginPage();
         loginPage.assertLoginErrorIsDisplayed();
+
         runtimeState.takeScreenShot();
     }
 
     @When("^the user logs out$")
     public void the_user_logs_out() throws Throwable {
-        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
         dashboardPage.assertPagePresent();
         dashboardPage.clickLogoutBtn();
     }
 
     @Then("^they are redirected to the login page$")
     public void they_are_redirected_to_the_login_page() throws Throwable {
-        LoginPage loginPage = runtimeState.getLoginPage();
+        LoginPage loginPage = runtimeState.getPageFactory().getLoginPage();
         loginPage.assertPagePresent();
+
         runtimeState.takeScreenShot();
     }
 }
