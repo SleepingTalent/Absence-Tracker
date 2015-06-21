@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.Map;
  * Created by lynseymcgregor on 13/06/2015.
  */
 
-@Component
+@ManagedBean(name = "browseEmployeeModel")
 @SessionScoped
 public class BrowseEmployeeModel {
 
@@ -26,7 +28,7 @@ public class BrowseEmployeeModel {
 
     private LazyDataModel<EmployeeViewBean> dataModel;
 
-    @Autowired
+    @ManagedProperty(value = "#{employeeService}")
     EmployeeService employeeService;
 
     @PostConstruct
@@ -76,5 +78,13 @@ public class BrowseEmployeeModel {
                 return lazyLoadedData;
             }
         };
+    }
+
+    public EmployeeService getEmployeeService() {
+        return employeeService;
+    }
+
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 }

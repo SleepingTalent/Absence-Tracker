@@ -5,6 +5,7 @@ import com.noveria.absencemanagement.model.common.dao.BaseDAO;
 import com.noveria.absencemanagement.model.common.dao.PagenatedResults;
 import com.noveria.absencemanagement.model.department.entities.Department;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
+import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.model.user.entities.UserRole;
 import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
 import org.slf4j.Logger;
@@ -70,5 +71,14 @@ public class EmployeeDAO extends BaseDAO<Employee> {
     @Override
     protected Class<Employee> getEntityClass() {
         return Employee.class;
+    }
+
+    public Employee findEmployeesbyUser(User user) {
+        String sql = "select e from Employee e where e.user = :user";
+
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("user",user);
+
+        return (Employee) query.getSingleResult();
     }
 }

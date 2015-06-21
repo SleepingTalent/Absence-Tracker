@@ -16,7 +16,7 @@
     <logger name="com.noveria.absencemanagement.view.employee.controller.EmployeeController" level="DEBUG"/>
     <logger name="com.noveria.absencemanagement.model.employee.dao.EmployeeDAO" level="DEBUG" />
 
-    <root level="ERROR">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT" />
     </root>
 

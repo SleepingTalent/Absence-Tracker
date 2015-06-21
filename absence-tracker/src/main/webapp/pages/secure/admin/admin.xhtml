@@ -1,17 +1,21 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:form id="adminForm" prependId="false">
+
 <p:panelMenu id="adminMenu" styleClass="menuPanel">
+
     <p:submenu id="createMenu" label="Create">
+
         <p:menuitem id="CreateDept" value="Department"
                     actionListener="#{departmentController.clearDepartment}"
                     action="#{navigationController.showAddDepartmentDialog}"
                     update=":tabPanel:addDepartment" icon="ui-icon-folder-collapsed"/>
+
         <p:separator />
+
         <p:menuitem id="CreateEmployee" value="Employee"
                     actionListener="#{employeeController.clearEmployee}"
                     action="#{navigationController.showAddEmployeeDialog}"
@@ -19,11 +23,14 @@
     </p:submenu>
 
     <p:submenu id="browseMenu" label="Browse">
+
         <p:menuitem id="BrowseDept" value="Department"
                     actionListener="#{browseDepartmentController.clearDataModel}"
                     action="#{navigationController.showBrowseDepartmentsDialog}"
                     icon="ui-icon-search" update=":tabPanel:browseDepartments"/>
+
         <p:separator />
+
         <p:menuitem id="BrowseEmployee" value="Employee"
                     actionListener="#{browseEmployeeController.clearDataModel}"
                     action="#{navigationController.showBrowseEmployeesDialog}"
@@ -38,6 +45,6 @@
 <ui:include src="department/browseDepartmentsDialog.xhtml"/>
 <ui:include src="employee/browseEmployeesDialog.xhtml"/>
 <ui:include src="employee/addEmployeeDialog.xhtml"/>
-</html>
+</ui:composition>
 
 

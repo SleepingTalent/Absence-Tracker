@@ -83,14 +83,24 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
     @Test
     public void findAllManagers_returnsAsExpected() {
         List<Employee> results = employeeDAO.findAllManagers();
-        assertEquals(1, results.size());
+        assertEquals(2, results.size());
 
-        assertEquals("Bob",results.get(0).getFirstName());
-        assertEquals("Gaffer",results.get(0).getLastName());
-        assertEquals("bgaffer",results.get(0).getUser().getUsername());
+        assertEquals("Trevor",results.get(0).getFirstName());
+        assertEquals("Boss",results.get(0).getLastName());
+        assertEquals("admin",results.get(0).getUser().getUsername());
 
-        assertEquals(1,results.get(0).getUser().getUserRole().size());
-        assertEquals("MANAGER",results.get(0).getUser().getUserRole().get(0).getRole());
+        assertEquals(3,results.get(0).getUser().getUserRole().size());
+        assertEquals("ADMIN",results.get(0).getUser().getUserRole().get(0).getRole());
+        assertEquals("MANAGER",results.get(0).getUser().getUserRole().get(1).getRole());
+        assertEquals("EMPLOYEE",results.get(0).getUser().getUserRole().get(2).getRole());
+
+        assertEquals("Bob",results.get(1).getFirstName());
+        assertEquals("Gaffer",results.get(1).getLastName());
+        assertEquals("bgaffer",results.get(1).getUser().getUsername());
+
+        assertEquals(2,results.get(1).getUser().getUserRole().size());
+        assertEquals("MANAGER",results.get(1).getUser().getUserRole().get(0).getRole());
+        assertEquals("EMPLOYEE",results.get(1).getUser().getUserRole().get(1).getRole());
     }
 
     @Test

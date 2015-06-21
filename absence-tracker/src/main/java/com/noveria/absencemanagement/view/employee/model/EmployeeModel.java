@@ -9,6 +9,7 @@ import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
 import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
 import org.springframework.stereotype.Component;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * Created by lynseymcgregor on 14/06/2015.
  */
-@Component
+@ManagedBean(name = "employeeModel")
 @SessionScoped
 public class EmployeeModel {
 

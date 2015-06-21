@@ -105,4 +105,8 @@ public class EmployeeService {
 
         return managerList;
     }
+
+    public Employee findEmployeeByUser(User user) {
+        return employeeDAO.findEmployeesbyUser(user);
+    }
 }

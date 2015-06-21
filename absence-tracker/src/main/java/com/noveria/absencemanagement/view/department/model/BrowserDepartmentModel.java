@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Component
+@ManagedBean(name = "browserDepartmentModel")
 @SessionScoped
 public class BrowserDepartmentModel {
 
@@ -22,7 +24,7 @@ public class BrowserDepartmentModel {
 
     private LazyDataModel<DepartmentViewBean> dataModel;
 
-    @Autowired
+    @ManagedProperty(value = "#{departmentService}")
     DepartmentService departmentService;
 
     @PostConstruct
@@ -76,5 +78,13 @@ public class BrowserDepartmentModel {
                 return lazyLoadedData;
             }
         };
+    }
+
+    public DepartmentService getDepartmentService() {
+        return departmentService;
+    }
+
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 }

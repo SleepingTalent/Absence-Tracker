@@ -24,7 +24,12 @@ body {
     width: 270px;
     height: 135px;
     position: absolute;
-    left: 300px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
 }
 
 .formElement {

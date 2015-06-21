@@ -21,7 +21,7 @@ public class HolidayAllowance {
     @Column(name = "USED")
     private int used;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Employee employee;
 
     public Long getId() {
