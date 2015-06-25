@@ -21,7 +21,7 @@
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
         <property name="persistenceUnitName" value="jpa" />
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="h2DataSource" />
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
         <property name="jpaDialect" ref="jpaDialect" />
     </bean>
@@ -36,18 +36,36 @@
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="h2DataSource" />
         <property name="jpaDialect" ref="jpaDialect" />
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager" />
 
-    <bean id="dataSource"
+    <bean id="h2DataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver" />
-        <property name="url" value="jdbc:h2:mem;INIT=CREATE SCHEMA IF NOT EXISTS test" />
+        <property name="url" value="jdbc:h2:file:../data/absencetracker;INIT=CREATE SCHEMA IF NOT EXISTS absencetracker" />
         <property name="username" value="sa" />
         <property name="password" value="" />
+    </bean>
+
+    <bean id="h2TcpServer" class="org.h2.tools.Server" factory-method="createTcpServer" depends-on="h2DataSource"
+          init-method="start" destroy-method="stop">
+        <constructor-arg>
+            <array>
+                <value>-tcp</value>
+                <value>-tcpAllowOthers</value>
+                <value>-tcpPort</value>
+                <value>8043</value>
+            </array>
+        </constructor-arg>
+    </bean>
+
+    <!-- provides a H2 console to look into the db if necessary -->
+    <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer" depends-on="h2DataSource"
+          init-method="start" lazy-init="false" destroy-method="stop">
+        <constructor-arg value="-web,-webPort,11111" />
     </bean>
 
 </beans>

@@ -87,7 +87,7 @@ public class EmployeeDAOIntegrationTest extends BaseIntegrationTest {
 
         assertEquals("Trevor",results.get(0).getFirstName());
         assertEquals("Boss",results.get(0).getLastName());
-        assertEquals("admin",results.get(0).getUser().getUsername());
+        assertEquals("tboss",results.get(0).getUser().getUsername());
 
         assertEquals(3,results.get(0).getUser().getUserRole().size());
         assertEquals("ADMIN",results.get(0).getUser().getUserRole().get(0).getRole());

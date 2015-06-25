@@ -1,14 +1,18 @@
 package com.noveria.cukes.steps;
 
+import com.noveria.cukes.helpers.db.DBHelper;
 import com.noveria.cukes.helpers.selenium.page.dashboard.DashboardPage;
 import com.noveria.cukes.helpers.selenium.page.helper.SeleniumTimeoutException;
 import com.noveria.cukes.runtime.RuntimeState;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+
+import static org.junit.Assert.assertFalse;
 
 /**
  * Created by lynseymcgregor on 09/06/2015.
@@ -20,6 +24,9 @@ public class AdminStep {
 
     @Autowired
     RuntimeState runtimeState;
+
+    @Autowired
+    DBHelper dbHelper;
 
     @And("^they create a Department without a name$")
     public void they_create_a_without_a() throws Throwable {
@@ -39,10 +46,9 @@ public class AdminStep {
 
     @And("^checks that the \"([^\"]*)\" department does not exist$")
     public void checks_that_the_department_does_not_exist(String departmentName) throws Throwable {
-        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
-        dashboardPage.assertPagePresent();
 
-        dashboardPage.checkThatTheDepartmentDoesNotExist(runtimeState, departmentName);
+        assertFalse(departmentName+" already exists!",dbHelper.departmentExists(departmentName));
+        runtimeState.setNewDepartmentName(departmentName);
     }
 
     @And("^they create a Department called \"([^\"]*)\"$")

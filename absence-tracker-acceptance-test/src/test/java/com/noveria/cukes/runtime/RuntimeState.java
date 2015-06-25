@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class RuntimeState {
 
     public static final String ABSENCE_TRACKER_URL = "http://localhost:4094/absence-tracker";
+    private String newDepartmentName = "CucumberTestDepartment";
 
     public CucumberWebDriver getWebDriver() {
         return webDriver;
@@ -60,4 +61,11 @@ public class RuntimeState {
         return loginDetails;
     }
 
+    public void setNewDepartmentName(String newDepartmentName) {
+        this.newDepartmentName = newDepartmentName;
+    }
+
+    public String getNewDepartmentName() {
+        return newDepartmentName;
+    }
 }

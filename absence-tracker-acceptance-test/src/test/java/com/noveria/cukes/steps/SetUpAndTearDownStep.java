@@ -2,6 +2,7 @@ package com.noveria.cukes.steps;
 
 import java.io.IOException;
 
+import com.noveria.cukes.helpers.db.DBHelper;
 import com.noveria.cukes.helpers.report.ScenarioHelper;
 import com.noveria.cukes.runtime.RuntimeState;
 import cucumber.api.Scenario;
@@ -23,14 +24,24 @@ public class SetUpAndTearDownStep {
     @Autowired
     ScenarioHelper scenarioHelper;
 
+    @Autowired
+    DBHelper dbHelper;
+
     @Before
     public void setUp(Scenario scenario) {
         runtimeState.initialise();
         runtimeState.setScenario(scenario);
+
+        dbHelper.listDepartments();
     }
 
     @After
     public void tearDown(Scenario scenario) throws IOException {
+
+        if(runtimeState.getNewDepartmentName() != null) {
+            dbHelper.deleteDepartment(runtimeState.getNewDepartmentName());
+        }
+
         if(scenario.isFailed()) {
             runtimeState.takeScreenShot();
         }

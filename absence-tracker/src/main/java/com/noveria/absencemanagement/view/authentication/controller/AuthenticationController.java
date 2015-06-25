@@ -88,6 +88,11 @@ public class AuthenticationController {
     public String logout() {
         SecurityContextHolder.clearContext();
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+
+        setUserName(null);
+        setPassword(null);
+
+        userModel.setEmployee(null);
         return "logout";
     }
 

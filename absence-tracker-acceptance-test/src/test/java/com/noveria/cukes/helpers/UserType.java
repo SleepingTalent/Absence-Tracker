@@ -2,8 +2,8 @@ package com.noveria.cukes.helpers;
 
 
 public enum UserType {
-    ADMIN("admin","password"), MANAGER("manager","password"),
-    EMPLOYEE("employee","password"),NOROLE("norole","password"),
+    ADMIN("tboss","password"), MANAGER("bgaffer","password"),
+    EMPLOYEE("jworker","password"),NOROLE("norole","password"),
     UNKNOWNROLE("unknownrole","password");
 
     private String username;

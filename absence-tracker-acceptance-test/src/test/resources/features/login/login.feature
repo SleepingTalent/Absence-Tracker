@@ -5,16 +5,22 @@ Feature: Application Login Features
     Given a valid "Admin" user
     When the user logs in
     Then they are redirected to the appropriate dashboard
+    When the user logs out
+    Then they are redirected to the login page
 
   Scenario: A valid Manager User logs in
     Given a valid "Manager" user
     When the user logs in
     Then they are redirected to the appropriate dashboard
+    When the user logs out
+    Then they are redirected to the login page
 
   Scenario: A valid Employee User logs in
     Given a valid "Employee" user
     When the user logs in
     Then they are redirected to the appropriate dashboard
+    When the user logs out
+    Then they are redirected to the login page
 
   Scenario: An invalid User logs in
     Given an invalid user
@@ -31,12 +37,6 @@ Feature: Application Login Features
     When the user logs in
     Then a login error is displayed
 
-  Scenario: An valid User logs in and out
-    Given a valid "Admin" user
-    When the user logs in
-    Then they are redirected to the appropriate dashboard
-    When the user logs out
-    Then they are redirected to the login page
 
 
 
