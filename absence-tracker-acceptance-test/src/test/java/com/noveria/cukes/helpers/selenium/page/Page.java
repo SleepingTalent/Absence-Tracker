@@ -12,8 +12,10 @@ public class Page {
 
     public static final String MESSAGES_CONTAINER = "messages_container";
     private PageHelper pageHelper;
+    protected CucumberWebDriver webDriver;
 
     protected Page(CucumberWebDriver webDriver) {
+        this.webDriver = webDriver;
         pageHelper = new PageHelper(webDriver);
     }
 

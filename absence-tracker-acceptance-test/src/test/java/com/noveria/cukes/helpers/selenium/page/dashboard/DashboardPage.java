@@ -1,5 +1,7 @@
 package com.noveria.cukes.helpers.selenium.page.dashboard;
 
+import com.noveria.cukes.helpers.UserType;
+import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.helpers.selenium.page.Page;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.BrowseDepartmentsDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.CreateDepartmentDialog;
@@ -104,8 +106,18 @@ public class DashboardPage extends Page {
             getAdminMenu().clickOnCreateDepartment();
             getCreateDepartmentDialog().assertDialogPresent(true);
         } catch (SeleniumTimeoutException ste) {
-            getAdminMenu().clickOnCreateDepartment();
-            getCreateDepartmentDialog().assertDialogPresent();
+            try {
+                getAdminMenu().clickOnCreateDepartment();
+                getCreateDepartmentDialog().assertDialogPresent(true);
+            } catch (SeleniumTimeoutException stee) {
+                clickLogoutBtn();
+                LoginPage loginPage = new LoginPage(webDriver);
+                loginPage.logIn(UserType.ADMIN);
+
+                assertPagePresent();
+                getAdminMenu().clickOnCreateDepartment();
+                getCreateDepartmentDialog().assertDialogPresent();
+            }
         }
     }
 

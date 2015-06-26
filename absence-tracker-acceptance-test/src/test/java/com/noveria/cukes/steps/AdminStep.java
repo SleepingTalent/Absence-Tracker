@@ -38,7 +38,7 @@ public class AdminStep {
 
     @Then("^a \"([^\"]*)\" \"([^\"]*)\" validation error is displayed$")
     public void a_validation_error_is_displayed(String title, String message) throws Throwable {
-        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
         dashboardPage.assertPagePresent();
         dashboardPage.assertValidationErrorIsDisplayed(title, message);
         runtimeState.takeScreenShot();
@@ -53,7 +53,7 @@ public class AdminStep {
 
     @And("^they create a Department called \"([^\"]*)\"$")
     public void they_create_a_Department_called(String departmentName) throws Throwable {
-        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
         dashboardPage.assertPagePresent();
 
         dashboardPage.createDepartmentWithName(runtimeState, departmentName);
@@ -61,14 +61,14 @@ public class AdminStep {
 
     @Then("^the \"([^\"]*)\" Department is created$")
     public void the_Department_is_created(String departmentName) throws Throwable {
-        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
         dashboardPage.assertPagePresent();
         dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName);
     }
 
     @And("^the \"([^\"]*)\" Department is already created$")
     public void the_Department_is_already_created(String departmentName) throws Throwable {
-        DashboardPage dashboardPage = new DashboardPage(runtimeState.getWebDriver());
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
         dashboardPage.assertPagePresent();
         dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName);
     }

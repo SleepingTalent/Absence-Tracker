@@ -23,6 +23,7 @@
         <phantomjs.plugin.version>0.2</phantomjs.plugin.version>
         <phantomjs.version>1.9.7</phantomjs.version>
         <skip.acceptance.tests>false</skip.acceptance.tests>
+        <absence.tracker.db.location>../${basedir}/data/absencetracker</absence.tracker.db.location>
     </properties>
 
     <dependencies>

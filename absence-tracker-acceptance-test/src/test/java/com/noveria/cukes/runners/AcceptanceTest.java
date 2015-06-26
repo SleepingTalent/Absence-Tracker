@@ -20,6 +20,7 @@ public class AcceptanceTest {
         static {
                 System.setProperty("browser", "Phantom");
                 //System.setProperty("browser", "Chrome");
+
         }
 
         @BeforeClass

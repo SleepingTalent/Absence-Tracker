@@ -1,5 +1,6 @@
 package com.noveria.cukes.helpers.selenium.page;
 
+import com.noveria.cukes.helpers.UserType;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
 import com.noveria.cukes.runtime.RuntimeState;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -42,5 +43,11 @@ public class LoginPage extends Page {
 
     public void assertLoginErrorIsDisplayed() {
         assertValidationErrorDisplayed("Login Unsuccessful","Bad credentials");
+    }
+
+    public void logIn(UserType user) {
+        inputUserName(user.getUsername());
+        inputPassword(user.getPassword());
+        clickLoginButton();
     }
 }
