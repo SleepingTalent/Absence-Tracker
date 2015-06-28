@@ -13,24 +13,11 @@
 
 
     <sec:http auto-config="true" use-expressions="true">
-        <!-- Page level Spring Security : Intercept access to resources in ** -->
-
-        <!--
-        <sec:intercept-url pattern="/pages/secure/**" access="hasAnyRole({'ADMIN','MANAGER','EMPLOYEE'})" />
--->
-
-        <!-- Page level Spring Security : Intercept access to resources in ** -->
-        <!-- <sec:intercept-url pattern="/**" access="hasAnyRole({'ADMIN','MANAGER','EMPLOYEE'})" /> -->
-
         <!-- Page level Spring Security : Enable Primefaces -->
         <sec:intercept-url pattern="/javax.faces.resource/**" access="permitAll"/>
 
         <!-- Page level Spring Security : Permit access to resources in /pages/unsecure/** -->
         <sec:intercept-url pattern="/pages/**" access="permitAll"/>
-
-
-        <!-- Page level Spring Security : Permit access to resources in /pages/unsecure/** -->
-        <!--<sec:intercept-url pattern="/pages/unsecure/**" access="permitAll"/> -->
 
         <!-- Define login page for Spring Security -->
         <sec:form-login login-page="/pages/unsecure/login.xhtml"/>
@@ -48,9 +35,4 @@
         </sec:authentication-provider>
     </sec:authentication-manager>
 
-    <!--
-    <bean id="loginBean" name="loginBean" class="com.noveria.absencemanagement.view.authenticationentication.AuthenticationController" scope="prototype">
-        <property name="authenticationManager" ref="authenticationManager"/>
-    </bean>
-    -->
 </beans>

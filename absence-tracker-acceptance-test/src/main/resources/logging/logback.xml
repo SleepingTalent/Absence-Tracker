@@ -18,6 +18,10 @@
     <logger name="com.noveria.absencemanagement.model.employee.dao.EmployeeDAO" level="DEBUG" />
     -->
 
+    <logger name="com.noveria.absencemanagement.view.holiday.management.model.HolidayManagementModel" level="DEBUG" />
+
+    <logger name="com.noveria.absencemanagement.view.holiday.management.controller.HolidayManagementController" level="DEBUG" />
+
     <root level="ERROR">
         <appender-ref ref="STDOUT" />
     </root>

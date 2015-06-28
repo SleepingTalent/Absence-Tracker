@@ -13,12 +13,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.NoResultException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * This class Manages Login Actions
@@ -49,13 +52,13 @@ public class AuthenticationController {
     @ManagedProperty(value = "#{userDAO}")
     UserDAO userDAO;
 
-
     /**
      * Login method, authenticates username and password
      *
      * @return String "correct" if successful otherwise "incorrect"
      */
     public String login() {
+
         try {
             Authentication request = new UsernamePasswordAuthenticationToken(getUserName(), getPassword());
             Authentication result = authenticationManager.authenticate(request);
@@ -86,13 +89,24 @@ public class AuthenticationController {
      * @return String "loggedout"
      */
     public String logout() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null){
+            new SecurityContextLogoutHandler().logout(
+                    (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest(),
+                    (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse(),
+                    authentication);
+        }
+
+        SecurityContextHolder.getContext().setAuthentication(null);
         SecurityContextHolder.clearContext();
+
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 
         setUserName(null);
         setPassword(null);
-
         userModel.setEmployee(null);
+
         return "logout";
     }
 

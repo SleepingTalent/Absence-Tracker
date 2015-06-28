@@ -4,17 +4,25 @@ import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance;
 import com.noveria.absencemanagement.service.employee.EmployeeService;
 import com.noveria.absencemanagement.view.authentication.model.UserModel;
-import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
+import com.noveria.absencemanagement.view.helper.DateHelper;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayAllowanceViewBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.primefaces.event.ScheduleEntryMoveEvent;
+import org.primefaces.event.ScheduleEntryResizeEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by lynseymcgregor on 21/06/2015.
@@ -23,6 +31,8 @@ import java.util.ArrayList;
 @SessionScoped
 public class HolidayManagementModel implements Serializable {
 
+    private static final Logger logger = LoggerFactory.getLogger(HolidayManagementModel.class);
+
     @ManagedProperty(value = "#{employeeService}")
     EmployeeService employeeService;
 
@@ -30,6 +40,30 @@ public class HolidayManagementModel implements Serializable {
     UserModel userModel;
 
     HolidayAllowanceViewBean holidayAllowanceViewBean;
+
+    private ScheduleModel lazyEventModel;
+
+    @PostConstruct
+    public void init() {
+        lazyEventModel = buildDataModel();
+    }
+
+    public void clearDataModel() {
+        init();
+    }
+
+    private ScheduleModel buildDataModel() {
+        lazyEventModel = new DefaultScheduleModel();
+        lazyEventModel.addEvent(new DefaultScheduleEvent("Champions League Match", DateHelper.previousDay8Pm(), DateHelper.previousDay11Pm()));
+        lazyEventModel.addEvent(new DefaultScheduleEvent("Birthday Party", DateHelper.today1Pm(), DateHelper.today6Pm()));
+        lazyEventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", DateHelper.nextDay9Am(), DateHelper.nextDay11Am()));
+        lazyEventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", DateHelper.theDayAfter3Pm(), DateHelper.fourDaysLater3pm()));
+        return lazyEventModel;
+    }
+
+    public ScheduleModel getLazyEventModel() {
+        return lazyEventModel;
+    }
 
     private HolidayAllowanceViewBean buildHolidayAllowance() {
 

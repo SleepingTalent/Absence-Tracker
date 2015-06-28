@@ -1,36 +1,42 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
-<p:outputLabel id="employerole" value="You have employee access!"/>
+    <p:outputLabel id="employerole" value="You have employee access!"/>
 
-<h:panelGrid columns="2">
-    <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Holiday Balance">
-
+    <h:form id="holidayManagementForm" prependId="false">
         <h:panelGrid columns="2">
+            <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Holiday Balance">
 
-            <p:outputLabel id="holidayTotalLbl" for="holidayTotal" value="Total:"/>
-            <h:outputText id="holidayTotal" value="#{holidayManagementController.holidayAllowance.total}" style="color: black"/>
+                <h:panelGrid columns="2">
 
-            <p:separator/>
-            <p:separator/>
+                    <p:outputLabel id="holidayTotalLbl" for="holidayTotal" value="Total:"/>
+                    <h:outputText id="holidayTotal" value="#{holidayManagementController.holidayAllowance.total}"
+                                  style="color: black"/>
 
-            <p:outputLabel id="holidayUsedLbl" for="holidayUsed" value="Used:"/>
-            <h:outputText id="holidayUsed" value="#{holidayManagementController.holidayAllowance.used}" style="color: red"/>
+                    <p:separator/>
+                    <p:separator/>
 
-            <p:separator/>
-            <p:separator/>
+                    <p:outputLabel id="holidayUsedLbl" for="holidayUsed" value="Used:"/>
+                    <h:outputText id="holidayUsed" value="#{holidayManagementController.holidayAllowance.used}"
+                                  style="color: red"/>
 
-            <p:outputLabel id="holidayRemainingLbl" for="holidayRemaining" value="Remaining:"/>
-            <h:outputText id="holidayRemaining" value="#{holidayManagementController.holidayAllowance.remaining}" style="color: green"/>
+                    <p:separator/>
+                    <p:separator/>
+
+                    <p:outputLabel id="holidayRemainingLbl" for="holidayRemaining" value="Remaining:"/>
+                    <h:outputText id="holidayRemaining"
+                                  value="#{holidayManagementController.holidayAllowance.remaining}"
+                                  style="color: green"/>
+                </h:panelGrid>
+
+            </p:panel>
+
+            <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Holiday Calendar">
+                <p:schedule value="#{holidayManagementController.scheduleLazyModel}"/>
+            </p:panel>
         </h:panelGrid>
-
-    </p:panel>
-
-    <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Holiday Calendar">
-       <h:outputText value="TODO:ADD CALENDAR"/>
-    </p:panel>
-</h:panelGrid>
+    </h:form>
 
 </ui:composition>
