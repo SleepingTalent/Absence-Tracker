@@ -32,7 +32,7 @@ public class SetUpAndTearDownStep {
         runtimeState.initialise();
         runtimeState.setScenario(scenario);
 
-        dbHelper.listDepartments();
+        //dbHelper.listDepartments();
     }
 
     @After

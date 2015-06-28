@@ -58,3 +58,15 @@ body {
 .holidayCalendarPanel {
     width: 600px;
 }
+
+.holidayAwaitingAuth {
+    background: gold;
+}
+
+.holidayAuth {
+    background: green;
+}
+
+.holidayDeclined {
+    background: red;
+}
