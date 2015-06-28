@@ -19,3 +19,33 @@ Feature: Administrator Features
     When the user logs in
     And they create a Department called "Software Development"
     Then a "Create Department Failed" "Software Development Already Exists" validation error is displayed
+
+  Scenario: An Admin User Creates an Employee without a firstname
+    Given a valid "Admin" user
+    When the user logs in
+    And they create an Employee without a "firstname"
+    Then a "Firstname is required" "Firstname is required" validation error is displayed
+
+  Scenario: An Admin User Creates an Employee without a lastname
+    Given a valid "Admin" user
+    When the user logs in
+    And they create an Employee without a "lastname"
+    Then a "Lastname is required" "Lastname is required" validation error is displayed
+
+  Scenario: An Admin User Creates an Employee without a username
+    Given a valid "Admin" user
+    When the user logs in
+    And they create an Employee without a "username"
+    Then a "Username is required" "Username is required" validation error is displayed
+
+  Scenario: An Admin User Creates an Employee without a password
+    Given a valid "Admin" user
+    When the user logs in
+    And they create an Employee without a "password"
+    Then a "Password is required" "Password is required" validation error is displayed
+
+  Scenario: An Admin User Creates an Employee without a department
+    Given a valid "Admin" user
+    When the user logs in
+    And they create an Employee without a "department"
+    Then a "Please Select Department" "Please Select Department" validation error is displayed

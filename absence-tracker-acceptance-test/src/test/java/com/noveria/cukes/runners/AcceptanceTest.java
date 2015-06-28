@@ -20,14 +20,6 @@ public class AcceptanceTest {
         static {
                 System.setProperty("browser", "Phantom");
                 //System.setProperty("browser", "Chrome");
-
-                String dbLocation = System.getProperty("db.url");
-                if(dbLocation == null) {
-                        System.err.print("Db Location not set!");
-                }else {
-                   System.err.print("Db Location : "+dbLocation);
-                }
-
         }
 
         @BeforeClass

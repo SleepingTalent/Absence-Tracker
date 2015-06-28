@@ -75,4 +75,7 @@ public class PageHelper {
         return elementHelper.findByLinkText(text, false);
     }
 
+    public WebElement findSelectElement(String id, String value) {
+        return elementHelper.findSelectElement(id,value, false);
+    }
 }

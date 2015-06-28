@@ -1,6 +1,8 @@
 package com.noveria.cukes.steps;
 
+import com.noveria.cukes.helpers.DepartmentType;
 import com.noveria.cukes.helpers.db.DBHelper;
+import com.noveria.cukes.helpers.db.entity.Employee;
 import com.noveria.cukes.helpers.selenium.page.dashboard.DashboardPage;
 import com.noveria.cukes.helpers.selenium.page.helper.SeleniumTimeoutException;
 import com.noveria.cukes.runtime.RuntimeState;
@@ -71,5 +73,27 @@ public class AdminStep {
         DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
         dashboardPage.assertPagePresent();
         dashboardPage.checkThatTheDepartmentExist(runtimeState, departmentName);
+    }
+
+    @And("^they create an Employee without a \"([^\"]*)\"$")
+    public void they_create_an_Employee_without_a(String missingfield) throws Throwable {
+        Employee employee = new Employee();
+
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
+        dashboardPage.assertPagePresent();
+
+        if(missingfield.equalsIgnoreCase("firstname")) {
+            employee.setFirstname("");
+        }else if(missingfield.equalsIgnoreCase("lastname")) {
+            employee.setLastname("");
+        }else if(missingfield.equalsIgnoreCase("username")) {
+            employee.setUsername("");
+        }else if(missingfield.equalsIgnoreCase("password")) {
+            employee.setPassword("");
+        }else if(missingfield.equalsIgnoreCase("department")) {
+            employee.setDepartment(DepartmentType.NO_SELECTION.getName());
+        }
+
+        dashboardPage.createEmployee(runtimeState, employee);
     }
 }

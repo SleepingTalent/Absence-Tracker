@@ -11,6 +11,8 @@ import org.openqa.selenium.interactions.Actions;
 public class AdminMenu extends Page {
 
     public static final String CREATE_DEPARTMENT_MENU_ID = "tabPanel:CreateDept";
+    public static final String CREATE_EMPLOYEE_MENU_ID = "tabPanel:CreateEmployee";
+
     public static final String CREATE_MENU_DIV = "tabPanel:adminMenu_createMenu";
 
     public static final String BROWSE_MENU_DIV = "tabPanel:adminMenu_browseMenu";
@@ -52,4 +54,14 @@ public class AdminMenu extends Page {
         }
     }
 
+    public void clickOnCreateEmployee() {
+        try {
+            getPageHelper().findElementById(CREATE_MENU_DIV,true);
+            getPageHelper().findElementById(CREATE_EMPLOYEE_MENU_ID).click();
+        } catch (SeleniumTimeoutException ste) {
+            openCreateMenu();
+            getPageHelper().findElementById(CREATE_MENU_DIV);
+            getPageHelper().findElementById(CREATE_EMPLOYEE_MENU_ID).click();
+        }
+    }
 }

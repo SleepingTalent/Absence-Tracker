@@ -1,10 +1,12 @@
 package com.noveria.cukes.helpers.selenium.page.dashboard;
 
 import com.noveria.cukes.helpers.UserType;
+import com.noveria.cukes.helpers.db.entity.Employee;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.helpers.selenium.page.Page;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.BrowseDepartmentsDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.CreateDepartmentDialog;
+import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.CreateEmployeeDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.menu.AdminMenu;
 import com.noveria.cukes.helpers.selenium.page.helper.SeleniumTimeoutException;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
@@ -24,6 +26,8 @@ public class DashboardPage extends Page {
 
     private CreateDepartmentDialog createDepartmentDialog;
 
+    private CreateEmployeeDialog createEmployeeDialog;
+
     private BrowseDepartmentsDialog browseDepartmentsDialog;
 
     public DashboardPage(CucumberWebDriver webDriver) {
@@ -32,6 +36,7 @@ public class DashboardPage extends Page {
         adminMenu = new AdminMenu(webDriver);
         createDepartmentDialog = new CreateDepartmentDialog(webDriver);
         browseDepartmentsDialog = new BrowseDepartmentsDialog(webDriver);
+        createEmployeeDialog = new CreateEmployeeDialog(webDriver);
     }
 
     public void assertPagePresent() {
@@ -64,6 +69,11 @@ public class DashboardPage extends Page {
     public CreateDepartmentDialog getCreateDepartmentDialog() {
         return createDepartmentDialog;
     }
+
+    public CreateEmployeeDialog getCreateEmployeeDialog() {
+        return createEmployeeDialog;
+    }
+
 
     public void assertValidationErrorIsDisplayed(String title, String message) {
         assertValidationErrorDisplayed(title, message);
@@ -106,18 +116,8 @@ public class DashboardPage extends Page {
             getAdminMenu().clickOnCreateDepartment();
             getCreateDepartmentDialog().assertDialogPresent(true);
         } catch (SeleniumTimeoutException ste) {
-            try {
                 getAdminMenu().clickOnCreateDepartment();
-                getCreateDepartmentDialog().assertDialogPresent(true);
-            } catch (SeleniumTimeoutException stee) {
-                clickLogoutBtn();
-                LoginPage loginPage = new LoginPage(webDriver);
-                loginPage.logIn(UserType.ADMIN);
-
-                assertPagePresent();
-                getAdminMenu().clickOnCreateDepartment();
-                getCreateDepartmentDialog().assertDialogPresent();
-            }
+                getCreateDepartmentDialog().assertDialogPresent(false);
         }
     }
 
@@ -129,6 +129,30 @@ public class DashboardPage extends Page {
         } catch (SeleniumTimeoutException ste) {
             getAdminMenu().clickOnBrowseDepartment();
             getBrowseDepartmentsDialog().assertDialogPresent();
+        }
+    }
+
+    public void createEmployee(RuntimeState runtimeState, Employee employee) {
+        openCreateEmployeeDialog();
+
+        getCreateEmployeeDialog().setFirstName(employee.getFirstname());
+        getCreateEmployeeDialog().setLastName(employee.getLastname());
+        getCreateEmployeeDialog().setDepartment(employee.getDepartment());
+        getCreateEmployeeDialog().setUserName(employee.getUsername());
+        getCreateEmployeeDialog().setPassword(employee.getPassword());
+
+        runtimeState.takeScreenShot();
+
+        getCreateEmployeeDialog().clickCreateBtn();
+    }
+
+    private void openCreateEmployeeDialog() {
+        try {
+            getAdminMenu().clickOnCreateEmployee();
+            getCreateEmployeeDialog().assertDialogPresent(true);
+        } catch (SeleniumTimeoutException ste) {
+            getAdminMenu().clickOnCreateEmployee();
+            getCreateEmployeeDialog().assertDialogPresent(false);
         }
     }
 }

@@ -39,4 +39,8 @@ public class FindByHelper {
     public static By findTableRowWithText(String text) {
         return By.xpath("//tr[td//text()[contains(., '"+text+"')]]");
     }
+
+    public static By findBySelectIdAndValue(String id, String value) {
+        return By.xpath("//div[@id='"+id+"']/div[2]/ul/li[text() = '"+value+"']");
+    }
 }
