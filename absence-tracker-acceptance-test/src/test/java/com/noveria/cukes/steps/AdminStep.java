@@ -96,4 +96,23 @@ public class AdminStep {
 
         dashboardPage.createEmployee(runtimeState, employee);
     }
+
+    @And("^they create an Employee$")
+    public void they_create_an_Employee() throws Throwable {
+        Employee employee = new Employee();
+
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
+        dashboardPage.assertPagePresent();
+
+        runtimeState.setEmployee(employee);
+
+        dashboardPage.createEmployee(runtimeState, runtimeState.getEmployee());
+    }
+
+    @Then("^the Employee is created$")
+    public void the_Employee_is_created() throws Throwable {
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
+        dashboardPage.assertPagePresent();
+        dashboardPage.checkThatTheEmployeeExist(runtimeState, runtimeState.getEmployee());
+    }
 }

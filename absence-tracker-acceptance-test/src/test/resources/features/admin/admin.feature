@@ -49,3 +49,14 @@ Feature: Administrator Features
     When the user logs in
     And they create an Employee without a "department"
     Then a "Please Select Department" "Please Select Department" validation error is displayed
+
+  Scenario: An Admin User Creates an Employee
+    Given a valid "Admin" user
+    When the user logs in
+    And they create an Employee
+    Then the Employee is created
+    And the user logs out
+    When the Employee logs in
+    Then they are redirected to their dashboard
+    When the Employee logs out
+    Then they are redirected to the login page

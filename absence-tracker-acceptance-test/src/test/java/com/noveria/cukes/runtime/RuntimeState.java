@@ -1,6 +1,7 @@
 package com.noveria.cukes.runtime;
 
 import com.noveria.cukes.helpers.LoginDetails;
+import com.noveria.cukes.helpers.db.entity.Employee;
 import com.noveria.cukes.helpers.selenium.PageFactory;
 import com.noveria.cukes.helpers.selenium.WebDriverFactory;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
@@ -13,6 +14,7 @@ public class RuntimeState {
 
     public static final String ABSENCE_TRACKER_URL = "http://localhost:4094/absence-tracker";
     private String newDepartmentName = "CucumberTestDepartment";
+    private Employee employee;
 
     public CucumberWebDriver getWebDriver() {
         return webDriver;
@@ -34,6 +36,7 @@ public class RuntimeState {
     public void initialise() {
         webDriver = WebDriverFactory.getWebDriver();
         pageFactory = new PageFactory(webDriver);
+        setEmployee(null);
     }
 
     public void takeScreenShot() {
@@ -68,4 +71,14 @@ public class RuntimeState {
     public String getNewDepartmentName() {
         return newDepartmentName;
     }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+
 }

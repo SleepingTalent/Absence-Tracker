@@ -5,6 +5,7 @@ import com.noveria.cukes.helpers.db.entity.Employee;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.helpers.selenium.page.Page;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.BrowseDepartmentsDialog;
+import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.BrowseEmployeesDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.CreateDepartmentDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.CreateEmployeeDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.menu.AdminMenu;
@@ -30,13 +31,18 @@ public class DashboardPage extends Page {
 
     private BrowseDepartmentsDialog browseDepartmentsDialog;
 
+    private BrowseEmployeesDialog browseEmployeesDialog;
+
     public DashboardPage(CucumberWebDriver webDriver) {
         super(webDriver);
 
         adminMenu = new AdminMenu(webDriver);
+
         createDepartmentDialog = new CreateDepartmentDialog(webDriver);
         browseDepartmentsDialog = new BrowseDepartmentsDialog(webDriver);
+
         createEmployeeDialog = new CreateEmployeeDialog(webDriver);
+        browseEmployeesDialog = new BrowseEmployeesDialog(webDriver);
     }
 
     public void assertPagePresent() {
@@ -74,6 +80,9 @@ public class DashboardPage extends Page {
         return createEmployeeDialog;
     }
 
+    public BrowseEmployeesDialog getBrowseEmployeesDialog() {
+        return browseEmployeesDialog;
+    }
 
     public void assertValidationErrorIsDisplayed(String title, String message) {
         assertValidationErrorDisplayed(title, message);
@@ -153,6 +162,26 @@ public class DashboardPage extends Page {
         } catch (SeleniumTimeoutException ste) {
             getAdminMenu().clickOnCreateEmployee();
             getCreateEmployeeDialog().assertDialogPresent(false);
+        }
+    }
+
+    public void checkThatTheEmployeeExist(RuntimeState runtimeState, Employee employee) {
+        openBrowseEmployeesDialog();
+
+        getBrowseEmployeesDialog().assertEmployeePresent(employee);
+        runtimeState.takeScreenShot();
+
+        getBrowseEmployeesDialog().closeDialog();
+    }
+
+    private void openBrowseEmployeesDialog() {
+
+        try {
+            getAdminMenu().clickOnBrowseEmployees();
+            getBrowseEmployeesDialog().assertDialogPresent(true);
+        } catch (SeleniumTimeoutException ste) {
+            getAdminMenu().clickOnBrowseEmployees();
+            getBrowseEmployeesDialog().assertDialogPresent();
         }
     }
 }

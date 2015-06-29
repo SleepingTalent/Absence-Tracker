@@ -17,6 +17,8 @@ public class AdminMenu extends Page {
 
     public static final String BROWSE_MENU_DIV = "tabPanel:adminMenu_browseMenu";
     public static final String BROWSE_DEPARTMENT_MENU_ID = "tabPanel:BrowseDept";
+    public static final String BROWSE_EMPLOYEES_MENU_ID = "tabPanel:BrowseEmployee";
+
 
     public AdminMenu(CucumberWebDriver webDriver) {
         super(webDriver);
@@ -62,6 +64,17 @@ public class AdminMenu extends Page {
             openCreateMenu();
             getPageHelper().findElementById(CREATE_MENU_DIV);
             getPageHelper().findElementById(CREATE_EMPLOYEE_MENU_ID).click();
+        }
+    }
+
+    public void clickOnBrowseEmployees() {
+        try {
+            getPageHelper().findElementById(BROWSE_MENU_DIV,true);
+            getPageHelper().findElementById(BROWSE_EMPLOYEES_MENU_ID).click();
+        } catch (SeleniumTimeoutException ste) {
+            openBrowseMenu();
+            getPageHelper().findElementById(BROWSE_MENU_DIV);
+            getPageHelper().findElementById(BROWSE_EMPLOYEES_MENU_ID).click();
         }
     }
 }

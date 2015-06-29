@@ -42,6 +42,12 @@ public class SetUpAndTearDownStep {
             dbHelper.deleteDepartment(runtimeState.getNewDepartmentName());
         }
 
+        System.err.println("Employee : "+runtimeState.getEmployee());
+
+        if(runtimeState.getEmployee() != null) {
+            dbHelper.deleteEmployee(runtimeState.getEmployee());
+        }
+
         if(scenario.isFailed()) {
             runtimeState.takeScreenShot();
         }

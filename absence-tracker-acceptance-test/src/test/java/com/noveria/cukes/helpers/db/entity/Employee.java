@@ -61,4 +61,20 @@ public class Employee {
     public void setManager(boolean manager) {
         this.manager = manager;
     }
+
+    public String getFullname() {
+        return firstname+" "+lastname;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", department='" + department + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", manager=" + manager +
+                '}';
+    }
 }

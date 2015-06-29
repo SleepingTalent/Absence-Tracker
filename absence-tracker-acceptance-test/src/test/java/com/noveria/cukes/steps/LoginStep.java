@@ -5,6 +5,7 @@ import com.noveria.cukes.helpers.UserType;
 import com.noveria.cukes.helpers.selenium.page.dashboard.DashboardPage;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.runtime.RuntimeState;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -95,5 +96,33 @@ public class LoginStep {
         loginPage.assertPagePresent();
 
         runtimeState.takeScreenShot();
+    }
+
+    @When("^the Employee logs in$")
+    public void the_Employee_logs_in() throws Throwable {
+        LoginPage loginPage = runtimeState.getPageFactory().getLoginPage();
+
+        loginPage.navigateToLoginPage();
+        loginPage.inputUserName(runtimeState.getEmployee().getUsername());
+        loginPage.inputPassword(runtimeState.getEmployee().getPassword());
+
+        runtimeState.takeScreenShot();
+        loginPage.clickLoginButton();
+    }
+
+    @When("^the Employee logs out$")
+    public void the_Employee_logs_out() throws Throwable {
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
+        dashboardPage.assertPagePresent();
+        dashboardPage.clickLogoutBtn();
+    }
+
+    @Then("^they are redirected to their dashboard$")
+    public void they_are_redirected_to_their_dashboard() throws Throwable {
+        runtimeState.takeScreenShot();
+
+        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
+        dashboardPage.assertPagePresent();
+        dashboardPage.assertEmployeeTextPresent();
     }
 }
