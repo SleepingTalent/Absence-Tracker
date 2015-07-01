@@ -20,7 +20,8 @@ public class DashboardPage extends Page {
     private static final String ADMIN_TEXT_LABEL_ID = "tabPanel:adminrole";
     private static final String MANAGER_TEXT_LABEL_ID = "tabPanel:managerrole";
     private static final String EMPLOYEE_TEXT_LABEL_ID = "tabPanel:employerole";
-    private static final String LOGOUT_BTN_ID = "logoutBtn";
+    private static final String LOGOUT_ID = "logout";
+    private static final String FEATURES_MENU_ID = "featuresMenu_button";
     public static final String DASHBOARD_PANEL = "dashboardPanel";
 
     private AdminMenu adminMenu;
@@ -65,7 +66,8 @@ public class DashboardPage extends Page {
     }
 
     public void clickLogoutBtn() {
-        getPageHelper().findElementById(LOGOUT_BTN_ID).click();
+        getPageHelper().findElementById(FEATURES_MENU_ID).click();
+        getPageHelper().findElementById(LOGOUT_ID).click();
     }
 
     public AdminMenu getAdminMenu() {

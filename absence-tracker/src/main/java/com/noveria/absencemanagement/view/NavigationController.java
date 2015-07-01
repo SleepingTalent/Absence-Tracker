@@ -55,4 +55,16 @@ public class NavigationController {
         viewHelper.hideAddEmployeeDialog();
     }
 
+    public void showAdminFeatures() {
+        System.err.println("This would show admin page");
+    }
+
+    public void showHolidayMangementFeatures() {
+        System.err.println("This would show holiday management page");
+    }
+
+    public void showHolidayAuthoriseFeatures() {
+        System.err.println("This would show holiday authorise page");
+    }
+
 }

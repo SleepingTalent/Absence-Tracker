@@ -21,8 +21,28 @@
 
             <f:facet name="header">
                 <p:outputLabel id="mainLbl" value="Absence Tracker" style="float :left"/>
-                <h:form id="logoutForm" prependId="false">
-                    <h:commandButton id="logoutBtn" value="Logout" action="#{authController.logout}" style="float :right"/>
+                <h:form id="featuresForm" prependId="false">
+                    <p:menuButton id="featuresMenu" value="#{authController.employeeDetails.fullname}" style="float :right">
+                        <sec:authorize ifAllGranted="EMPLOYEE">
+                            <p:menuitem id="myAnnualLeave" value="myAnnualLeave" action="#{navigationController.showHolidayMangementFeatures}" icon="ui-icon-calendar"/>
+                            <p:menuitem id="myAbsence" value="myAbsence" action="#{navigationController.showHolidayMangementFeatures}" icon="ui-icon-mail-closed"/>
+                        </sec:authorize>
+
+                        <sec:authorize ifAllGranted="MANAGER">
+                            <p:separator />
+                            <p:menuitem id="authoriseLeave" value="authoriseLeave" action="#{navigationController.showHolidayAuthoriseFeatures}" icon="ui-icon-person"/>
+                            <p:menuitem id="enterAbsence" value="enterAbsence" action="#{navigationController.showHolidayAuthoriseFeatures}" icon="ui-icon-mail-open"/>
+                        </sec:authorize>
+
+
+                        <sec:authorize ifAllGranted="ADMIN">
+                            <p:separator />
+                            <p:menuitem id="adminFeature" value="systemAdmin" action="#{navigationController.showAdminFeatures}" icon="ui-icon-gear"/>
+                        </sec:authorize>
+
+                        <p:separator />
+                        <p:menuitem id="logout" value="logout" action="#{authController.logout}" icon="ui-icon-power"/>
+                    </p:menuButton>
                 </h:form>
             </f:facet>
 

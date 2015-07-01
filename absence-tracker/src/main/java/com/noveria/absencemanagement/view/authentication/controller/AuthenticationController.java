@@ -5,6 +5,7 @@ import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.service.employee.EmployeeService;
 import com.noveria.absencemanagement.view.authentication.model.UserModel;
+import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
 import com.noveria.absencemanagement.view.helper.MessageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -164,5 +165,13 @@ public class AuthenticationController {
 
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
+    }
+
+    public EmployeeViewBean getEmployeeDetails() {
+        EmployeeViewBean employeeViewBean = new EmployeeViewBean();
+        employeeViewBean.setFirstname(userModel.getEmployee().getFirstName());
+        employeeViewBean.setLastname(userModel.getEmployee().getLastName());
+        employeeViewBean.setId(userModel.getEmployee().getId());
+        return employeeViewBean;
     }
 }
