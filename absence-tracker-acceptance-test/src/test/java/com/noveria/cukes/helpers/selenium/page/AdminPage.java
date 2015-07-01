@@ -1,30 +1,27 @@
-package com.noveria.cukes.helpers.selenium.page.dashboard;
+package com.noveria.cukes.helpers.selenium.page;
 
-import com.noveria.cukes.helpers.UserType;
 import com.noveria.cukes.helpers.db.entity.Employee;
-import com.noveria.cukes.helpers.selenium.page.LoginPage;
-import com.noveria.cukes.helpers.selenium.page.Page;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.BrowseDepartmentsDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.BrowseEmployeesDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.CreateDepartmentDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.dialog.CreateEmployeeDialog;
 import com.noveria.cukes.helpers.selenium.page.dashboard.menu.AdminMenu;
+import com.noveria.cukes.helpers.selenium.page.dashboard.menu.FeaturesMenu;
 import com.noveria.cukes.helpers.selenium.page.helper.SeleniumTimeoutException;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
 import com.noveria.cukes.runtime.RuntimeState;
 
 import static org.junit.Assert.assertEquals;
 
-public class DashboardPage extends Page {
+/**
+ * Created by lynseymcgregor on 01/07/2015.
+ */
+public class AdminPage extends Page {
 
-    private static final String ADMIN_TEXT_LABEL_ID = "tabPanel:adminrole";
-    private static final String MANAGER_TEXT_LABEL_ID = "tabPanel:managerrole";
-    private static final String EMPLOYEE_TEXT_LABEL_ID = "tabPanel:employerole";
-    private static final String LOGOUT_ID = "logout";
-    private static final String FEATURES_MENU_ID = "featuresMenu_button";
-    public static final String DASHBOARD_PANEL = "dashboardPanel";
+    public static final String ADMIN_FORM = "adminForm";
 
     private AdminMenu adminMenu;
+    private FeaturesMenu featuresMenu;
 
     private CreateDepartmentDialog createDepartmentDialog;
 
@@ -34,10 +31,11 @@ public class DashboardPage extends Page {
 
     private BrowseEmployeesDialog browseEmployeesDialog;
 
-    public DashboardPage(CucumberWebDriver webDriver) {
+    public AdminPage(CucumberWebDriver webDriver) {
         super(webDriver);
 
         adminMenu = new AdminMenu(webDriver);
+        featuresMenu = new FeaturesMenu(webDriver);
 
         createDepartmentDialog = new CreateDepartmentDialog(webDriver);
         browseDepartmentsDialog = new BrowseDepartmentsDialog(webDriver);
@@ -47,31 +45,15 @@ public class DashboardPage extends Page {
     }
 
     public void assertPagePresent() {
-        getPageHelper().findElementById(DASHBOARD_PANEL);
-    }
-
-    public void assertAdminTextPresent() {
-        String adminText = getPageHelper().findElementById(ADMIN_TEXT_LABEL_ID).getText();
-        assertEquals("You have admin access!", adminText);
-    }
-
-    public void assertManagerTextPresent() {
-        String adminText = getPageHelper().findElementById(MANAGER_TEXT_LABEL_ID).getText();
-        assertEquals("You have manager access!", adminText);
-    }
-
-    public void assertEmployeeTextPresent() {
-        String adminText = getPageHelper().findElementById(EMPLOYEE_TEXT_LABEL_ID).getText();
-        assertEquals("You have employee access!", adminText);
-    }
-
-    public void clickLogoutBtn() {
-        getPageHelper().findElementById(FEATURES_MENU_ID).click();
-        getPageHelper().findElementById(LOGOUT_ID).click();
+        getPageHelper().findElementById(ADMIN_FORM);
     }
 
     public AdminMenu getAdminMenu() {
         return adminMenu;
+    }
+
+    public FeaturesMenu getFeaturesMenu() {
+        return featuresMenu;
     }
 
     public CreateDepartmentDialog getCreateDepartmentDialog() {
@@ -127,8 +109,8 @@ public class DashboardPage extends Page {
             getAdminMenu().clickOnCreateDepartment();
             getCreateDepartmentDialog().assertDialogPresent(true);
         } catch (SeleniumTimeoutException ste) {
-                getAdminMenu().clickOnCreateDepartment();
-                getCreateDepartmentDialog().assertDialogPresent(false);
+            getAdminMenu().clickOnCreateDepartment();
+            getCreateDepartmentDialog().assertDialogPresent(false);
         }
     }
 

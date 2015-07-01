@@ -11,7 +11,7 @@ import static org.junit.Assert.fail;
  */
 public class BrowseDepartmentsDialog extends Page {
 
-    public static final String BROWSE_DEPARTMENT_DIALOG_ID = "tabPanel:browseDepartmentsDialog";
+    public static final String BROWSE_DEPARTMENT_DIALOG_ID = "browseDepartmentsDialog";
 
     //ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all
     public static final String CLOSE_ICON_CLASS = "";
@@ -21,7 +21,7 @@ public class BrowseDepartmentsDialog extends Page {
     }
 
     public void closeDialog() {
-        getPageHelper().findByLinkWithinDivById("tabPanel:browseDepartmentsDialog",false).click();
+        getPageHelper().findByLinkWithinDivById(BROWSE_DEPARTMENT_DIALOG_ID,false).click();
     }
 
     public void assertDialogPresent(boolean reThrow) {

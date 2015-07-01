@@ -2,10 +2,9 @@ package com.noveria.cukes.steps;
 
 import com.noveria.cukes.helpers.LoginDetails;
 import com.noveria.cukes.helpers.UserType;
-import com.noveria.cukes.helpers.selenium.page.dashboard.DashboardPage;
+import com.noveria.cukes.helpers.selenium.page.dashboard.WelcomePage;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.runtime.RuntimeState;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -58,20 +57,19 @@ public class LoginStep {
         loginPage.clickLoginButton();
     }
 
-
-    @Then("^they are redirected to the appropriate dashboard$")
-    public void they_are_redirected_to_the_dashboard() throws Throwable {
+    @Then("^they have the expected user features$")
+    public void they_have_the_expected_user_features() throws Throwable {
         runtimeState.takeScreenShot();
 
-        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
-        dashboardPage.assertPagePresent();
+        WelcomePage welcomePage = runtimeState.getPageFactory().getWelcomePage();
+        welcomePage.assertPagePresent();
 
         if(runtimeState.getLoginDetails().getUserType().equals(UserType.ADMIN)) {
-            dashboardPage.assertAdminTextPresent();
+            welcomePage.getFeaturesMenu().assertAdminFeaturesPresent();
         } else if (runtimeState.getLoginDetails().getUserType().equals(UserType.MANAGER)) {
-           dashboardPage.assertManagerTextPresent();
+           welcomePage.getFeaturesMenu().assertManagerFeaturesPresent();
         } else if (runtimeState.getLoginDetails().getUserType().equals(UserType.EMPLOYEE)) {
-           dashboardPage.assertEmployeeTextPresent();
+            welcomePage.getFeaturesMenu().assertEmployeeFeaturesPresent();
         }
     }
 
@@ -85,9 +83,8 @@ public class LoginStep {
 
     @When("^the user logs out$")
     public void the_user_logs_out() throws Throwable {
-        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
-        dashboardPage.assertPagePresent();
-        dashboardPage.clickLogoutBtn();
+        WelcomePage welcomePage = runtimeState.getPageFactory().getWelcomePage();
+        welcomePage.getFeaturesMenu().clickLogout();
     }
 
     @Then("^they are redirected to the login page$")
@@ -103,8 +100,16 @@ public class LoginStep {
         LoginPage loginPage = runtimeState.getPageFactory().getLoginPage();
 
         loginPage.navigateToLoginPage();
-        loginPage.inputUserName(runtimeState.getEmployee().getUsername());
-        loginPage.inputPassword(runtimeState.getEmployee().getPassword());
+
+        LoginDetails loginDetails = new LoginDetails();
+        loginDetails.setUsername(runtimeState.getEmployee().getUsername());
+        loginDetails.setPassword(runtimeState.getEmployee().getPassword());
+        loginDetails.setUserType(UserType.EMPLOYEE);
+
+        runtimeState.setLoginDetails(loginDetails);
+
+        loginPage.inputUserName(loginDetails.getUsername());
+        loginPage.inputPassword(loginDetails.getPassword());
 
         runtimeState.takeScreenShot();
         loginPage.clickLoginButton();
@@ -112,17 +117,25 @@ public class LoginStep {
 
     @When("^the Employee logs out$")
     public void the_Employee_logs_out() throws Throwable {
-        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
-        dashboardPage.assertPagePresent();
-        dashboardPage.clickLogoutBtn();
+        WelcomePage welcomePage = runtimeState.getPageFactory().getWelcomePage();
+        welcomePage.assertPagePresent();
+        welcomePage.getFeaturesMenu().clickLogout();
     }
 
-    @Then("^they are redirected to their dashboard$")
-    public void they_are_redirected_to_their_dashboard() throws Throwable {
-        runtimeState.takeScreenShot();
+    @When("^the user logs in and selects admin features$")
+    public void the_user_logs_in_and_selects_admin_features() throws Throwable {
+        LoginPage loginPage = runtimeState.getPageFactory().getLoginPage();
 
-        DashboardPage dashboardPage = runtimeState.getPageFactory().getDashboardPage();
-        dashboardPage.assertPagePresent();
-        dashboardPage.assertEmployeeTextPresent();
+        loginPage.navigateToLoginPage();
+        loginPage.inputUserName(runtimeState.getLoginDetails().getUsername());
+        loginPage.inputPassword(runtimeState.getLoginDetails().getPassword());
+
+        runtimeState.takeScreenShot();
+        loginPage.clickLoginButton();
+
+        WelcomePage welcomePage = runtimeState.getPageFactory().getWelcomePage();
+        welcomePage.assertPagePresent();
+        runtimeState.takeScreenShot();
+        welcomePage.getFeaturesMenu().clickSystemAdmin();
     }
 }

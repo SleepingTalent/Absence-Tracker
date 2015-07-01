@@ -1,50 +1,54 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/pages/secure/secureTemplate.xhtml">
 
-<h:form id="adminForm" prependId="false">
+    <ui:define name="pageContent">
+        <h:form id="adminForm" prependId="false">
 
-<p:panelMenu id="adminMenu" styleClass="menuPanel">
+            <p:menubar id="adminMenu">
 
-    <p:submenu id="createMenu" label="Create">
+                <p:submenu id="createMenu" label="Create">
 
-        <p:menuitem id="CreateDept" value="Department"
-                    actionListener="#{departmentController.clearDepartment}"
-                    action="#{navigationController.showAddDepartmentDialog}"
-                    update=":tabPanel:addDepartment" icon="ui-icon-folder-collapsed"/>
+                    <p:menuitem id="CreateDept" value="Department"
+                                actionListener="#{departmentController.clearDepartment}"
+                                action="#{navigationController.showAddDepartmentDialog}"
+                                update=":addDepartment" icon="ui-icon-folder-collapsed"/>
 
-        <p:separator />
+                    <p:separator/>
 
-        <p:menuitem id="CreateEmployee" value="Employee"
-                    actionListener="#{employeeController.clearEmployee}"
-                    action="#{navigationController.showAddEmployeeDialog}"
-                    update=":tabPanel:addEmployee" icon="ui-icon-person"/>
-    </p:submenu>
+                    <p:menuitem id="CreateEmployee" value="Employee"
+                                actionListener="#{employeeController.clearEmployee}"
+                                action="#{navigationController.showAddEmployeeDialog}"
+                                update=":addEmployee" icon="ui-icon-person"/>
+                </p:submenu>
 
-    <p:submenu id="browseMenu" label="Browse">
+                <p:submenu id="browseMenu" label="Browse">
 
-        <p:menuitem id="BrowseDept" value="Department"
-                    actionListener="#{browseDepartmentController.clearDataModel}"
-                    action="#{navigationController.showBrowseDepartmentsDialog}"
-                    icon="ui-icon-search" update=":tabPanel:browseDepartments"/>
+                    <p:menuitem id="BrowseDept" value="Department"
+                                actionListener="#{browseDepartmentController.clearDataModel}"
+                                action="#{navigationController.showBrowseDepartmentsDialog}"
+                                icon="ui-icon-search" update=":browseDepartments"/>
 
-        <p:separator />
+                    <p:separator/>
 
-        <p:menuitem id="BrowseEmployee" value="Employee"
-                    actionListener="#{browseEmployeeController.clearDataModel}"
-                    action="#{navigationController.showBrowseEmployeesDialog}"
-                    icon="ui-icon-search" update=":tabPanel:browseEmployees"/>
-    </p:submenu>
+                    <p:menuitem id="BrowseEmployee" value="Employee"
+                                actionListener="#{browseEmployeeController.clearDataModel}"
+                                action="#{navigationController.showBrowseEmployeesDialog}"
+                                icon="ui-icon-search" update=":browseEmployees"/>
+                </p:submenu>
 
-</p:panelMenu>
-<p:outputLabel id="adminrole" value="You have admin access!"/>
-</h:form>
+            </p:menubar>
+            <p:outputLabel id="adminrole" value="You have admin access!"/>
+        </h:form>
 
-<ui:include src="department/addDepartmentDialog.xhtml"/>
-<ui:include src="department/browseDepartmentsDialog.xhtml"/>
-<ui:include src="employee/browseEmployeesDialog.xhtml"/>
-<ui:include src="employee/addEmployeeDialog.xhtml"/>
+        <ui:include src="department/addDepartmentDialog.xhtml"/>
+        <ui:include src="department/browseDepartmentsDialog.xhtml"/>
+        <ui:include src="employee/browseEmployeesDialog.xhtml"/>
+        <ui:include src="employee/addEmployeeDialog.xhtml"/>
+
+    </ui:define>
 </ui:composition>
 
 

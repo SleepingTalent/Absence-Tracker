@@ -1,4 +1,4 @@
-package com.noveria.absencemanagement.view;
+package com.noveria.absencemanagement.view.navigation;
 
 import com.noveria.absencemanagement.view.helper.ViewHelper;
 
@@ -55,16 +55,16 @@ public class NavigationController {
         viewHelper.hideAddEmployeeDialog();
     }
 
-    public void showAdminFeatures() {
-        System.err.println("This would show admin page");
+    public String showAdminFeatures() {
+        return NavigationOutcome.SUCCESS.getOutcomeName();
     }
 
-    public void showHolidayMangementFeatures() {
-        System.err.println("This would show holiday management page");
+    public String showHolidayManagementFeatures() {
+       return NavigationOutcome.SUCCESS.getOutcomeName();
     }
 
-    public void showHolidayAuthoriseFeatures() {
-        System.err.println("This would show holiday authorise page");
+    public String showHolidayAuthoriseFeatures() {
+        return NavigationOutcome.SUCCESS.getOutcomeName();
     }
 
 }

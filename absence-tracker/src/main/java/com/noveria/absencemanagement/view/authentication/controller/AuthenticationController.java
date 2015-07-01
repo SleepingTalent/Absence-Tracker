@@ -7,6 +7,7 @@ import com.noveria.absencemanagement.service.employee.EmployeeService;
 import com.noveria.absencemanagement.view.authentication.model.UserModel;
 import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
 import com.noveria.absencemanagement.view.helper.MessageHelper;
+import com.noveria.absencemanagement.view.navigation.NavigationOutcome;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -68,7 +69,7 @@ public class AuthenticationController {
             logger.error(e.getMessage()+":"+getUserName()+":"+getPassword());
 
             messageHelper.addErrorMessage("Login Unsuccessful", e.getMessage());
-            return "incorrect";
+            return NavigationOutcome.FAIL.getOutcomeName();
         }
 
         try {
@@ -80,7 +81,7 @@ public class AuthenticationController {
             logger.warn("No Employee found for : " + getUserName() + ":" + getPassword());
         }
 
-        return "correct";
+        return NavigationOutcome.SUCCESS.getOutcomeName();
     }
 
 
@@ -108,7 +109,7 @@ public class AuthenticationController {
         setPassword(null);
         userModel.setEmployee(null);
 
-        return "logout";
+        return NavigationOutcome.SUCCESS.getOutcomeName();
     }
 
     public AuthenticationManager getAuthenticationManager() {

@@ -14,17 +14,16 @@ import static org.junit.Assert.fail;
  */
 public class CreateEmployeeDialog extends Page {
 
-    public static final String CREATE_EMPLOYEE_DIALOG_ID = "tabPanel:addEmployeeDialog";
+    public static final String CREATE_EMPLOYEE_DIALOG_ID = "addEmployeeDialog";
 
-    public static final String EMPLOYEE_FIRSTNAME_FIELD = "tabPanel:addEmployee:firstName";
-    public static final String EMPLOYEE_LASTNAME_FIELD = "tabPanel:addEmployee:lastName";
-    public static final String EMPLOYEE_DEPARTMENT_FIELD = "tabPanel:addEmployee:department";
-    public static final String EMPLOYEE_USERNAME_FIELD = "tabPanel:addEmployee:username";
-    public static final String EMPLOYEE_PASSWORD_FIELD = "tabPanel:addEmployee:password";
-    public static final String EMPLOYEE_MANAGER_ROLE_FIELD = "tabPanel:addEmployee:mangerrole";
+    public static final String EMPLOYEE_FIRSTNAME_FIELD = "addEmployee:firstName";
+    public static final String EMPLOYEE_LASTNAME_FIELD = "addEmployee:lastName";
+    public static final String EMPLOYEE_DEPARTMENT_FIELD = "addEmployee:department";
+    public static final String EMPLOYEE_USERNAME_FIELD = "addEmployee:username";
+    public static final String EMPLOYEE_PASSWORD_FIELD = "addEmployee:password";
+    public static final String EMPLOYEE_MANAGER_ROLE_FIELD = "addEmployee:mangerrole";
 
-
-    public static final String CREATE_DEPARTMENT_BTN = "tabPanel:addEmployee:addEmployeeBtn";
+    public static final String CREATE_DEPARTMENT_BTN = "addEmployee:addEmployeeBtn";
 
     public CreateEmployeeDialog(CucumberWebDriver webDriver) {
         super(webDriver);

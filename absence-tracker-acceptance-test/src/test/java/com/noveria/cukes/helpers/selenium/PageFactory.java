@@ -1,7 +1,8 @@
 package com.noveria.cukes.helpers.selenium;
 
+import com.noveria.cukes.helpers.selenium.page.AdminPage;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
-import com.noveria.cukes.helpers.selenium.page.dashboard.DashboardPage;
+import com.noveria.cukes.helpers.selenium.page.dashboard.WelcomePage;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
 
 /**
@@ -19,7 +20,11 @@ public class PageFactory {
         return new LoginPage(webDriver);
     }
 
-    public DashboardPage getDashboardPage() {
-        return new DashboardPage(webDriver);
+    public WelcomePage getWelcomePage() {
+        return new WelcomePage(webDriver);
+    }
+
+    public AdminPage getAdminPage() {
+        return new AdminPage(webDriver);
     }
 }

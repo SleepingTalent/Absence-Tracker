@@ -78,4 +78,8 @@ public class PageHelper {
     public WebElement findSelectElement(String id, String value) {
         return elementHelper.findSelectElement(id,value, false);
     }
+
+    public WebElement findElementByClassAndText(String cssClass, String text) {
+        return elementHelper.findElementByClassAndText(cssClass,text,false);
+    }
 }

@@ -12,7 +12,7 @@ import static org.junit.Assert.fail;
  */
 public class BrowseEmployeesDialog extends Page {
 
-    public static final String BROWSE_EMPLOYEES_DIALOG_ID = "tabPanel:browseEmployeesDialog";
+    public static final String BROWSE_EMPLOYEES_DIALOG_ID = "browseEmployeesDialog";
 
     //ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all
     public static final String CLOSE_ICON_CLASS = "";
@@ -23,7 +23,7 @@ public class BrowseEmployeesDialog extends Page {
 
 
     public void closeDialog() {
-        getPageHelper().findByLinkWithinDivById("tabPanel:browseEmployeesDialog",false).click();
+        getPageHelper().findByLinkWithinDivById(BROWSE_EMPLOYEES_DIALOG_ID,false).click();
     }
 
     public void assertDialogPresent(boolean reThrow) {

@@ -10,35 +10,60 @@
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
 
-    <!--
-    <converter>
-        <converter-for-class>com.noveria.absencemanagement.view.employee.view.EmployeeViewBean</converter-for-class>
-        <converter-class>com.noveria.absencemanagement.view.employee.view.converter.EmployeeViewConverter</converter-class>
-    </converter>
-    -->
-
     <!-- navigation-rule for login.xhtml -->
     <navigation-rule>
         <from-view-id>/pages/unsecure/login.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{authController.login}</from-action>
-            <from-outcome>correct</from-outcome>
-            <to-view-id>/pages/secure/dashboard.xhtml</to-view-id>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/welcome.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{authController.login}</from-action>
-            <from-outcome>incorrect</from-outcome>
+            <from-outcome>fail</from-outcome>
             <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/pages/secure/dashboard.xhtml</from-view-id>
+        <from-view-id>/pages/secure/welcome.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{authController.logout}</from-action>
-            <from-outcome>logout</from-outcome>
-            <!-- <to-view-id>/j_spring_security_logout?faces-redirect=true</to-view-id>-->
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{navigationController.showAdminFeatures}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/admin/admin.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{navigationController.showHolidayManagementFeatures}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/holiday/management.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/secure/admin/admin.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{authController.logout}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <from-view-id>/pages/secure/holiday/management.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{authController.logout}</from-action>
+            <from-outcome>success</from-outcome>
             <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
             <redirect/>
         </navigation-case>

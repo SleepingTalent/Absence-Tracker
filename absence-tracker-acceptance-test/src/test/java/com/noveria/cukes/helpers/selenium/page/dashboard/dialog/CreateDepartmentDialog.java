@@ -10,9 +10,9 @@ import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
  */
 public class CreateDepartmentDialog extends Page {
 
-    public static final String DEPARTMENT_NAME_FIELD = "tabPanel:addDepartment:deptName";
-    public static final String CREATE_DEPARTMENT_BTN = "tabPanel:addDepartment:addDepartmentBtn";
-    public static final String CREATE_DEPARTMENT_DIALOG_ID = "tabPanel:addDepartmentDialog";
+    public static final String DEPARTMENT_NAME_FIELD = "addDepartment:deptName";
+    public static final String CREATE_DEPARTMENT_BTN = "addDepartment:addDepartmentBtn";
+    public static final String CREATE_DEPARTMENT_DIALOG_ID = "addDepartmentDialog";
 
 
     public CreateDepartmentDialog(CucumberWebDriver webDriver) {
