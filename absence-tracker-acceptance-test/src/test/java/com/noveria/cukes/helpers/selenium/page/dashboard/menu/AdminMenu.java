@@ -37,8 +37,13 @@ public class AdminMenu extends Page {
     }
 
     public void clickOnBrowseEmployees() {
-        selectBrowseMenu();
-        getPageHelper().findElementById(BROWSE_EMPLOYEES_MENU_ID).click();
+        try {
+            selectBrowseMenu();
+            getPageHelper().findElementById(BROWSE_EMPLOYEES_MENU_ID, true).click();
+        } catch (SeleniumTimeoutException ste) {
+            selectBrowseMenu();
+            getPageHelper().findElementById(BROWSE_EMPLOYEES_MENU_ID, false).click();
+        }
     }
 
     private void selectCreateMenu() {
