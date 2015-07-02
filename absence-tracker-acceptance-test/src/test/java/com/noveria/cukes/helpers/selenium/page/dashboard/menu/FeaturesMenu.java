@@ -50,4 +50,9 @@ public class FeaturesMenu extends Page {
         getPageHelper().findElementById(AUTHORISE_LEAVE_ID);
         getPageHelper().findElementById(ENTER_ABSENCE_ID);
     }
+
+    public void clickMyAnnualLeave() {
+        selectFeaturesMenu();
+        getPageHelper().findElementById(MY_ANNUAL_LEAVE_ID).click();
+    }
 }

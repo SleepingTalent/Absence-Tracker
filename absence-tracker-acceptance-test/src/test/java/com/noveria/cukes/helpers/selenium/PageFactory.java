@@ -1,6 +1,7 @@
 package com.noveria.cukes.helpers.selenium;
 
 import com.noveria.cukes.helpers.selenium.page.AdminPage;
+import com.noveria.cukes.helpers.selenium.page.HolidayManagementPage;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.helpers.selenium.page.dashboard.WelcomePage;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
@@ -26,5 +27,9 @@ public class PageFactory {
 
     public AdminPage getAdminPage() {
         return new AdminPage(webDriver);
+    }
+
+    public HolidayManagementPage getHolidayManagementPage() {
+        return new HolidayManagementPage(webDriver);
     }
 }

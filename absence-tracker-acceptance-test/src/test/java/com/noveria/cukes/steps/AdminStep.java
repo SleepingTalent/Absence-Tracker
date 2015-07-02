@@ -4,6 +4,8 @@ import com.noveria.cukes.helpers.DepartmentType;
 import com.noveria.cukes.helpers.db.DBHelper;
 import com.noveria.cukes.helpers.db.entity.Employee;
 import com.noveria.cukes.helpers.selenium.page.AdminPage;
+import com.noveria.cukes.helpers.selenium.page.HolidayManagementPage;
+import com.noveria.cukes.helpers.selenium.page.dashboard.WelcomePage;
 import com.noveria.cukes.runtime.RuntimeState;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 /**
  * Created by lynseymcgregor on 09/06/2015.
@@ -117,5 +120,32 @@ public class AdminStep {
         runtimeState.setEmployee(employee);
 
         adminPage.createEmployee(runtimeState, runtimeState.getEmployee());
+    }
+
+    @And("^they select \"([^\"]*)\" feature$")
+    public void they_select_feature(String feature) throws Throwable {
+
+        WelcomePage welcomePage = runtimeState.getPageFactory().getWelcomePage();
+        welcomePage.assertPagePresent();
+        runtimeState.takeScreenShot();
+
+        if(feature.equalsIgnoreCase("myAnnualLeave")){
+            welcomePage.getFeaturesMenu().clickMyAnnualLeave();
+        }else {
+           fail(feature+" not supported!");
+        }
+
+    }
+
+    @Then("^the holiday balance is set$")
+    public void the_holiday_balance_is_set() throws Throwable {
+        HolidayManagementPage holidayManagementPage =
+                runtimeState.getPageFactory().getHolidayManagementPage();
+
+        holidayManagementPage.assertDefaultHolidayTotalAllowance();
+        holidayManagementPage.assertDefaultHolidayUsedAllowance();
+        holidayManagementPage.assertDefaultHolidayRemainingAllowance();
+
+        runtimeState.takeScreenShot();
     }
 }

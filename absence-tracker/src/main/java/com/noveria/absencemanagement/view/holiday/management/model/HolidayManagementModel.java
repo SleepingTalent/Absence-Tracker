@@ -54,15 +54,15 @@ public class HolidayManagementModel implements Serializable {
 
     private ScheduleModel buildDataModel() {
         lazyEventModel = new DefaultScheduleModel();
-        lazyEventModel.addEvent(buildEvent("Joe Worker", DateHelper.daysInPast(2), DateHelper.daysInFuture(2), "holidayAuth"));
-        lazyEventModel.addEvent(buildEvent("Jane Worker", DateHelper.daysInPast(7), DateHelper.daysInFuture(1), "holidayAuth"));
-        lazyEventModel.addEvent(buildEvent("Joe Worker", DateHelper.daysInPast(7), DateHelper.daysInPast(3), "holidayDeclined"));
-        lazyEventModel.addEvent(buildEvent("Jane Worker", DateHelper.daysInFuture(2), DateHelper.daysInFuture(3), "holidayAwaitingAuth"));
+        lazyEventModel.addEvent(buildEvent("Joe Worker", DateHelper.daysInPast(2), DateHelper.daysInFuture(2)));
+        lazyEventModel.addEvent(buildEvent("Jane Worker", DateHelper.daysInPast(7), DateHelper.daysInFuture(1)));
+        lazyEventModel.addEvent(buildEvent("Joe Worker", DateHelper.daysInPast(7), DateHelper.daysInPast(3)));
+        lazyEventModel.addEvent(buildEvent("Jane Worker", DateHelper.daysInFuture(2), DateHelper.daysInFuture(3)));
         return lazyEventModel;
     }
 
-    private DefaultScheduleEvent buildEvent(String title, Date start, Date end, String cssClass) {
-        DefaultScheduleEvent event = new DefaultScheduleEvent(title,start,end,cssClass);
+    private DefaultScheduleEvent buildEvent(String title, Date start, Date end) {
+        DefaultScheduleEvent event = new DefaultScheduleEvent(title,start,end);
         event.setAllDay(true);
         return event;
     }
