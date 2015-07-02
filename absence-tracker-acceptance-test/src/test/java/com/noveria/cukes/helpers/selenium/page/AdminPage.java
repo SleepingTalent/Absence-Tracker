@@ -134,6 +134,10 @@ public class AdminPage extends Page {
         getCreateEmployeeDialog().setUserName(employee.getUsername());
         getCreateEmployeeDialog().setPassword(employee.getPassword());
 
+        if(employee.isManager()) {
+            getCreateEmployeeDialog().setManager(employee.isManager());
+        }
+
         runtimeState.takeScreenShot();
 
         getCreateEmployeeDialog().clickCreateBtn();

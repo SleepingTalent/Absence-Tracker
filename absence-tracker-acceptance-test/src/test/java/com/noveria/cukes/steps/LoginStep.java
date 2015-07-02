@@ -5,6 +5,7 @@ import com.noveria.cukes.helpers.UserType;
 import com.noveria.cukes.helpers.selenium.page.dashboard.WelcomePage;
 import com.noveria.cukes.helpers.selenium.page.LoginPage;
 import com.noveria.cukes.runtime.RuntimeState;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -57,7 +58,7 @@ public class LoginStep {
         loginPage.clickLoginButton();
     }
 
-    @Then("^they have the expected user features$")
+    @Then("^they have the expected (?:user|Employee|Manager) features$")
     public void they_have_the_expected_user_features() throws Throwable {
         runtimeState.takeScreenShot();
 
@@ -81,7 +82,7 @@ public class LoginStep {
         runtimeState.takeScreenShot();
     }
 
-    @When("^the user logs out$")
+    @When("^the (?:user|Employee|Manager) logs out$")
     public void the_user_logs_out() throws Throwable {
         WelcomePage welcomePage = runtimeState.getPageFactory().getWelcomePage();
         welcomePage.getFeaturesMenu().clickLogout();
@@ -93,33 +94,6 @@ public class LoginStep {
         loginPage.assertPagePresent();
 
         runtimeState.takeScreenShot();
-    }
-
-    @When("^the Employee logs in$")
-    public void the_Employee_logs_in() throws Throwable {
-        LoginPage loginPage = runtimeState.getPageFactory().getLoginPage();
-
-        loginPage.navigateToLoginPage();
-
-        LoginDetails loginDetails = new LoginDetails();
-        loginDetails.setUsername(runtimeState.getEmployee().getUsername());
-        loginDetails.setPassword(runtimeState.getEmployee().getPassword());
-        loginDetails.setUserType(UserType.EMPLOYEE);
-
-        runtimeState.setLoginDetails(loginDetails);
-
-        loginPage.inputUserName(loginDetails.getUsername());
-        loginPage.inputPassword(loginDetails.getPassword());
-
-        runtimeState.takeScreenShot();
-        loginPage.clickLoginButton();
-    }
-
-    @When("^the Employee logs out$")
-    public void the_Employee_logs_out() throws Throwable {
-        WelcomePage welcomePage = runtimeState.getPageFactory().getWelcomePage();
-        welcomePage.assertPagePresent();
-        welcomePage.getFeaturesMenu().clickLogout();
     }
 
     @When("^the user logs in and selects admin features$")
@@ -137,5 +111,33 @@ public class LoginStep {
         welcomePage.assertPagePresent();
         runtimeState.takeScreenShot();
         welcomePage.getFeaturesMenu().clickSystemAdmin();
+    }
+
+    @When("^the \"([^\"]*)\" logs in$")
+    public void the_logs_in(String userType) throws Throwable {
+        LoginPage loginPage = runtimeState.getPageFactory().getLoginPage();
+
+        loginPage.navigateToLoginPage();
+
+        LoginDetails loginDetails = new LoginDetails();
+        loginDetails.setUsername(runtimeState.getEmployee().getUsername());
+        loginDetails.setPassword(runtimeState.getEmployee().getPassword());
+
+        if(userType.equalsIgnoreCase("Manager")) {
+            loginDetails.setUserType(UserType.MANAGER);
+        }else if (userType.equalsIgnoreCase("Employee")) {
+            loginDetails.setUserType(UserType.EMPLOYEE);
+        } else {
+            loginDetails.setUserType(UserType.ADMIN);
+        }
+
+        runtimeState.setLoginDetails(loginDetails);
+
+        loginPage.assertPagePresent();
+        loginPage.inputUserName(loginDetails.getUsername());
+        loginPage.inputPassword(loginDetails.getPassword());
+
+        runtimeState.takeScreenShot();
+        loginPage.clickLoginButton();
     }
 }

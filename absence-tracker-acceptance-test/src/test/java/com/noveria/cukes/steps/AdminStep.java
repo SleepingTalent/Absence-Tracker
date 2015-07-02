@@ -5,6 +5,7 @@ import com.noveria.cukes.helpers.db.DBHelper;
 import com.noveria.cukes.helpers.db.entity.Employee;
 import com.noveria.cukes.helpers.selenium.page.AdminPage;
 import com.noveria.cukes.runtime.RuntimeState;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.slf4j.Logger;
@@ -95,22 +96,26 @@ public class AdminStep {
         adminPage.createEmployee(runtimeState, employee);
     }
 
-    @And("^they create an Employee$")
-    public void they_create_an_Employee() throws Throwable {
+    @Then("^the (?:Employee|Manager) is created$")
+    public void the_Employee_is_created() throws Throwable {
+        AdminPage adminPage = runtimeState.getPageFactory().getAdminPage();
+        adminPage.assertPagePresent();
+        adminPage.checkThatTheEmployeeExist(runtimeState, runtimeState.getEmployee());
+    }
+
+    @And("^they create (?:an|a) \"([^\"]*)\"$")
+    public void they_create_an(String employeeType) throws Throwable {
         Employee employee = new Employee();
 
         AdminPage adminPage = runtimeState.getPageFactory().getAdminPage();
         adminPage.assertPagePresent();
 
+        if(employeeType.equalsIgnoreCase("Manager")) {
+            employee.setManager(true);
+        }
+
         runtimeState.setEmployee(employee);
 
         adminPage.createEmployee(runtimeState, runtimeState.getEmployee());
-    }
-
-    @Then("^the Employee is created$")
-    public void the_Employee_is_created() throws Throwable {
-        AdminPage adminPage = runtimeState.getPageFactory().getAdminPage();
-        adminPage.assertPagePresent();
-        adminPage.checkThatTheEmployeeExist(runtimeState, runtimeState.getEmployee());
     }
 }

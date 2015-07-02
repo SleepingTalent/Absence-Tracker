@@ -2,6 +2,7 @@ package com.noveria.cukes.helpers.selenium.page;
 
 
 import com.noveria.cukes.helpers.selenium.page.helper.PageHelper;
+import com.noveria.cukes.helpers.selenium.page.helper.SeleniumTimeoutException;
 import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -25,13 +26,8 @@ public class Page {
 
     protected void sendKeysToId(String id, String text) {
         try {
-            getPageHelper().findElementById(id).sendKeys(text);
-        } catch (StaleElementReferenceException e) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
-            }
+            getPageHelper().findElementById(id,true).sendKeys(text);
+        } catch (SeleniumTimeoutException ste) {
             getPageHelper().findElementById(id).sendKeys(text);
         }
     }

@@ -6,7 +6,7 @@ import com.noveria.cukes.helpers.selenium.webdriver.CucumberWebDriver;
 
 public class WelcomePage extends Page {
 
-    public static final String DASHBOARD_PANEL = "welcomePanel";
+    public static final String WELCOME_PANEL = "welcomePanel";
 
     private FeaturesMenu featuresMenu;
 
@@ -16,7 +16,7 @@ public class WelcomePage extends Page {
     }
 
     public void assertPagePresent() {
-        getPageHelper().findElementById(DASHBOARD_PANEL);
+        getPageHelper().findElementById(WELCOME_PANEL);
     }
 
     public FeaturesMenu getFeaturesMenu() {return featuresMenu;}

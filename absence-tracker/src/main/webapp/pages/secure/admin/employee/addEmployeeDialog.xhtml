@@ -39,8 +39,8 @@
                              value="#{employeeController.user.password}"
                              requiredMessage="Password is required"/>
 
-                <p:outputLabel id="roleslbl" for="mangerrole" value="Manager:" />
-                <p:selectBooleanCheckbox id="mangerrole" value="#{employeeController.managerrole}" />
+                <p:outputLabel id="roleslbl" for="managerrole" value="Role:" />
+                <h:selectBooleanCheckbox id="managerrole" value="#{employeeController.managerrole}" />
 
                 <f:facet name="footer">
                     <h:commandButton id="addEmployeeBtn" value="Create Employee"

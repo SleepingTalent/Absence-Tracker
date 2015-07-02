@@ -21,7 +21,7 @@ public class CreateEmployeeDialog extends Page {
     public static final String EMPLOYEE_DEPARTMENT_FIELD = "addEmployee:department";
     public static final String EMPLOYEE_USERNAME_FIELD = "addEmployee:username";
     public static final String EMPLOYEE_PASSWORD_FIELD = "addEmployee:password";
-    public static final String EMPLOYEE_MANAGER_ROLE_FIELD = "addEmployee:mangerrole";
+    public static final String EMPLOYEE_MANAGER_ROLE_FIELD = "addEmployee:managerrole";
 
     public static final String CREATE_DEPARTMENT_BTN = "addEmployee:addEmployeeBtn";
 
@@ -79,4 +79,9 @@ public class CreateEmployeeDialog extends Page {
     public void clickCreateBtn() {
         getPageHelper().findElementById(CREATE_DEPARTMENT_BTN).click();
     }
+
+    public void setManager(boolean manager) {
+        getPageHelper().findElementById(EMPLOYEE_MANAGER_ROLE_FIELD).click();
+    }
+
 }

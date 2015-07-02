@@ -53,10 +53,21 @@ Feature: Administrator Features
   Scenario: An Admin User Creates an Employee
     Given a valid "Admin" user
     When the user logs in and selects admin features
-    And they create an Employee
+    And they create an "Employee"
     Then the Employee is created
     And the user logs out
-    When the Employee logs in
-    Then they have the expected user features
+    When the "Employee" logs in
+    Then they have the expected Employee features
     When the Employee logs out
+    Then they are redirected to the login page
+
+  Scenario: An Admin User Creates a Manager
+    Given a valid "Admin" user
+    When the user logs in and selects admin features
+    And they create a "Manager"
+    Then the Manager is created
+    And the user logs out
+    When the "Manager" logs in
+    Then they have the expected Manager features
+    When the Manager logs out
     Then they are redirected to the login page
