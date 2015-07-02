@@ -27,8 +27,13 @@ public class AdminMenu extends Page {
     }
 
     public void clickOnBrowseDepartment() {
-        selectBrowseMenu();
-        getPageHelper().findElementById(BROWSE_DEPARTMENT_MENU_ID).click();
+        try {
+            selectBrowseMenu();
+            getPageHelper().findElementById(BROWSE_DEPARTMENT_MENU_ID,true).click();
+        } catch (SeleniumTimeoutException ste) {
+            selectBrowseMenu();
+            getPageHelper().findElementById(BROWSE_DEPARTMENT_MENU_ID).click();
+        }
     }
 
     public void clickOnCreateEmployee() {
