@@ -9,7 +9,6 @@
     </appender>
 
     <!--
-    <logger name="com.noveria.absencemanagement.service.department.DepartmentService" level="DEBUG"/>
     <logger name="com.noveria.absencemanagement.view.department.controller.DepartmentController" level="DEBUG"/>
     <logger name="com.noveria.absencemanagement.model.department.dao.DepartmentDAO" level="DEBUG" />
 

@@ -1,10 +1,9 @@
-package com.noveria.absencemanagement.service.user;
+package com.noveria.absencemanagement.service.authentication;
 
 import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.model.user.entities.UserRole;
 import com.noveria.common.BaseUnitTest;
-import com.noveria.common.groups.UnitTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -24,10 +23,10 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * Created by lynseymcgregor on 30/05/2015.
  */
-public class UserServiceTest extends BaseUnitTest {
+public class AuthenticationServiceTest extends BaseUnitTest {
 
     @InjectMocks
-    UserService userService;
+    AuthenticationService authenticationService;
 
     @Mock
     UserDAO userDAO;
@@ -56,7 +55,7 @@ public class UserServiceTest extends BaseUnitTest {
 
     @Test
     public void login_whenLoginValid_withAdminRole_returnsUser() {
-        org.springframework.security.core.userdetails.UserDetails actual = userService.loadUserByUsername("admin");
+        org.springframework.security.core.userdetails.UserDetails actual = authenticationService.loadUserByUsername("admin");
         assertEquals(user.getUsername(),actual.getUsername());
         assertEquals(user.getPassword(),actual.getPassword());
 
@@ -74,7 +73,7 @@ public class UserServiceTest extends BaseUnitTest {
 
         user.setUserRole(roleList);
 
-        org.springframework.security.core.userdetails.UserDetails actual = userService.loadUserByUsername("admin");
+        org.springframework.security.core.userdetails.UserDetails actual = authenticationService.loadUserByUsername("admin");
         assertEquals(user.getUsername(),actual.getUsername());
         assertEquals(user.getPassword(),actual.getPassword());
 
@@ -92,7 +91,7 @@ public class UserServiceTest extends BaseUnitTest {
 
         user.setUserRole(roleList);
 
-        org.springframework.security.core.userdetails.UserDetails actual = userService.loadUserByUsername("admin");
+        org.springframework.security.core.userdetails.UserDetails actual = authenticationService.loadUserByUsername("admin");
         assertEquals(user.getUsername(),actual.getUsername());
         assertEquals(user.getPassword(),actual.getPassword());
 
@@ -102,7 +101,7 @@ public class UserServiceTest extends BaseUnitTest {
     @Test(expected = UsernameNotFoundException.class)
     public void login_whenLoginHasNoRoles_throwsException() {
         user.setUserRole(new ArrayList<UserRole>());
-        userService.loadUserByUsername("admin");
+        authenticationService.loadUserByUsername("admin");
 
     }
 
@@ -116,7 +115,7 @@ public class UserServiceTest extends BaseUnitTest {
         roleList.add(roleOne);
 
         user.setUserRole(roleList);
-        userService.loadUserByUsername("admin");
+        authenticationService.loadUserByUsername("admin");
 
     }
 
@@ -125,7 +124,7 @@ public class UserServiceTest extends BaseUnitTest {
         when(userDAO.findUserByUsername(anyString())).
                 thenThrow(new NoResultException());
 
-        userService.loadUserByUsername("wrong");
+        authenticationService.loadUserByUsername("wrong");
     }
 
 }

@@ -1,6 +1,6 @@
 package com.noveria.absencemanagement.view.department.controller;
 
-import com.noveria.absencemanagement.service.department.DepartmentService;
+import com.noveria.absencemanagement.service.administration.AdministrationService;
 import com.noveria.absencemanagement.service.employee.EmployeeService;
 import com.noveria.absencemanagement.view.department.model.DepartmentModel;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
@@ -29,8 +29,8 @@ public class DepartmentController {
     @ManagedProperty(value = "#{departmentModel}")
     DepartmentModel departmentModel;
 
-    @ManagedProperty(value = "#{departmentService}")
-    DepartmentService departmentService;
+    @ManagedProperty(value = "#{administrationService}")
+    AdministrationService administrationService;
 
     @ManagedProperty(value = "#{employeeService}")
     EmployeeService employeeService;
@@ -43,7 +43,7 @@ public class DepartmentController {
     public void saveDepartment() {
         DepartmentViewBean departmentView = getDepartmentModel().getDepartment();
 
-        if(departmentService.departmentAlreadyExists(departmentView.getName())) {
+        if(administrationService.departmentAlreadyExists(departmentView.getName())) {
             logger.debug("Create Department Failed : "+departmentView.getName()+" already exists");
 
             messageHelper.addErrorMessage("Create Department Failed",
@@ -60,7 +60,7 @@ public class DepartmentController {
                 departmentView.setManager(manager);
             }
 
-            departmentService.saveDepartment(departmentView);
+            administrationService.saveDepartment(departmentView);
 
             messageHelper.addInfoMessage("Department Created",
                     departmentView.getName()+" Created Successfully");
@@ -78,7 +78,7 @@ public class DepartmentController {
     public List<SelectItem> getManagers() {
         List<SelectItem> managers = new ArrayList<SelectItem>();
 
-        for(EmployeeViewBean employeeViewBean : employeeService.findAllManagers()) {
+        for(EmployeeViewBean employeeViewBean : administrationService.findAllManagers()) {
             SelectItem manager = new SelectItem(employeeViewBean.getId().toString(),employeeViewBean.getFullname());
             managers.add(manager);
         }
@@ -94,12 +94,12 @@ public class DepartmentController {
         this.departmentModel = departmentModel;
     }
 
-    public DepartmentService getDepartmentService() {
-        return departmentService;
+    public AdministrationService getAdministrationService() {
+        return administrationService;
     }
 
-    public void setDepartmentService(DepartmentService departmentService) {
-        this.departmentService = departmentService;
+    public void setAdministrationService(AdministrationService administrationService) {
+        this.administrationService = administrationService;
     }
 
     public EmployeeService getEmployeeService() {

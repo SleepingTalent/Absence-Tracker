@@ -1,6 +1,7 @@
 package com.noveria.absencemanagement.view.employee.model;
 
 import com.noveria.absencemanagement.model.employee.dao.BrowseEmployeePagenatedResults;
+import com.noveria.absencemanagement.service.administration.AdministrationService;
 import com.noveria.absencemanagement.service.employee.EmployeeService;
 import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
 import org.primefaces.model.LazyDataModel;
@@ -29,8 +30,8 @@ public class BrowseEmployeeModel implements Serializable {
 
     private LazyDataModel<EmployeeViewBean> dataModel;
 
-    @ManagedProperty(value = "#{employeeService}")
-    EmployeeService employeeService;
+    @ManagedProperty(value = "#{administrationService}")
+    AdministrationService administrationService;
 
     @PostConstruct
     public void init() {
@@ -68,7 +69,7 @@ public class BrowseEmployeeModel implements Serializable {
 
                 lazyLoadedData.clear();
 
-                BrowseEmployeePagenatedResults results = employeeService.findAllEmployees(first, pageSize);
+                BrowseEmployeePagenatedResults results = administrationService.findAllEmployees(first, pageSize);
 
                 for(EmployeeViewBean employeeViewBean : results.getResultList()) {
                     lazyLoadedData.add(employeeViewBean);
@@ -81,11 +82,11 @@ public class BrowseEmployeeModel implements Serializable {
         };
     }
 
-    public EmployeeService getEmployeeService() {
-        return employeeService;
+    public AdministrationService getAdministrationService() {
+        return administrationService;
     }
 
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public void setAdministrationService(AdministrationService administrationService) {
+        this.administrationService = administrationService;
     }
 }

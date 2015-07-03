@@ -1,4 +1,4 @@
-package com.noveria.absencemanagement.service.user.userrole;
+package com.noveria.absencemanagement.service.authentication.userrole;
 
 /**
  * Created by lynseymcgregor on 06/06/2015.

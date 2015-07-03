@@ -1,12 +1,10 @@
 package com.noveria.absencemanagement.view.department.model;
 
 import com.noveria.absencemanagement.model.department.dao.BrowseDepartmentPagenatedResults;
-import com.noveria.absencemanagement.service.department.DepartmentService;
+import com.noveria.absencemanagement.service.administration.AdministrationService;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -25,8 +23,8 @@ public class BrowserDepartmentModel implements Serializable {
 
     private LazyDataModel<DepartmentViewBean> dataModel;
 
-    @ManagedProperty(value = "#{departmentService}")
-    DepartmentService departmentService;
+    @ManagedProperty(value = "#{administrationService}")
+    AdministrationService administrationService;
 
     @PostConstruct
     public void init() {
@@ -68,7 +66,7 @@ public class BrowserDepartmentModel implements Serializable {
 
                 lazyLoadedData.clear();
 
-                BrowseDepartmentPagenatedResults results = departmentService.findAllDepartmentsPagenated(first, pageSize);
+                BrowseDepartmentPagenatedResults results = administrationService.findAllDepartmentsPagenated(first, pageSize);
 
                 for(DepartmentViewBean departmentViewBean : results.getResultList()) {
                     lazyLoadedData.add(departmentViewBean);
@@ -81,11 +79,11 @@ public class BrowserDepartmentModel implements Serializable {
         };
     }
 
-    public DepartmentService getDepartmentService() {
-        return departmentService;
+    public AdministrationService getAdministrationService() {
+        return administrationService;
     }
 
-    public void setDepartmentService(DepartmentService departmentService) {
-        this.departmentService = departmentService;
+    public void setAdministrationService(AdministrationService administrationService) {
+        this.administrationService = administrationService;
     }
 }

@@ -1,4 +1,4 @@
-package com.noveria.absencemanagement.service.employee.exception;
+package com.noveria.absencemanagement.service.administration.exception;
 
 import javax.persistence.NoResultException;
 

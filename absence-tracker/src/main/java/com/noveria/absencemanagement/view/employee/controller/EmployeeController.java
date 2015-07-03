@@ -6,7 +6,7 @@ package com.noveria.absencemanagement.view.employee.controller;
 
 import com.noveria.absencemanagement.model.common.Role;
 import com.noveria.absencemanagement.model.user.dao.UserDAO;
-import com.noveria.absencemanagement.service.department.DepartmentService;
+import com.noveria.absencemanagement.service.administration.AdministrationService;
 import com.noveria.absencemanagement.service.employee.EmployeeService;
 import com.noveria.absencemanagement.view.authentication.view.UserViewBean;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
@@ -36,8 +36,8 @@ public class EmployeeController {
     @ManagedProperty(value = "#{employeeModel}")
     EmployeeModel employeeModel;
 
-    @ManagedProperty(value = "#{departmentService}")
-    DepartmentService departmentService;
+    @ManagedProperty(value = "#{administrationService}")
+    AdministrationService administrationService;
 
     @ManagedProperty(value = "#{employeeService}")
     EmployeeService employeeService;
@@ -67,7 +67,7 @@ public class EmployeeController {
 
            throw new AbortProcessingException(employeeModel.getUser().getUsername()+" Already Exists");
        }else {
-           employeeService.createEmployee(employeeModel);
+           administrationService.createEmployee(employeeModel);
 
            messageHelper.addInfoMessage("Employee Created",
                    employeeModel.getEmployee().getFullname()+" Created Successfully");
@@ -77,7 +77,7 @@ public class EmployeeController {
     public List<SelectItem> getDepartments() {
         List<SelectItem> departments = new ArrayList<SelectItem>();
 
-        List<DepartmentViewBean> results = departmentService.findAllDepartments();
+        List<DepartmentViewBean> results = administrationService.findAllDepartments();
 
         for(DepartmentViewBean departmentResult : results) {
             SelectItem department = new SelectItem(departmentResult.getId(),departmentResult.getName());
@@ -123,12 +123,12 @@ public class EmployeeController {
         return employeeModel.getUser();
     }
 
-    public DepartmentService getDepartmentService() {
-        return departmentService;
+    public AdministrationService getAdministrationService() {
+        return administrationService;
     }
 
-    public void setDepartmentService(DepartmentService departmentService) {
-        this.departmentService = departmentService;
+    public void setAdministrationService(AdministrationService administrationService) {
+        this.administrationService = administrationService;
     }
 
     public EmployeeService getEmployeeService() {

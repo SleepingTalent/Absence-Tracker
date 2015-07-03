@@ -30,7 +30,7 @@
 
     <!-- Set UserService class as the authentication Manager for Spring Security-->
     <sec:authentication-manager alias="authenticationManager">
-        <sec:authentication-provider user-service-ref="userService">
+        <sec:authentication-provider user-service-ref="authenticationService">
             <sec:password-encoder hash="plaintext"/>
         </sec:authentication-provider>
     </sec:authentication-manager>

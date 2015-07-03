@@ -1,20 +1,20 @@
-package com.noveria.absencemanagement.service.user;
+package com.noveria.absencemanagement.service.authentication;
 
 import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.model.user.entities.User;
 import com.noveria.absencemanagement.model.user.entities.UserRole;
-import com.noveria.absencemanagement.service.user.exception.InvalidRolesException;
-import com.noveria.absencemanagement.service.user.userrole.ApplicationRole;
+import com.noveria.absencemanagement.service.authentication.exception.InvalidRolesException;
+import com.noveria.absencemanagement.service.authentication.userrole.ApplicationRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.NoResultException;
 import java.util.ArrayList;
@@ -30,9 +30,9 @@ import java.util.Set;
  */
 
 @Service
-public class UserService implements UserDetailsService {
+public class AuthenticationService implements UserDetailsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
 
     /**
      * Autowired; is a spring command which
