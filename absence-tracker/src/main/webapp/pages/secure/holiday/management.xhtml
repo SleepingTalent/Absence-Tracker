@@ -6,10 +6,8 @@
 
     <ui:define name="pageContent">
 
-    <p:outputLabel id="employerole" value="You have employee access!"/>
-
     <h:form id="holidayManagementForm" prependId="false">
-        <h:panelGrid columns="2">
+        <h:panelGrid columns="3" columnClasses="alignColumnTop">
             <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Holiday Balance">
 
                 <h:panelGrid columns="2">
@@ -38,6 +36,21 @@
 
             <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Holiday Calendar">
                 <p:schedule value="#{holidayManagementController.scheduleLazyModel}"/>
+            </p:panel>
+
+            <p:panel id="holidayRequestPanel" styleClass="holidayRequestPanel" header="Holiday Requests">
+
+                <h:panelGrid columns="1">
+
+                    <p:panel id="requestPanel" styleClass="requestNewHolidayPanel" header="Request New Holiday">
+
+                    </p:panel>
+
+                    <p:panel id="historyPanel" styleClass="requestHistoryPanel" header="Request History">
+
+                    </p:panel>
+                </h:panelGrid>
+
             </p:panel>
         </h:panelGrid>
     </h:form>

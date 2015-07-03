@@ -1,7 +1,7 @@
 package com.noveria.absencemanagement.view.department.controller;
 
 import com.noveria.absencemanagement.service.administration.AdministrationService;
-import com.noveria.absencemanagement.service.employee.EmployeeService;
+import com.noveria.absencemanagement.service.annualleave.AnnualLeaveService;
 import com.noveria.absencemanagement.view.department.model.DepartmentModel;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
 import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
@@ -32,8 +32,8 @@ public class DepartmentController {
     @ManagedProperty(value = "#{administrationService}")
     AdministrationService administrationService;
 
-    @ManagedProperty(value = "#{employeeService}")
-    EmployeeService employeeService;
+    @ManagedProperty(value = "#{annualLeaveService}")
+    AnnualLeaveService annualLeaveService;
 
     @ManagedProperty(value = "#{messageHelper}")
     private MessageHelper messageHelper;
@@ -60,7 +60,7 @@ public class DepartmentController {
                 departmentView.setManager(manager);
             }
 
-            administrationService.saveDepartment(departmentView);
+            administrationService.createDepartment(departmentView);
 
             messageHelper.addInfoMessage("Department Created",
                     departmentView.getName()+" Created Successfully");
@@ -102,12 +102,12 @@ public class DepartmentController {
         this.administrationService = administrationService;
     }
 
-    public EmployeeService getEmployeeService() {
-        return employeeService;
+    public AnnualLeaveService getAnnualLeaveService() {
+        return annualLeaveService;
     }
 
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public void setAnnualLeaveService(AnnualLeaveService annualLeaveService) {
+        this.annualLeaveService = annualLeaveService;
     }
 
     public MessageHelper getMessageHelper() {

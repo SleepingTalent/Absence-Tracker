@@ -2,12 +2,9 @@ package com.noveria.absencemanagement.view.employee.model;
 
 import com.noveria.absencemanagement.model.employee.dao.BrowseEmployeePagenatedResults;
 import com.noveria.absencemanagement.service.administration.AdministrationService;
-import com.noveria.absencemanagement.service.employee.EmployeeService;
 import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;

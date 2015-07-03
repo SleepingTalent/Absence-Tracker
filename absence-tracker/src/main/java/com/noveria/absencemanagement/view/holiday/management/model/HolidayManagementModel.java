@@ -2,26 +2,19 @@ package com.noveria.absencemanagement.view.holiday.management.model;
 
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance;
-import com.noveria.absencemanagement.service.employee.EmployeeService;
+import com.noveria.absencemanagement.service.annualleave.AnnualLeaveService;
 import com.noveria.absencemanagement.view.authentication.model.UserModel;
 import com.noveria.absencemanagement.view.helper.DateHelper;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayAllowanceViewBean;
-import org.primefaces.event.ScheduleEntryMoveEvent;
-import org.primefaces.event.ScheduleEntryResizeEvent;
-import org.primefaces.event.SelectEvent;
 import org.primefaces.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -33,8 +26,8 @@ public class HolidayManagementModel implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(HolidayManagementModel.class);
 
-    @ManagedProperty(value = "#{employeeService}")
-    EmployeeService employeeService;
+    @ManagedProperty(value = "#{annualLeaveService}")
+    AnnualLeaveService annualLeaveService;
 
     @ManagedProperty(value = "#{userModel}")
     UserModel userModel;
@@ -75,7 +68,7 @@ public class HolidayManagementModel implements Serializable {
 
         Employee employee = userModel.getEmployee();
 
-        HolidayAllowance holidayAllowance = employeeService.getHolidayAllowance(employee);
+        HolidayAllowance holidayAllowance = annualLeaveService.getHolidayAllowance(employee);
 
         int totalAllowance = holidayAllowance.getTotal();
         int usedAllowance = holidayAllowance.getUsed();
@@ -101,12 +94,12 @@ public class HolidayManagementModel implements Serializable {
         return holidayAllowanceViewBean;
     }
 
-    public EmployeeService getEmployeeService() {
-        return employeeService;
+    public AnnualLeaveService getAnnualLeaveService() {
+        return annualLeaveService;
     }
 
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public void setAnnualLeaveService(AnnualLeaveService annualLeaveService) {
+        this.annualLeaveService = annualLeaveService;
     }
 
     public UserModel getUserModel() {

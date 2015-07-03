@@ -3,7 +3,7 @@ package com.noveria.absencemanagement.view.authentication.controller;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.model.user.entities.User;
-import com.noveria.absencemanagement.service.employee.EmployeeService;
+import com.noveria.absencemanagement.service.annualleave.AnnualLeaveService;
 import com.noveria.absencemanagement.view.authentication.model.UserModel;
 import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
 import com.noveria.absencemanagement.view.helper.MessageHelper;
@@ -48,8 +48,8 @@ public class AuthenticationController {
     @ManagedProperty(value = "#{userModel}")
     private UserModel userModel;
 
-    @ManagedProperty(value = "#{employeeService}")
-    EmployeeService employeeService;
+    @ManagedProperty(value = "#{annualLeaveService}")
+    AnnualLeaveService annualLeaveService;
 
     @ManagedProperty(value = "#{userDAO}")
     UserDAO userDAO;
@@ -74,7 +74,7 @@ public class AuthenticationController {
 
         try {
             User user = userDAO.findUserByUsername(getUserName());
-            Employee employee = employeeService.findEmployeeByUser(user);
+            Employee employee = annualLeaveService.findEmployeeByUser(user);
 
             userModel.setEmployee(employee);
         } catch (NoResultException nre) {
@@ -152,12 +152,12 @@ public class AuthenticationController {
         this.password = password;
     }
 
-    public EmployeeService getEmployeeService() {
-        return employeeService;
+    public AnnualLeaveService getAnnualLeaveService() {
+        return annualLeaveService;
     }
 
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public void setAnnualLeaveService(AnnualLeaveService annualLeaveService) {
+        this.annualLeaveService = annualLeaveService;
     }
 
     public UserDAO getUserDAO() {

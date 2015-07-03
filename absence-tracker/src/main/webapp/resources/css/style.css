@@ -39,6 +39,10 @@ body {
     padding-right: 2px;
 }
 
+.alignColumnTop {
+    vertical-align: top;
+}
+
 .browseTable {
     width: 600px;
     min-height: 200px;
@@ -54,7 +58,20 @@ body {
 }
 
 .holidayAllowancePanel {
-    width: 140px;
+    width: 160px;
+}
+
+.holidayRequestPanel {
+    width: 300px;
+    min-height: 500px;
+}
+
+.requestNewHolidayPanel {
+    width: 260px;
+}
+
+.requestHistoryPanel {
+    width: 260px;
 }
 
 .holidayCalendarPanel {

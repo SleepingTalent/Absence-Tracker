@@ -7,7 +7,7 @@ package com.noveria.absencemanagement.view.employee.controller;
 import com.noveria.absencemanagement.model.common.Role;
 import com.noveria.absencemanagement.model.user.dao.UserDAO;
 import com.noveria.absencemanagement.service.administration.AdministrationService;
-import com.noveria.absencemanagement.service.employee.EmployeeService;
+import com.noveria.absencemanagement.service.annualleave.AnnualLeaveService;
 import com.noveria.absencemanagement.view.authentication.view.UserViewBean;
 import com.noveria.absencemanagement.view.department.view.DepartmentViewBean;
 import com.noveria.absencemanagement.view.employee.model.EmployeeModel;
@@ -39,8 +39,8 @@ public class EmployeeController {
     @ManagedProperty(value = "#{administrationService}")
     AdministrationService administrationService;
 
-    @ManagedProperty(value = "#{employeeService}")
-    EmployeeService employeeService;
+    @ManagedProperty(value = "#{annualLeaveService}")
+    AnnualLeaveService annualLeaveService;
 
     @ManagedProperty(value = "#{userDAO}")
     UserDAO userDAO;
@@ -131,12 +131,12 @@ public class EmployeeController {
         this.administrationService = administrationService;
     }
 
-    public EmployeeService getEmployeeService() {
-        return employeeService;
+    public AnnualLeaveService getAnnualLeaveService() {
+        return annualLeaveService;
     }
 
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public void setAnnualLeaveService(AnnualLeaveService annualLeaveService) {
+        this.annualLeaveService = annualLeaveService;
     }
 
     public UserDAO getUserDAO() {

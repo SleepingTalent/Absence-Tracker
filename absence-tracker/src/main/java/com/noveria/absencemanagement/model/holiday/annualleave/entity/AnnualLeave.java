@@ -4,6 +4,7 @@ import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowances;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by lynseymcgregor on 17/06/2015.
@@ -16,13 +17,17 @@ public class AnnualLeave {
     @Column(name = "ID")
     protected Long id;
 
-    @Column(name = "TOTAL")
-    private int total;
+    @Column(name = "START")
+    private Date start;
 
-    @Column(name = "USED")
-    private int used;
+    @Column(name = "END")
+    private Date end;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @Column(name = "STATUS")
+    private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID")
     private Employee employee;
 
     public Long getId() {
@@ -33,20 +38,28 @@ public class AnnualLeave {
         this.id = id;
     }
 
-    public int getTotal() {
-        return total;
+    public Date getStart() {
+        return start;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setStart(Date total) {
+        this.start = total;
     }
 
-    public int getUsed() {
-        return used;
+    public Date getEnd() {
+        return end;
     }
 
-    public void setUsed(int used) {
-        this.used = used;
+    public void setEnd(Date used) {
+        this.end = used;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Employee getEmployee() {
@@ -55,11 +68,5 @@ public class AnnualLeave {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
-
-    public void initialise(Employee employee) {
-        setUsed(0);
-        setTotal(HolidayAllowances.DEFAULT.getTotal());
-        setEmployee(employee);
     }
 }
