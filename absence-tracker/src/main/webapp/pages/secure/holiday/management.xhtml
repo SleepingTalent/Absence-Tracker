@@ -1,59 +1,92 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 template="/pages/secure/secureTemplate.xhtml">
 
     <ui:define name="pageContent">
 
-    <h:form id="holidayManagementForm" prependId="false">
-        <h:panelGrid columns="3" columnClasses="alignColumnTop">
-            <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Holiday Balance">
+        <h:form id="holidayManagementForm" prependId="false">
+            <h:panelGrid columns="3" columnClasses="alignColumnTop">
+                <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Holiday Balance">
 
-                <h:panelGrid columns="2">
+                    <h:panelGrid columns="2">
 
-                    <p:outputLabel id="holidayTotalLbl" for="holidayTotal" value="Total:"/>
-                    <h:outputText id="holidayTotal" value="#{holidayManagementController.holidayAllowance.total}"
-                                  style="color: black"/>
+                        <p:outputLabel id="holidayTotalLbl" for="holidayTotal" value="Total:"/>
+                        <h:outputText id="holidayTotal" value="#{holidayManagementController.holidayAllowance.total}"
+                                      style="color: black"/>
 
-                    <p:separator/>
-                    <p:separator/>
+                        <p:separator/>
+                        <p:separator/>
 
-                    <p:outputLabel id="holidayUsedLbl" for="holidayUsed" value="Used:"/>
-                    <h:outputText id="holidayUsed" value="#{holidayManagementController.holidayAllowance.used}"
-                                  style="color: red"/>
+                        <p:outputLabel id="holidayUsedLbl" for="holidayUsed" value="Used:"/>
+                        <h:outputText id="holidayUsed" value="#{holidayManagementController.holidayAllowance.used}"
+                                      style="color: red"/>
 
-                    <p:separator/>
-                    <p:separator/>
+                        <p:separator/>
+                        <p:separator/>
 
-                    <p:outputLabel id="holidayRemainingLbl" for="holidayRemaining" value="Remaining:"/>
-                    <h:outputText id="holidayRemaining"
-                                  value="#{holidayManagementController.holidayAllowance.remaining}"
-                                  style="color: green"/>
-                </h:panelGrid>
+                        <p:outputLabel id="holidayRemainingLbl" for="holidayRemaining" value="Remaining:"/>
+                        <h:outputText id="holidayRemaining"
+                                      value="#{holidayManagementController.holidayAllowance.remaining}"
+                                      style="color: green"/>
+                    </h:panelGrid>
 
-            </p:panel>
+                </p:panel>
 
-            <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Holiday Calendar">
-                <p:schedule value="#{holidayManagementController.scheduleLazyModel}"/>
-            </p:panel>
+                <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Holiday Calendar">
+                    <p:schedule value="#{holidayManagementController.scheduleLazyModel}"/>
+                </p:panel>
 
-            <p:panel id="holidayRequestPanel" styleClass="holidayRequestPanel" header="Holiday Requests">
+                <p:panel id="holidayRequestPanel" styleClass="holidayRequestPanel" header="Holiday Requests">
 
-                <h:panelGrid columns="1">
 
-                    <p:panel id="requestPanel" styleClass="requestNewHolidayPanel" header="Request New Holiday">
+                    <h:panelGrid columns="1">
 
-                    </p:panel>
 
-                    <p:panel id="historyPanel" styleClass="requestHistoryPanel" header="Request History">
+                        <p:panel id="requestPanel" styleClass="requestNewHolidayPanel" header="Request New Holiday">
 
-                    </p:panel>
-                </h:panelGrid>
+                            <h:form id="requestHolidayForm">
 
-            </p:panel>
-        </h:panelGrid>
-    </h:form>
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel for="holidayStart" value="Start:"/>
+                                    <p:calendar id="holidayStart" value="#{holidayManagementController.holidayManagementModel.holidayRequest.start}" pattern="dd-MM-yyyy"/>
+                                    <p:outputLabel for="holidayEnd" value="End:"/>
+                                    <p:calendar id="holidayEnd" value="#{holidayManagementController.holidayManagementModel.holidayRequest.end}" pattern="dd-MM-yyyy"/>
+
+                                    <f:facet name="footer">
+                                        <h:commandButton id="requestHolidyBtn" value="Request Holiday"
+                                                         actionListener="#{holidayManagementController.requestHoliday}">
+                                            <f:ajax execute="@form" render=":messages"/>
+                                        </h:commandButton>
+                                    </f:facet>
+                                </h:panelGrid>
+
+                            </h:form>
+
+                        </p:panel>
+
+                        <p:panel id="historyPanel" styleClass="requestHistoryPanel" header="Request History">
+
+                            <p:dataTable id="requestHistoryTable" var="holidayRequestRow" value="#{holidayManagementController.requestHistory}" scrollable="true" scrollHeight="250">
+                                <p:column headerText="Start">
+                                    <h:outputText value="#{holidayRequestRow.startDateStr}" />
+                                </p:column>
+                                <p:column headerText="End">
+                                    <h:outputText value="#{holidayRequestRow.endDateStr}" />
+                                </p:column>
+                                <p:column headerText="Status">
+                                    <h:outputText value="#{holidayRequestRow.status}" />
+                                </p:column>
+                            </p:dataTable>
+
+                        </p:panel>
+                    </h:panelGrid>
+
+                </p:panel>
+            </h:panelGrid>
+        </h:form>
 
     </ui:define>
 </ui:composition>

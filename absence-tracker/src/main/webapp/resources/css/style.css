@@ -62,16 +62,17 @@ body {
 }
 
 .holidayRequestPanel {
-    width: 300px;
+    width: 350px;
     min-height: 500px;
 }
 
 .requestNewHolidayPanel {
-    width: 260px;
+    width: 315px;
 }
 
 .requestHistoryPanel {
-    width: 260px;
+    width: 315px;
+    min-height: 250px;
 }
 
 .holidayCalendarPanel {

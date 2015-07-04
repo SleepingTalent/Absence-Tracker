@@ -5,7 +5,9 @@ import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAll
 import com.noveria.absencemanagement.service.annualleave.AnnualLeaveService;
 import com.noveria.absencemanagement.view.authentication.model.UserModel;
 import com.noveria.absencemanagement.view.helper.DateHelper;
+import com.noveria.absencemanagement.view.helper.MessageHelper;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayAllowanceViewBean;
+import com.noveria.absencemanagement.view.holiday.management.view.HolidayRequestViewingBean;
 import org.primefaces.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by lynseymcgregor on 21/06/2015.
@@ -32,13 +37,18 @@ public class HolidayManagementModel implements Serializable {
     @ManagedProperty(value = "#{userModel}")
     UserModel userModel;
 
+    @ManagedProperty(value = "#{messageHelper}")
+    private MessageHelper messageHelper;
+
     HolidayAllowanceViewBean holidayAllowanceViewBean;
 
     private ScheduleModel lazyEventModel;
+    private HolidayRequestViewingBean holidayRequest;
 
     @PostConstruct
     public void init() {
         lazyEventModel = buildDataModel();
+        holidayRequest = new HolidayRequestViewingBean();
     }
 
     public void clearDataModel() {
@@ -108,5 +118,65 @@ public class HolidayManagementModel implements Serializable {
 
     public void setUserModel(UserModel userModel) {
         this.userModel = userModel;
+    }
+
+    public void requestHoliday() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        System.err.println("Start Date : "+format.format(getHolidayRequest().getStart()));
+        System.err.println("End Date : "+format.format(getHolidayRequest().getEnd()));
+        //annualLeaveService.createAnnualLeave(getHolidayRequest());
+
+        messageHelper.addInfoMessage("Holiday Requested",
+                "From : "+format.format(getHolidayRequest().getStart()) + " " +
+                "To : "+format.format(getHolidayRequest().getEnd()));
+
+        getHolidayRequest().setStart(null);
+        getHolidayRequest().setEnd(null);
+    }
+
+    public HolidayRequestViewingBean getHolidayRequest() {
+        return holidayRequest;
+    }
+
+    public void setHolidayRequest(HolidayRequestViewingBean holidayRequest) {
+        this.holidayRequest = holidayRequest;
+    }
+
+    public MessageHelper getMessageHelper() {
+        return messageHelper;
+    }
+
+    public void setMessageHelper(MessageHelper messageHelper) {
+        this.messageHelper = messageHelper;
+    }
+
+    public List<HolidayRequestViewingBean> getRequestHistory() {
+        List<HolidayRequestViewingBean> requestHistory = new ArrayList<HolidayRequestViewingBean>();
+
+        HolidayRequestViewingBean authoriseHoliday = new HolidayRequestViewingBean();
+        authoriseHoliday.setStart(new Date());
+        authoriseHoliday.setEnd(new Date());
+        authoriseHoliday.setStatus("Authorised");
+
+        HolidayRequestViewingBean awaitingAuthorisationHoliday = new HolidayRequestViewingBean();
+        awaitingAuthorisationHoliday.setStart(new Date());
+        awaitingAuthorisationHoliday.setEnd(new Date());
+        awaitingAuthorisationHoliday.setStatus("Awaiting Authorisation");
+
+        requestHistory.add(authoriseHoliday);
+        requestHistory.add(awaitingAuthorisationHoliday);
+
+
+        for(int i = 0; i< 15; i++) {
+            HolidayRequestViewingBean authoriseHolidayToo = new HolidayRequestViewingBean();
+            authoriseHolidayToo.setStart(new Date());
+            authoriseHolidayToo.setEnd(new Date());
+            authoriseHolidayToo.setStatus("Authorised");
+
+            requestHistory.add(authoriseHolidayToo);
+        }
+
+        return requestHistory;
     }
 }
