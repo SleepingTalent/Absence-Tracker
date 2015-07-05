@@ -42,16 +42,16 @@ public class AnnualLeave {
         return start;
     }
 
-    public void setStart(Date total) {
-        this.start = total;
+    public void setStart(Date start) {
+        this.start = start;
     }
 
     public Date getEnd() {
         return end;
     }
 
-    public void setEnd(Date used) {
-        this.end = used;
+    public void setEnd(Date end) {
+        this.end = end;
     }
 
     public String getStatus() {

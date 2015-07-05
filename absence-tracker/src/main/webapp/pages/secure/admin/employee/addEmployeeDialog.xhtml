@@ -39,15 +39,14 @@
                              value="#{employeeController.user.password}"
                              requiredMessage="Password is required"/>
 
-                <p:outputLabel id="roleslbl" for="managerrole" value="Role:" />
+                <p:outputLabel id="roleslbl" for="managerrole" value="Manager:" />
                 <h:selectBooleanCheckbox id="managerrole" value="#{employeeController.managerrole}" />
 
                 <f:facet name="footer">
-                    <h:commandButton id="addEmployeeBtn" value="Create Employee"
+                    <p:commandButton id="addEmployeeBtn" value="Create Employee"
                                      actionListener="#{employeeController.saveEmployee}"
-                                     action="#{navigationController.hideAddEmployeeDialog}">
-                        <f:ajax execute="@form" render=":messages" />
-                    </h:commandButton>
+                                     action="#{navigationController.hideAddEmployeeDialog}"
+                            update=":messages"/>
                 </f:facet>
 
             </p:panelGrid>

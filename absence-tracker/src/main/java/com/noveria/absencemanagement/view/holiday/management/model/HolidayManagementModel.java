@@ -123,9 +123,11 @@ public class HolidayManagementModel implements Serializable {
     public void requestHoliday() {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-        System.err.println("Start Date : "+format.format(getHolidayRequest().getStart()));
-        System.err.println("End Date : "+format.format(getHolidayRequest().getEnd()));
-        //annualLeaveService.createAnnualLeave(getHolidayRequest());
+        logger.debug("Requesting Holiday Start Date : " + format.format(getHolidayRequest().getStart()));
+        logger.debug("REquesting Holiday End Date : " + format.format(getHolidayRequest().getEnd()));
+
+        annualLeaveService.createAnnualLeave(getHolidayRequest().getStart(),
+                getHolidayRequest().getEnd(), userModel.getEmployee());
 
         messageHelper.addInfoMessage("Holiday Requested",
                 "From : "+format.format(getHolidayRequest().getStart()) + " " +
@@ -152,31 +154,6 @@ public class HolidayManagementModel implements Serializable {
     }
 
     public List<HolidayRequestViewingBean> getRequestHistory() {
-        List<HolidayRequestViewingBean> requestHistory = new ArrayList<HolidayRequestViewingBean>();
-
-        HolidayRequestViewingBean authoriseHoliday = new HolidayRequestViewingBean();
-        authoriseHoliday.setStart(new Date());
-        authoriseHoliday.setEnd(new Date());
-        authoriseHoliday.setStatus("Authorised");
-
-        HolidayRequestViewingBean awaitingAuthorisationHoliday = new HolidayRequestViewingBean();
-        awaitingAuthorisationHoliday.setStart(new Date());
-        awaitingAuthorisationHoliday.setEnd(new Date());
-        awaitingAuthorisationHoliday.setStatus("Awaiting Authorisation");
-
-        requestHistory.add(authoriseHoliday);
-        requestHistory.add(awaitingAuthorisationHoliday);
-
-
-        for(int i = 0; i< 15; i++) {
-            HolidayRequestViewingBean authoriseHolidayToo = new HolidayRequestViewingBean();
-            authoriseHolidayToo.setStart(new Date());
-            authoriseHolidayToo.setEnd(new Date());
-            authoriseHolidayToo.setStatus("Authorised");
-
-            requestHistory.add(authoriseHolidayToo);
-        }
-
-        return requestHistory;
+        return annualLeaveService.getHolidayRequests(userModel.getEmployee());
     }
 }

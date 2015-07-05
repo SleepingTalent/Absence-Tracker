@@ -19,11 +19,10 @@
                 </p:selectOneMenu>
 
                 <f:facet name="footer">
-                    <h:commandButton id="addDepartmentBtn" value="Create Department"
+                    <p:commandButton id="addDepartmentBtn" value="Create Department"
                                      actionListener="#{departmentController.saveDepartment}"
-                                     action="#{navigationController.hideAddDepartmentDialog}">
-                        <f:ajax execute="@form" render=":messages" />
-                    </h:commandButton>
+                                     action="#{navigationController.hideAddDepartmentDialog}"
+                            update=":messages"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>

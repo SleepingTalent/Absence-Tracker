@@ -56,10 +56,9 @@
                                     <p:calendar id="holidayEnd" value="#{holidayManagementController.holidayManagementModel.holidayRequest.end}" pattern="dd-MM-yyyy"/>
 
                                     <f:facet name="footer">
-                                        <h:commandButton id="requestHolidyBtn" value="Request Holiday"
-                                                         actionListener="#{holidayManagementController.requestHoliday}">
-                                            <f:ajax execute="@form" render=":messages"/>
-                                        </h:commandButton>
+                                        <p:commandButton id="requestHolidyBtn" value="Request Holiday"
+                                                         actionListener="#{holidayManagementController.requestHoliday}"
+                                                update=":messages,:#{p:component('holidayManagementForm')}"/>
                                     </f:facet>
                                 </h:panelGrid>
 

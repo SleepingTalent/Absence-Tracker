@@ -10,6 +10,7 @@ import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeav
 import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeaveStatus;
 import com.noveria.absencemanagement.model.user.entities.User;
 
+import com.noveria.absencemanagement.view.holiday.management.view.HolidayRequestViewingBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,8 +36,11 @@ public class AnnualLeaveService {
     AnnualLeaveDAO annualLeaveDAO;
 
     @Transactional
-    public void createAnnualLeave() {
+    public void createAnnualLeave(Date start, Date end, Employee employee) {
         AnnualLeave annualLeave = new AnnualLeave();
+        annualLeave.setStart(start);
+        annualLeave.setEnd(end);
+        annualLeave.setEmployee(employee);
         annualLeave.setStatus(AnnualLeaveStatus.AWAITING_AUTHORISATION.name());
 
         annualLeaveDAO.create(annualLeave);
@@ -81,5 +86,22 @@ public class AnnualLeaveService {
 
     public Employee findEmployeeByUser(User user) {
         return employeeDAO.findEmployeesbyUser(user);
+    }
+
+    public List<HolidayRequestViewingBean> getHolidayRequests(Employee employee) {
+        List<HolidayRequestViewingBean> requestHistory = new ArrayList<HolidayRequestViewingBean>();
+
+        List<AnnualLeave> annualLeaveList = annualLeaveDAO.findAnnualLeaveByEmployee(employee);
+
+        for(AnnualLeave annualLeave : annualLeaveList) {
+            HolidayRequestViewingBean holidayRequestViewingBean = new HolidayRequestViewingBean();
+            holidayRequestViewingBean.setStart(annualLeave.getStart());
+            holidayRequestViewingBean.setEnd(annualLeave.getEnd());
+            holidayRequestViewingBean.setStatus(annualLeave.getStatus());
+
+            requestHistory.add(holidayRequestViewingBean);
+        }
+
+        return requestHistory;
     }
 }
