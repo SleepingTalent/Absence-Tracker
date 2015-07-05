@@ -19,9 +19,9 @@
         <p:panel id="dashboardPanel" styleClass="mainPanel" header="Absence Tracker">
 
             <f:facet name="header">
-                <p:outputLabel id="mainLbl" value="Absence Tracker" style="float :left"/>
+                <h:graphicImage library="images" name="ats_banner.png"/>
                 <h:form id="featuresForm" prependId="false">
-                    <p:menuButton id="featuresMenu" value="#{authController.employeeDetails.fullname}" style="float :right">
+                    <p:menuButton id="featuresMenu" value="#{authController.employeeDetails.fullname}" styleClass="featuresMenu">
                         <sec:authorize ifAllGranted="EMPLOYEE">
                             <p:menuitem id="myAnnualLeave" value="myAnnualLeave" action="#{navigationController.showHolidayManagementFeatures}" icon="ui-icon-calendar"/>
                             <p:menuitem id="myAbsence" value="myAbsence" action="#{navigationController.showHolidayManagementFeatures}" icon="ui-icon-mail-closed"/>

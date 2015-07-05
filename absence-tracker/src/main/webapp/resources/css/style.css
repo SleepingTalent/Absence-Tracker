@@ -22,6 +22,18 @@ body {
     background: #0e2c54;
 }
 
+.mainPanel > .ui-panel-titlebar {
+    background: #ffffff;
+    max-height: 90px;
+    padding: 0;
+}
+
+.featuresMenu {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
 .loginPanel {
     width: 270px;
     height: 135px;
