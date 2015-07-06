@@ -10,18 +10,18 @@
             <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
 
                 <p:outputLabel id="empFirstNamelbl" for="firstName" value="Firstname:"/>
-                <p:inputText label="firstName" id="firstName" required="true"
+                <p:inputText label="firstName" id="firstName" styleClass="empTextField" required="true"
                              value="#{employeeController.employee.firstname}"
                              requiredMessage="Firstname is required"/>
 
                 <p:outputLabel id="empLastNamelbl" for="lastName" value="Lastname:"/>
-                <p:inputText label="LastName" id="lastName" required="true"
+                <p:inputText label="LastName" id="lastName" styleClass="empTextField" required="true"
                              value="#{employeeController.employee.lastname}"
                              requiredMessage="Lastname is required"/>
 
                 <p:outputLabel id="departmentlbl" for="department" value="Department:" />
                 <p:selectOneMenu id="department" value="#{employeeController.departmentId}"
-                                 required="true" requiredMessage="Please Select Department">
+                                 styleClass="empDropDownField" required="true" requiredMessage="Please Select Department">
                     <f:selectItem itemLabel="Select Department" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{employeeController.departments}" />
                 </p:selectOneMenu>
@@ -30,26 +30,25 @@
                 <p:separator />
 
                 <p:outputLabel id="userNamelbl" for="username" value="Username:"/>
-                <p:inputText label="username" id="username" required="true"
+                <p:inputText label="username" id="username" styleClass="empTextField" required="true"
                              value="#{employeeController.user.username}"
                              requiredMessage="Username is required"/>
 
                 <p:outputLabel id="passwordlbl" for="password" value="Password:"/>
-                <p:inputText label="password" id="password" required="true"
+                <p:password label="password" id="password" styleClass="empTextField" required="true"
                              value="#{employeeController.user.password}"
                              requiredMessage="Password is required"/>
 
                 <p:outputLabel id="roleslbl" for="managerrole" value="Manager:" />
                 <h:selectBooleanCheckbox id="managerrole" value="#{employeeController.managerrole}" />
 
-                <f:facet name="footer">
-                    <p:commandButton id="addEmployeeBtn" value="Create Employee"
-                                     actionListener="#{employeeController.saveEmployee}"
-                                     action="#{navigationController.hideAddEmployeeDialog}"
-                            update=":messages"/>
-                </f:facet>
-
             </p:panelGrid>
+
+            <p:separator />
+            <p:commandButton id="addEmployeeBtn" styleClass="floatRight" value="Create Employee"
+                             actionListener="#{employeeController.saveEmployee}"
+                             action="#{navigationController.hideAddEmployeeDialog}"
+                             update=":messages"/>
 
         </h:form>
     </p:dialog>

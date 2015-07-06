@@ -33,13 +33,17 @@
                                       style="color: green"/>
                     </h:panelGrid>
 
+                    <p:separator/>
+
+                    <p:chart type="pie" model="#{holidayManagementController.holidayAllowance.pieModel}" styleClass="holidayAllowancePie"/>
+
                 </p:panel>
 
                 <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Holiday Calendar">
                     <p:schedule value="#{holidayManagementController.scheduleLazyModel}"/>
                 </p:panel>
 
-                <p:panel id="holidayRequestPanel" styleClass="holidayRequestPanel" header="Holiday Requests">
+                <p:panel id="holidayRequestPanel" styleClass="holidayRequestPanel">
 
 
                     <h:panelGrid columns="1">
@@ -51,24 +55,27 @@
 
                                 <h:panelGrid columns="2">
                                     <p:outputLabel for="holidayStart" value="Start:"/>
-                                    <p:calendar id="holidayStart" value="#{holidayManagementController.holidayManagementModel.holidayRequest.start}" pattern="dd-MM-yyyy"/>
+                                    <p:calendar id="holidayStart" styleClass="calTextField" value="#{holidayManagementController.holidayManagementModel.holidayRequest.start}" pattern="dd-MM-yyyy"/>
                                     <p:outputLabel for="holidayEnd" value="End:"/>
-                                    <p:calendar id="holidayEnd" value="#{holidayManagementController.holidayManagementModel.holidayRequest.end}" pattern="dd-MM-yyyy"/>
+                                    <p:calendar id="holidayEnd" styleClass="calTextField" value="#{holidayManagementController.holidayManagementModel.holidayRequest.end}" pattern="dd-MM-yyyy"/>
 
-                                    <f:facet name="footer">
-                                        <p:commandButton id="requestHolidyBtn" value="Request Holiday"
-                                                         actionListener="#{holidayManagementController.requestHoliday}"
-                                                update=":messages,:#{p:component('holidayManagementForm')}"/>
-                                    </f:facet>
                                 </h:panelGrid>
 
+                                <p:separator />
+                                <p:commandButton id="requestHolidyBtn" value="Request Holiday" styleClass="alignRight"
+                                                 actionListener="#{holidayManagementController.requestHoliday}"
+                                                 update=":messages,:#{p:component('holidayManagementForm')}"/>
                             </h:form>
 
                         </p:panel>
 
-                        <p:panel id="historyPanel" styleClass="requestHistoryPanel" header="Request History">
+                        <p:panel id="historyPanel" styleClass="requestHistoryPanel">
 
                             <p:dataTable id="requestHistoryTable" var="holidayRequestRow" value="#{holidayManagementController.requestHistory}" scrollable="true" scrollHeight="250">
+                                <f:facet name="header">
+                                    Request History
+                                </f:facet>
+
                                 <p:column headerText="Start">
                                     <h:outputText value="#{holidayRequestRow.startDateStr}" />
                                 </p:column>

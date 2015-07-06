@@ -1,5 +1,7 @@
 package com.noveria.absencemanagement.view.holiday.management.view;
 
+import org.primefaces.model.chart.PieChartModel;
+
 /**
  * Created by lynseymcgregor on 21/06/2015.
  */
@@ -33,5 +35,20 @@ public class HolidayAllowanceViewBean {
 
     public void setRemaining(int remaining) {
         this.remaining = remaining;
+    }
+
+    public PieChartModel getPieModel() {
+        PieChartModel holidayPieModel1 = new PieChartModel();
+
+        holidayPieModel1.set("Used", used);
+        holidayPieModel1.set("Remaining", remaining);
+
+        holidayPieModel1.setLegendPosition("n");
+
+        //holidayPieModel1.setShowDataLabels(true);
+        holidayPieModel1.setDiameter(200);
+        holidayPieModel1.setSeriesColors("a7c2ee,1d5198");
+
+        return holidayPieModel1;
     }
 }

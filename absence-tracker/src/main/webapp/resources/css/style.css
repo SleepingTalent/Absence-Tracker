@@ -1,6 +1,6 @@
 body {
     font-size: 75% !important;
-    background: #0e2c54;
+    background: #ffffff;
 }
 
 .ui-widget,.ui-widget-header,.ui-widget-content,.ui-widget-header .ui-widget-header,.ui-widget-content .ui-widget-content,.ui-widget input,.ui-widget select,.ui-widget textarea,.ui-widget button
@@ -19,11 +19,11 @@ body {
 
 .mainPanel {
     border: none;
-    background: #0e2c54;
+    background: #ffffff;
 }
 
 .mainPanel > .ui-panel-titlebar {
-    background: #ffffff;
+    background: #0e2c54;
     max-height: 90px;
     padding: 0;
 }
@@ -31,12 +31,17 @@ body {
 .featuresMenu {
     position: absolute;
     right: 20px;
-    top: 20px;
+    top: 46px;
+}
+
+.adminMenu {
+    background: #0e2c54;
+    color: #ffffff;
 }
 
 .loginPanel {
     width: 270px;
-    height: 135px;
+    height: 150px;
     position: absolute;
     top:0;
     bottom: 0;
@@ -70,25 +75,80 @@ body {
 }
 
 .holidayAllowancePanel {
-    width: 160px;
+    width: 240px;
+}
+
+.holidayAllowancePie {
+    width: 220px;
+    height: 220px;
+}
+
+.jqplot-series-canvas {
+    background:#ffffff;
 }
 
 .holidayRequestPanel {
     width: 350px;
     min-height: 500px;
+    border: none !important;
 }
 
 .requestNewHolidayPanel {
-    width: 315px;
+    width: 220px;
 }
 
 .requestHistoryPanel {
     width: 315px;
     min-height: 250px;
+    border: none !important;
 }
 
 .holidayCalendarPanel {
     width: 600px;
+}
+
+.calTextField {
+
+}
+
+.calTextField input{
+    background: #ffffff !important;
+    color: #0e2c54 !important;
+}
+
+.loginTextField {
+    background: #ffffff !important;
+    color: #0e2c54 !important;
+}
+
+.empTextField {
+    background: #ffffff !important;
+    color: #0e2c54 !important;
+    float: right;
+    width: 170px;
+}
+
+.deptTextField {
+    background: #ffffff !important;
+    color: #0e2c54 !important;
+    float: right;
+    width: 170px;
+}
+
+.empDropDownField {
+    background: #ffffff !important;
+    color: #0e2c54 !important;
+}
+
+.deptDropDownField {
+    background: #ffffff !important;
+    color: #0e2c54 !important;
+    width: 178px !important;
+}
+
+.calendarField {
+    background: #ffffff !important;
+    color: #0e2c54 !important;
 }
 
 .holidayAwaitingAuth {
@@ -101,4 +161,8 @@ body {
 
 .holidayDeclined {
     background: red;
+}
+
+.floatRight {
+    float: right;
 }

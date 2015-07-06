@@ -4,44 +4,52 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+        >
 <h:head>
     <title>Absence Tracker</title>
 </h:head>
 <h:body>
     <h:outputStylesheet library="css" name="style.css"/>
-        <h:form  id="loginForm" prependId="false">
 
-            <p:growl id="messages" showDetail="true"/>
+    <p:growl id="messages" showDetail="true"/>
 
-            <p:panel id="mainPanel" styleClass="mainPanel" header="This is the login panel">
+    <p:panel id="mainPanel" styleClass="mainPanel" header="This is the login panel">
 
+        <f:facet name="header">
+            <h:graphicImage library="images" name="ats_banner2.png"/>
+        </f:facet>
 
-                <f:facet name="header">
-                    <h:graphicImage library="images" name="ats_banner.png"/>
-                </f:facet>
+        <p:panel id="loginPanel" styleClass="loginPanel" header="Login">
 
-            <p:panel id="loginPanel" styleClass="loginPanel" header="Login">
+            <h:form id="loginForm" prependId="false">
+
                 <p:panelGrid styleClass="borderLessPanelGrid" columns="2" columnClasses="alignTop">
-                    <p:column>
+                <p:column>
                         <h:outputText id="userNameLbl" value="Username: "/>
                     </p:column>
                     <p:column>
-                        <h:inputText id="userName" required="true" value="#{authController.userName}" requiredMessage="Please enter username"/>
+                        <p:inputText id="userName" styleClass="loginTextField" required="true"
+                                     value="#{authController.userName}" requiredMessage="Please enter username"/>
                     </p:column>
                     <p:column>
                         <h:outputText id="psswordLbl" value="Password: "/>
                     </p:column>
                     <p:column>
-                        <h:inputSecret id="password"  required="true" value="#{authController.password}" requiredMessage="Please enter password" />
-                    </p:column>
-                    <p:column>
-                        <h:commandButton id="loginBtn" value="Login" action="#{authController.login}" update="messages"/>
+                        <p:password id="password" styleClass="loginTextField" required="true"
+                                    value="#{authController.password}" requiredMessage="Please enter password"/>
                     </p:column>
                 </p:panelGrid>
-            </p:panel>
 
-            </p:panel>
-        </h:form>
+                <p:separator />
+                <p:commandButton id="loginBtn" styleClass="floatRight"
+                                 value="Login" action="#{authController.login}"
+                                 update=":messages"/>
+
+            </h:form>
+
+        </p:panel>
+
+    </p:panel>
+
 </h:body>
 </html>

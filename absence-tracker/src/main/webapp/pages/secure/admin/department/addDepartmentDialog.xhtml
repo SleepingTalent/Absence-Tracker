@@ -8,23 +8,23 @@
         <h:form id="addDepartment">
             <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
                 <p:outputLabel id="deptNamelbl" for="deptName" value="Department Name:"/>
-                <p:inputText label="firstName" id="deptName" required="true"
+                <p:inputText label="firstName" id="deptName" styleClass="deptTextField" required="true"
                              value="#{departmentController.department.name}"
                              requiredMessage="Department Name is required"/>
 
                 <p:outputLabel id="managerlbl" for="deptManager" value="Manager" />
-                <p:selectOneMenu id="deptManager" value="#{departmentController.managerId}">
+                <p:selectOneMenu id="deptManager" styleClass="deptDropDownField" value="#{departmentController.managerId}">
                     <f:selectItem itemLabel="Select Manager" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{departmentController.managers}" />
                 </p:selectOneMenu>
-
-                <f:facet name="footer">
-                    <p:commandButton id="addDepartmentBtn" value="Create Department"
-                                     actionListener="#{departmentController.saveDepartment}"
-                                     action="#{navigationController.hideAddDepartmentDialog}"
-                            update=":messages"/>
-                </f:facet>
             </p:panelGrid>
+
+            <p:separator />
+            <p:commandButton id="addDepartmentBtn" styleClass="floatRight" value="Create Department"
+                             actionListener="#{departmentController.saveDepartment}"
+                             action="#{navigationController.hideAddDepartmentDialog}"
+                             update=":messages"/>
+
         </h:form>
     </p:dialog>
 </ui:composition>
