@@ -36,4 +36,5 @@ public class Page {
         WebElement element = getPageHelper().findElementById(MESSAGES_CONTAINER);
         assertEquals(title + "\n" + details, element.getText());
     }
+
 }

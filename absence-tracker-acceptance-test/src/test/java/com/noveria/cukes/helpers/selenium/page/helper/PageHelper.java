@@ -35,12 +35,20 @@ public class PageHelper {
         return elementHelper.findElementsByClass(className, false);
     }
 
-    public WebElement findTableRowWithText(String text, boolean reThrow) {
-        return elementHelper.findTableRowWithText(text, reThrow);
+    public WebElement findTableDataWithText(String text) {
+            return elementHelper.findTableDataWithText(text, false);
+    }
+
+    public WebElement findTableDataWithText(String text, boolean reThrow) {
+        return elementHelper.findTableDataWithText(text, reThrow);
     }
 
     public WebElement findByLinkWithinDivById(String id, boolean reThrow) {
         return elementHelper.findByLinkWithinDivById(id, reThrow);
+    }
+
+    public WebElement findTableRowWithText(String text, boolean reThrow) {
+        return elementHelper.findTableRowWithText(text, reThrow);
     }
 
     public WebElement findTableRowWithText(String text) {
@@ -82,4 +90,5 @@ public class PageHelper {
     public WebElement findElementByClassAndText(String cssClass, String text) {
         return elementHelper.findElementByClassAndText(cssClass,text,false);
     }
+
 }

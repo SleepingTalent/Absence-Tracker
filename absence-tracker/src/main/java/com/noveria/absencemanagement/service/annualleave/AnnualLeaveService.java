@@ -97,7 +97,10 @@ public class AnnualLeaveService {
             HolidayRequestViewingBean holidayRequestViewingBean = new HolidayRequestViewingBean();
             holidayRequestViewingBean.setStart(annualLeave.getStart());
             holidayRequestViewingBean.setEnd(annualLeave.getEnd());
-            holidayRequestViewingBean.setStatus(annualLeave.getStatus());
+
+            AnnualLeaveStatus annualLeaveStatus = AnnualLeaveStatus.findByName(annualLeave.getStatus());
+
+            holidayRequestViewingBean.setStatus(annualLeaveStatus.getDisplayName());
 
             requestHistory.add(holidayRequestViewingBean);
         }

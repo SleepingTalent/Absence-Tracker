@@ -10,5 +10,11 @@ Feature: Employee Features
     When the "Employee" logs in
     And they select "myAnnualLeave" feature
     Then the holiday balance is set
-    When the Employee logs out
-    Then they are redirected to the login page
+
+  @wip
+  Scenario: An Employee can request a Holiday
+    Given a valid "Employee" user
+    When the user logs in
+    And they select "myAnnualLeave" feature
+    And they request a holiday from "today" to "tomorrow"
+    Then a holiday request is created

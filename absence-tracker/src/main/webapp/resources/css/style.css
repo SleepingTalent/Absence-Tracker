@@ -40,7 +40,7 @@ body {
 }
 
 .loginPanel {
-    width: 270px;
+    width: 272px;
     height: 150px;
     position: absolute;
     top:0;
@@ -100,7 +100,6 @@ body {
 .requestHistoryPanel {
     width: 315px;
     min-height: 250px;
-    border: none !important;
 }
 
 .holidayCalendarPanel {

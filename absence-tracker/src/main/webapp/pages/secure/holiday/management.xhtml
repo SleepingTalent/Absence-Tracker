@@ -69,13 +69,9 @@
 
                         </p:panel>
 
-                        <p:panel id="historyPanel" styleClass="requestHistoryPanel">
+                        <p:panel id="historyPanel" styleClass="requestHistoryPanel" header="Request History">
 
                             <p:dataTable id="requestHistoryTable" var="holidayRequestRow" value="#{holidayManagementController.requestHistory}" scrollable="true" scrollHeight="250">
-                                <f:facet name="header">
-                                    Request History
-                                </f:facet>
-
                                 <p:column headerText="Start">
                                     <h:outputText value="#{holidayRequestRow.startDateStr}" />
                                 </p:column>
