@@ -60,6 +60,10 @@ body {
     vertical-align: top;
 }
 
+.borderLess {
+    border: none !important;
+}
+
 .browseTable {
     width: 600px;
     min-height: 200px;

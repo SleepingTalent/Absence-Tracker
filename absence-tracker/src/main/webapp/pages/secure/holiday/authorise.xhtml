@@ -34,14 +34,14 @@
                         </p:column>
 
                         <p:column headerText="Action">
-                        <h:panelGrid columns="2" columnClasses="borderLessPanelGrid">
-                            <p:commandButton id="approveHolidyBtn" value="Auth"
+                        <h:panelGrid columns="2" columnClasses="borderLess,borderLess">
+                            <p:commandButton id="approveHolidyBtn" icon="ui-icon-check"
                                              action="#{holidayAuthoriseController.approveHoliday}"
                                              update=":messages,:#{p:component('holidayAuthoriseForm')}">
                              <f:setPropertyActionListener value="#{holidayRequestRow}" target="#{holidayAuthoriseController.selectedRequest}" />
                             </p:commandButton>
 
-                            <p:commandButton id="declineHolidyBtn" value="Dec"
+                            <p:commandButton id="declineHolidyBtn" icon="ui-icon-closethick"
                                              action="#{holidayAuthoriseController.declineHoliday}"
                                              update=":messages,:#{p:component('holidayAuthoriseForm')}">
                             <f:setPropertyActionListener value="#{holidayRequestRow}" target="#{holidayAuthoriseController.selectedRequest}" />
