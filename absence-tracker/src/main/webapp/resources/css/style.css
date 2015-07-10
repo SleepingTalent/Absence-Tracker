@@ -171,6 +171,26 @@ body {
     background: red;
 }
 
+.holidayTotal {
+    width:5px;
+}
+
+.holidayUsed {
+    width:5px;
+}
+
+td .holidayUsed{
+    color:red
+}
+
+.holidayRemaining {
+    width:10px;
+}
+
+td .holidayRemaining{
+    color:green
+}
+
 .floatRight {
     float: right;
 }

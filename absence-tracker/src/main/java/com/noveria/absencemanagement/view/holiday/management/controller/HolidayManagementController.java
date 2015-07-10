@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,12 @@ public class HolidayManagementController {
 
     @ManagedProperty(value = "#{holidayManagementModel}")
     HolidayManagementModel holidayManagementModel;
+
+    public List<HolidayAllowanceViewBean> getHolidayAllowanceList() {
+        List<HolidayAllowanceViewBean> holidayAllowanceViewBeanList = new ArrayList<HolidayAllowanceViewBean>();
+        holidayAllowanceViewBeanList.add(holidayManagementModel.getHolidayAllowance());
+        return holidayAllowanceViewBeanList;
+    }
 
     public HolidayAllowanceViewBean getHolidayAllowance() {
         return holidayManagementModel.getHolidayAllowance();
