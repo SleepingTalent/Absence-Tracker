@@ -84,6 +84,33 @@ public class AnnualLeaveService {
         return employeeAnnualLeaveList;
     }
 
+
+    public List<HolidayRequestViewingBean> getPendingHolidayRequestsForManager(Employee manager) {
+        List<HolidayRequestViewingBean> pendingRequests = new ArrayList<HolidayRequestViewingBean>();
+
+        List<EmployeeAnnualLeave> employeeAnnualLeaveList = annualLeaveDAO.findAnnualLeaveToAuthoriseByManager(manager);
+
+        for(EmployeeAnnualLeave employeeAnnualLeave : employeeAnnualLeaveList) {
+
+            for(AnnualLeave annualLeave : employeeAnnualLeave.getAnnualLeaveList()) {
+                HolidayRequestViewingBean holidayRequestViewingBean = new HolidayRequestViewingBean();
+                holidayRequestViewingBean.setId(annualLeave.getId());
+                holidayRequestViewingBean.setFirstName(employeeAnnualLeave.getEmployee().getFirstName());
+                holidayRequestViewingBean.setLastName(employeeAnnualLeave.getEmployee().getLastName());
+                holidayRequestViewingBean.setStart(annualLeave.getStart());
+                holidayRequestViewingBean.setEnd(annualLeave.getEnd());
+
+                AnnualLeaveStatus annualLeaveStatus = AnnualLeaveStatus.findByName(annualLeave.getStatus());
+
+                holidayRequestViewingBean.setStatus(annualLeaveStatus.getDisplayName());
+
+                pendingRequests.add(holidayRequestViewingBean);
+            }
+        }
+
+        return pendingRequests;
+    }
+
     public Employee findEmployeeByUser(User user) {
         return employeeDAO.findEmployeesbyUser(user);
     }
@@ -95,6 +122,7 @@ public class AnnualLeaveService {
 
         for(AnnualLeave annualLeave : annualLeaveList) {
             HolidayRequestViewingBean holidayRequestViewingBean = new HolidayRequestViewingBean();
+            holidayRequestViewingBean.setId(annualLeave.getId());
             holidayRequestViewingBean.setStart(annualLeave.getStart());
             holidayRequestViewingBean.setEnd(annualLeave.getEnd());
 
@@ -107,4 +135,5 @@ public class AnnualLeaveService {
 
         return requestHistory;
     }
+
 }

@@ -93,6 +93,11 @@ body {
     border: none !important;
 }
 
+.pendingRequestPanel {
+    width: 500px;
+    min-height: 500px;
+}
+
 .requestNewHolidayPanel {
     width: 220px;
 }

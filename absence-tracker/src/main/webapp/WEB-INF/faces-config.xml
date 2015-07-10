@@ -46,6 +46,12 @@
             <to-view-id>/pages/secure/holiday/management.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-action>#{navigationController.showHolidayAuthoriseFeatures}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/holiday/authorise.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
@@ -54,6 +60,12 @@
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{navigationController.showHolidayAuthoriseFeatures}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/holiday/authorise.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -65,6 +77,34 @@
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{navigationController.showHolidayAuthoriseFeatures}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/holiday/authorise.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{navigationController.showHolidayManagementFeatures}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/holiday/management.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/secure/holiday/authorise.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{authController.logout}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{navigationController.showHolidayManagementFeatures}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/holiday/management.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

@@ -1,12 +1,68 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
                 template="/pages/secure/secureTemplate.xhtml">
 
-      <ui:define name="pageContent">
-            <p:outputLabel id="managerrole" value="You have manager access!"/>
-      </ui:define>
+    <ui:define name="pageContent">
+        <p:outputLabel id="managerrole" value="You have manager access!"/>
+
+        <h:form id="holidayAuthoriseForm" prependId="false">
+
+            <h:panelGrid columns="2" columnClasses="alignColumnTop">
+
+
+                <p:panel id="pendingholidayRequestsPanel" styleClass="pendingRequestPanel"
+                         header="Pending Holiday Requests">
+
+                    <p:dataTable id="requestHistoryTable" var="holidayRequestRow"
+                                 value="#{holidayAuthoriseController.pendingHolidayRequests}" scrollable="true"
+                                 selection="#{holidayAuthoriseController.selectedRequest}"
+                                 selectionMode="single"  rowKey="#{holidayRequestRow.id}" scrollHeight="250">
+
+                        <p:column headerText="Employee Name">
+                            <h:outputText value="#{holidayRequestRow.fullName}"/>
+                        </p:column>
+                        <p:column headerText="Start">
+                            <h:outputText value="#{holidayRequestRow.startDateStr}"/>
+                        </p:column>
+                        <p:column headerText="End">
+                            <h:outputText value="#{holidayRequestRow.endDateStr}"/>
+                        </p:column>
+                        <p:column headerText="Status">
+                            <h:outputText value="#{holidayRequestRow.status}"/>
+                        </p:column>
+
+                        <p:column headerText="Action">
+                        <h:panelGrid columns="2" columnClasses="borderLessPanelGrid">
+                            <p:commandButton id="approveHolidyBtn" value="Auth"
+                                             action="#{holidayAuthoriseController.approveHoliday}"
+                                             update=":messages,:#{p:component('holidayAuthoriseForm')}">
+                             <f:setPropertyActionListener value="#{holidayRequestRow}" target="#{holidayAuthoriseController.selectedRequest}" />
+                            </p:commandButton>
+
+                            <p:commandButton id="declineHolidyBtn" value="Dec"
+                                             action="#{holidayAuthoriseController.declineHoliday}"
+                                             update=":messages,:#{p:component('holidayAuthoriseForm')}">
+                            <f:setPropertyActionListener value="#{holidayRequestRow}" target="#{holidayAuthoriseController.selectedRequest}" />
+                            </p:commandButton>
+
+                        </h:panelGrid>
+                        </p:column>
+
+
+                    </p:dataTable>
+
+                </p:panel>
+
+
+                <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Holiday Calendar">
+                    <p:schedule value="#{holidayAuthoriseController.scheduleLazyModel}"/>
+                </p:panel>
+
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
 
 
 </ui:composition>
