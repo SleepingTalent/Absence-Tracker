@@ -1,6 +1,10 @@
 package com.noveria.absencemanagement.view.holiday.management.view;
 
+import org.primefaces.model.chart.DonutChartModel;
 import org.primefaces.model.chart.PieChartModel;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by lynseymcgregor on 21/06/2015.
@@ -50,5 +54,20 @@ public class HolidayAllowanceViewBean {
         holidayPieModel1.setSeriesColors("a7c2ee,1d5198");
 
         return holidayPieModel1;
+    }
+
+    public DonutChartModel getDonutModel() {
+        DonutChartModel holidayDonutModel = new DonutChartModel();
+
+        Map<String, Number> holidayData = new LinkedHashMap<String, Number>();
+
+        holidayData.put("Used", used);
+        holidayData.put("Remaining", remaining);
+
+        holidayDonutModel.setLegendPosition("n");
+        holidayDonutModel.addCircle(holidayData);
+        holidayDonutModel.setSeriesColors("FF0000,008000");
+
+        return holidayDonutModel;
     }
 }
