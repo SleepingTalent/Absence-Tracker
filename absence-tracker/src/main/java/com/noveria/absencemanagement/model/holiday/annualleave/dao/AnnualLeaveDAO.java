@@ -38,6 +38,18 @@ public class AnnualLeaveDAO extends BaseDAO<AnnualLeave> {
         return query.getResultList();
     }
 
+    public List<AnnualLeave> findDeparmentAnnualLeaveByManager(Employee manager) {
+        String sql = "select l from AnnualLeave l where l.status != '"+ AnnualLeaveStatus.DECLINED.name()+"'" +
+                "and l.employee in (select e from Employee e where e.department = " +
+                "(select d from Department d where d.manager = :manager))";
+
+
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("manager",manager);
+
+        return query.getResultList();
+    }
+
     public List<AnnualLeave> findAllAnnualLeaveByEmployee(Employee employee) {
         String sql = "select l from AnnualLeave l where l.employee = :employee";
 

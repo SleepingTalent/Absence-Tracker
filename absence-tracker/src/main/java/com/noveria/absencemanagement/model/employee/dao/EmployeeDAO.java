@@ -36,6 +36,16 @@ public class EmployeeDAO extends BaseDAO<Employee> {
         return query.getResultList();
     }
 
+    public List<Employee> findEmployeesbyManager(Employee manager) {
+        String sql = "select e from Employee e where e.department = " +
+                "(select d from Department d where d.manager = :manager)";
+
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("manager",manager);
+
+        return query.getResultList();
+    }
+
     public BrowseEmployeePagenatedResults findAllEmployees(int first, int pageSize) {
         BrowseEmployeePagenatedResults results = new BrowseEmployeePagenatedResults();
 

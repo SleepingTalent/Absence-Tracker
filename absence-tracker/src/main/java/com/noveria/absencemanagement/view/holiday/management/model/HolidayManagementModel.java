@@ -137,11 +137,7 @@ public class HolidayManagementModel implements Serializable {
     }
 
     public HolidayAllowanceViewBean getHolidayAllowance() {
-        if (holidayAllowanceViewBean == null) {
-            holidayAllowanceViewBean = buildHolidayAllowance();
-        }
-
-        return holidayAllowanceViewBean;
+            return buildHolidayAllowance();
     }
 
     public AnnualLeaveService getAnnualLeaveService() {

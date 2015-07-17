@@ -8,6 +8,8 @@
 
         <h:form id="holidayAuthoriseForm" prependId="false">
 
+            <p:ajaxStatus onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()" />
+
             <h:panelGrid columns="2" columnClasses="alignColumnTop">
 
 
@@ -36,15 +38,13 @@
                         <h:panelGrid columns="2" columnClasses="borderLess,borderLess">
                             <p:commandButton id="approveHolidyBtn" icon="ui-icon-check"
                                              action="#{holidayAuthoriseController.approveHoliday}"
-                                             update=":messages,:#{p:component('holidayAuthoriseForm')}"
-                                             onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()">
+                                             update=":messages,:#{p:component('holidayAuthoriseForm')}">
                              <f:setPropertyActionListener value="#{holidayRequestRow}" target="#{holidayAuthoriseController.selectedRequest}" />
                             </p:commandButton>
 
                             <p:commandButton id="declineHolidyBtn" icon="ui-icon-closethick"
                                              action="#{holidayAuthoriseController.declineHoliday}"
-                                             update=":messages,:#{p:component('holidayAuthoriseForm')}"
-                                    onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()">
+                                             update=":messages,:#{p:component('holidayAuthoriseForm')}">
                             <f:setPropertyActionListener value="#{holidayRequestRow}" target="#{holidayAuthoriseController.selectedRequest}" />
                             </p:commandButton>
 

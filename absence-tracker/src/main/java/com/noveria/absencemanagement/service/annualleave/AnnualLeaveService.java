@@ -80,10 +80,10 @@ public class AnnualLeaveService {
         return holidayAllowanceDAO.findHolidayAllowanceByEmployee(employee);
     }
 
-    public List<EmployeeAnnualLeave> getAnnualLeaveByManagedDepartment(Employee employee) {
+    public List<EmployeeAnnualLeave> getAnnualLeaveByManagedDepartment(Employee manager) {
         List<EmployeeAnnualLeave> employeeAnnualLeaveList = new ArrayList<EmployeeAnnualLeave>();
 
-        List<Department> managedDepartments = departmentDAO.findDepartmentbyManager(employee);
+        List<Department> managedDepartments = departmentDAO.findDepartmentbyManager(manager);
 
         for(Department department : managedDepartments) {
 
