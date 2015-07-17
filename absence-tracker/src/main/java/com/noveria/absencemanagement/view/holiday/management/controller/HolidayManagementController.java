@@ -36,8 +36,6 @@ public class HolidayManagementController {
     }
 
     public ScheduleModel getScheduleLazyModel() {
-        logger.debug("getScheduleLazyModel : retrieving Schedule");
-
         return holidayManagementModel.getLazyEventModel();
     }
 

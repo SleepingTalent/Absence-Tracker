@@ -66,7 +66,7 @@ public class HolidayAllowanceViewBean {
 
         holidayDonutModel.setLegendPosition("n");
         holidayDonutModel.addCircle(holidayData);
-        holidayDonutModel.setSeriesColors("FF0000,008000");
+        holidayDonutModel.setSeriesColors("1d5198,a7c2ee");
 
         return holidayDonutModel;
     }

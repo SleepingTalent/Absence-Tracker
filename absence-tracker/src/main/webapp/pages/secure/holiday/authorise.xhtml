@@ -5,7 +5,6 @@
                 template="/pages/secure/secureTemplate.xhtml">
 
     <ui:define name="pageContent">
-        <p:outputLabel id="managerrole" value="You have manager access!"/>
 
         <h:form id="holidayAuthoriseForm" prependId="false">
 
@@ -37,13 +36,15 @@
                         <h:panelGrid columns="2" columnClasses="borderLess,borderLess">
                             <p:commandButton id="approveHolidyBtn" icon="ui-icon-check"
                                              action="#{holidayAuthoriseController.approveHoliday}"
-                                             update=":messages,:#{p:component('holidayAuthoriseForm')}">
+                                             update=":messages,:#{p:component('holidayAuthoriseForm')}"
+                                             onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()">
                              <f:setPropertyActionListener value="#{holidayRequestRow}" target="#{holidayAuthoriseController.selectedRequest}" />
                             </p:commandButton>
 
                             <p:commandButton id="declineHolidyBtn" icon="ui-icon-closethick"
                                              action="#{holidayAuthoriseController.declineHoliday}"
-                                             update=":messages,:#{p:component('holidayAuthoriseForm')}">
+                                             update=":messages,:#{p:component('holidayAuthoriseForm')}"
+                                    onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()">
                             <f:setPropertyActionListener value="#{holidayRequestRow}" target="#{holidayAuthoriseController.selectedRequest}" />
                             </p:commandButton>
 
@@ -56,7 +57,7 @@
                 </p:panel>
 
 
-                <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Holiday Calendar">
+                <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Managed Departments Holiday Calendar">
                     <p:schedule value="#{holidayAuthoriseController.scheduleLazyModel}"/>
                 </p:panel>
 

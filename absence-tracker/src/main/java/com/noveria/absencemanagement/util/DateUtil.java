@@ -15,7 +15,7 @@ public class DateUtil {
         Calendar endCal = Calendar.getInstance();
         endCal.setTime(endDate);
 
-        int workDays = 0;
+        int workDays = 1;
 
         //Return 0 if start and end are the same
         if (startCal.getTimeInMillis() == endCal.getTimeInMillis()) {
@@ -34,6 +34,15 @@ public class DateUtil {
     }
 
     public static void validateStartAndEndDates(Date startDate, Date endDate) throws InvalidDateException {
+
+        if(startDate == null) {
+            throw new InvalidDateException("Start Date must have a value!");
+        }
+
+        if(endDate == null) {
+            throw new InvalidDateException("End Date must have a value!");
+        }
+
         Calendar startCal = Calendar.getInstance();
         startCal.setTime(startDate);
 

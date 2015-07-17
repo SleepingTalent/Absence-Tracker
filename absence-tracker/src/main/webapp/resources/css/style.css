@@ -159,16 +159,13 @@ body {
     color: #0e2c54 !important;
 }
 
-.holidayEvent {
-    background: gold;
-}
-
 .holidayAuth {
-    background: green;
+    background: #1d5198;
 }
 
-.holidayDeclined {
-    background: red;
+.holidayAwaitingAuth {
+    background: #e7ecf5;
+    color: #0e2c54;
 }
 
 .holidayTotal {
@@ -180,7 +177,7 @@ body {
 }
 
 td .holidayUsed{
-    color:red
+
 }
 
 .holidayRemaining {
@@ -188,7 +185,7 @@ td .holidayUsed{
 }
 
 td .holidayRemaining{
-    color:green
+
 }
 
 .floatRight {

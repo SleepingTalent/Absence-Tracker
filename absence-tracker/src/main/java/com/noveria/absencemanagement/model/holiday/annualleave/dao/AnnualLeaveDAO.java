@@ -7,6 +7,7 @@ import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance;
 import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeave;
+import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeaveStatus;
 import com.noveria.absencemanagement.service.annualleave.EmployeeAnnualLeave;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,16 @@ public class AnnualLeaveDAO extends BaseDAO<AnnualLeave> {
     EmployeeDAO employeeDAO;
 
     public List<AnnualLeave> findAnnualLeaveByEmployee(Employee employee) {
+        String sql = "select l from AnnualLeave l where l.employee = :employee " +
+                        "and l.status != '"+ AnnualLeaveStatus.DECLINED.name()+"'";
+
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("employee",employee);
+
+        return query.getResultList();
+    }
+
+    public List<AnnualLeave> findAllAnnualLeaveByEmployee(Employee employee) {
         String sql = "select l from AnnualLeave l where l.employee = :employee";
 
         Query query = entityManager.createQuery(sql);
@@ -36,17 +47,9 @@ public class AnnualLeaveDAO extends BaseDAO<AnnualLeave> {
         return query.getResultList();
     }
 
-    public List<AnnualLeave> findAnnualLeaveByEmployees(List<Employee> employees) {
-        String sql = "select l from AnnualLeave l where l.employee in (:employees)";
-
-        Query query = entityManager.createQuery(sql);
-        query.setParameter("employees",employees);
-
-        return query.getResultList();
-    }
-
     public List<AnnualLeave> findAnnualLeaveAwaitingAuthorisationByEmployee(Employee employee) {
-        String sql = "select l from AnnualLeave l where l.employee = :employee and l.status = 'AWAITING_AUTHORISATION'";
+        String sql = "select l from AnnualLeave l where l.employee = :employee " +
+                "and l.status = '"+ AnnualLeaveStatus.AWAITING_AUTHORISATION.name()+"'";
 
         Query query = entityManager.createQuery(sql);
         query.setParameter("employee",employee);
@@ -57,7 +60,6 @@ public class AnnualLeaveDAO extends BaseDAO<AnnualLeave> {
     public List<EmployeeAnnualLeave> findAnnualLeaveToAuthoriseByManager(Employee manager) {
         List<Department> managersDepartments = departmentDAO.findDepartmentbyManager(manager);
         List<Employee> employees = new ArrayList<Employee>();
-
 
         for(Department department : managersDepartments) {
             List<Employee> employeesByDepartment = employeeDAO.findEmployeesbyDepartmentId(department);

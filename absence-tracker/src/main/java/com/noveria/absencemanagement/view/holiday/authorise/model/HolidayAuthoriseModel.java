@@ -12,6 +12,7 @@ import com.noveria.absencemanagement.view.holiday.management.view.HolidayAllowan
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayRequestViewingBean;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -57,27 +59,50 @@ public class HolidayAuthoriseModel implements Serializable {
     }
 
     private ScheduleModel buildDataModel() {
-        lazyEventModel = new DefaultScheduleModel();
 
-        List<EmployeeAnnualLeave> annualLeaveList = annualLeaveService.getAnnualLeaveByDepartment(userModel.getEmployee());
+        lazyEventModel = new LazyScheduleModel() {
 
-        for(EmployeeAnnualLeave employeeAnnualLeave : annualLeaveList) {
+            @Override
+            public void loadEvents(Date start, Date end) {
 
-            Employee employee = employeeAnnualLeave.getEmployee();
+                List<EmployeeAnnualLeave> annualLeaveList = annualLeaveService.getAnnualLeaveByManagedDepartment(userModel.getEmployee());
 
-            for(AnnualLeave annualLeave : employeeAnnualLeave.getAnnualLeaveList()) {
-                String css = (annualLeave.getStatus().equals("AUTHORISED")) ? "holidayAuth" : "holidayAwaitingAuth";
+                for (EmployeeAnnualLeave employeeAnnualLeave : annualLeaveList) {
 
-                lazyEventModel.addEvent(buildEvent(employee.getFirstName()+""+employee.getLastName(),
-                        annualLeave.getStart(), annualLeave.getEnd(),css));
+                    Employee employee = employeeAnnualLeave.getEmployee();
+
+                    for (AnnualLeave annualLeave : employeeAnnualLeave.getAnnualLeaveList()) {
+
+                        String css = "holidayAuth";
+                        String title = employee.getFirstName() + " " + employee.getLastName();
+
+                        if(!annualLeave.getStatus().equals("AUTHORISED")) {
+                            css = "holidayAwaitingAuth";
+                            title = title + " (Pending)";
+                        }
+
+                        lazyEventModel.addEvent(buildEvent(title,
+                                annualLeave.getStart(), annualLeave.getEnd(), css));
+                    }
+                }
             }
-        }
+        };
 
         return lazyEventModel;
     }
 
     private DefaultScheduleEvent buildEvent(String title, Date start, Date end, String css) {
-        DefaultScheduleEvent event = new DefaultScheduleEvent(title,start,end);
+        Calendar startDate = Calendar.getInstance();
+        startDate.setTime(start);
+        startDate.set(Calendar.HOUR_OF_DAY, 9);
+
+        Calendar endDate = Calendar.getInstance();
+        endDate.setTime(end);
+        endDate.set(Calendar.HOUR_OF_DAY, 17);
+
+        DefaultScheduleEvent event = new DefaultScheduleEvent(title,
+                startDate.getTime(), endDate.getTime());
+
         event.setAllDay(true);
         event.setStyleClass(css);
         return event;
@@ -125,24 +150,25 @@ public class HolidayAuthoriseModel implements Serializable {
 
     public void authoriseAnnualLeave() {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String startDateStr = format.format(getSelectedRequest().getStart());
+        String endDateStr = format.format(getSelectedRequest().getEnd());
 
         annualLeaveService.authoriseAnnualLeave(getSelectedRequest().getId());
 
-        messageHelper.addInfoMessage("Holiday Approved",
-                "For :"+getSelectedRequest().getFullName()+ " " +
-                "From : "+format.format(getSelectedRequest().getStart()) + " " +
-                        "To : "+format.format(getSelectedRequest().getEnd()));
-
+        holidayInfoMessage("Holiday Authorised", startDateStr, endDateStr);
     }
 
     public void declineAnnualLeave() {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String startDateStr = format.format(getSelectedRequest().getStart());
+        String endDateStr = format.format(getSelectedRequest().getEnd());
 
         annualLeaveService.declineAnnualLeave(getSelectedRequest().getId());
 
-        messageHelper.addInfoMessage("Holiday Declined",
-                "For :"+getSelectedRequest().getFullName()+ " " +
-                        "From : "+format.format(getSelectedRequest().getStart()) + " " +
-                        "To : "+format.format(getSelectedRequest().getEnd()));
+        holidayInfoMessage("Holiday Declined", startDateStr, endDateStr);
+    }
+
+    public void holidayInfoMessage(String title, String start, String end) {
+        messageHelper.addInfoMessage(title,start+"-"+end);
     }
 }

@@ -16,6 +16,10 @@
 
         <p:growl id="messages" showDetail="true"/>
 
+        <p:dialog widgetVar="_ajaxLoadingDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <h:graphicImage library="images" name="ajax-loader.gif"/>
+        </p:dialog>
+
         <p:panel id="dashboardPanel" styleClass="mainPanel" header="Absence Tracker">
 
             <f:facet name="header">

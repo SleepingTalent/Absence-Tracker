@@ -1,5 +1,7 @@
 package com.noveria.absencemanagement.service.annualleave;
 
+import com.noveria.absencemanagement.model.department.dao.DepartmentDAO;
+import com.noveria.absencemanagement.model.department.entities.Department;
 import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.allowance.dao.HolidayAllowanceDAO;
@@ -30,6 +32,9 @@ public class AnnualLeaveService {
 
     @Autowired
     EmployeeDAO employeeDAO;
+
+    @Autowired
+    DepartmentDAO departmentDAO;
 
     @Autowired
     HolidayAllowanceDAO holidayAllowanceDAO;
@@ -73,6 +78,29 @@ public class AnnualLeaveService {
 
     public HolidayAllowance getHolidayAllowance(Employee employee) {
         return holidayAllowanceDAO.findHolidayAllowanceByEmployee(employee);
+    }
+
+    public List<EmployeeAnnualLeave> getAnnualLeaveByManagedDepartment(Employee employee) {
+        List<EmployeeAnnualLeave> employeeAnnualLeaveList = new ArrayList<EmployeeAnnualLeave>();
+
+        List<Department> managedDepartments = departmentDAO.findDepartmentbyManager(employee);
+
+        for(Department department : managedDepartments) {
+
+            List<Employee> employeesByDepartment = employeeDAO.findEmployeesbyDepartmentId(department);
+
+            for (Employee departmentEmployee : employeesByDepartment) {
+                List<AnnualLeave> annualLeave = annualLeaveDAO.findAnnualLeaveByEmployee(departmentEmployee);
+
+                EmployeeAnnualLeave employeeAnnualLeave = new EmployeeAnnualLeave();
+                employeeAnnualLeave.setEmployee(departmentEmployee);
+                employeeAnnualLeave.setAnnualLeaveList(annualLeave);
+
+                employeeAnnualLeaveList.add(employeeAnnualLeave);
+            }
+        }
+
+        return employeeAnnualLeaveList;
     }
 
     public List<EmployeeAnnualLeave> getAnnualLeaveByDepartment(Employee employee) {
@@ -127,7 +155,7 @@ public class AnnualLeaveService {
     public List<HolidayRequestViewingBean> getHolidayRequests(Employee employee) {
         List<HolidayRequestViewingBean> requestHistory = new ArrayList<HolidayRequestViewingBean>();
 
-        List<AnnualLeave> annualLeaveList = annualLeaveDAO.findAnnualLeaveByEmployee(employee);
+        List<AnnualLeave> annualLeaveList = annualLeaveDAO.findAllAnnualLeaveByEmployee(employee);
 
         for(AnnualLeave annualLeave : annualLeaveList) {
             HolidayRequestViewingBean holidayRequestViewingBean = new HolidayRequestViewingBean();

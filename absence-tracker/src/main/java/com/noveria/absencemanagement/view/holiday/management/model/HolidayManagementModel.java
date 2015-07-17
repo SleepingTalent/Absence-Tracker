@@ -24,6 +24,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.AbortProcessingException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -45,9 +46,8 @@ public class HolidayManagementModel implements Serializable {
     @ManagedProperty(value = "#{messageHelper}")
     private MessageHelper messageHelper;
 
-    HolidayAllowanceViewBean holidayAllowanceViewBean;
-
     private ScheduleModel lazyEventModel;
+    private HolidayAllowanceViewBean holidayAllowanceViewBean;
     private HolidayRequestViewingBean holidayRequest;
 
     @PostConstruct
@@ -74,9 +74,16 @@ public class HolidayManagementModel implements Serializable {
                     Employee employee = employeeAnnualLeave.getEmployee();
 
                     for (AnnualLeave annualLeave : employeeAnnualLeave.getAnnualLeaveList()) {
-                        String css = (annualLeave.getStatus().equals("AUTHORISED")) ? "holidayAuth" : "holidayAwaitingAuth";
 
-                        lazyEventModel.addEvent(buildEvent(employee.getFirstName() + " " + employee.getLastName(),
+                        String css = "holidayAuth";
+                        String title = employee.getFirstName() + " " + employee.getLastName();
+
+                        if(!annualLeave.getStatus().equals("AUTHORISED")) {
+                          css = "holidayAwaitingAuth";
+                          title = title + " (Pending)";
+                        }
+
+                        lazyEventModel.addEvent(buildEvent(title,
                                 annualLeave.getStart(), annualLeave.getEnd(), css));
                     }
                 }
@@ -87,7 +94,17 @@ public class HolidayManagementModel implements Serializable {
     }
 
     private DefaultScheduleEvent buildEvent(String title, Date start, Date end, String css) {
-        DefaultScheduleEvent event = new DefaultScheduleEvent(title, start, end);
+        Calendar startDate = Calendar.getInstance();
+        startDate.setTime(start);
+        startDate.set(Calendar.HOUR_OF_DAY, 9);
+
+        Calendar endDate = Calendar.getInstance();
+        endDate.setTime(end);
+        endDate.set(Calendar.HOUR_OF_DAY, 17);
+
+        DefaultScheduleEvent event = new DefaultScheduleEvent(title,
+                startDate.getTime(), endDate.getTime());
+
         event.setAllDay(true);
         event.setStyleClass(css);
         return event;
@@ -146,27 +163,29 @@ public class HolidayManagementModel implements Serializable {
     public void requestHoliday() {
         try {
 
+            Date holidayRequestStart = getHolidayRequest().getStart();
+            Date holidayRequestEnd = getHolidayRequest().getEnd();
+
+            DateUtil.validateStartAndEndDates(holidayRequestStart, holidayRequestEnd);
+
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String holidayRequestStartStr = format.format(holidayRequestStart);
+            String holidayRequestEndStr = format.format(holidayRequestEnd);
 
-            logger.debug("Requesting Holiday Start Date : " + format.format(getHolidayRequest().getStart()));
-            logger.debug("Requesting Holiday End Date : " + format.format(getHolidayRequest().getEnd()));
+            logger.debug("Requesting Holiday Start Date : " + holidayRequestStartStr);
+            logger.debug("Requesting Holiday End Date : " + holidayRequestEndStr);
 
-            DateUtil.validateStartAndEndDates(getHolidayRequest().getStart(),
-                    getHolidayRequest().getEnd());
+            annualLeaveService.createAnnualLeave(holidayRequestStart, holidayRequestEnd,
+                    userModel.getEmployee());
 
-            annualLeaveService.createAnnualLeave(getHolidayRequest().getStart(),
-                    getHolidayRequest().getEnd(), userModel.getEmployee());
-
-            int totalDays = DateUtil.getWorkingDaysBetweenTwoDates(getHolidayRequest().getStart(),
-                    getHolidayRequest().getEnd());
+            int totalDays = DateUtil.getWorkingDaysBetweenTwoDates(holidayRequestStart,
+                    holidayRequestEnd);
 
             logger.debug("Requesting Working Days Total : " + totalDays);
 
             annualLeaveService.addHolidayAllowance(userModel.getEmployee(), totalDays);
 
-            messageHelper.addInfoMessage("Holiday Requested",
-                    "(" + format.format(getHolidayRequest().getStart()) + "-" +
-                            format.format(getHolidayRequest().getEnd()) + ")");
+            messageHelper.addInfoMessage("Holiday Requested", holidayRequestStartStr+"-"+holidayRequestEndStr);
 
             getHolidayRequest().setStart(null);
             getHolidayRequest().setEnd(null);
@@ -175,7 +194,6 @@ public class HolidayManagementModel implements Serializable {
             messageHelper.addErrorMessage("Invalid Date Range",ide.getMessage());
             throw new AbortProcessingException(ide.getMessage());
         }
-
     }
 
     public HolidayRequestViewingBean getHolidayRequest() {

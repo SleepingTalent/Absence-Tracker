@@ -29,7 +29,7 @@
 
                 </p:panel>
 
-                <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Holiday Calendar">
+                <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Department Holiday Calendar">
                     <p:schedule value="#{holidayManagementController.scheduleLazyModel}"/>
                 </p:panel>
 
@@ -54,6 +54,7 @@
                                 <p:separator />
                                 <p:commandButton id="requestHolidyBtn" value="Request Holiday" styleClass="alignRight"
                                                  actionListener="#{holidayManagementController.requestHoliday}"
+                                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
                                                  update=":messages,:#{p:component('holidayManagementForm')}"/>
                             </h:form>
 
