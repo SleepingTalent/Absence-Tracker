@@ -2,7 +2,9 @@ package com.noveria.absencemanagement.view.holiday.authorise.model;
 
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance;
+import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeave;
 import com.noveria.absencemanagement.service.annualleave.AnnualLeaveService;
+import com.noveria.absencemanagement.service.annualleave.EmployeeAnnualLeave;
 import com.noveria.absencemanagement.view.authentication.model.UserModel;
 import com.noveria.absencemanagement.view.helper.DateHelper;
 import com.noveria.absencemanagement.view.helper.MessageHelper;
@@ -42,6 +44,7 @@ public class HolidayAuthoriseModel implements Serializable {
     private MessageHelper messageHelper;
 
     private ScheduleModel lazyEventModel;
+
     private HolidayRequestViewingBean selectedRequest;
 
     @PostConstruct
@@ -55,16 +58,28 @@ public class HolidayAuthoriseModel implements Serializable {
 
     private ScheduleModel buildDataModel() {
         lazyEventModel = new DefaultScheduleModel();
-        lazyEventModel.addEvent(buildEvent("Joe Worker", DateHelper.daysInPast(2), DateHelper.daysInFuture(2)));
-        lazyEventModel.addEvent(buildEvent("Jane Worker", DateHelper.daysInPast(7), DateHelper.daysInFuture(1)));
-        lazyEventModel.addEvent(buildEvent("Joe Worker", DateHelper.daysInPast(7), DateHelper.daysInPast(3)));
-        lazyEventModel.addEvent(buildEvent("Jane Worker", DateHelper.daysInFuture(2), DateHelper.daysInFuture(3)));
+
+        List<EmployeeAnnualLeave> annualLeaveList = annualLeaveService.getAnnualLeaveByDepartment(userModel.getEmployee());
+
+        for(EmployeeAnnualLeave employeeAnnualLeave : annualLeaveList) {
+
+            Employee employee = employeeAnnualLeave.getEmployee();
+
+            for(AnnualLeave annualLeave : employeeAnnualLeave.getAnnualLeaveList()) {
+                String css = (annualLeave.getStatus().equals("AUTHORISED")) ? "holidayAuth" : "holidayAwaitingAuth";
+
+                lazyEventModel.addEvent(buildEvent(employee.getFirstName()+""+employee.getLastName(),
+                        annualLeave.getStart(), annualLeave.getEnd(),css));
+            }
+        }
+
         return lazyEventModel;
     }
 
-    private DefaultScheduleEvent buildEvent(String title, Date start, Date end) {
+    private DefaultScheduleEvent buildEvent(String title, Date start, Date end, String css) {
         DefaultScheduleEvent event = new DefaultScheduleEvent(title,start,end);
         event.setAllDay(true);
+        event.setStyleClass(css);
         return event;
     }
 

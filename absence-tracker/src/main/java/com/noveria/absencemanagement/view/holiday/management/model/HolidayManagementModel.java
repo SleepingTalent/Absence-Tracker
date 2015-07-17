@@ -2,13 +2,18 @@ package com.noveria.absencemanagement.view.holiday.management.model;
 
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance;
+import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeave;
 import com.noveria.absencemanagement.service.annualleave.AnnualLeaveService;
+import com.noveria.absencemanagement.service.annualleave.EmployeeAnnualLeave;
+import com.noveria.absencemanagement.util.DateUtil;
+import com.noveria.absencemanagement.util.InvalidDateException;
 import com.noveria.absencemanagement.view.authentication.model.UserModel;
-import com.noveria.absencemanagement.view.helper.DateHelper;
 import com.noveria.absencemanagement.view.helper.MessageHelper;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayAllowanceViewBean;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayRequestViewingBean;
-import org.primefaces.model.*;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.LazyScheduleModel;
+import org.primefaces.model.ScheduleModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,9 +21,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AbortProcessingException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,17 +61,35 @@ public class HolidayManagementModel implements Serializable {
     }
 
     private ScheduleModel buildDataModel() {
-        lazyEventModel = new DefaultScheduleModel();
-        lazyEventModel.addEvent(buildEvent("Joe Worker", DateHelper.daysInPast(2), DateHelper.daysInFuture(2)));
-        lazyEventModel.addEvent(buildEvent("Jane Worker", DateHelper.daysInPast(7), DateHelper.daysInFuture(1)));
-        lazyEventModel.addEvent(buildEvent("Joe Worker", DateHelper.daysInPast(7), DateHelper.daysInPast(3)));
-        lazyEventModel.addEvent(buildEvent("Jane Worker", DateHelper.daysInFuture(2), DateHelper.daysInFuture(3)));
+
+        lazyEventModel = new LazyScheduleModel() {
+
+            @Override
+            public void loadEvents(Date start, Date end) {
+
+                List<EmployeeAnnualLeave> annualLeaveList = annualLeaveService.getAnnualLeaveByDepartment(userModel.getEmployee());
+
+                for (EmployeeAnnualLeave employeeAnnualLeave : annualLeaveList) {
+
+                    Employee employee = employeeAnnualLeave.getEmployee();
+
+                    for (AnnualLeave annualLeave : employeeAnnualLeave.getAnnualLeaveList()) {
+                        String css = (annualLeave.getStatus().equals("AUTHORISED")) ? "holidayAuth" : "holidayAwaitingAuth";
+
+                        lazyEventModel.addEvent(buildEvent(employee.getFirstName() + " " + employee.getLastName(),
+                                annualLeave.getStart(), annualLeave.getEnd(), css));
+                    }
+                }
+            }
+        };
+
         return lazyEventModel;
     }
 
-    private DefaultScheduleEvent buildEvent(String title, Date start, Date end) {
-        DefaultScheduleEvent event = new DefaultScheduleEvent(title,start,end);
+    private DefaultScheduleEvent buildEvent(String title, Date start, Date end, String css) {
+        DefaultScheduleEvent event = new DefaultScheduleEvent(title, start, end);
         event.setAllDay(true);
+        event.setStyleClass(css);
         return event;
     }
 
@@ -97,7 +120,7 @@ public class HolidayManagementModel implements Serializable {
     }
 
     public HolidayAllowanceViewBean getHolidayAllowance() {
-        if(holidayAllowanceViewBean == null) {
+        if (holidayAllowanceViewBean == null) {
             holidayAllowanceViewBean = buildHolidayAllowance();
         }
 
@@ -121,20 +144,38 @@ public class HolidayManagementModel implements Serializable {
     }
 
     public void requestHoliday() {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        try {
 
-        logger.debug("Requesting Holiday Start Date : " + format.format(getHolidayRequest().getStart()));
-        logger.debug("REquesting Holiday End Date : " + format.format(getHolidayRequest().getEnd()));
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-        annualLeaveService.createAnnualLeave(getHolidayRequest().getStart(),
-                getHolidayRequest().getEnd(), userModel.getEmployee());
+            logger.debug("Requesting Holiday Start Date : " + format.format(getHolidayRequest().getStart()));
+            logger.debug("Requesting Holiday End Date : " + format.format(getHolidayRequest().getEnd()));
 
-        messageHelper.addInfoMessage("Holiday Requested",
-                "From : "+format.format(getHolidayRequest().getStart()) + " " +
-                "To : "+format.format(getHolidayRequest().getEnd()));
+            DateUtil.validateStartAndEndDates(getHolidayRequest().getStart(),
+                    getHolidayRequest().getEnd());
 
-        getHolidayRequest().setStart(null);
-        getHolidayRequest().setEnd(null);
+            annualLeaveService.createAnnualLeave(getHolidayRequest().getStart(),
+                    getHolidayRequest().getEnd(), userModel.getEmployee());
+
+            int totalDays = DateUtil.getWorkingDaysBetweenTwoDates(getHolidayRequest().getStart(),
+                    getHolidayRequest().getEnd());
+
+            logger.debug("Requesting Working Days Total : " + totalDays);
+
+            annualLeaveService.addHolidayAllowance(userModel.getEmployee(), totalDays);
+
+            messageHelper.addInfoMessage("Holiday Requested",
+                    "(" + format.format(getHolidayRequest().getStart()) + "-" +
+                            format.format(getHolidayRequest().getEnd()) + ")");
+
+            getHolidayRequest().setStart(null);
+            getHolidayRequest().setEnd(null);
+
+        } catch (InvalidDateException ide) {
+            messageHelper.addErrorMessage("Invalid Date Range",ide.getMessage());
+            throw new AbortProcessingException(ide.getMessage());
+        }
+
     }
 
     public HolidayRequestViewingBean getHolidayRequest() {

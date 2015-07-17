@@ -4,12 +4,14 @@ import com.noveria.absencemanagement.model.employee.dao.EmployeeDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.allowance.dao.HolidayAllowanceDAO;
 import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance;
+import com.noveria.absencemanagement.model.holiday.allowance.entities.WorkingHours;
 import com.noveria.absencemanagement.model.holiday.annualleave.dao.AnnualLeaveDAO;
 
 import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeave;
 import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeaveStatus;
 import com.noveria.absencemanagement.model.user.entities.User;
 
+import com.noveria.absencemanagement.util.DateUtil;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayRequestViewingBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,13 +55,20 @@ public class AnnualLeaveService {
 
     @Transactional
     public void declineAnnualLeave(Long id) {
-        updateAnnualLeaveStatus(id,AnnualLeaveStatus.DECLINED);
+        AnnualLeave annualLeave = updateAnnualLeaveStatus(id,AnnualLeaveStatus.DECLINED);
+
+        int totalDays = DateUtil.getWorkingDaysBetweenTwoDates(annualLeave.getStart(),
+                annualLeave.getEnd());
+
+        deductHolidayAllowance(annualLeave.getEmployee(),totalDays);
     }
 
-    private void updateAnnualLeaveStatus(Long id, AnnualLeaveStatus status) {
+    private AnnualLeave updateAnnualLeaveStatus(Long id, AnnualLeaveStatus status) {
         AnnualLeave annualLeave = annualLeaveDAO.findById(id);
         annualLeave.setStatus(status.name());
         annualLeaveDAO.update(annualLeave);
+
+        return annualLeave;
     }
 
     public HolidayAllowance getHolidayAllowance(Employee employee) {
@@ -136,4 +145,33 @@ public class AnnualLeaveService {
         return requestHistory;
     }
 
+    @Transactional
+    public void deductHolidayAllowance(Employee employee, int totalDays) {
+        HolidayAllowance holidayAllowance = holidayAllowanceDAO.findHolidayAllowanceByEmployee(employee);
+
+        int totalHoursRequested = totalDays * WorkingHours.DEFAULT.getDailyWorkingHours();
+        int usedHolidays = holidayAllowance.getUsed();
+
+        int totalUsed = usedHolidays - totalHoursRequested;
+
+        holidayAllowance.setUsed(totalUsed);
+
+        holidayAllowanceDAO.update(holidayAllowance);
+
+    }
+
+    @Transactional
+    public void addHolidayAllowance(Employee employee, int totalDays) {
+        HolidayAllowance holidayAllowance = holidayAllowanceDAO.findHolidayAllowanceByEmployee(employee);
+
+        int totalHoursRequested = totalDays * WorkingHours.DEFAULT.getDailyWorkingHours();
+        int usedHolidays = holidayAllowance.getUsed();
+
+        int totalUsed = usedHolidays + totalHoursRequested;
+
+        holidayAllowance.setUsed(totalUsed);
+
+        holidayAllowanceDAO.update(holidayAllowance);
+
+    }
 }
