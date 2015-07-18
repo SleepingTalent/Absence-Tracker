@@ -102,4 +102,17 @@ public class EmployeeDelegate {
 
         return managerList;
     }
+
+    public List<Employee> findAllEmployeesByManager(Employee manager) {
+        List<Department> managedDepartments = departmentDAO.findDepartmentbyManager(manager);
+        List<Employee> totalEmployees = new ArrayList<Employee>();
+
+        for(Department department : managedDepartments) {
+
+            List<Employee> employeesByDepartment = employeeDAO.findEmployeesbyDepartmentId(department);
+            totalEmployees.addAll(employeesByDepartment);
+        }
+
+        return totalEmployees;
+    }
 }

@@ -25,15 +25,15 @@ public class HolidayManagementPage extends Page {
     }
 
     public void assertDefaultHolidayTotalAllowance() {
-        assertEquals("225", getPageHelper().findElementById(HOLIDAY_TOTAL).getText());
+        getPageHelper().findTableDataWithText("225");
     }
 
     public void assertDefaultHolidayUsedAllowance() {
-        assertEquals("0", getPageHelper().findElementById(HOLIDAY_USED).getText());
+        getPageHelper().findTableDataWithText("0");
     }
 
     public void assertDefaultHolidayRemainingAllowance() {
-        assertEquals("225", getPageHelper().findElementById(HOLIDAY_REMAINING).getText());
+        getPageHelper().findTableDataWithText("225");
     }
 
     public void selectTodaysDateForHolidayRequestStart() {

@@ -65,6 +65,11 @@ public class AdministrationService {
         return employeeDelegate.findAllManagers();
     }
 
+    public List<Employee> findAllEmployeeByManager(Employee manager) {
+        return employeeDelegate.findAllEmployeesByManager(manager);
+    }
+
+
     public boolean departmentAlreadyExists(String name) {
         return departmentDelegate.departmentAlreadyExists(name);
     }

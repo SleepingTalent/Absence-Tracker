@@ -59,4 +59,26 @@ public class DateUtil {
           throw new InvalidDateException("Start Date after End Date!");
         }
     }
+
+    public static void validateStartAndEndDatesForAbsence(Date startDate, Date endDate) throws InvalidDateException {
+
+        if(startDate == null) {
+            throw new InvalidDateException("Start Date must have a value!");
+        }
+
+        if(endDate == null) {
+            throw new InvalidDateException("End Date must have a value!");
+        }
+
+        Calendar startCal = Calendar.getInstance();
+        startCal.setTime(startDate);
+
+        Calendar endCal = Calendar.getInstance();
+        endCal.setTime(endDate);
+
+
+        if (startCal.getTimeInMillis() > endCal.getTimeInMillis()) {
+            throw new InvalidDateException("Start Date after End Date!");
+        }
+    }
 }
