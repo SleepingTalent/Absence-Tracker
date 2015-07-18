@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/pages/secure/secureTemplate.xhtml">
+
+    <ui:define name="pageContent">
+
+        <h:form id="absenceManagementForm" prependId="false">
+            <h:panelGrid columns="2" columnClasses="alignColumnTop">
+
+                        <p:panel id="newAbsencePanel" styleClass="newAbsencePanel" header="Add New Absence">
+                            <h:outputText value="This would have the Add Absence Button"/>
+                        </p:panel>
+
+                        <p:panel id="departmentAbsenceHistoryPanel" styleClass="absenceHistoryPanel" header="Department Absence History">
+                            <h:outputText value="This would have the Add Absence History Table"/>
+                        </p:panel>
+
+            </h:panelGrid>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
