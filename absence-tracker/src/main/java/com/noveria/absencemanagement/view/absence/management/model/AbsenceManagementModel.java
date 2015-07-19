@@ -20,6 +20,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AbortProcessingException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +31,7 @@ import java.util.List;
  */
 @ManagedBean(name = "absenceManagementModel")
 @SessionScoped
-public class AbsenceManagementModel {
+public class AbsenceManagementModel implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(AbsenceManagementModel.class);
 
@@ -77,7 +78,7 @@ public class AbsenceManagementModel {
         return employeeViewBeanList;
     }
 
-    public void enterAbsence() {
+    public void createAbsence() {
         try {
 
         Date absenceStart = getNewAbsence().getStart();
@@ -92,7 +93,7 @@ public class AbsenceManagementModel {
         logger.debug("Adding Absence Start Date : " + absenceStartStr);
         logger.debug("Adding Absence End Date : " + absenceEndStr);
 
-         Employee employee = administrationService.findEmployee(getNewAbsence().getEmployeeId());
+         Employee employee = administrationService.findEmployee(new Long(getNewAbsence().getEmployeeId()));
 
          absenceService.createAbsence(absenceStart,absenceEnd,employee,AbsenceType.SICK.name());
 
@@ -145,5 +146,9 @@ public class AbsenceManagementModel {
 
     public void setAdministrationService(AdministrationService administrationService) {
         this.administrationService = administrationService;
+    }
+
+    public void clearAbsence() {
+        newAbsence = new AbsenceViewBean();
     }
 }

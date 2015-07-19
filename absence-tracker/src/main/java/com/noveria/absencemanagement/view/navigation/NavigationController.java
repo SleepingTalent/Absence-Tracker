@@ -67,4 +67,11 @@ public class NavigationController {
         return NavigationOutcome.SUCCESS.getOutcomeName();
     }
 
+    public void showNewAbsenceDialog() {
+        viewHelper.showNewAbsenceDialog();;
+    }
+
+    public void hideNewAbsenceDialog() {
+        viewHelper.hideNewAbsenceDialog();;
+    }
 }

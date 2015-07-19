@@ -8,18 +8,46 @@
     <ui:define name="pageContent">
 
         <h:form id="absenceManagementForm" prependId="false">
-            <h:panelGrid columns="2" columnClasses="alignColumnTop">
+            <p:menubar id="absenceMenu" syleClass="absenceMenu">
 
-                        <p:panel id="newAbsencePanel" styleClass="newAbsencePanel" header="Add New Absence">
-                            <h:outputText value="This would have the Add Absence Button"/>
-                        </p:panel>
+                <p:submenu id="createMenu" label="Create">
 
-                        <p:panel id="departmentAbsenceHistoryPanel" styleClass="absenceHistoryPanel" header="Department Absence History">
-                            <h:outputText value="This would have the Add Absence History Table"/>
-                        </p:panel>
+                    <p:menuitem id="CreateAbsence" value="Absence"
+                                actionListener="#{absenceManagementController.clearAbsense}"
+                                action="#{navigationController.showNewAbsenceDialog}"
+                                onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
+                                update=":addNewAbsence" icon="ui-icon-folder-collapsed"/>
+                    <p:separator/>
 
-            </h:panelGrid>
+                </p:submenu>
+
+            </p:menubar>
+
+            <p:panel id="departmentAbsenceHistoryPanel" styleClass="absenceHistoryPanel" header="Department Absence History">
+                <p:dataTable id="employeeAbsenceTable" var="absenceRow" value="#{absenceManagementController.employeeAbsencesByManager}" scrollable="true" scrollHeight="250">
+                    <p:column headerText="Name">
+                        <h:outputText value="#{absenceRow.fullName}" />
+                    </p:column>
+                    <p:column headerText="Start">
+                        <h:outputText value="#{absenceRow.start}" />
+                    </p:column>
+                    <p:column headerText="End">
+                        <h:outputText value="#{absenceRow.end}" />
+                    </p:column>
+                    <p:column headerText="Type">
+                        <h:outputText value="#{absenceRow.type}" />
+                    </p:column>
+                    <p:column headerText="Status">
+                        <h:outputText value="#{absenceRow.status}" />
+                    </p:column>
+                    <p:column headerText="Reason">
+                        <h:outputText value="#{absenceRow.reason}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
         </h:form>
 
+        <ui:include src="addNewAbsenceDialog.xhtml"/>
     </ui:define>
 </ui:composition>

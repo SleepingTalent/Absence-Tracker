@@ -13,7 +13,7 @@ public class AbsenceViewBean {
     private Date end;
     private Long id;
     private String fullName;
-    private Long employeeId;
+    private String employeeId;
 
     public void setReason(String reason) {
         this.reason = reason;
@@ -72,11 +72,11 @@ public class AbsenceViewBean {
         return fullName;
     }
 
-    public Long getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Long employeeId) {
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 }

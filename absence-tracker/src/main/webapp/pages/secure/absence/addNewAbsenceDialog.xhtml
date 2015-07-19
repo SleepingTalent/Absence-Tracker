@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="addNewAbsenceDialog" widgetVar="_addNewAbsenceDialog" header="Add New Absence" modal="true" dynamic="true" resizable="false" closable="true">
+
+        <h:form id="addNewAbsence">
+
+            <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
+
+                <p:outputLabel id="employeelbl" for="employee" value="Employee:" />
+                <p:selectOneMenu id="employee" styleClass="employeeDropDownField" value="#{absenceManagementController.absenceManagementModel.newAbsence.employeeId}">
+                    <f:selectItem itemLabel="Select Employee" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{absenceManagementController.managedEmployees}" />
+                </p:selectOneMenu>
+
+                <p:outputLabel for="absenceStart" value="Start:"/>
+                <p:calendar id="absenceStart" styleClass="calTextField" value="#{absenceManagementController.absenceManagementModel.newAbsence.start}" pattern="dd-MM-yyyy"/>
+                <p:outputLabel for="absenceEnd" value="End:"/>
+                <p:calendar id="absenceEnd" styleClass="calTextField" value="#{absenceManagementController.absenceManagementModel.newAbsence.end}" pattern="dd-MM-yyyy"/>
+
+            </p:panelGrid>
+
+            <p:separator />
+            <p:commandButton id="addNewAbsenceBtn" styleClass="floatRight" value="Create Absence"
+                             actionListener="#{absenceManagementController.createAbsence}"
+                             action="#{navigationController.hideNewAbsenceDialog}"
+                             update=":messages,:#{p:component('absenceManagementForm')}"/>
+
+        </h:form>
+    </p:dialog>
+</ui:composition>

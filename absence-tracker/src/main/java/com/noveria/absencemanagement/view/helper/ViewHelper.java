@@ -46,17 +46,23 @@ public class ViewHelper {
         dialogHelper.hideDialog(Dialogs.ADD_EMPLOYEE);
     }
 
-
     public void showBrowseEmployeeDialog() {
         dialogHelper.showDialog(Dialogs.BROWSE_EMPLOYEES);
     }
 
     public void showEditEmployeeDialog() {
         dialogHelper.showDialog(Dialogs.EDIT_EMPLOYEE);
-
     }
 
     public void showDeleteEmployeeDialog() {
         dialogHelper.showDialog(Dialogs.DELETE_EMPLOYEE);
+    }
+
+    public void showNewAbsenceDialog() {
+        dialogHelper.showDialog(Dialogs.ADD_ABSENCE);
+    }
+
+    public void hideNewAbsenceDialog() {
+        dialogHelper.hideDialog(Dialogs.ADD_ABSENCE);
     }
 }
