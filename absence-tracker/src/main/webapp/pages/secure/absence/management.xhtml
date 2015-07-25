@@ -21,10 +21,21 @@
 
                 </p:submenu>
 
+                <p:submenu id="viewMenu" label="View">
+
+                    <p:menuitem id="ViewEmployeeAbsence" value="Employee Absence"
+                                actionListener="#{absenceManagementController.clearEmployeeAbsense}"
+                                action="#{navigationController.showSelectEmployeeDialog}"
+                                onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
+                                update=":selectEmployee" icon="ui-icon-folder-collapsed"/>
+                    <p:separator/>
+
+                </p:submenu>
+
             </p:menubar>
 
             <p:panel id="departmentAbsenceHistoryPanel" styleClass="absenceHistoryPanel" header="Department Absence History">
-                <p:dataTable id="employeeAbsenceTable" var="absenceRow" value="#{absenceManagementController.employeeAbsencesByManager}" scrollable="true" scrollHeight="250" styleClass="employeeAbsenceTable">
+                <p:dataTable id="employeeAbsenceAwaitingConfirmationTable" var="absenceRow" value="#{absenceManagementController.employeeAbsencesAwaitingConfirmationByManager}" scrollable="true" scrollHeight="250" styleClass="employeeAbsenceTable">
                     <p:column headerText="Name" styleClass="absenceNameCol">
                         <h:outputText value="#{absenceRow.fullName}" />
                     </p:column>
@@ -46,5 +57,7 @@
         </h:form>
 
         <ui:include src="addNewAbsenceDialog.xhtml"/>
+        <ui:include src="selectEmployeeDialog.xhtml"/>
+        <ui:include src="browseEmployeeAbsenceDialog.xhtml"/>
     </ui:define>
 </ui:composition>

@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="selectEmployeeDialog" widgetVar="_selectEmployeeDialog" header="Select Employee" modal="true" dynamic="true" resizable="false" closable="true">
+
+        <h:form id="selectEmployee">
+
+            <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
+
+                <p:outputLabel id="employeelbl" for="employee" value="Employee:" />
+                <p:selectOneMenu id="employee" styleClass="employeeDropDownField" value="#{absenceManagementController.absenceManagementModel.selectedEmployeeId}"
+                                 required="true" requiredMessage="Please Select Employee">
+                    <f:selectItem itemLabel="Select Employee" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{absenceManagementController.managedEmployees}" />
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+
+            <p:separator />
+            <p:commandButton id="selectEmployeeBtn" styleClass="floatRight" value="View Employee Absence"
+                             actionListener="#{navigationController.hideNewAbsenceDialog}"
+                             action="#{navigationController.showEmployeeAbsenceDialog}"
+                             update=":employeeAbsence"/>
+
+        </h:form>
+    </p:dialog>
+</ui:composition>

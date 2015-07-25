@@ -1,6 +1,5 @@
 package com.noveria.absencemanagement.view.absence.management.model;
 
-import com.noveria.absencemanagement.model.absence.entity.AbsenceStatus;
 import com.noveria.absencemanagement.model.absence.entity.AbsenceType;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.service.absence.AbsenceService;
@@ -49,6 +48,8 @@ public class AbsenceManagementModel implements Serializable {
 
     private AbsenceViewBean newAbsence;
 
+    private Long selectedEmployeeId;
+
     @PostConstruct
     public void init() {
         newAbsence = new AbsenceViewBean();
@@ -66,7 +67,7 @@ public class AbsenceManagementModel implements Serializable {
         List<EmployeeViewBean> employeeViewBeanList = new ArrayList<EmployeeViewBean>();
         List<Employee> employeeList = administrationService.findAllEmployeeByManager(userModel.getEmployee());
 
-        for(Employee employee : employeeList) {
+        for (Employee employee : employeeList) {
             EmployeeViewBean employeeViewBean = new EmployeeViewBean();
             employeeViewBean.setId(employee.getId());
             employeeViewBean.setFirstname(employee.getFirstName());
@@ -81,39 +82,39 @@ public class AbsenceManagementModel implements Serializable {
     public void createAbsence() {
         try {
 
-        Date absenceStart = getNewAbsence().getStart();
-        Date absenceEnd = getNewAbsence().getEnd();
+            Date absenceStart = getNewAbsence().getStart();
+            Date absenceEnd = getNewAbsence().getEnd();
 
-        DateUtil.validateStartAndEndDatesForAbsence(absenceStart, absenceEnd);
+            DateUtil.validateStartAndEndDatesForAbsence(absenceStart, absenceEnd);
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        String absenceStartStr = format.format(absenceStart);
-        String absenceEndStr = format.format(absenceEnd);
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String absenceStartStr = format.format(absenceStart);
+            String absenceEndStr = format.format(absenceEnd);
 
-        logger.debug("Adding Absence Start Date : " + absenceStartStr);
-        logger.debug("Adding Absence End Date : " + absenceEndStr);
+            logger.debug("Adding Absence Start Date : " + absenceStartStr);
+            logger.debug("Adding Absence End Date : " + absenceEndStr);
 
-         Employee employee = administrationService.findEmployee(new Long(getNewAbsence().getEmployeeId()));
+            Employee employee = administrationService.findEmployee(new Long(getNewAbsence().getEmployeeId()));
 
-         absenceService.createAbsence(absenceStart,absenceEnd,employee,AbsenceType.SICK.name());
+            absenceService.createAbsence(absenceStart, absenceEnd, employee, AbsenceType.SICK.name());
 
-            messageHelper.addInfoMessage("Absence Submitted", absenceStartStr+"-"+absenceEndStr);
+            messageHelper.addInfoMessage("Absence Submitted", absenceStartStr + "-" + absenceEndStr);
 
             getNewAbsence().setStart(null);
             getNewAbsence().setEnd(null);
             getNewAbsence().setEmployeeId(null);
 
         } catch (InvalidDateException ide) {
-            messageHelper.addErrorMessage("Invalid Date Range",ide.getMessage());
+            messageHelper.addErrorMessage("Invalid Date Range", ide.getMessage());
             throw new AbortProcessingException(ide.getMessage());
         } catch (EmployeeNotFoundException e) {
-            messageHelper.addErrorMessage("Employee Not Found","No Employee Found with Id ("+getNewAbsence().getEmployeeId()+")");
-            throw new AbortProcessingException("No Employee Found with Id ("+getNewAbsence().getEmployeeId()+")");
+            messageHelper.addErrorMessage("Employee Not Found", "No Employee Found with Id (" + getNewAbsence().getEmployeeId() + ")");
+            throw new AbortProcessingException("No Employee Found with Id (" + getNewAbsence().getEmployeeId() + ")");
         }
     }
 
-    public List<AbsenceViewBean> getEmployeeAbsencesByManager() {
-        return absenceService.getEmployeeAbsencesByManager(userModel.getEmployee());
+    public List<AbsenceViewBean> findAllAbsenceAwaitingConfirmationByManager() {
+        return absenceService.findAllAbsenceAwaitingConfirmationByManager(userModel.getEmployee());
     }
 
     public AbsenceService getAbsenceService() {
@@ -150,5 +151,27 @@ public class AbsenceManagementModel implements Serializable {
 
     public void clearAbsence() {
         newAbsence = new AbsenceViewBean();
+    }
+
+    public void clearEmployeeAbsence() {
+        selectedEmployeeId = null;
+    }
+
+    public Long getSelectedEmployeeId() {
+        return selectedEmployeeId;
+    }
+
+    public void setSelectedEmployeeId(Long selectedEmployeeId) {
+        this.selectedEmployeeId = selectedEmployeeId;
+    }
+
+    public List<AbsenceViewBean> getEmployeeAbsences() {
+        try {
+            Employee selectedEmployee = administrationService.findEmployee(selectedEmployeeId);
+            return absenceService.getEmployeeAbsences(selectedEmployee);
+        } catch (EmployeeNotFoundException e) {
+            messageHelper.addErrorMessage("Employee Not Found", "No Employee Found with Id (" + selectedEmployeeId + ")");
+            throw new AbortProcessingException("No Employee Found with Id (" + selectedEmployeeId + ")");
+        }
     }
 }

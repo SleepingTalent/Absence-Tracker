@@ -90,4 +90,17 @@ public class NavigationController {
     public void hideConfirmAbsenceDialog() {
         viewHelper.hideConfirmAbsenceDialog();
     }
+
+    public void showSelectEmployeeDialog() {
+        viewHelper.showSelectEmployeeDialog();
+    }
+
+    public void hideSelectEmployeeDialog() {
+        viewHelper.hideSelectEmployeeDialog();
+    }
+
+    public void showEmployeeAbsenceDialog() {
+        viewHelper.showEmployeeAbsenceDialog();
+    }
+
 }

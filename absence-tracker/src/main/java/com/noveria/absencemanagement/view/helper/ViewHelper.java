@@ -73,4 +73,16 @@ public class ViewHelper {
     public void hideConfirmAbsenceDialog() {
         dialogHelper.hideDialog(Dialogs.CONFIRM_ABSENCE);
     }
+
+    public void showSelectEmployeeDialog() {
+        dialogHelper.showDialog(Dialogs.SELECT_EMPLOYEE);
+    }
+
+    public void hideSelectEmployeeDialog() {
+        dialogHelper.hideDialog(Dialogs.SELECT_EMPLOYEE);
+    }
+
+    public void showEmployeeAbsenceDialog() {
+        dialogHelper.showDialog(Dialogs.SHOW_EMPLOYEE_ABSENCE);
+    }
 }

@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="showEmployeeAbsenceDialog" widgetVar="_showEmployeeAbsenceDialog" header="Employee Absence" modal="true"
+              dynamic="true" resizable="false" closable="true">
+
+        <h:form id="employeeAbsence">
+
+            <p:dataTable id="employeeAbsenceTable" var="absenceRow" value="#{absenceManagementController.employeeAbsences}" scrollable="true" scrollHeight="250" styleClass="employeeAbsenceTable">
+                <p:column headerText="Name" styleClass="absenceNameCol">
+                    <h:outputText value="#{absenceRow.fullName}" />
+                </p:column>
+                <p:column headerText="Start" styleClass="absenceDateCol">
+                    <h:outputText value="#{absenceRow.startStr}" />
+                </p:column>
+                <p:column headerText="End" styleClass="absenceDateCol">
+                    <h:outputText value="#{absenceRow.endStr}" />
+                </p:column>
+                <p:column headerText="Type" styleClass="absenceTypeCol">
+                    <h:outputText value="#{absenceRow.type}" />
+                </p:column>
+                <p:column headerText="Status" styleClass="absenceStatusCol">
+                    <h:outputText value="#{absenceRow.status}" />
+                </p:column>
+                <p:column headerText="Reason">
+                    <h:outputText value="#{absenceRow.reason}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </p:dialog>
+</ui:composition>

@@ -42,8 +42,25 @@ public class AbsenceService {
         absenceDAO.updateAbsenceWithReason(id,reason);
     }
 
-    public List<Absence> getEmployeeAbsences(Employee employee){
-        return absenceDAO.findAllAbsenceByEmployee(employee);
+    public List<AbsenceViewBean> getEmployeeAbsences(Employee employee){
+        List<AbsenceViewBean> absenceViewBeanList = new ArrayList<AbsenceViewBean>();
+
+        for(Absence absence : absenceDAO.findAllAbsenceByEmployee(employee)){
+            AbsenceViewBean absenceViewBean = new AbsenceViewBean();
+            absenceViewBean.setId(absence.getId());
+            absenceViewBean.setStart(absence.getStart());
+            absenceViewBean.setEnd(absence.getEnd());
+            absenceViewBean.setType(absence.getType());
+            absenceViewBean.setStatus(absence.getStatus());
+            absenceViewBean.setReason(absence.getReason());
+            absenceViewBean.setFullName(
+                    absence.getEmployee().getFirstName()+" "+
+                            absence.getEmployee().getLastName());
+
+            absenceViewBeanList.add(absenceViewBean);
+        }
+
+        return absenceViewBeanList;
     }
 
     public List<AbsenceViewBean> getEmployeeAbsencesAwaitingConfirmation(Employee employee){
@@ -67,10 +84,10 @@ public class AbsenceService {
         return absenceViewBeanList;
     }
 
-    public List<AbsenceViewBean> getEmployeeAbsencesByManager(Employee manager){
+    public List<AbsenceViewBean> findAllAbsenceAwaitingConfirmationByManager(Employee manager){
         List<AbsenceViewBean> absenceViewBeanList = new ArrayList<AbsenceViewBean>();
 
-        for(Absence absence : absenceDAO.findAllAbsenceByManager(manager)){
+        for(Absence absence : absenceDAO.findAllAbsenceAwaitingConfirmationByManager(manager)){
             AbsenceViewBean absenceViewBean = new AbsenceViewBean();
             absenceViewBean.setId(absence.getId());
             absenceViewBean.setStart(absence.getStart());

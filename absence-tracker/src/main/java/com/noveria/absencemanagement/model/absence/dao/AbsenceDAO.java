@@ -60,4 +60,16 @@ public class AbsenceDAO extends BaseDAO<Absence> {
         return query.getResultList();
 
     }
+
+    public List<Absence> findAllAbsenceAwaitingConfirmationByManager(Employee manager) {
+        String sql = "select a from Absence a where a.employee in (select e from Employee e where e.department = " +
+                "(select d from Department d where d.manager = :manager))" +
+        " and a.status = '"+ AbsenceStatus.AWAITING_COMFIRMATION.name()+"'";
+
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("manager",manager);
+
+        return query.getResultList();
+
+    }
 }

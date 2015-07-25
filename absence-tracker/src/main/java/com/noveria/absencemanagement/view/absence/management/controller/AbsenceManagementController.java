@@ -27,6 +27,10 @@ public class AbsenceManagementController {
         absenceManagementModel.clearAbsence();
     }
 
+    public void clearEmployeeAbsense() {
+        absenceManagementModel.clearEmployeeAbsence();
+    }
+
     public AbsenceManagementModel getAbsenceManagementModel() {
         return absenceManagementModel;
     }
@@ -50,9 +54,12 @@ public class AbsenceManagementController {
             return managers;
      }
 
-    public List<AbsenceViewBean> getEmployeeAbsencesByManager() {
-        return absenceManagementModel.getEmployeeAbsencesByManager();
+    public List<AbsenceViewBean> getEmployeeAbsencesAwaitingConfirmationByManager() {
+        return absenceManagementModel.findAllAbsenceAwaitingConfirmationByManager();
     }
 
 
+    public List<AbsenceViewBean> getEmployeeAbsences() {
+        return absenceManagementModel.getEmployeeAbsences();
+    }
 }
