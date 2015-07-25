@@ -119,6 +119,29 @@ body {
 
 }
 
+.employeeAbsenceTable {
+}
+
+.absenceDateCol {
+    width: 80px !important;
+}
+
+.absenceTypeCol {
+    width: 80px !important;
+}
+
+.absenceNameCol {
+    width: 130px !important;
+}
+
+.absenceStatusCol {
+    width: 180px !important;
+}
+
+.absenceActionCol {
+    width: 100px !important;
+}
+
 .calTextField input{
     background: #ffffff !important;
     color: #0e2c54 !important;

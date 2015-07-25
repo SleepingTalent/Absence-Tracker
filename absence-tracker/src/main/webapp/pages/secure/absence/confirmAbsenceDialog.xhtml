@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="confirmAbsenceDialog" widgetVar="_confirmAbsenceDialog" header="Confirm Absence" modal="true" dynamic="true" resizable="false" closable="true">
+
+        <h:form id="confirmAbsence">
+
+            <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
+
+                <p:outputLabel id="employeelbl" value="Employee:" />
+                <p:outputLabel id="employeelName" value="#{absenceConfirmationController.absenceConfirmationModel.selectedAbsence.fullName}" />
+
+                <p:outputLabel id="startlbl" value="Absence Start:" />
+                <p:outputLabel id="start" value="#{absenceConfirmationController.absenceConfirmationModel.selectedAbsence.startStr}" />
+
+                <p:outputLabel id="endlbl" value="Absence End:" />
+                <p:outputLabel id="end" value="#{absenceConfirmationController.absenceConfirmationModel.selectedAbsence.endStr}" />
+
+                <p:outputLabel id="reasonlbl" for="reason" value="Reason:" />
+                <p:selectOneMenu id="reason" styleClass="employeeDropDownField" value="#{absenceConfirmationController.absenceConfirmationModel.selectedAbsence.reason}"
+                                 required="true" requiredMessage="Please Select Reason">
+                    <f:selectItem itemLabel="Select Reason" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{absenceConfirmationController.absenceReasons}" />
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+
+            <p:separator />
+            <p:commandButton id="confirmAbsenceBtn" styleClass="floatRight" value="Confirm Absence"
+                             actionListener="#{absenceConfirmationController.confirmAbsence}"
+                             action="#{navigationController.hideConfirmAbsenceDialog}"
+                             onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
+                             update=":messages,:#{p:component('absenceConfirmationForm')}"/>
+
+        </h:form>
+    </p:dialog>
+</ui:composition>

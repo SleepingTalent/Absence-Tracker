@@ -67,11 +67,27 @@ public class NavigationController {
         return NavigationOutcome.SUCCESS.getOutcomeName();
     }
 
+    public String showEnterAbsenceFeatures() {
+        return NavigationOutcome.SUCCESS.getOutcomeName();
+    }
+
+    public String showConfirmAbsenceFeatures() {
+        return NavigationOutcome.SUCCESS.getOutcomeName();
+    }
+
     public void showNewAbsenceDialog() {
-        viewHelper.showNewAbsenceDialog();;
+        viewHelper.showNewAbsenceDialog();
     }
 
     public void hideNewAbsenceDialog() {
-        viewHelper.hideNewAbsenceDialog();;
+        viewHelper.hideNewAbsenceDialog();
+    }
+
+    public void showConfirmAbsenceDialog() {
+        viewHelper.showConfirmAbsenceDialog();
+    }
+
+    public void hideConfirmAbsenceDialog() {
+        viewHelper.hideConfirmAbsenceDialog();
     }
 }

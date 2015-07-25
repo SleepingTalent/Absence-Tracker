@@ -38,11 +38,33 @@ public class AbsenceService {
 
     @Transactional
     public void updateAbsence(Long id, String reason){
+
         absenceDAO.updateAbsenceWithReason(id,reason);
     }
 
     public List<Absence> getEmployeeAbsences(Employee employee){
         return absenceDAO.findAllAbsenceByEmployee(employee);
+    }
+
+    public List<AbsenceViewBean> getEmployeeAbsencesAwaitingConfirmation(Employee employee){
+        List<AbsenceViewBean> absenceViewBeanList = new ArrayList<AbsenceViewBean>();
+
+        for(Absence absence : absenceDAO.findEmployeeAbsenceByAwaitingComfirmation(employee)){
+            AbsenceViewBean absenceViewBean = new AbsenceViewBean();
+            absenceViewBean.setId(absence.getId());
+            absenceViewBean.setStart(absence.getStart());
+            absenceViewBean.setEnd(absence.getEnd());
+            absenceViewBean.setType(absence.getType());
+            absenceViewBean.setStatus(absence.getStatus());
+            absenceViewBean.setReason(absence.getReason());
+            absenceViewBean.setFullName(
+                    absence.getEmployee().getFirstName()+" "+
+                            absence.getEmployee().getLastName());
+
+            absenceViewBeanList.add(absenceViewBean);
+        }
+
+        return absenceViewBeanList;
     }
 
     public List<AbsenceViewBean> getEmployeeAbsencesByManager(Employee manager){

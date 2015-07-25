@@ -65,4 +65,12 @@ public class ViewHelper {
     public void hideNewAbsenceDialog() {
         dialogHelper.hideDialog(Dialogs.ADD_ABSENCE);
     }
+
+    public void showConfirmAbsenceDialog() {
+        dialogHelper.showDialog(Dialogs.CONFIRM_ABSENCE);
+    }
+
+    public void hideConfirmAbsenceDialog() {
+        dialogHelper.hideDialog(Dialogs.CONFIRM_ABSENCE);
+    }
 }

@@ -11,7 +11,8 @@
             <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
 
                 <p:outputLabel id="employeelbl" for="employee" value="Employee:" />
-                <p:selectOneMenu id="employee" styleClass="employeeDropDownField" value="#{absenceManagementController.absenceManagementModel.newAbsence.employeeId}">
+                <p:selectOneMenu id="employee" styleClass="employeeDropDownField" value="#{absenceManagementController.absenceManagementModel.newAbsence.employeeId}"
+                                 required="true" requiredMessage="Please Select Employee">
                     <f:selectItem itemLabel="Select Employee" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{absenceManagementController.managedEmployees}" />
                 </p:selectOneMenu>

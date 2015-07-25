@@ -28,13 +28,13 @@
                     <p:menuButton id="featuresMenu" value="#{authController.employeeDetails.fullname}" styleClass="featuresMenu">
                         <sec:authorize ifAllGranted="EMPLOYEE">
                             <p:menuitem id="myAnnualLeave" value="myAnnualLeave" action="#{navigationController.showHolidayManagementFeatures}" icon="ui-icon-calendar"/>
-                            <p:menuitem id="myAbsence" value="myAbsence" action="#{navigationController.showHolidayManagementFeatures}" icon="ui-icon-mail-closed"/>
+                            <p:menuitem id="myAbsence" value="myAbsence" action="#{navigationController.showConfirmAbsenceFeatures}" icon="ui-icon-mail-closed"/>
                         </sec:authorize>
 
                         <sec:authorize ifAllGranted="MANAGER">
                             <p:separator />
                             <p:menuitem id="authoriseLeave" value="authoriseLeave" action="#{navigationController.showHolidayAuthoriseFeatures}" icon="ui-icon-person"/>
-                            <p:menuitem id="enterAbsence" value="enterAbsence" action="#{navigationController.showHolidayAuthoriseFeatures}" icon="ui-icon-mail-open"/>
+                            <p:menuitem id="enterAbsence" value="enterAbsence" action="#{navigationController.showEnterAbsenceFeatures}" icon="ui-icon-mail-open"/>
                         </sec:authorize>
 
 

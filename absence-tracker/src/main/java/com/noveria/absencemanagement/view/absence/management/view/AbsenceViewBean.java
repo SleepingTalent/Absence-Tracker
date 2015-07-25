@@ -1,11 +1,15 @@
 package com.noveria.absencemanagement.view.absence.management.view;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * Created by lynseymcgregor on 18/07/2015.
  */
 public class AbsenceViewBean {
+
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
     private String reason;
     private String status;
     private String type;
@@ -48,12 +52,20 @@ public class AbsenceViewBean {
         return start;
     }
 
+    public String getStartStr() {
+        return simpleDateFormat.format(start);
+    }
+
     public void setEnd(Date end) {
         this.end = end;
     }
 
     public Date getEnd() {
         return end;
+    }
+
+    public String getEndStr() {
+        return simpleDateFormat.format(end);
     }
 
     public void setId(Long id) {

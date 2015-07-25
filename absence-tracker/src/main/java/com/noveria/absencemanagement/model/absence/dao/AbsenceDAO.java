@@ -1,6 +1,7 @@
 package com.noveria.absencemanagement.model.absence.dao;
 
 import com.noveria.absencemanagement.model.absence.entity.Absence;
+import com.noveria.absencemanagement.model.absence.entity.AbsenceStatus;
 import com.noveria.absencemanagement.model.common.dao.BaseDAO;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeave;
@@ -30,9 +31,20 @@ public class AbsenceDAO extends BaseDAO<Absence> {
         return query.getResultList();
     }
 
+    public List<Absence> findEmployeeAbsenceByAwaitingComfirmation(Employee employee) {
+        String sql = "select a from Absence a where a.employee = :employee " +
+                "and a.status = '"+ AbsenceStatus.AWAITING_COMFIRMATION.name()+"'";
+
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("employee", employee);
+
+        return query.getResultList();
+    }
+
     public Absence updateAbsenceWithReason(Long id, String reason) {
         Absence absence = findById(id);
         absence.setReason(reason);
+        absence.setStatus(AbsenceStatus.CONFIRMED.name());
         update(absence);
 
         return absence;

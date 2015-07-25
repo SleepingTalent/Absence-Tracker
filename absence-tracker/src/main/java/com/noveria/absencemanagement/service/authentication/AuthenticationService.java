@@ -36,7 +36,7 @@ public class AuthenticationService implements UserDetailsService {
 
     /**
      * Autowired; is a spring command which
-     * automatically injects an instance of
+     * automatically injects (dependency injection) an instance of
      * the named object into the class.
      */
     @Autowired
