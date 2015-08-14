@@ -51,6 +51,10 @@ public class HolidayManagementController {
         holidayManagementModel.requestHoliday();
     }
 
+    public void clearHolidayRequest() {
+        holidayManagementModel.clearHolidayRequest();
+    }
+
     public List<HolidayRequestViewingBean> getRequestHistory() {
         return holidayManagementModel.getRequestHistory();
     }

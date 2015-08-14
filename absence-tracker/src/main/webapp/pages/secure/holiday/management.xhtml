@@ -8,7 +8,21 @@
     <ui:define name="pageContent">
 
         <h:form id="holidayManagementForm" prependId="false">
-            <h:panelGrid columns="3" columnClasses="alignColumnTop">
+            <p:menubar id="holidayMenuBar" syleClass="holidayMenu">
+
+                <p:submenu id="holidayMenu" label="Holiday">
+
+                    <p:menuitem id="RequestHoliday" value="Request Holiday"
+                                actionListener="#{holidayManagementController.clearHolidayRequest}"
+                                action="#{navigationController.showRequestHolidayDialog}"
+                                onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
+                                update=":requestHolidayForm" icon="ui-icon-calendar"/>
+                </p:submenu>
+
+
+            </p:menubar>
+
+            <h:panelGrid columns="3" columnClasses="alignColumnTop,alignColumnTop,alignColumnTop">
                 <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Holiday Balance">
 
                         <p:dataTable id="holidayAllowanceTable" var="holidayAllowanceRow" value="#{holidayManagementController.holidayAllowanceList}">
@@ -33,34 +47,7 @@
                     <p:schedule value="#{holidayManagementController.scheduleLazyModel}"/>
                 </p:panel>
 
-                <p:panel id="holidayRequestPanel" styleClass="holidayRequestPanel">
-
-
-                    <h:panelGrid columns="1">
-
-
-                        <p:panel id="requestPanel" styleClass="requestNewHolidayPanel" header="Request New Holiday">
-
-                            <h:form id="requestHolidayForm">
-
-                                <h:panelGrid columns="2">
-                                    <p:outputLabel for="holidayStart" value="Start:"/>
-                                    <p:calendar id="holidayStart" styleClass="calTextField" value="#{holidayManagementController.holidayManagementModel.holidayRequest.start}" pattern="dd-MM-yyyy"/>
-                                    <p:outputLabel for="holidayEnd" value="End:"/>
-                                    <p:calendar id="holidayEnd" styleClass="calTextField" value="#{holidayManagementController.holidayManagementModel.holidayRequest.end}" pattern="dd-MM-yyyy"/>
-
-                                </h:panelGrid>
-
-                                <p:separator />
-                                <p:commandButton id="requestHolidyBtn" value="Request Holiday" styleClass="alignRight"
-                                                 actionListener="#{holidayManagementController.requestHoliday}"
-                                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                                 update=":messages,:#{p:component('holidayManagementForm')}"/>
-                            </h:form>
-
-                        </p:panel>
-
-                        <p:panel id="historyPanel" styleClass="requestHistoryPanel" header="Request History">
+                <p:panel id="historyPanel" styleClass="requestHistoryPanel" header="Request History">
 
                             <p:dataTable id="requestHistoryTable" var="holidayRequestRow" value="#{holidayManagementController.requestHistory}" scrollable="true" scrollHeight="250">
                                 <p:column headerText="Start">
@@ -74,12 +61,10 @@
                                 </p:column>
                             </p:dataTable>
 
-                        </p:panel>
-                    </h:panelGrid>
-
                 </p:panel>
             </h:panelGrid>
         </h:form>
 
+        <ui:include src="requestHolidayDialog.xhtml"/>
     </ui:define>
 </ui:composition>

@@ -103,4 +103,12 @@ public class NavigationController {
         viewHelper.showEmployeeAbsenceDialog();
     }
 
+    public void showRequestHolidayDialog() {
+        viewHelper.showRequestHolidayDialog();
+    }
+
+    public void hideRequestHolidayDialog() {
+        viewHelper.hideRequestHolidayDialog();
+    }
+
 }

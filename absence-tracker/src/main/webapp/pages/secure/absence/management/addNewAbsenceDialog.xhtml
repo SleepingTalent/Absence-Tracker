@@ -18,9 +18,9 @@
                 </p:selectOneMenu>
 
                 <p:outputLabel for="absenceStart" value="Start:"/>
-                <p:calendar id="absenceStart" styleClass="calTextField" value="#{absenceManagementController.absenceManagementModel.newAbsence.start}" pattern="dd-MM-yyyy"/>
+                <p:calendar id="absenceStart" styleClass="calTextField" value="#{absenceManagementController.absenceManagementModel.newAbsence.start}" pattern="dd-MM-yyyy" showOn="button" mask="true"/>
                 <p:outputLabel for="absenceEnd" value="End:"/>
-                <p:calendar id="absenceEnd" styleClass="calTextField" value="#{absenceManagementController.absenceManagementModel.newAbsence.end}" pattern="dd-MM-yyyy"/>
+                <p:calendar id="absenceEnd" styleClass="calTextField" value="#{absenceManagementController.absenceManagementModel.newAbsence.end}" pattern="dd-MM-yyyy" showOn="button" mask="true"/>
 
             </p:panelGrid>
 

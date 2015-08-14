@@ -211,4 +211,8 @@ public class HolidayManagementModel implements Serializable {
     public List<HolidayRequestViewingBean> getRequestHistory() {
         return annualLeaveService.getHolidayRequests(userModel.getEmployee());
     }
+
+    public void clearHolidayRequest() {
+        holidayRequest = new HolidayRequestViewingBean();
+    }
 }

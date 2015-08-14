@@ -107,8 +107,7 @@ body {
 }
 
 .requestHistoryPanel {
-    width: 315px;
-    min-height: 250px;
+    min-height: 505px;
 }
 
 .holidayCalendarPanel {

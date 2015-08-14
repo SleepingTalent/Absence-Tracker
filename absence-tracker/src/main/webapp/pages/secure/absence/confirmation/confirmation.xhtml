@@ -9,7 +9,7 @@
 
         <h:form id="absenceConfirmationForm" prependId="false">
 
-            <p:panel id="employeeAbsenceConfirmationPanel" styleClass="absenceConfirmationPanel" header="Absence Confirmation">
+            <p:panel id="employeeAbsenceConfirmationPanel" styleClass="absenceConfirmationPanel" header="Record of Absence">
                 <p:dataTable id="employeeAbsenceConfirmationTable" var="absenceRow" value="#{absenceConfirmationController.employeeAbsencesAwaitingConfirmation}" scrollable="true" scrollHeight="250" styleClass="employeeAbsenceTable">
                     <p:column headerText="Name" styleClass="absenceNameCol">
                         <h:outputText value="#{absenceRow.fullName}" />

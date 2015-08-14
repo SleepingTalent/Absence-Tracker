@@ -6,7 +6,7 @@ public enum Dialogs {
     EDIT_DEPARTMENT("_editDepartmentDialog"), BROWSE_DEPARTMENTS("_browseDepartmentsDialog"),
     ADD_EMPLOYEE("_addEmployeeDialog"), DELETE_EMPLOYEE("_deleteEmployeeDialog"), EDIT_EMPLOYEE("_editEmployeeDialog"),
     BROWSE_EMPLOYEES("_browseEmployeesDialog"), ADD_ABSENCE("_addNewAbsenceDialog"), CONFIRM_ABSENCE("_confirmAbsenceDialog"),
-    SELECT_EMPLOYEE("_selectEmployeeDialog"), SHOW_EMPLOYEE_ABSENCE("_showEmployeeAbsenceDialog");
+    SELECT_EMPLOYEE("_selectEmployeeDialog"), SHOW_EMPLOYEE_ABSENCE("_showEmployeeAbsenceDialog"), REQUEST_HOLIDAY("_requestNewHolidayDialog");
 
     private final String dialogWidgetVar;
 

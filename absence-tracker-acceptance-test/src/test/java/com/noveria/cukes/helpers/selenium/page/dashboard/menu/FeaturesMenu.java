@@ -14,7 +14,7 @@ public class FeaturesMenu extends Page {
     private static final String MY_ANNUAL_LEAVE_ID = "myAnnualLeave";
     private static final String MY_ABSENCE_ID = "myAbsence";
     private static final String AUTHORISE_LEAVE_ID = "authoriseLeave";
-    private static final String ENTER_ABSENCE_ID = "enterAbsence";
+    private static final String ENTER_ABSENCE_ID = "absenceMgt";
 
     public FeaturesMenu(CucumberWebDriver webDriver) {
         super(webDriver);
