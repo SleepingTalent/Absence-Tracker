@@ -43,25 +43,25 @@
         <navigation-case>
             <from-action>#{navigationController.showHolidayManagementFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/employee/holidayManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showConfirmAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/confirmation/confirmation.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/employee/employeeAbsence.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showEnterAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/management/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/management/absenceManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showHolidayAuthoriseFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/authorise.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/management/authoriseHoliday.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -83,32 +83,32 @@
         <navigation-case>
             <from-action>#{navigationController.showHolidayManagementFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/employee/holidayManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showConfirmAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/confirmation/confirmation.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/employee/employeeAbsence.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showEnterAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/management/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/management/absenceManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showHolidayAuthoriseFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/authorise.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/management/authoriseHoliday.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
 
 
     <navigation-rule>
-        <from-view-id>/pages/secure/holiday/management.xhtml</from-view-id>
+        <from-view-id>/pages/secure/holiday/employee/holidayManagement.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>
@@ -124,31 +124,31 @@
         <navigation-case>
             <from-action>#{navigationController.showHolidayManagementFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/employee/holidayManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showConfirmAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/confirmation/confirmation.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/employee/employeeAbsence.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showEnterAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/management/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/management/absenceManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showHolidayAuthoriseFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/authorise.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/management/authoriseHoliday.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/pages/secure/holiday/authorise.xhtml</from-view-id>
+        <from-view-id>/pages/secure/holiday/management/authoriseHoliday.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>
@@ -164,31 +164,31 @@
         <navigation-case>
             <from-action>#{navigationController.showHolidayManagementFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/employee/holidayManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showConfirmAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/confirmation/confirmation.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/employee/employeeAbsence.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showEnterAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/management/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/management/absenceManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showHolidayAuthoriseFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/authorise.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/management/authoriseHoliday.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/pages/secure/absence/management/management.xhtml</from-view-id>
+        <from-view-id>/pages/secure/absence/management/absenceManagement.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>
@@ -204,31 +204,31 @@
         <navigation-case>
             <from-action>#{navigationController.showHolidayManagementFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/employee/holidayManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showConfirmAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/confirmation/confirmation.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/employee/employeeAbsence.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showEnterAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/management/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/management/absenceManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showHolidayAuthoriseFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/authorise.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/management/authoriseHoliday.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/pages/secure/absence/confirmation/confirmation.xhtml</from-view-id>
+        <from-view-id>/pages/secure/absence/employee/employeeAbsence.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>
@@ -244,25 +244,25 @@
         <navigation-case>
             <from-action>#{navigationController.showHolidayManagementFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/employee/holidayManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showConfirmAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/confirmation/confirmation.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/employee/employeeAbsence.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showEnterAbsenceFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/absence/management/management.xhtml</to-view-id>
+            <to-view-id>/pages/secure/absence/management/absenceManagement.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-action>#{navigationController.showHolidayAuthoriseFeatures}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/pages/secure/holiday/authorise.xhtml</to-view-id>
+            <to-view-id>/pages/secure/holiday/management/authoriseHoliday.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

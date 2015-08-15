@@ -9,13 +9,19 @@
 
         <h:form id="absenceConfirmationForm" prependId="false">
 
-            <p:menubar id="absenceMenu" syleClass="absenceMenu">
-                <p:submenu id="viewMenu" label="Absence">
-                    <p:menuitem id="ViewEmployeeAbsence" value="Absence History"
+            <p:menubar id="absenceMenuBar" syleClass="absenceMenu">
+                <p:submenu id="absenceMenu" label="Absence">
+                    <p:menuitem id="ViewEmployeeAbsenceHistory" value="View History"
                                 action="#{navigationController.showEmployeeAbsenceDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
                                 update=":employeeAbsence" icon="ui-icon-search"/>
+
+                    <p:menuitem id="ViewEmployeeAbsenceStats" value="View Statistics"
+                                action="#{navigationController.showEmployeeAbsenceStatsDialog}"
+                                onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
+                                update=":employeeAbsenceStats" icon="ui-icon-clipboard"/>
                 </p:submenu>
+
             </p:menubar>
 
             <p:panel id="employeeAbsenceConfirmationPanel" styleClass="absenceConfirmationPanel" header="Record of Absence">
@@ -48,5 +54,6 @@
 
         <ui:include src="confirmAbsenceDialog.xhtml"/>
         <ui:include src="employeeAbsenceHistoryDialog.xhtml"/>
+        <ui:include src="employeeAbsenceStatsDialog.xhtml"/>
     </ui:define>
 </ui:composition>

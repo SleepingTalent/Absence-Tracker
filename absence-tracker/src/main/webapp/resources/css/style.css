@@ -198,6 +198,14 @@ body {
     width:5px;
 }
 
+.authorisedAbsenceChart {
+    height: 200px;
+}
+
+.unAuthorisedAbsenceChart {
+    height: 200px;
+}
+
 td .holidayUsed{
 
 }

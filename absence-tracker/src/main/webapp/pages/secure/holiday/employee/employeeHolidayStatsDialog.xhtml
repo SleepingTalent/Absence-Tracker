@@ -1,0 +1,14 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="employeeHolidayStatsDialog" widgetVar="_employeeHolidayStatsDialog" header="Holiday Statistics" width="720" modal="true" dynamic="true" resizable="false" closable="true">
+
+        <h:form id="employeeHolidayStatsForm">
+            <p:chart id="employeeHolidayBarChart" type="bar" model="#{holidayManagementController.holidayBarChartStats}" styleClass="employeeHolidayBarChart" widgetVar="employeeHolidayBarChart"/>
+        </h:form>
+
+    </p:dialog>
+</ui:composition>

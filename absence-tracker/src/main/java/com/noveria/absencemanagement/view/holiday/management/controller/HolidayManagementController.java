@@ -4,6 +4,10 @@ import com.noveria.absencemanagement.view.holiday.management.model.HolidayManage
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayAllowanceViewBean;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayRequestViewingBean;
 import org.primefaces.model.ScheduleModel;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,6 +57,36 @@ public class HolidayManagementController {
 
     public void clearHolidayRequest() {
         holidayManagementModel.clearHolidayRequest();
+    }
+
+    public BarChartModel getHolidayBarChartStats() {
+        BarChartModel holidayStats = new BarChartModel();
+
+        ChartSeries holiday = new ChartSeries();
+
+        holiday.set("Apr", 5);
+        holiday.set("May", 1);
+        holiday.set("Jun", 15);
+        holiday.set("Jul", 1);
+        holiday.set("Aug", 2);
+        holiday.set("Sep", 1);
+        holiday.set("Oct", 5);
+        holiday.set("Nov", 1);
+        holiday.set("Dec", 5);
+        holiday.set("Jan", 1);
+        holiday.set("Feb", 1);
+        holiday.set("Mar", 2);
+
+        holidayStats.addSeries(holiday);
+        holidayStats.setTitle("Annual Holiday Breakdown");
+        holidayStats.setExtender("chartExtender");
+
+        Axis yAxis = holidayStats.getAxis(AxisType.Y);
+        yAxis.setLabel("Days");
+        yAxis.setMin(0);
+        yAxis.setMax(30);
+
+        return holidayStats;
     }
 
     public List<HolidayRequestViewingBean> getRequestHistory() {

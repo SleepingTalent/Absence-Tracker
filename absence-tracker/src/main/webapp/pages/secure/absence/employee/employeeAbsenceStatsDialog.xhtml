@@ -1,0 +1,14 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="employeeAbsenceStatsDialog" widgetVar="_employeeAbsenceStatsDialog" width="720" header="Absence Statistics" modal="true"
+              dynamic="true" resizable="false" closable="true">
+        <h:form id="employeeAbsenceStats">
+            <p:chart id="authorisedAbsenceChart" type="bar" model="#{employeeAbsenceController.authorisedAbsenceStats}" styleClass="authorisedAbsenceChart" widgetVar="authorisedAbsenceChart"/>
+            <p:separator/>
+            <p:chart id="unauthorisedAbsenceChart" type="bar" model="#{employeeAbsenceController.unauthorisedAbsenceStats}" styleClass="unauthorisedAbsenceChart" widgetVar="unauthorisedAbsenceChart"/>
+        </h:form>
+    </p:dialog>
+</ui:composition>

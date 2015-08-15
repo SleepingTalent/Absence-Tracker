@@ -94,4 +94,19 @@ public class ViewHelper {
         dialogHelper.hideDialog(Dialogs.REQUEST_HOLIDAY);
     }
 
+    public void showEmployeeAbsenceStatsDialog() {
+        dialogHelper.showDialog(Dialogs.EMPLOYEE_ABSENCE_STATS);
+    }
+
+    public void hideEmployeeAbsenceStatsDialog() {
+        dialogHelper.hideDialog(Dialogs.EMPLOYEE_ABSENCE_STATS);
+    }
+
+    public void showEmployeeHolidayStatsDialog() {
+        dialogHelper.showDialog(Dialogs.EMPLOYEE_HOLIDAY_STATS);
+    }
+
+    public void hideEmployeeHolidayStatsDialog() {
+        dialogHelper.hideDialog(Dialogs.EMPLOYEE_HOLIDAY_STATS);
+    }
 }

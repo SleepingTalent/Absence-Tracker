@@ -1,6 +1,5 @@
 package com.noveria.absencemanagement.view.absence.management.model;
 
-import com.noveria.absencemanagement.model.absence.entity.AbsenceType;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.service.absence.AbsenceService;
 import com.noveria.absencemanagement.service.administration.AdministrationService;

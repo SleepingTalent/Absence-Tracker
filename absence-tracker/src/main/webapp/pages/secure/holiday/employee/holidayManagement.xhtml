@@ -17,13 +17,18 @@
                                 action="#{navigationController.showRequestHolidayDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
                                 update=":requestHolidayForm" icon="ui-icon-calendar"/>
+
+                    <p:menuitem id="ViewEmployeeHolidayStats" value="View Statistics"
+                                action="#{navigationController.showEmployeeHolidayStatsDialog}"
+                                onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
+                                update=":employeeHolidayStatsForm" icon="ui-icon-clipboard"/>
                 </p:submenu>
 
 
             </p:menubar>
 
             <h:panelGrid columns="3" columnClasses="alignColumnTop,alignColumnTop,alignColumnTop">
-                <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Holiday Balance">
+                <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Holiday Balance (Hours)">
 
                         <p:dataTable id="holidayAllowanceTable" var="holidayAllowanceRow" value="#{holidayManagementController.holidayAllowanceList}">
                             <p:column headerText="Total" styleClass="holidayTotal">
@@ -66,5 +71,6 @@
         </h:form>
 
         <ui:include src="requestHolidayDialog.xhtml"/>
+        <ui:include src="employeeHolidayStatsDialog.xhtml"/>
     </ui:define>
 </ui:composition>

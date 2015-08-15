@@ -111,4 +111,19 @@ public class NavigationController {
         viewHelper.hideRequestHolidayDialog();
     }
 
+    public void showEmployeeAbsenceStatsDialog() {
+        viewHelper.showEmployeeAbsenceStatsDialog();
+    }
+
+    public void hideEmployeeAbsenceStatsDialog() {
+        viewHelper.hideEmployeeAbsenceStatsDialog();
+    }
+
+    public void showEmployeeHolidayStatsDialog() {
+        viewHelper.showEmployeeHolidayStatsDialog();
+    }
+
+    public void hideEmployeeHolidayStatsDialog() {
+        viewHelper.hideEmployeeHolidayStatsDialog();
+    }
 }

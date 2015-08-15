@@ -13,8 +13,9 @@
 </h:head>
 <h:body>
     <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputScript library="js" name="common.js" />
 
-        <p:growl id="messages" showDetail="true"/>
+    <p:growl id="messages" showDetail="true"/>
 
         <p:dialog widgetVar="_ajaxLoadingDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
             <h:graphicImage library="images" name="ajax-loader.gif"/>
