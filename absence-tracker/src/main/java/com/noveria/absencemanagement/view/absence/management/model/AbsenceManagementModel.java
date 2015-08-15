@@ -96,7 +96,7 @@ public class AbsenceManagementModel implements Serializable {
 
             Employee employee = administrationService.findEmployee(new Long(getNewAbsence().getEmployeeId()));
 
-            absenceService.createAbsence(absenceStart, absenceEnd, employee, AbsenceType.SICK.name());
+            absenceService.createAbsence(absenceStart, absenceEnd, employee);
 
             messageHelper.addInfoMessage("Absence Submitted", absenceStartStr + "-" + absenceEndStr);
 

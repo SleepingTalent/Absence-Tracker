@@ -8,7 +8,7 @@
 
         <h:form id="employeeAbsence">
 
-            <p:dataTable id="employeeAbsenceTable" var="absenceRow" value="#{absenceManagementController.employeeAbsences}" scrollable="true" scrollHeight="250" styleClass="employeeAbsenceTable">
+            <p:dataTable id="employeeAbsenceTable" var="absenceRow" value="#{employeeAbsenceController.employeeAbsences}" scrollable="true" scrollHeight="250" styleClass="employeeAbsenceTable">
                 <p:column headerText="Name" styleClass="absenceNameCol">
                     <h:outputText value="#{absenceRow.fullName}" />
                 </p:column>

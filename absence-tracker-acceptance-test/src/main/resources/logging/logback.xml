@@ -17,7 +17,7 @@
     <logger name="com.noveria.absencemanagement.model.employee.dao.EmployeeDAO" level="DEBUG" />
     -->
 
-    <logger name="com.noveria.absencemanagement.view.absence.confirmation.model.AbsenceConfirmationModel" level="DEBUG" />
+    <logger name="com.noveria.absencemanagement.view.absence.employee.model.EmployeeAbsenceModel" level="DEBUG" />
     <logger name="com.noveria.absencemanagement.view.holiday.management.model.HolidayManagementModel" level="DEBUG" />
     <logger name="com.noveria.absencemanagement.view.holiday.management.controller.HolidayManagementController" level="DEBUG" />
 

@@ -11,25 +11,21 @@
             <p:menubar id="absenceMenu" syleClass="absenceMenu">
 
                 <p:submenu id="createMenu" label="Create">
-
                     <p:menuitem id="CreateAbsence" value="Absence"
                                 actionListener="#{absenceManagementController.clearAbsense}"
                                 action="#{navigationController.showNewAbsenceDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                update=":addNewAbsence" icon="ui-icon-folder-collapsed"/>
+                                update=":addNewAbsence" icon="ui-icon-plusthick"/>
                     <p:separator/>
-
                 </p:submenu>
 
                 <p:submenu id="viewMenu" label="View">
-
                     <p:menuitem id="ViewEmployeeAbsence" value="Employee Absence"
                                 actionListener="#{absenceManagementController.clearEmployeeAbsense}"
                                 action="#{navigationController.showSelectEmployeeDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                update=":selectEmployee" icon="ui-icon-folder-collapsed"/>
+                                update=":selectEmployee" icon="ui-icon-search"/>
                     <p:separator/>
-
                 </p:submenu>
 
             </p:menubar>
@@ -44,9 +40,6 @@
                     </p:column>
                     <p:column headerText="End" styleClass="absenceDateCol">
                         <h:outputText value="#{absenceRow.endStr}" />
-                    </p:column>
-                    <p:column headerText="Type" styleClass="absenceTypeCol">
-                        <h:outputText value="#{absenceRow.type}" />
                     </p:column>
                     <p:column headerText="Status" styleClass="absenceStatusCol">
                         <h:outputText value="#{absenceRow.status}" />

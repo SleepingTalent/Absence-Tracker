@@ -83,7 +83,7 @@ public class ViewHelper {
     }
 
     public void showEmployeeAbsenceDialog() {
-        dialogHelper.showDialog(Dialogs.SHOW_EMPLOYEE_ABSENCE);
+        dialogHelper.showDialog(Dialogs.EMPLOYEE_ABSENCE);
     }
 
     public void showRequestHolidayDialog() {
@@ -93,4 +93,5 @@ public class ViewHelper {
     public void hideRequestHolidayDialog() {
         dialogHelper.hideDialog(Dialogs.REQUEST_HOLIDAY);
     }
+
 }

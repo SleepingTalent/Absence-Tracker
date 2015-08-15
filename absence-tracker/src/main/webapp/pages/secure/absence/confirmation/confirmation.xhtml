@@ -9,8 +9,17 @@
 
         <h:form id="absenceConfirmationForm" prependId="false">
 
+            <p:menubar id="absenceMenu" syleClass="absenceMenu">
+                <p:submenu id="viewMenu" label="Absence">
+                    <p:menuitem id="ViewEmployeeAbsence" value="Absence History"
+                                action="#{navigationController.showEmployeeAbsenceDialog}"
+                                onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
+                                update=":employeeAbsence" icon="ui-icon-search"/>
+                </p:submenu>
+            </p:menubar>
+
             <p:panel id="employeeAbsenceConfirmationPanel" styleClass="absenceConfirmationPanel" header="Record of Absence">
-                <p:dataTable id="employeeAbsenceConfirmationTable" var="absenceRow" value="#{absenceConfirmationController.employeeAbsencesAwaitingConfirmation}" scrollable="true" scrollHeight="250" styleClass="employeeAbsenceTable">
+                <p:dataTable id="employeeAbsenceConfirmationTable" var="absenceRow" value="#{employeeAbsenceController.employeeAbsencesAwaitingConfirmation}" scrollable="true" scrollHeight="250" styleClass="employeeAbsenceTable">
                     <p:column headerText="Name" styleClass="absenceNameCol">
                         <h:outputText value="#{absenceRow.fullName}" />
                     </p:column>
@@ -20,9 +29,6 @@
                     <p:column headerText="End" styleClass="absenceDateCol">
                         <h:outputText value="#{absenceRow.endStr}" />
                     </p:column>
-                    <p:column headerText="Type" styleClass="absenceTypeCol">
-                        <h:outputText value="#{absenceRow.type}" />
-                    </p:column>
                     <p:column headerText="Status" styleClass="absenceStatusCol">
                         <h:outputText value="#{absenceRow.status}" />
                     </p:column>
@@ -31,7 +37,7 @@
                                              action="#{navigationController.showConfirmAbsenceDialog}"
                                              onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
                                              update=":confirmAbsence">
-                                <f:setPropertyActionListener value="#{absenceRow}" target="#{absenceConfirmationController.absenceConfirmationModel.selectedAbsence}" />
+                                <f:setPropertyActionListener value="#{absenceRow}" target="#{employeeAbsenceController.employeeAbsenceModel.selectedAbsence}" />
                             </p:commandButton>
                     </p:column>
 
@@ -41,5 +47,6 @@
         </h:form>
 
         <ui:include src="confirmAbsenceDialog.xhtml"/>
+        <ui:include src="employeeAbsenceHistoryDialog.xhtml"/>
     </ui:define>
 </ui:composition>

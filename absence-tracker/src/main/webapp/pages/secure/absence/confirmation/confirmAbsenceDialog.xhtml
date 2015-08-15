@@ -11,26 +11,26 @@
             <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
 
                 <p:outputLabel id="employeelbl" value="Employee:" />
-                <p:outputLabel id="employeelName" value="#{absenceConfirmationController.absenceConfirmationModel.selectedAbsence.fullName}" />
+                <p:outputLabel id="employeelName" value="#{employeeAbsenceController.employeeAbsenceModel.selectedAbsence.fullName}" />
 
                 <p:outputLabel id="startlbl" value="Absence Start:" />
-                <p:outputLabel id="start" value="#{absenceConfirmationController.absenceConfirmationModel.selectedAbsence.startStr}" />
+                <p:outputLabel id="start" value="#{employeeAbsenceController.employeeAbsenceModel.selectedAbsence.startStr}" />
 
                 <p:outputLabel id="endlbl" value="Absence End:" />
-                <p:outputLabel id="end" value="#{absenceConfirmationController.absenceConfirmationModel.selectedAbsence.endStr}" />
+                <p:outputLabel id="end" value="#{employeeAbsenceController.employeeAbsenceModel.selectedAbsence.endStr}" />
 
                 <p:outputLabel id="reasonlbl" for="reason" value="Reason:" />
-                <p:selectOneMenu id="reason" styleClass="employeeDropDownField" value="#{absenceConfirmationController.absenceConfirmationModel.selectedAbsence.reason}"
+                <p:selectOneMenu id="reason" styleClass="employeeDropDownField" value="#{employeeAbsenceController.employeeAbsenceModel.selectedAbsence.reason}"
                                  required="true" requiredMessage="Please Select Reason">
                     <f:selectItem itemLabel="Select Reason" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{absenceConfirmationController.absenceReasons}" />
+                    <f:selectItems value="#{employeeAbsenceController.absenceReasons}" />
                 </p:selectOneMenu>
 
             </p:panelGrid>
 
             <p:separator />
             <p:commandButton id="confirmAbsenceBtn" styleClass="floatRight" value="Confirm Absence"
-                             actionListener="#{absenceConfirmationController.confirmAbsence}"
+                             actionListener="#{employeeAbsenceController.confirmAbsence}"
                              action="#{navigationController.hideConfirmAbsenceDialog}"
                              onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
                              update=":messages,:#{p:component('absenceConfirmationForm')}"/>

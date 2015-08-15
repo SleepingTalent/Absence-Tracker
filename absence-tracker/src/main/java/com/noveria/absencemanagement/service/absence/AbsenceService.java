@@ -25,12 +25,11 @@ public class AbsenceService {
     private AbsenceDAO absenceDAO;
 
     @Transactional
-    public void createAbsence(Date start, Date end, Employee employee, String type) {
+    public void createAbsence(Date start, Date end, Employee employee) {
         Absence absence = new Absence();
         absence.setStart(start);
         absence.setEnd(end);
         absence.setEmployee(employee);
-        absence.setType(type);
         absence.setStatus(AbsenceStatus.AWAITING_COMFIRMATION.name());
 
         absenceDAO.create(absence);
@@ -50,7 +49,6 @@ public class AbsenceService {
             absenceViewBean.setId(absence.getId());
             absenceViewBean.setStart(absence.getStart());
             absenceViewBean.setEnd(absence.getEnd());
-            absenceViewBean.setType(absence.getType());
             absenceViewBean.setStatus(absence.getStatus());
             absenceViewBean.setReason(absence.getReason());
             absenceViewBean.setFullName(
@@ -71,7 +69,6 @@ public class AbsenceService {
             absenceViewBean.setId(absence.getId());
             absenceViewBean.setStart(absence.getStart());
             absenceViewBean.setEnd(absence.getEnd());
-            absenceViewBean.setType(absence.getType());
             absenceViewBean.setStatus(absence.getStatus());
             absenceViewBean.setReason(absence.getReason());
             absenceViewBean.setFullName(
@@ -92,7 +89,6 @@ public class AbsenceService {
             absenceViewBean.setId(absence.getId());
             absenceViewBean.setStart(absence.getStart());
             absenceViewBean.setEnd(absence.getEnd());
-            absenceViewBean.setType(absence.getType());
             absenceViewBean.setStatus(absence.getStatus());
             absenceViewBean.setReason(absence.getReason());
             absenceViewBean.setFullName(

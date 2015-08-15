@@ -25,9 +25,6 @@ public class Absence {
     @Column(name = "STATUS")
     private String status;
 
-    @Column(name = "TYPE")
-    private String type;
-
     @Column(name = "REASON")
     private String reason;
 
@@ -73,14 +70,6 @@ public class Absence {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getReason() {
