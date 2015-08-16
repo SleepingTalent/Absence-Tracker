@@ -5,17 +5,17 @@ import com.noveria.absencemanagement.view.holiday.management.model.HolidayManage
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayAllowanceViewBean;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayRequestViewingBean;
 import org.primefaces.model.ScheduleModel;
-import org.primefaces.model.chart.Axis;
-import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lynseymcgregor on 21/06/2015.
@@ -58,12 +58,72 @@ public class HolidayAuthoriseController {
         holidayAuthoriseModel.setSelectedRequest(selected);
     }
 
-    public HolidayAllowanceViewBean getHolidayAllowance() {
-        HolidayAllowanceViewBean holidayAllowance = new HolidayAllowanceViewBean();
-        holidayAllowance.setTotal(450);
-        holidayAllowance.setUsed(100);
-        holidayAllowance.setRemaining(350);
-        return holidayAllowance;
+    public DonutChartModel getHolidayAllowance() {
+        DonutChartModel holidayDonutModel = new DonutChartModel();
+
+        Map<String, Number> holidayData = new LinkedHashMap<String, Number>();
+
+        holidayData.put("Used", 150);
+        holidayData.put("Remaining", 250);
+
+        holidayDonutModel.setLegendPosition("e");
+        holidayDonutModel.addCircle(holidayData);
+        holidayDonutModel.setTitle("Department Holiday Balance (Hours)");
+
+        holidayDonutModel.setSliceMargin(5);
+        holidayDonutModel.setShowDataLabels(true);
+        holidayDonutModel.setDataFormat("value");
+
+        return holidayDonutModel;
+    }
+
+    public List<DonutChartModel> getEmployeeHolidayAllowances() {
+        List<DonutChartModel> donutChartModels = new ArrayList<DonutChartModel>();
+
+        DonutChartModel holidayDonutModel = new DonutChartModel();
+
+        Map<String, Number> holidayData = new LinkedHashMap<String, Number>();
+        holidayData.put("Used", 100);
+        holidayData.put("Remaining", 200);
+
+        holidayDonutModel.setLegendPosition("n");
+        holidayDonutModel.addCircle(holidayData);
+        holidayDonutModel.setTitle("Jane Worker");
+        holidayDonutModel.setSliceMargin(5);
+        holidayDonutModel.setShowDataLabels(true);
+        holidayDonutModel.setDataFormat("value");
+
+        donutChartModels.add(holidayDonutModel);
+
+        DonutChartModel holidayDonutModel2 = new DonutChartModel();
+
+        Map<String, Number> holidayData2 = new LinkedHashMap<String, Number>();
+        holidayData2.put("Used", 150);
+        holidayData2.put("Remaining", 150);
+        holidayDonutModel2.setLegendPosition("n");
+        holidayDonutModel2.addCircle(holidayData2);
+        holidayDonutModel2.setTitle("Dave Worker");
+        holidayDonutModel2.setSliceMargin(5);
+        holidayDonutModel2.setShowDataLabels(true);
+        holidayDonutModel2.setDataFormat("value");
+
+        donutChartModels.add(holidayDonutModel2);
+
+        DonutChartModel holidayDonutModel3 = new DonutChartModel();
+
+        Map<String, Number> holidayData3 = new LinkedHashMap<String, Number>();
+        holidayData3.put("Used", 50);
+        holidayData3.put("Remaining", 250);
+        holidayDonutModel3.setLegendPosition("n");
+        holidayDonutModel3.addCircle(holidayData3);
+        holidayDonutModel3.setTitle("Another Worker");
+        holidayDonutModel3.setSliceMargin(5);
+        holidayDonutModel3.setShowDataLabels(true);
+        holidayDonutModel3.setDataFormat("value");
+
+        donutChartModels.add(holidayDonutModel3);
+
+        return donutChartModels;
     }
 
     public BarChartModel getHolidayBarChartStats() {
@@ -85,7 +145,7 @@ public class HolidayAuthoriseController {
         holiday.set("Mar", 2);
 
         holidayStats.addSeries(holiday);
-        holidayStats.setTitle("Annual Holiday Breakdown");
+        holidayStats.setTitle("Department Annual Holiday Breakdown");
         holidayStats.setExtender("chartExtender");
 
         Axis yAxis = holidayStats.getAxis(AxisType.Y);

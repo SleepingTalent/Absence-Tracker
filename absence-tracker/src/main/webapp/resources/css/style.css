@@ -91,6 +91,10 @@ body {
     width: 300px;
 }
 
+.empHolidayAllowanceDetailsPie {
+    width: 290px;
+}
+
 .jqplot-series-canvas {
     background:#ffffff;
 }

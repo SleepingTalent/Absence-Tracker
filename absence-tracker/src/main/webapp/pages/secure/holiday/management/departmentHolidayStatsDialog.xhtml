@@ -1,17 +1,18 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <p:dialog id="departmentHolidayStatsDialog" widgetVar="_departmentHolidayStatsDialog" header="Department Holiday Statistics"
-              width="1000" modal="true" dynamic="true" resizable="false" closable="true">
-
+              width="1010" modal="true" dynamic="true" resizable="false" closable="true">
+        <p:scrollPanel mode="native" style="width:985px;height:530px">
         <h:form id="departmentHolidayStatsForm">
 
             <h:panelGrid columns="2" style="width:100%;" columnClasses="alignColumnTop,alignColumnTop">
                 <p:panel styleClass="borderLess">
                     <p:chart id="departmentHolidayAllowancePie" type="donut"
-                             model="#{holidayAuthoriseController.holidayAllowance.detailedDonutModel}"
+                             model="#{holidayAuthoriseController.holidayAllowance}"
                              styleClass="holidayAllowanceDetailsPie"/>
 
                 </p:panel>
@@ -21,7 +22,19 @@
                              styleClass="departmentHolidayBarChart" widgetVar="departmentHolidayBarChart"/>
                 </p:panel>
             </h:panelGrid>
-        </h:form>
 
+            <p:separator/>
+
+            <h:panelGrid columns="3" style="width:100%;" columnClasses="alignColumnTop,alignColumnTop">
+               <c:forEach var="model" items="#{holidayAuthoriseController.employeeHolidayAllowances}"  >
+                   <p:panel styleClass="borderLess">
+                       <p:chart type="donut" model="${model}" styleClass="empHolidayAllowanceDetailsPie"/>
+                   </p:panel>
+               </c:forEach>
+            </h:panelGrid>
+
+
+        </h:form>
+        </p:scrollPanel>
     </p:dialog>
 </ui:composition>
