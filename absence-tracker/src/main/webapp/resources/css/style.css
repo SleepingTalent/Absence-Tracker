@@ -87,6 +87,10 @@ body {
     height: 220px;
 }
 
+.holidayAllowanceDetailsPie {
+    width: 300px;
+}
+
 .jqplot-series-canvas {
     background:#ffffff;
 }
@@ -204,6 +208,14 @@ body {
 
 .unAuthorisedAbsenceChart {
     height: 200px;
+}
+
+.employeeHolidayBarChart {
+    width: 600px;
+}
+
+.departmentHolidayBarChart {
+    width: 600px;
 }
 
 td .holidayUsed{

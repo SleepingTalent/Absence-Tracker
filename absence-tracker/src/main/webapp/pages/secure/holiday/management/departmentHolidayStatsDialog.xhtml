@@ -3,23 +3,22 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui">
 
-    <p:dialog id="employeeHolidayStatsDialog" widgetVar="_employeeHolidayStatsDialog" header="Holiday Statistics"
+    <p:dialog id="departmentHolidayStatsDialog" widgetVar="_departmentHolidayStatsDialog" header="Department Holiday Statistics"
               width="1000" modal="true" dynamic="true" resizable="false" closable="true">
 
-        <h:form id="employeeHolidayStatsForm">
-
+        <h:form id="departmentHolidayStatsForm">
 
             <h:panelGrid columns="2" style="width:100%;" columnClasses="alignColumnTop,alignColumnTop">
                 <p:panel styleClass="borderLess">
-                    <p:chart id="employeeHolidayAllowancePie" type="donut"
-                             model="#{holidayManagementController.holidayAllowance.detailedDonutModel}"
+                    <p:chart id="departmentHolidayAllowancePie" type="donut"
+                             model="#{holidayAuthoriseController.holidayAllowance.detailedDonutModel}"
                              styleClass="holidayAllowanceDetailsPie"/>
 
                 </p:panel>
                 <p:panel styleClass="borderLess">
-                    <p:chart id="employeeHolidayBarChart" type="bar"
-                             model="#{holidayManagementController.holidayBarChartStats}"
-                             styleClass="employeeHolidayBarChart" widgetVar="employeeHolidayBarChart"/>
+                    <p:chart id="departmentHolidayBarChart" type="bar"
+                             model="#{holidayAuthoriseController.holidayBarChartStats}"
+                             styleClass="departmentHolidayBarChart" widgetVar="departmentHolidayBarChart"/>
                 </p:panel>
             </h:panelGrid>
         </h:form>

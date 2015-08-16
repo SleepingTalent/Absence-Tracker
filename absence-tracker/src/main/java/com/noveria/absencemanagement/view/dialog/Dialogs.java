@@ -9,7 +9,8 @@ public enum Dialogs {
     ADD_ABSENCE("_addNewAbsenceDialog"), CONFIRM_ABSENCE("_confirmAbsenceDialog"),
     SELECT_EMPLOYEE("_selectEmployeeDialog"), EMPLOYEE_ABSENCE("_employeeAbsenceDialog"),
     REQUEST_HOLIDAY("_requestNewHolidayDialog"), EMPLOYEE_ABSENCE_STATS("_employeeAbsenceStatsDialog"),
-    EMPLOYEE_HOLIDAY_STATS("_employeeHolidayStatsDialog");
+    EMPLOYEE_HOLIDAY_STATS("_employeeHolidayStatsDialog"), DEPARTMENT_ABSENCE_STATS("_departmentAbsenceStatsDialog"),
+    DEPARTMENT_HOLIDAY_STATS("_departmentHolidayStatsDialog");
 
     private final String dialogWidgetVar;
 

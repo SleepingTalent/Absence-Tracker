@@ -10,6 +10,18 @@
 
             <p:ajaxStatus onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()" />
 
+            <p:menubar id="holidayMenuBar" syleClass="holidayMenu">
+
+                <p:submenu id="holidayMenu" label="View">
+
+                    <p:menuitem id="ViewDepartmentHolidayStats" value="Department Stats"
+                                action="#{navigationController.showDepartmentHolidayStatsDialog}"
+                                onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
+                                update=":departmentHolidayStatsForm" icon="ui-icon-clipboard"/>
+                </p:submenu>
+
+            </p:menubar>
+
             <h:panelGrid columns="2" columnClasses="alignColumnTop">
 
                 <p:panel id="pendingholidayRequestsPanel" styleClass="pendingRequestPanel"
@@ -62,6 +74,8 @@
 
             </h:panelGrid>
         </h:form>
+
+        <ui:include src="departmentHolidayStatsDialog.xhtml"/>
     </ui:define>
 
 

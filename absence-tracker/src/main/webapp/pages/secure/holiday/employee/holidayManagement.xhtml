@@ -24,7 +24,6 @@
                                 update=":employeeHolidayStatsForm" icon="ui-icon-clipboard"/>
                 </p:submenu>
 
-
             </p:menubar>
 
             <h:panelGrid columns="3" columnClasses="alignColumnTop,alignColumnTop,alignColumnTop">
@@ -41,10 +40,6 @@
                                 <h:outputText value="#{holidayAllowanceRow.remaining}" />
                             </p:column>
                         </p:dataTable>
-
-                    <p:separator/>
-
-                    <p:chart type="donut" model="#{holidayManagementController.holidayAllowance.donutModel}" styleClass="holidayAllowancePie"/>
 
                 </p:panel>
 

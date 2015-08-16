@@ -26,6 +26,12 @@
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
                                 update=":selectEmployee" icon="ui-icon-search"/>
                     <p:separator/>
+
+                    <p:menuitem id="ViewDepartmentAbsenceStats" value="Department Stats"
+                                action="#{navigationController.showDepartmentAbsenceStatsDialog}"
+                                onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
+                                update=":departmentAbsenceStats" icon="ui-icon-clipboard"/>
+                    <p:separator/>
                 </p:submenu>
 
             </p:menubar>
@@ -52,5 +58,6 @@
         <ui:include src="addNewAbsenceDialog.xhtml"/>
         <ui:include src="selectEmployeeDialog.xhtml"/>
         <ui:include src="browseEmployeeAbsenceDialog.xhtml"/>
+        <ui:include src="departmentAbsenceStatsDialog.xhtml"/>
     </ui:define>
 </ui:composition>
