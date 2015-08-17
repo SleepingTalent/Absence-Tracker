@@ -16,7 +16,6 @@
                                 action="#{navigationController.showNewAbsenceDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
                                 update=":addNewAbsence" icon="ui-icon-plusthick"/>
-                    <p:separator/>
                 </p:submenu>
 
                 <p:submenu id="viewMenu" label="View">
@@ -31,7 +30,6 @@
                                 action="#{navigationController.showDepartmentAbsenceStatsDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
                                 update=":departmentAbsenceStats" icon="ui-icon-clipboard"/>
-                    <p:separator/>
                 </p:submenu>
 
             </p:menubar>

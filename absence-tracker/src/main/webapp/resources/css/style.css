@@ -60,6 +60,20 @@ body {
     vertical-align: top;
 }
 
+.alignColumnBottom {
+    vertical-align: bottom;
+}
+
+.absenceStatsColumnOne {
+    vertical-align: bottom;
+    width: 40%;
+}
+
+.absenceStatsColumnTwo {
+    vertical-align: bottom;
+    width: 60%;
+}
+
 .borderLess {
     border: none !important;
 }
@@ -207,11 +221,11 @@ body {
 }
 
 .authorisedAbsenceChart {
-    height: 200px;
+    height: 170px;
 }
 
 .unAuthorisedAbsenceChart {
-    height: 200px;
+    height: 230px;
 }
 
 .employeeHolidayBarChart {
