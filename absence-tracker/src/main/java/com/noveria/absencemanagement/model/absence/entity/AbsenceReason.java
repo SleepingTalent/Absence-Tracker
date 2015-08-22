@@ -11,10 +11,10 @@ public enum AbsenceReason {
     BEREAVEMENT("Bereavement",true),
     COLD_FLU("Cold/Flu",false),
     STRESS_DEPRESSION("Stress/Depression",false),
-    HEADACHE_MIGRAINE("Headache/Migraine",false),
+    HEADACHE_MIGRAINE("Headache",false),
     BACK_PROBLEMS("Back Problems",false),
-    GI_PROBLEMS("Gastro-intestinal Problems",false),
-    DENTAL_PROBLEMS("Dental/Oral Problems",false);
+    GI_PROBLEMS("GastroIntestinal",false),
+    DENTAL_PROBLEMS("Dental",false);
 
     private String displayName;
     private boolean isAuthorised;
@@ -35,6 +35,16 @@ public enum AbsenceReason {
     public static AbsenceReason findByName(String name) {
         for(AbsenceReason type : AbsenceReason.values()) {
             if(type.name().equalsIgnoreCase(name)) {
+                return type;
+            }
+        }
+
+        throw new RuntimeException(name+" AbsenceReason not supported!");
+    }
+
+    public static AbsenceReason findByDiplayName(String name) {
+        for(AbsenceReason type : AbsenceReason.values()) {
+            if(type.getDisplayName().equals(name)) {
                 return type;
             }
         }

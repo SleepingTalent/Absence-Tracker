@@ -1,5 +1,7 @@
 package com.noveria.absencemanagement.view.absence.management.controller;
 
+import com.noveria.absencemanagement.model.absence.entity.AbsenceData;
+import com.noveria.absencemanagement.model.absence.entity.AbsenceReason;
 import com.noveria.absencemanagement.view.absence.management.model.AbsenceManagementModel;
 import com.noveria.absencemanagement.view.absence.management.view.AbsenceStatsViewBean;
 import com.noveria.absencemanagement.view.absence.management.view.AbsenceViewBean;
@@ -72,10 +74,13 @@ public class AbsenceManagementController {
 
         ChartSeries absence = new ChartSeries();
 
-        absence.set("Maternity", 90);
-        absence.set("Paternity", 10);
-        absence.set("Carer's", 20);
-        absence.set("Bereavement", 100);
+        List<AbsenceData> absenceDataList = absenceManagementModel.getAuthorisedAbsenceData();
+
+        for(AbsenceData absenceData : absenceDataList) {
+            absence.set(AbsenceReason.findByName(
+                            absenceData.getAbsenceType()).getDisplayName(),
+                    absenceData.getTotal());
+        }
 
         authorisedAbsenceStats.addSeries(absence);
         authorisedAbsenceStats.setTitle("Department Authorised Absence");
@@ -94,11 +99,13 @@ public class AbsenceManagementController {
 
         ChartSeries absence = new ChartSeries();
 
-        absence.set("Cold/Flu", 90);
-        absence.set("Stress/Depression", 10);
-        absence.set("Back Problems", 20);
-        absence.set("Gastro-intestinal", 100);
-        absence.set("Dental/Oral", 20);
+        List<AbsenceData> absenceDataList = absenceManagementModel.getUnauthorisedAbsenceData();
+
+        for(AbsenceData absenceData : absenceDataList) {
+            absence.set(AbsenceReason.findByName(
+                            absenceData.getAbsenceType()).getDisplayName(),
+                    absenceData.getTotal());
+        }
 
         unAuthorisedAbsenceStats.addSeries(absence);
         unAuthorisedAbsenceStats.setTitle("Department Unauthorised Absence");
@@ -114,49 +121,62 @@ public class AbsenceManagementController {
 
     public List<AbsenceStatsViewBean> getEmployeeAbsenceStats() {
         List<AbsenceStatsViewBean> absenceStatsViewBeanList = new ArrayList<AbsenceStatsViewBean>();
-        AbsenceStatsViewBean absenceStatsViewBean = new AbsenceStatsViewBean(0);
 
-        BarChartModel authorisedAbsenceStats = new BarChartModel();
+        List<EmployeeViewBean> employeeList = absenceManagementModel.getManagedEmployees();
 
-        ChartSeries absence = new ChartSeries();
+        int index = 0;
 
-        absence.set("Maternity", 90);
-        absence.set("Paternity", 10);
-        absence.set("Carer's", 20);
-        absence.set("Bereavement", 100);
+        for(EmployeeViewBean employee : employeeList) {
+            AbsenceStatsViewBean absenceStatsViewBean = new AbsenceStatsViewBean(index);
 
-        authorisedAbsenceStats.addSeries(absence);
-        authorisedAbsenceStats.setTitle("Jane Worker Authorised Absence");
-        authorisedAbsenceStats.setExtender("chartExtender");
+            BarChartModel authorisedAbsenceStats = new BarChartModel();
+            ChartSeries absence = new ChartSeries();
 
-        Axis yAxis = authorisedAbsenceStats.getAxis(AxisType.Y);
-        yAxis.setLabel("Days");
-        yAxis.setMin(0);
+            List<AbsenceData> absenceDataList = absenceManagementModel.getAuthorisedAbsenceDataForEmployee(employee.getId());
 
-        absenceStatsViewBean.setAuthorisedAbsence(authorisedAbsenceStats);
+            for(AbsenceData absenceData : absenceDataList) {
+                absence.set(AbsenceReason.findByName(
+                                absenceData.getAbsenceType()).getDisplayName(),
+                        absenceData.getTotal());
+            }
 
-        BarChartModel unAuthorisedAbsenceStats = new BarChartModel();
+            authorisedAbsenceStats.addSeries(absence);
+            authorisedAbsenceStats.setTitle(employee.getFullname()+" Authorised Absence");
+            authorisedAbsenceStats.setExtender("chartExtender");
 
-        absence = new ChartSeries();
+            Axis yAxis = authorisedAbsenceStats.getAxis(AxisType.Y);
+            yAxis.setLabel("Days");
+            yAxis.setMin(0);
 
-        absence.set("Cold/Flu", 90);
-        absence.set("Stress/Depression", 10);
-        absence.set("Back Problems", 20);
-        absence.set("Gastro-intestinal", 100);
-        absence.set("Dental/Oral", 20);
+            absenceStatsViewBean.setAuthorisedAbsence(authorisedAbsenceStats);
 
-        unAuthorisedAbsenceStats.addSeries(absence);
-        unAuthorisedAbsenceStats.setTitle("Jane Worker Unauthorised Absence");
-        unAuthorisedAbsenceStats.setExtender("chartExtender");
+            BarChartModel unAuthorisedAbsenceStats = new BarChartModel();
 
-        yAxis = unAuthorisedAbsenceStats.getAxis(AxisType.Y);
-        yAxis.setLabel("Days");
-        yAxis.setMin(0);
-        yAxis.setMax(100);
+            absence = new ChartSeries();
 
-        absenceStatsViewBean.setUnAuthorisedAbsence(unAuthorisedAbsenceStats);
+            absenceDataList = absenceManagementModel.getUnauthorisedAbsenceDataForEmployee(employee.getId());
 
-        absenceStatsViewBeanList.add(absenceStatsViewBean);
+            for(AbsenceData absenceData : absenceDataList) {
+                absence.set(AbsenceReason.findByName(
+                                absenceData.getAbsenceType()).getDisplayName(),
+                        absenceData.getTotal());
+            }
+
+            unAuthorisedAbsenceStats.addSeries(absence);
+            unAuthorisedAbsenceStats.setTitle(employee.getFullname()+" Unauthorised Absence");
+            unAuthorisedAbsenceStats.setExtender("chartExtender");
+
+            yAxis = unAuthorisedAbsenceStats.getAxis(AxisType.Y);
+            yAxis.setLabel("Days");
+            yAxis.setMin(0);
+            yAxis.setMax(100);
+
+            absenceStatsViewBean.setUnAuthorisedAbsence(unAuthorisedAbsenceStats);
+
+            absenceStatsViewBeanList.add(absenceStatsViewBean);
+
+            index++;
+        }
 
         return absenceStatsViewBeanList;
     }

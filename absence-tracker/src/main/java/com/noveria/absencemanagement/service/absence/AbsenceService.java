@@ -2,6 +2,8 @@ package com.noveria.absencemanagement.service.absence;
 
 import com.noveria.absencemanagement.model.absence.dao.AbsenceDAO;
 import com.noveria.absencemanagement.model.absence.entity.Absence;
+import com.noveria.absencemanagement.model.absence.entity.AbsenceData;
+import com.noveria.absencemanagement.model.absence.entity.AbsenceReason;
 import com.noveria.absencemanagement.model.absence.entity.AbsenceStatus;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeave;
@@ -37,8 +39,28 @@ public class AbsenceService {
 
     @Transactional
     public void updateAbsence(Long id, String reason){
+        AbsenceReason absenceReason = AbsenceReason.findByDiplayName(reason);
+        absenceDAO.updateAbsenceWithReason(id,absenceReason);
+    }
 
-        absenceDAO.updateAbsenceWithReason(id,reason);
+    public List<AbsenceData> getEmployeeAuthorisedAbsenceData(Employee employee) {
+        List<Absence> absenceList = absenceDAO.findAuthorisedAbsenceForEmployee(employee);
+        return absenceDAO.getAuthorisedAbsenceData(absenceList);
+    }
+
+    public List<AbsenceData> getEmployeeUnauthorisedAbsenceData(Employee employee) {
+        List<Absence> absenceList = absenceDAO.findUnauthorisedAbsenceForEmployee(employee);
+        return absenceDAO.getUnauthorisedAbsenceData(absenceList);
+    }
+
+    public List<AbsenceData> getAuthorisedAbsenceDataByDepartment(Employee manager) {
+        List<Absence> absenceList = absenceDAO.findAuthorisedAbsenceByDepartment(manager);
+        return absenceDAO.getAuthorisedAbsenceData(absenceList);
+    }
+
+    public List<AbsenceData> getUnauthorisedAbsenceDataByDepartment(Employee manager) {
+        List<Absence> absenceList = absenceDAO.findUnauthorisedAbsenceByDepartment(manager);
+        return absenceDAO.getUnauthorisedAbsenceData(absenceList);
     }
 
     public List<AbsenceViewBean> getEmployeeAbsences(Employee employee){

@@ -1,5 +1,6 @@
 package com.noveria.absencemanagement.view.absence.employee.model;
 
+import com.noveria.absencemanagement.model.absence.entity.AbsenceData;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.service.absence.AbsenceService;
 import com.noveria.absencemanagement.service.administration.exception.EmployeeNotFoundException;
@@ -104,5 +105,13 @@ public class EmployeeAbsenceModel implements Serializable {
 
     public List<AbsenceViewBean> getEmployeeAbsences() {
             return absenceService.getEmployeeAbsences(userModel.getEmployee());
+    }
+
+    public List<AbsenceData> getUnauthorisedAbsenceData() {
+        return absenceService.getEmployeeUnauthorisedAbsenceData(userModel.getEmployee());
+    }
+
+    public List<AbsenceData> getAuthorisedAbsenceData() {
+        return absenceService.getEmployeeAuthorisedAbsenceData(userModel.getEmployee());
     }
 }

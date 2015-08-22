@@ -1,5 +1,6 @@
 package com.noveria.absencemanagement.view.absence.management.model;
 
+import com.noveria.absencemanagement.model.absence.entity.AbsenceData;
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.service.absence.AbsenceService;
 import com.noveria.absencemanagement.service.administration.AdministrationService;
@@ -168,6 +169,34 @@ public class AbsenceManagementModel implements Serializable {
         try {
             Employee selectedEmployee = administrationService.findEmployee(selectedEmployeeId);
             return absenceService.getEmployeeAbsences(selectedEmployee);
+        } catch (EmployeeNotFoundException e) {
+            messageHelper.addErrorMessage("Employee Not Found", "No Employee Found with Id (" + selectedEmployeeId + ")");
+            throw new AbortProcessingException("No Employee Found with Id (" + selectedEmployeeId + ")");
+        }
+    }
+
+    public List<AbsenceData> getAuthorisedAbsenceData() {
+        return absenceService.getAuthorisedAbsenceDataByDepartment(userModel.getEmployee());
+    }
+
+    public List<AbsenceData> getUnauthorisedAbsenceData() {
+        return absenceService.getUnauthorisedAbsenceDataByDepartment(userModel.getEmployee());
+    }
+
+    public List<AbsenceData> getAuthorisedAbsenceDataForEmployee(Long employeeId) {
+        try {
+            Employee selectedEmployee = administrationService.findEmployee(employeeId);
+            return absenceService.getEmployeeAuthorisedAbsenceData(selectedEmployee);
+        } catch (EmployeeNotFoundException e) {
+            messageHelper.addErrorMessage("Employee Not Found", "No Employee Found with Id (" + selectedEmployeeId + ")");
+            throw new AbortProcessingException("No Employee Found with Id (" + selectedEmployeeId + ")");
+        }
+    }
+
+    public List<AbsenceData> getUnauthorisedAbsenceDataForEmployee(Long employeeId) {
+        try {
+            Employee selectedEmployee = administrationService.findEmployee(employeeId);
+            return absenceService.getEmployeeUnauthorisedAbsenceData(selectedEmployee);
         } catch (EmployeeNotFoundException e) {
             messageHelper.addErrorMessage("Employee Not Found", "No Employee Found with Id (" + selectedEmployeeId + ")");
             throw new AbortProcessingException("No Employee Found with Id (" + selectedEmployeeId + ")");

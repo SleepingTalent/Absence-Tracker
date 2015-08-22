@@ -1,5 +1,6 @@
 package com.noveria.absencemanagement.view.absence.employee.controller;
 
+import com.noveria.absencemanagement.model.absence.entity.AbsenceData;
 import com.noveria.absencemanagement.model.absence.entity.AbsenceReason;
 import com.noveria.absencemanagement.view.absence.employee.model.EmployeeAbsenceModel;
 import com.noveria.absencemanagement.view.absence.management.view.AbsenceViewBean;
@@ -67,10 +68,13 @@ public class EmployeeAbsenceController {
 
         ChartSeries absence = new ChartSeries();
 
-        absence.set("Maternity", 90);
-        absence.set("Paternity", 10);
-        absence.set("Carer's", 20);
-        absence.set("Bereavement", 100);
+        List<AbsenceData> absenceDataList = employeeAbsenceModel.getAuthorisedAbsenceData();
+
+        for(AbsenceData absenceData : absenceDataList) {
+            absence.set(AbsenceReason.findByName(
+                    absenceData.getAbsenceType()).getDisplayName(),
+                    absenceData.getTotal());
+        }
 
         authorisedAbsenceStats.addSeries(absence);
         authorisedAbsenceStats.setTitle("Authorised Absence");
@@ -89,11 +93,13 @@ public class EmployeeAbsenceController {
 
         ChartSeries absence = new ChartSeries();
 
-        absence.set("Cold/Flu", 90);
-        absence.set("Stress/Depression", 10);
-        absence.set("Back Problems", 20);
-        absence.set("Gastro-intestinal", 100);
-        absence.set("Dental/Oral", 20);
+        List<AbsenceData> absenceDataList = employeeAbsenceModel.getUnauthorisedAbsenceData();
+
+        for(AbsenceData absenceData : absenceDataList) {
+            absence.set(AbsenceReason.findByName(
+                            absenceData.getAbsenceType()).getDisplayName(),
+                    absenceData.getTotal());
+        }
 
         unAuthorisedAbsenceStats.addSeries(absence);
         unAuthorisedAbsenceStats.setTitle("Unauthorised Absence");

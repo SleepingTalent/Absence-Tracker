@@ -3,4 +3,8 @@ function chartExtender() {
     this.cfg.axes.yaxis.tickOptions = {
         formatString: '%d'
     };
+
+    this.cfg.axes.xaxis.tickOptions = {
+        labelPosition: 'middle'
+    };
 }

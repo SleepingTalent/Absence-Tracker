@@ -13,6 +13,8 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
         <class>com.noveria.absencemanagement.model.user.entities.UserRole</class>
         <class>com.noveria.absencemanagement.model.department.entities.Department</class>
         <class>com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance</class>
+        <class>com.noveria.absencemanagement.model.absence.entity.Absence</class>
+
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class, hbm"/>

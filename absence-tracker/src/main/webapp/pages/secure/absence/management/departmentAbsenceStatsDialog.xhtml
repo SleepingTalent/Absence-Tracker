@@ -6,8 +6,8 @@
 
     <p:dialog id="departmentAbsenceStatsDialog" widgetVar="_departmentAbsenceStatsDialog"
               header="Department Absence Statistics" modal="true"
-              width="1200" dynamic="true" resizable="false" closable="true">
-        <p:scrollPanel mode="native" style="width:1180px;height:530px" styleClass="borderLess">
+              width="1400" dynamic="true" resizable="false" closable="true">
+        <p:scrollPanel mode="native" style="width:1380px;height:530px" styleClass="borderLess">
             <h:form id="departmentAbsenceStats">
 
                 <h:panelGrid columns="2" style="width:100%;"
@@ -20,25 +20,28 @@
                     <p:panel styleClass="borderLess">
                         <p:chart id="unauthorisedAbsenceChart" type="bar"
                                  model="#{absenceManagementController.unauthorisedAbsenceStats}"
-                                 styleClass="unauthorisedAbsenceChart" widgetVar="unauthorisedAbsenceChart"/>
+                                 styleClass="unAuthorisedAbsenceChart" widgetVar="unauthorisedAbsenceChart"/>
                     </p:panel>
 
                 </h:panelGrid>
-
-                <p:separator/>
 
                 <h:panelGrid columns="2" style="width:100%;"
                              columnClasses="absenceStatsColumnOne,absenceStatsColumnTwo">
 
                     <c:forEach var="employeeStats" items="#{absenceManagementController.employeeAbsenceStats}">
+                        <p:separator/>
+                        <p:separator/>
+
                         <p:panel styleClass="borderLess">
                             <p:chart type="bar" model="${employeeStats.authorisedAbsence}"
                                      styleClass="authorisedAbsenceChart" widgetVar="authorisedAbsenceChart${employeeStats.index}"/>
                         </p:panel>
                         <p:panel styleClass="borderLess">
                             <p:chart type="bar" model="${employeeStats.unAuthorisedAbsence}"
-                                     styleClass="unauthorisedAbsenceChart" widgetVar="unauthorisedAbsenceChart${employeeStats.index}"/>
+                                     styleClass="unAuthorisedAbsenceChart" widgetVar="unauthorisedAbsenceChart${employeeStats.index}"/>
                         </p:panel>
+
+
                     </c:forEach>
 
                 </h:panelGrid>
