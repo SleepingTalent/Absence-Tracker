@@ -20,4 +20,9 @@ public class MessageHelper {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail));
     }
+
+    public void addWarnMessage(String summary, String detail) {
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_WARN, summary, detail));
+    }
 }

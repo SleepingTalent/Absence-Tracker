@@ -5,6 +5,7 @@ import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.service.absence.AbsenceService;
 import com.noveria.absencemanagement.service.administration.AdministrationService;
 import com.noveria.absencemanagement.service.administration.exception.EmployeeNotFoundException;
+import com.noveria.absencemanagement.service.annualleave.AnnualLeaveService;
 import com.noveria.absencemanagement.util.DateUtil;
 import com.noveria.absencemanagement.util.InvalidDateException;
 import com.noveria.absencemanagement.view.absence.management.view.AbsenceViewBean;
@@ -40,6 +41,9 @@ public class AbsenceManagementModel implements Serializable {
     @ManagedProperty(value = "#{administrationService}")
     AdministrationService administrationService;
 
+    @ManagedProperty(value = "#{annualLeaveService}")
+    AnnualLeaveService annualLeaveService;
+
     @ManagedProperty(value = "#{userModel}")
     UserModel userModel;
 
@@ -61,6 +65,14 @@ public class AbsenceManagementModel implements Serializable {
 
     public void setMessageHelper(MessageHelper messageHelper) {
         this.messageHelper = messageHelper;
+    }
+
+    public AnnualLeaveService getAnnualLeaveService() {
+        return annualLeaveService;
+    }
+
+    public void setAnnualLeaveService(AnnualLeaveService annualLeaveService) {
+        this.annualLeaveService = annualLeaveService;
     }
 
     public List<EmployeeViewBean> getManagedEmployees() {
@@ -96,9 +108,17 @@ public class AbsenceManagementModel implements Serializable {
 
             Employee employee = administrationService.findEmployee(new Long(getNewAbsence().getEmployeeId()));
 
-            absenceService.createAbsence(absenceStart, absenceEnd, employee);
+            boolean holidayBeenDeclinedWithinRange = annualLeaveService.
+                    hasHolidayBeenDeclinedWithinRange(employee, absenceStart, absenceEnd);
+
+            absenceService.createAbsence(absenceStart, absenceEnd, employee, holidayBeenDeclinedWithinRange);
 
             messageHelper.addInfoMessage("Absence Submitted", absenceStartStr + "-" + absenceEndStr);
+
+            if(holidayBeenDeclinedWithinRange) {
+                messageHelper.addWarnMessage("Holiday Previously Declined",
+                        "A holiday was previously declined within this absence period!");
+            }
 
             getNewAbsence().setStart(null);
             getNewAbsence().setEnd(null);

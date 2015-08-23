@@ -18,6 +18,7 @@ public class AbsenceViewBean {
     private Long id;
     private String fullName;
     private String employeeId;
+    private boolean coincidedWithDeclinedHoliday;
 
     public void setReason(String reason) {
         this.reason = reason;
@@ -90,5 +91,17 @@ public class AbsenceViewBean {
 
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
+    }
+
+    public boolean isCoincidedWithDeclinedHoliday() {
+        return coincidedWithDeclinedHoliday;
+    }
+
+    public void setCoincidedWithDeclinedHoliday(boolean coincidedWithDeclinedHoliday) {
+        this.coincidedWithDeclinedHoliday = coincidedWithDeclinedHoliday;
+    }
+
+    public String getCoincidedWithDeclinedHolidayStr() {
+        return (coincidedWithDeclinedHoliday) ? "Yes" : "No";
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +35,20 @@ public class AnnualLeaveDAO extends BaseDAO<AnnualLeave> {
 
         Query query = entityManager.createQuery(sql);
         query.setParameter("employee",employee);
+
+        return query.getResultList();
+    }
+
+    public List<AnnualLeave> findDeclinedAnnualLeaveByEmployeeWithinDateRange(Employee employee,Date start, Date end) {
+        String sql = "select l from AnnualLeave l where l.employee = :employee " +
+                "and l.status = '"+ AnnualLeaveStatus.DECLINED.name()+"' " +
+                "and l.start between :startDate and :endDate " +
+                "or l.end between :startDate and :endDate";
+
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("employee",employee);
+        query.setParameter("startDate",start);
+        query.setParameter("endDate",end);
 
         return query.getResultList();
     }

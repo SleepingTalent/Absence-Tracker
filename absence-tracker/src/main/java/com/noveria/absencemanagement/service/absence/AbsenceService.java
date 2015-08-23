@@ -27,12 +27,13 @@ public class AbsenceService {
     private AbsenceDAO absenceDAO;
 
     @Transactional
-    public void createAbsence(Date start, Date end, Employee employee) {
+    public void createAbsence(Date start, Date end, Employee employee, boolean holidayBeenDeclinedWithinRange) {
         Absence absence = new Absence();
         absence.setStart(start);
         absence.setEnd(end);
         absence.setEmployee(employee);
         absence.setStatus(AbsenceStatus.AWAITING_COMFIRMATION.name());
+        absence.setCoincidedWithDeclinedHoliday(holidayBeenDeclinedWithinRange);
 
         absenceDAO.create(absence);
     }
@@ -73,6 +74,7 @@ public class AbsenceService {
             absenceViewBean.setEnd(absence.getEnd());
             absenceViewBean.setStatus(absence.getStatus());
             absenceViewBean.setReason(absence.getReason());
+            absenceViewBean.setCoincidedWithDeclinedHoliday(absence.isCoincidedWithDeclinedHoliday());
             absenceViewBean.setFullName(
                     absence.getEmployee().getFirstName()+" "+
                             absence.getEmployee().getLastName());

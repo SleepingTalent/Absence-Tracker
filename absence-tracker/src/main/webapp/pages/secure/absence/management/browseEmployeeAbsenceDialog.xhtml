@@ -24,6 +24,9 @@
                 <p:column headerText="Reason">
                     <h:outputText value="#{absenceRow.reason}" />
                 </p:column>
+                <p:column headerText="Coincides With Declined Holiday" styleClass="absenceStatusCol">
+                    <h:outputText value="#{absenceRow.coincidedWithDeclinedHolidayStr}" />
+                </p:column>
             </p:dataTable>
         </h:form>
     </p:dialog>

@@ -28,6 +28,9 @@ public class Absence {
     @Column(name = "REASON")
     private String reason;
 
+    @Column(name = "COINCIDES_WITH_DECLINED_HOL")
+    private boolean coincidedWithDeclinedHoliday;
+
     @ManyToOne
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID")
     private Employee employee;
@@ -78,5 +81,13 @@ public class Absence {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public boolean isCoincidedWithDeclinedHoliday() {
+        return coincidedWithDeclinedHoliday;
+    }
+
+    public void setCoincidedWithDeclinedHoliday(boolean coincidedWithDeclinedHoliday) {
+        this.coincidedWithDeclinedHoliday = coincidedWithDeclinedHoliday;
     }
 }

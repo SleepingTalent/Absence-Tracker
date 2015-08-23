@@ -220,6 +220,12 @@ public class AnnualLeaveService {
         holidayAllowance.setUsed(totalUsed);
 
         holidayAllowanceDAO.update(holidayAllowance);
+    }
 
+    public boolean hasHolidayBeenDeclinedWithinRange(Employee employee, Date start, Date end) {
+        List<AnnualLeave> declinedLeave = annualLeaveDAO.
+                findDeclinedAnnualLeaveByEmployeeWithinDateRange(employee, start, end);
+
+        return !declinedLeave.isEmpty();
     }
 }
