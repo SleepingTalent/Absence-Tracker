@@ -4,6 +4,7 @@ import com.noveria.absencemanagement.model.absence.entity.AbsenceData;
 import com.noveria.absencemanagement.model.absence.entity.AbsenceReason;
 import com.noveria.absencemanagement.view.absence.employee.model.EmployeeAbsenceModel;
 import com.noveria.absencemanagement.view.absence.management.view.AbsenceViewBean;
+import com.noveria.absencemanagement.view.helper.GraphHelper;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -26,6 +27,9 @@ public class EmployeeAbsenceController {
     @ManagedProperty(value = "#{employeeAbsenceModel}")
     EmployeeAbsenceModel employeeAbsenceModel;
 
+    @ManagedProperty(value = "#{graphHelper}")
+    private GraphHelper graphHelper;
+
     public void clearAbsense() {
         employeeAbsenceModel.clearAbsence();
     }
@@ -36,6 +40,14 @@ public class EmployeeAbsenceController {
 
     public void setEmployeeAbsenceModel(EmployeeAbsenceModel employeeAbsenceModel) {
         this.employeeAbsenceModel = employeeAbsenceModel;
+    }
+
+    public GraphHelper getGraphHelper() {
+        return graphHelper;
+    }
+
+    public void setGraphHelper(GraphHelper graphHelper) {
+        this.graphHelper = graphHelper;
     }
 
     public List<AbsenceViewBean> getEmployeeAbsencesAwaitingConfirmation() {
@@ -55,7 +67,6 @@ public class EmployeeAbsenceController {
             absenceReasons.add(absence);
         }
 
-
         return absenceReasons;
     }
 
@@ -64,52 +75,16 @@ public class EmployeeAbsenceController {
     }
 
     public BarChartModel getAuthorisedAbsenceStats() {
-        BarChartModel authorisedAbsenceStats = new BarChartModel();
+        List<AbsenceData> absenceDataList =
+                employeeAbsenceModel.getAuthorisedAbsenceData();
 
-        ChartSeries absence = new ChartSeries();
-
-        List<AbsenceData> absenceDataList = employeeAbsenceModel.getAuthorisedAbsenceData();
-
-        for(AbsenceData absenceData : absenceDataList) {
-            absence.set(AbsenceReason.findByName(
-                    absenceData.getAbsenceType()).getDisplayName(),
-                    absenceData.getTotal());
-        }
-
-        authorisedAbsenceStats.addSeries(absence);
-        authorisedAbsenceStats.setTitle("Authorised Absence");
-        authorisedAbsenceStats.setExtender("chartExtender");
-
-        Axis yAxis = authorisedAbsenceStats.getAxis(AxisType.Y);
-        yAxis.setLabel("Days");
-        yAxis.setMin(0);
-        yAxis.setMax(100);
-
-        return authorisedAbsenceStats;
+        return graphHelper.buildAbsenceStats("Authorised Absence",absenceDataList);
     }
 
     public BarChartModel getUnauthorisedAbsenceStats() {
-        BarChartModel unAuthorisedAbsenceStats = new BarChartModel();
+        List<AbsenceData> absenceDataList =
+                employeeAbsenceModel.getUnauthorisedAbsenceData();
 
-        ChartSeries absence = new ChartSeries();
-
-        List<AbsenceData> absenceDataList = employeeAbsenceModel.getUnauthorisedAbsenceData();
-
-        for(AbsenceData absenceData : absenceDataList) {
-            absence.set(AbsenceReason.findByName(
-                            absenceData.getAbsenceType()).getDisplayName(),
-                    absenceData.getTotal());
-        }
-
-        unAuthorisedAbsenceStats.addSeries(absence);
-        unAuthorisedAbsenceStats.setTitle("Unauthorised Absence");
-        unAuthorisedAbsenceStats.setExtender("chartExtender");
-
-        Axis yAxis = unAuthorisedAbsenceStats.getAxis(AxisType.Y);
-        yAxis.setLabel("Days");
-        yAxis.setMin(0);
-        yAxis.setMax(100);
-
-        return unAuthorisedAbsenceStats;
+        return graphHelper.buildAbsenceStats("Unauthorised Absence",absenceDataList);
     }
 }

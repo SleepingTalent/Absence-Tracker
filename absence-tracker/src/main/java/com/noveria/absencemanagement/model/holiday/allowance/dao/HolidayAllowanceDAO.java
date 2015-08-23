@@ -23,6 +23,17 @@ public class HolidayAllowanceDAO extends BaseDAO<HolidayAllowance> {
         return (HolidayAllowance) query.getSingleResult();
     }
 
+    public List<HolidayAllowance> findHolidayAllowanceByDepartment(Employee manager) {
+        String sql = "select h from HolidayAllowance h where h.employee in " +
+                "(select e from Employee e where e.department = " +
+                    "(select d from Department d where d.manager = :manager))";
+
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("manager",manager);
+
+        return query.getResultList();
+    }
+
     @Override
     protected Class<HolidayAllowance> getEntityClass() {
         return HolidayAllowance.class;

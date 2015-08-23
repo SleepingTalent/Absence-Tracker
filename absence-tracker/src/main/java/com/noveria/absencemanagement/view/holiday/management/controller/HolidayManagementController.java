@@ -2,6 +2,7 @@ package com.noveria.absencemanagement.view.holiday.management.controller;
 
 import com.noveria.absencemanagement.model.holiday.annualleave.HolidayBreakdown;
 import com.noveria.absencemanagement.model.holiday.annualleave.Month;
+import com.noveria.absencemanagement.view.helper.GraphHelper;
 import com.noveria.absencemanagement.view.holiday.management.model.HolidayManagementModel;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayAllowanceViewBean;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayRequestViewingBean;
@@ -27,6 +28,9 @@ public class HolidayManagementController {
     @ManagedProperty(value = "#{holidayManagementModel}")
     HolidayManagementModel holidayManagementModel;
 
+    @ManagedProperty(value = "#{graphHelper}")
+    private GraphHelper graphHelper;
+
     public List<HolidayAllowanceViewBean> getHolidayAllowanceList() {
         List<HolidayAllowanceViewBean> holidayAllowanceViewBeanList = new ArrayList<HolidayAllowanceViewBean>();
         holidayAllowanceViewBeanList.add(holidayManagementModel.getHolidayAllowance());
@@ -49,6 +53,14 @@ public class HolidayManagementController {
         this.holidayManagementModel = holidayManagementModel;
     }
 
+    public GraphHelper getGraphHelper() {
+        return graphHelper;
+    }
+
+    public void setGraphHelper(GraphHelper graphHelper) {
+        this.graphHelper = graphHelper;
+    }
+
     public void requestHoliday() {
         holidayManagementModel.requestHoliday();
     }
@@ -60,45 +72,18 @@ public class HolidayManagementController {
     public DonutChartModel getHolidayBalanceDonutModel() {
 
         HolidayAllowanceViewBean holidayAllowance = holidayManagementModel.getHolidayAllowance();
-        DonutChartModel holidayDonutModel = new DonutChartModel();
 
-        Map<String, Number> holidayData = new LinkedHashMap<String, Number>();
-
-        holidayData.put("Hours Used", holidayAllowance.getUsed());
-        holidayData.put("Hours Remaining", holidayAllowance.getRemaining());
-
-        holidayDonutModel.setLegendPosition("e");
-        holidayDonutModel.addCircle(holidayData);
-        holidayDonutModel.setTitle("Holiday Balance");
-
-        holidayDonutModel.setSliceMargin(5);
-        holidayDonutModel.setShowDataLabels(true);
-        holidayDonutModel.setDataFormat("value");
-
-        return holidayDonutModel;
+        return graphHelper.buildHolidayAllowanceDonutChart(
+                "Holiday Balance", holidayAllowance.getUsed(),
+                holidayAllowance.getRemaining());
     }
 
     public BarChartModel getHolidayBarChartStats() {
-        BarChartModel holidayStats = new BarChartModel();
+        HolidayBreakdown holidayBreakdown =
+                holidayManagementModel.getHolidayBreakdown();
 
-        ChartSeries holiday = new ChartSeries();
-
-        HolidayBreakdown holidayBreakdown = holidayManagementModel.getHolidayBreakdown();
-
-        for (Map.Entry<Month, Integer> entry : holidayBreakdown.getMonthlyBreakdown().entrySet()) {
-            holiday.set(entry.getKey().getDisplayName(), entry.getValue());
-        }
-
-        holidayStats.addSeries(holiday);
-        holidayStats.setTitle("Annual Holiday Breakdown");
-        holidayStats.setExtender("chartExtender");
-
-        Axis yAxis = holidayStats.getAxis(AxisType.Y);
-        yAxis.setLabel("Days");
-        yAxis.setMin(0);
-        yAxis.setMax(30);
-
-        return holidayStats;
+        return graphHelper.buildHolidayBreakdownBarChart(
+                "Annual Holiday Breakdown",holidayBreakdown);
     }
 
     public List<HolidayRequestViewingBean> getRequestHistory() {

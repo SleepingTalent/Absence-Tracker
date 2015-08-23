@@ -80,6 +80,19 @@ public class AnnualLeaveService {
         return holidayAllowanceDAO.findHolidayAllowanceByEmployee(employee);
     }
 
+    public HolidayAllowance getDepartmentHolidayAllowance(Employee manager) {
+        List<HolidayAllowance> holidayAllowanceList = holidayAllowanceDAO.findHolidayAllowanceByDepartment(manager);
+        HolidayAllowance departmentHolidayAllowance = new HolidayAllowance();
+
+        for(HolidayAllowance holidayAllowance : holidayAllowanceList) {
+            departmentHolidayAllowance.setTotal(
+                    departmentHolidayAllowance.getTotal() + holidayAllowance.getTotal());
+            departmentHolidayAllowance.setUsed(departmentHolidayAllowance.getUsed() + holidayAllowance.getUsed());
+        }
+
+        return departmentHolidayAllowance;
+    }
+
     public List<EmployeeAnnualLeave> getAnnualLeaveByManagedDepartment(Employee manager) {
         List<EmployeeAnnualLeave> employeeAnnualLeaveList = new ArrayList<EmployeeAnnualLeave>();
 
@@ -123,6 +136,10 @@ public class AnnualLeaveService {
 
     public List<AnnualLeave> getEmployeeAnnualLeave(Employee employee) {
        return annualLeaveDAO.findAnnualLeaveByEmployee(employee);
+    }
+
+    public List<AnnualLeave> getEmployeesAnnualLeaveByManager(Employee manager) {
+        return annualLeaveDAO.findDeparmentAnnualLeaveByManager(manager);
     }
 
     public List<HolidayRequestViewingBean> getPendingHolidayRequestsForManager(Employee manager) {

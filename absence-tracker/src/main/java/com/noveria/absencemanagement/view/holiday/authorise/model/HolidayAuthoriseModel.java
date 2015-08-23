@@ -2,16 +2,18 @@ package com.noveria.absencemanagement.view.holiday.authorise.model;
 
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance;
+import com.noveria.absencemanagement.model.holiday.annualleave.HolidayBreakdown;
 import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeave;
+import com.noveria.absencemanagement.service.administration.AdministrationService;
+import com.noveria.absencemanagement.service.administration.exception.EmployeeNotFoundException;
 import com.noveria.absencemanagement.service.annualleave.AnnualLeaveService;
 import com.noveria.absencemanagement.service.annualleave.EmployeeAnnualLeave;
 import com.noveria.absencemanagement.view.authentication.model.UserModel;
-import com.noveria.absencemanagement.view.helper.DateHelper;
+import com.noveria.absencemanagement.view.employee.view.EmployeeViewBean;
 import com.noveria.absencemanagement.view.helper.MessageHelper;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayAllowanceViewBean;
 import com.noveria.absencemanagement.view.holiday.management.view.HolidayRequestViewingBean;
 import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleModel;
 import org.slf4j.Logger;
@@ -21,8 +23,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AbortProcessingException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +42,9 @@ public class HolidayAuthoriseModel implements Serializable {
 
     @ManagedProperty(value = "#{annualLeaveService}")
     AnnualLeaveService annualLeaveService;
+
+    @ManagedProperty(value = "#{administrationService}")
+    AdministrationService administrationService;
 
     @ManagedProperty(value = "#{userModel}")
     UserModel userModel;
@@ -76,7 +83,7 @@ public class HolidayAuthoriseModel implements Serializable {
                         String css = "holidayAuth";
                         String title = employee.getFirstName() + " " + employee.getLastName();
 
-                        if(!annualLeave.getStatus().equals("AUTHORISED")) {
+                        if (!annualLeave.getStatus().equals("AUTHORISED")) {
                             css = "holidayAwaitingAuth";
                             title = title + " (Pending)";
                         }
@@ -118,6 +125,14 @@ public class HolidayAuthoriseModel implements Serializable {
 
     public void setAnnualLeaveService(AnnualLeaveService annualLeaveService) {
         this.annualLeaveService = annualLeaveService;
+    }
+
+    public AdministrationService getAdministrationService() {
+        return administrationService;
+    }
+
+    public void setAdministrationService(AdministrationService administrationService) {
+        this.administrationService = administrationService;
     }
 
     public UserModel getUserModel() {
@@ -169,6 +184,60 @@ public class HolidayAuthoriseModel implements Serializable {
     }
 
     public void holidayInfoMessage(String title, String start, String end) {
-        messageHelper.addInfoMessage(title,start+"-"+end);
+        messageHelper.addInfoMessage(title, start + "-" + end);
+    }
+
+    public List<EmployeeViewBean> getManagedEmployees() {
+        List<EmployeeViewBean> employeeViewBeanList = new ArrayList<EmployeeViewBean>();
+        List<Employee> employeeList = administrationService.findAllEmployeeByManager(userModel.getEmployee());
+
+        for (Employee employee : employeeList) {
+            EmployeeViewBean employeeViewBean = new EmployeeViewBean();
+            employeeViewBean.setId(employee.getId());
+            employeeViewBean.setFirstname(employee.getFirstName());
+            employeeViewBean.setLastname(employee.getLastName());
+
+            employeeViewBeanList.add(employeeViewBean);
+        }
+
+        return employeeViewBeanList;
+    }
+
+    public HolidayAllowanceViewBean getHolidayAllowanceForEmployee(Long id) {
+        try {
+            Employee employee = administrationService.findEmployee(id);
+
+            HolidayAllowance holidayAllowance = annualLeaveService.getHolidayAllowance(employee);
+
+            int totalAllowance = holidayAllowance.getTotal();
+            int usedAllowance = holidayAllowance.getUsed();
+            int remainingAllowance = holidayAllowance.getRemaining();
+
+            HolidayAllowanceViewBean holidayAllowanceViewBean = new HolidayAllowanceViewBean();
+            holidayAllowanceViewBean.setTotal(totalAllowance);
+            holidayAllowanceViewBean.setUsed(usedAllowance);
+            holidayAllowanceViewBean.setRemaining(remainingAllowance);
+
+            return holidayAllowanceViewBean;
+
+        } catch (EmployeeNotFoundException e) {
+            messageHelper.addErrorMessage("Employee Not Found", "No Employee Found with Id (" + id + ")");
+            throw new AbortProcessingException("No Employee Found with Id (" + id + ")");
+        }
+    }
+
+    public HolidayAllowance getDepartmentHolidayAllowance() {
+        return annualLeaveService.getDepartmentHolidayAllowance(userModel.getEmployee());
+    }
+
+    public HolidayBreakdown getDepartmentHolidayBreakdown() {
+        List<AnnualLeave> annualLeaveList = annualLeaveService.getEmployeesAnnualLeaveByManager(userModel.getEmployee());
+        HolidayBreakdown holidayBreakdown = new HolidayBreakdown();
+
+        for(AnnualLeave annualLeave : annualLeaveList) {
+            holidayBreakdown.updateHolidayBreakdown(annualLeave.getStart(),annualLeave.getEnd());
+        }
+
+        return holidayBreakdown;
     }
 }
