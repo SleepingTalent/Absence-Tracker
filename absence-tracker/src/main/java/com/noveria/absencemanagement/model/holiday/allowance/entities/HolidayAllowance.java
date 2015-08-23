@@ -61,4 +61,8 @@ public class HolidayAllowance {
         setTotal(HolidayAllowances.DEFAULT.getTotal());
         setEmployee(employee);
     }
+
+    public int getRemaining() {
+       return total - used;
+    }
 }

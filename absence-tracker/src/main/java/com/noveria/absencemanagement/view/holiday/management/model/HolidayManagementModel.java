@@ -2,6 +2,8 @@ package com.noveria.absencemanagement.view.holiday.management.model;
 
 import com.noveria.absencemanagement.model.employee.entities.Employee;
 import com.noveria.absencemanagement.model.holiday.allowance.entities.HolidayAllowance;
+import com.noveria.absencemanagement.model.holiday.allowance.entities.WorkingHours;
+import com.noveria.absencemanagement.model.holiday.annualleave.HolidayBreakdown;
 import com.noveria.absencemanagement.model.holiday.annualleave.entity.AnnualLeave;
 import com.noveria.absencemanagement.service.annualleave.AnnualLeaveService;
 import com.noveria.absencemanagement.service.annualleave.EmployeeAnnualLeave;
@@ -122,7 +124,7 @@ public class HolidayManagementModel implements Serializable {
 
         int totalAllowance = holidayAllowance.getTotal();
         int usedAllowance = holidayAllowance.getUsed();
-        int remainingAllowance = totalAllowance - usedAllowance;
+        int remainingAllowance = holidayAllowance.getRemaining();
 
         HolidayAllowanceViewBean holidayAllowanceViewBean = new HolidayAllowanceViewBean();
         holidayAllowanceViewBean.setTotal(totalAllowance);
@@ -171,13 +173,33 @@ public class HolidayManagementModel implements Serializable {
             logger.debug("Requesting Holiday Start Date : " + holidayRequestStartStr);
             logger.debug("Requesting Holiday End Date : " + holidayRequestEndStr);
 
-            annualLeaveService.createAnnualLeave(holidayRequestStart, holidayRequestEnd,
-                    userModel.getEmployee());
 
             int totalDays = DateUtil.getWorkingDaysBetweenTwoDates(holidayRequestStart,
                     holidayRequestEnd);
 
             logger.debug("Requesting Working Days Total : " + totalDays);
+
+            int totalHoursRequested = totalDays * WorkingHours.DEFAULT.getDailyWorkingHours();
+
+            logger.debug("Requested Hours Total : " + totalHoursRequested);
+
+            HolidayAllowance holidayAllowance = annualLeaveService.getHolidayAllowance(userModel.getEmployee());
+
+            int remainingHolidayAllowance = holidayAllowance.getRemaining();
+
+            logger.debug("Remaining Holiday Allowance Hours Total : " + remainingHolidayAllowance);
+
+            if(totalHoursRequested > remainingHolidayAllowance) {
+                logger.debug("Insufficient Holiday Allowance!");
+
+                messageHelper.addErrorMessage("Holiday Request Failed",
+                        "Insufficient Holiday Allowance");
+
+                throw new AbortProcessingException("Insufficient Holiday Allowance!");
+            }
+
+            annualLeaveService.createAnnualLeave(holidayRequestStart, holidayRequestEnd,
+                    userModel.getEmployee());
 
             annualLeaveService.addHolidayAllowance(userModel.getEmployee(), totalDays);
 
@@ -214,5 +236,16 @@ public class HolidayManagementModel implements Serializable {
 
     public void clearHolidayRequest() {
         holidayRequest = new HolidayRequestViewingBean();
+    }
+
+    public HolidayBreakdown getHolidayBreakdown() {
+        List<AnnualLeave> annualLeaveList = annualLeaveService.getEmployeeAnnualLeave(userModel.getEmployee());
+        HolidayBreakdown holidayBreakdown = new HolidayBreakdown();
+
+        for(AnnualLeave annualLeave : annualLeaveList) {
+            holidayBreakdown.updateHolidayBreakdown(annualLeave.getStart(),annualLeave.getEnd());
+        }
+
+        return holidayBreakdown;
     }
 }

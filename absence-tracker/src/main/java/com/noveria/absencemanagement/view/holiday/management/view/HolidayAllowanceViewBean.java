@@ -40,37 +40,5 @@ public class HolidayAllowanceViewBean {
         this.remaining = remaining;
     }
 
-    public DonutChartModel getDonutModel() {
-        DonutChartModel holidayDonutModel = new DonutChartModel();
 
-        Map<String, Number> holidayData = new LinkedHashMap<String, Number>();
-
-        holidayData.put("Used", used);
-        holidayData.put("Remaining", remaining);
-
-        holidayDonutModel.setLegendPosition("n");
-        holidayDonutModel.addCircle(holidayData);
-        holidayDonutModel.setSeriesColors("1d5198,a7c2ee");
-
-        return holidayDonutModel;
-    }
-
-    public DonutChartModel getDetailedDonutModel() {
-        DonutChartModel holidayDonutModel = new DonutChartModel();
-
-        Map<String, Number> holidayData = new LinkedHashMap<String, Number>();
-
-        holidayData.put("Used", used);
-        holidayData.put("Remaining", remaining);
-
-        holidayDonutModel.setLegendPosition("e");
-        holidayDonutModel.addCircle(holidayData);
-        holidayDonutModel.setTitle("Holiday Balance (Hours)");
-
-        holidayDonutModel.setSliceMargin(5);
-        holidayDonutModel.setShowDataLabels(true);
-        holidayDonutModel.setDataFormat("value");
-
-        return holidayDonutModel;
-    }
 }

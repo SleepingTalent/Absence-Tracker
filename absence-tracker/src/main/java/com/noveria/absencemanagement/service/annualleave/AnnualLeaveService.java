@@ -121,6 +121,9 @@ public class AnnualLeaveService {
         return employeeAnnualLeaveList;
     }
 
+    public List<AnnualLeave> getEmployeeAnnualLeave(Employee employee) {
+       return annualLeaveDAO.findAnnualLeaveByEmployee(employee);
+    }
 
     public List<HolidayRequestViewingBean> getPendingHolidayRequestsForManager(Employee manager) {
         List<HolidayRequestViewingBean> pendingRequests = new ArrayList<HolidayRequestViewingBean>();
