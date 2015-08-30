@@ -4,7 +4,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
-    <p:dialog id="requestNewHolidayDialog" widgetVar="_requestNewHolidayDialog" header="Request New Holiday" modal="true" dynamic="true" resizable="false" closable="true">
+    <p:dialog id="requestNewHolidayDialog" widgetVar="_requestNewHolidayDialog" header="Request Annual Leave" modal="true" dynamic="true" resizable="false" closable="true">
 
         <h:form id="requestHolidayForm">
 
@@ -17,7 +17,7 @@
             </h:panelGrid>
 
             <p:separator />
-            <p:commandButton id="requestHolidyBtn" value="Request Holiday" styleClass="alignRight"
+            <p:commandButton id="requestHolidyBtn" value="Request" styleClass="alignRight"
                              actionListener="#{holidayManagementController.requestHoliday}"
                              action="#{navigationController.hideRequestHolidayDialog}"
                              onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"

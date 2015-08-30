@@ -59,6 +59,8 @@ public class NavigationController {
         return NavigationOutcome.SUCCESS.getOutcomeName();
     }
 
+    public String showWelcomeInformation() { return NavigationOutcome.SUCCESS.getOutcomeName(); }
+
     public String showHolidayManagementFeatures() {
        return NavigationOutcome.SUCCESS.getOutcomeName();
     }

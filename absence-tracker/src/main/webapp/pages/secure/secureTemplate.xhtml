@@ -28,25 +28,26 @@
                 <h:form id="featuresForm" prependId="false">
                     <p:menuButton id="featuresMenu" value="#{authController.employeeDetails.fullname}" styleClass="featuresMenu">
                         <sec:authorize ifAllGranted="EMPLOYEE">
-                            <p:menuitem id="myAnnualLeave" value="myAnnualLeave" action="#{navigationController.showHolidayManagementFeatures}" icon="ui-icon-calendar"/>
-                            <p:menuitem id="myAbsence" value="myAbsence" action="#{navigationController.showConfirmAbsenceFeatures}" icon="ui-icon-mail-closed"/>
+                            <p:menuitem id="myAnnualLeave" value="My Annual Leave" action="#{navigationController.showHolidayManagementFeatures}"/>
+                            <p:menuitem id="myAbsence" value="My Absence" action="#{navigationController.showConfirmAbsenceFeatures}"/>
                         </sec:authorize>
 
                         <sec:authorize ifAllGranted="MANAGER">
                             <p:separator />
-                            <p:menuitem id="authoriseLeave" value="authoriseLeave" action="#{navigationController.showHolidayAuthoriseFeatures}" icon="ui-icon-person"/>
-                            <p:menuitem id="absenceMgt" value="absenceMgt" action="#{navigationController.showEnterAbsenceFeatures}" icon="ui-icon-mail-open"/>
+                            <p:menuitem id="authoriseLeave" value="Authorise Leave" action="#{navigationController.showHolidayAuthoriseFeatures}"/>
+                            <p:menuitem id="absenceMgt" value="Absence Management" action="#{navigationController.showEnterAbsenceFeatures}"/>
                         </sec:authorize>
 
 
                         <sec:authorize ifAllGranted="ADMIN">
                             <p:separator />
-                            <p:menuitem id="adminFeature" value="systemAdmin" action="#{navigationController.showAdminFeatures}" icon="ui-icon-gear"/>
+                            <p:menuitem id="adminFeature" value="System Administration" action="#{navigationController.showAdminFeatures}"/>
                         </sec:authorize>
 
                         <p:separator />
-                        <p:menuitem id="logout" value="logout" action="#{authController.logout}" icon="ui-icon-power"/>
+                        <p:menuitem id="logout" value="Logout" action="#{authController.logout}"/>
                     </p:menuButton>
+                    <p:commandButton action="#{navigationController.showWelcomeInformation}" styleClass="homePageBtn" icon="ui-icon-home"/>
                 </h:form>
             </f:facet>
 

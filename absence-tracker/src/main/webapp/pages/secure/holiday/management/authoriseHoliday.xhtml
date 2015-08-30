@@ -14,10 +14,10 @@
 
                 <p:submenu id="holidayMenu" label="View">
 
-                    <p:menuitem id="ViewDepartmentHolidayStats" value="Department Stats"
+                    <p:menuitem id="ViewDepartmentHolidayStats" value="Department Statistics"
                                 action="#{navigationController.showDepartmentHolidayStatsDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                update=":departmentHolidayStatsForm" icon="ui-icon-clipboard"/>
+                                update=":departmentHolidayStatsForm"/>
                 </p:submenu>
 
             </p:menubar>
@@ -25,7 +25,7 @@
             <h:panelGrid columns="2" columnClasses="alignColumnTop">
 
                 <p:panel id="pendingholidayRequestsPanel" styleClass="pendingRequestPanel"
-                         header="Pending Holiday Requests">
+                         header="Pending Annual Leave Requests">
 
                     <p:dataTable id="requestHistoryTable" var="holidayRequestRow"
                                  value="#{holidayAuthoriseController.pendingHolidayRequests}" scrollable="true"
@@ -68,7 +68,7 @@
                 </p:panel>
 
 
-                <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Managed Departments Holiday Calendar">
+                <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Managed Departments Annual Leave Calendar">
                     <p:schedule value="#{holidayAuthoriseController.scheduleLazyModel}"/>
                 </p:panel>
 

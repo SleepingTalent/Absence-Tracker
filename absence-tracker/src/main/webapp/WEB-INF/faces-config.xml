@@ -69,6 +69,12 @@
     <navigation-rule>
         <from-view-id>/pages/secure/admin/admin.xhtml</from-view-id>
         <navigation-case>
+            <from-action>#{navigationController.showWelcomeInformation}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/welcome.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
@@ -110,6 +116,12 @@
     <navigation-rule>
         <from-view-id>/pages/secure/holiday/employee/holidayManagement.xhtml</from-view-id>
         <navigation-case>
+            <from-action>#{navigationController.showWelcomeInformation}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/welcome.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
@@ -149,6 +161,12 @@
 
     <navigation-rule>
         <from-view-id>/pages/secure/holiday/management/authoriseHoliday.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{navigationController.showWelcomeInformation}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/welcome.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
         <navigation-case>
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>
@@ -190,6 +208,12 @@
     <navigation-rule>
         <from-view-id>/pages/secure/absence/management/absenceManagement.xhtml</from-view-id>
         <navigation-case>
+            <from-action>#{navigationController.showWelcomeInformation}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/welcome.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
@@ -229,6 +253,12 @@
 
     <navigation-rule>
         <from-view-id>/pages/secure/absence/employee/employeeAbsence.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{navigationController.showWelcomeInformation}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/secure/welcome.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
         <navigation-case>
             <from-action>#{authController.logout}</from-action>
             <from-outcome>success</from-outcome>

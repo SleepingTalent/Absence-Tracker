@@ -10,24 +10,28 @@
         <h:form id="holidayManagementForm" prependId="false">
             <p:menubar id="holidayMenuBar" syleClass="holidayMenu">
 
-                <p:submenu id="holidayMenu" label="Holiday">
+                <p:submenu id="requestholidayMenu" label="Request">
 
-                    <p:menuitem id="RequestHoliday" value="Request Holiday"
+                    <p:menuitem id="RequestHoliday" value="Annual Leave"
                                 actionListener="#{holidayManagementController.clearHolidayRequest}"
                                 action="#{navigationController.showRequestHolidayDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                update=":requestHolidayForm" icon="ui-icon-calendar"/>
+                                update=":requestHolidayForm"/>
 
-                    <p:menuitem id="ViewEmployeeHolidayStats" value="View Statistics"
+                </p:submenu>
+
+                <p:submenu id="viewholidayMenu" label="View">
+
+                    <p:menuitem id="ViewEmployeeHolidayStats" value="Leave Statistics"
                                 action="#{navigationController.showEmployeeHolidayStatsDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                update=":employeeHolidayStatsForm" icon="ui-icon-clipboard"/>
+                                update=":employeeHolidayStatsForm"/>
                 </p:submenu>
 
             </p:menubar>
 
             <h:panelGrid columns="3" columnClasses="alignColumnTop,alignColumnTop,alignColumnTop">
-                <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Holiday Balance (Hours)">
+                <p:panel id="holidayAllowancePanel" styleClass="holidayAllowancePanel" header="Annual Leave (Hours)">
 
                         <p:dataTable id="holidayAllowanceTable" var="holidayAllowanceRow" value="#{holidayManagementController.holidayAllowanceList}">
                             <p:column headerText="Total" styleClass="holidayTotal">
@@ -43,7 +47,7 @@
 
                 </p:panel>
 
-                <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Department Holiday Calendar">
+                <p:panel id="holidayCalendarPanel" styleClass="holidayCalendarPanel" header="Department Annual Leave Calendar">
                     <p:schedule value="#{holidayManagementController.scheduleLazyModel}"/>
                 </p:panel>
 

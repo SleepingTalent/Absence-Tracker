@@ -74,7 +74,7 @@ public class HolidayManagementController {
         HolidayAllowanceViewBean holidayAllowance = holidayManagementModel.getHolidayAllowance();
 
         return graphHelper.buildHolidayAllowanceDonutChart(
-                "Holiday Balance", holidayAllowance.getUsed(),
+                "Annual Leave Balance", holidayAllowance.getUsed(),
                 holidayAllowance.getRemaining());
     }
 
@@ -83,7 +83,7 @@ public class HolidayManagementController {
                 holidayManagementModel.getHolidayBreakdown();
 
         return graphHelper.buildHolidayBreakdownBarChart(
-                "Annual Holiday Breakdown",holidayBreakdown);
+                "Annual Leave Breakdown",holidayBreakdown);
     }
 
     public List<HolidayRequestViewingBean> getRequestHistory() {

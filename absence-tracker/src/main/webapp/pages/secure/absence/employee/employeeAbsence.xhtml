@@ -10,16 +10,16 @@
         <h:form id="absenceConfirmationForm" prependId="false">
 
             <p:menubar id="absenceMenuBar" syleClass="absenceMenu">
-                <p:submenu id="absenceMenu" label="Absence">
-                    <p:menuitem id="ViewEmployeeAbsenceHistory" value="View History"
+                <p:submenu id="absenceMenu" label="View">
+                    <p:menuitem id="ViewEmployeeAbsenceHistory" value="Absence History"
                                 action="#{navigationController.showEmployeeAbsenceDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                update=":employeeAbsence" icon="ui-icon-search"/>
+                                update=":employeeAbsence"/>
 
-                    <p:menuitem id="ViewEmployeeAbsenceStats" value="View Statistics"
+                    <p:menuitem id="ViewEmployeeAbsenceStats" value="Absence Statistics"
                                 action="#{navigationController.showEmployeeAbsenceStatsDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                update=":employeeAbsenceStats" icon="ui-icon-clipboard"/>
+                                update=":employeeAbsenceStats"/>
                 </p:submenu>
 
             </p:menubar>

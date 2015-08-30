@@ -75,7 +75,7 @@ public class HolidayAuthoriseController {
                 holidayAuthoriseModel.getDepartmentHolidayAllowance();
 
         return graphHelper.buildHolidayAllowanceDonutChart(
-                "Department Holiday Balance (Hours)", departmentHolidayAllowance.getUsed(),
+                "Department Annual Leave (Hours)", departmentHolidayAllowance.getUsed(),
                 departmentHolidayAllowance.getRemaining());
     }
 
@@ -83,7 +83,7 @@ public class HolidayAuthoriseController {
         HolidayBreakdown holidayBreakdown = holidayAuthoriseModel.getDepartmentHolidayBreakdown();
 
         return graphHelper.buildHolidayBreakdownBarChart(
-                "Department Annual Holiday Breakdown",holidayBreakdown);
+                "Department Annual Leave Breakdown",holidayBreakdown);
     }
 
     public List<DonutChartModel> getEmployeeHolidayAllowances() {

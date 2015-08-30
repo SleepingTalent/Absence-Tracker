@@ -30,6 +30,12 @@ body {
 
 .featuresMenu {
     position: absolute;
+    right: 60px;
+    top: 46px;
+}
+
+.homePageBtn {
+    position: absolute;
     right: 20px;
     top: 46px;
 }

@@ -15,7 +15,7 @@
                                 actionListener="#{absenceManagementController.clearAbsense}"
                                 action="#{navigationController.showNewAbsenceDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                update=":addNewAbsence" icon="ui-icon-plusthick"/>
+                                update=":addNewAbsence"/>
                 </p:submenu>
 
                 <p:submenu id="viewMenu" label="View">
@@ -23,13 +23,13 @@
                                 actionListener="#{absenceManagementController.clearEmployeeAbsense}"
                                 action="#{navigationController.showSelectEmployeeDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                update=":selectEmployee" icon="ui-icon-search"/>
+                                update=":selectEmployee"/>
                     <p:separator/>
 
-                    <p:menuitem id="ViewDepartmentAbsenceStats" value="Department Stats"
+                    <p:menuitem id="ViewDepartmentAbsenceStats" value="Department Statistics"
                                 action="#{navigationController.showDepartmentAbsenceStatsDialog}"
                                 onstart="PF('_ajaxLoadingDialog').show()" onsuccess="PF('_ajaxLoadingDialog').hide()"
-                                update=":departmentAbsenceStats" icon="ui-icon-clipboard"/>
+                                update=":departmentAbsenceStats"/>
                 </p:submenu>
 
             </p:menubar>
