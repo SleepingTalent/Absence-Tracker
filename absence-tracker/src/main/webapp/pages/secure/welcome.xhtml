@@ -13,7 +13,38 @@
 
         <ui:define name="pageContent">
             <p:panel id="welcomePanel" styleClass="mainPanel">
-                <h2 style="color:#0e2c54;">Would be the Welcome Page Content</h2>
+                <h3 style="margin-top:0">Welcome To The Absence Tracking System</h3>
+                <h4>TODO : Describe the Absence Tracking System</h4>
+                <p:accordionPanel>
+                    <p:tab title="Getting Started">
+                        Below is a descripton of all the feature available to you,
+                        please click on the section to view more details
+                    </p:tab>
+                    <sec:authorize ifAllGranted="EMPLOYEE">
+                    <p:tab title="My Annual Leave">
+                        TODO : Add info
+                    </p:tab>
+                    <p:tab title="My Absence">
+                        TODO : Add info
+                    </p:tab>
+                    </sec:authorize>
+
+                    <sec:authorize ifAllGranted="MANAGER">
+                        <p:tab title="Authorise Leave">
+                            TODO : Add info
+                        </p:tab>
+                        <p:tab title="Absence Management">
+                            TODO : Add info
+                        </p:tab>
+                    </sec:authorize>
+
+                    <sec:authorize ifAllGranted="ADMIN">
+                        <p:tab title="System Administration">
+                            TODO : Add info
+                        </p:tab>
+                    </sec:authorize>
+
+                </p:accordionPanel>
             </p:panel>
         </ui:define>
 
