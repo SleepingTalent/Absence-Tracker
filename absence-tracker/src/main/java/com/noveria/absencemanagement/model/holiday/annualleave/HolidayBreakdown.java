@@ -1,6 +1,8 @@
 package com.noveria.absencemanagement.model.holiday.annualleave;
 
 import com.noveria.absencemanagement.util.DateUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -8,6 +10,9 @@ import java.util.*;
  * Created by lynseymcgregor on 22/08/2015.
  */
 public class HolidayBreakdown {
+
+    private static final Logger logger = LoggerFactory.getLogger(HolidayBreakdown.class);
+
 
     private Map<Month,Integer> monthlyBreakdown = new LinkedHashMap<Month, Integer>();
 
@@ -27,26 +32,32 @@ public class HolidayBreakdown {
     }
 
     public void updateHolidayBreakdown(Date startDate, Date endDate) {
-        int startMonth = getMonth(startDate);
-        int endMonth = getMonth(endDate);
+        try {
 
-        if(startMonth == endMonth) {
-            int totalDays = DateUtil.getWorkingDaysBetweenTwoDates(startDate, endDate);
+            int startMonth = getMonth(startDate);
+            int endMonth = getMonth(endDate);
 
-            Month month = Month.getMonthFromIndex(startMonth);
-            updateTotal(month, totalDays);
-        } else {
-            Date endOfStartMonth = getEndOfStartMonth(endDate);
-            Date startOfEndMonth = getStartOfEndMonth(endDate);
+            if (startMonth == endMonth) {
+                int totalDays = DateUtil.getWorkingDaysBetweenTwoDates(startDate, endDate);
 
-            int startMonthTotal = DateUtil.getWorkingDaysBetweenTwoDates(startDate, endOfStartMonth);
-            int endMonthTotal = DateUtil.getWorkingDaysBetweenTwoDates(startOfEndMonth, endDate);
+                Month month = Month.getMonthFromIndex(startMonth);
+                updateTotal(month, totalDays);
+            } else {
+                Date endOfStartMonth = getEndOfStartMonth(endDate);
+                Date startOfEndMonth = getStartOfEndMonth(endDate);
 
-            Month startMon = Month.getMonthFromIndex(startMonth);
-            updateTotal(startMon, startMonthTotal);
+                int startMonthTotal = DateUtil.getWorkingDaysBetweenTwoDates(startDate, endOfStartMonth);
+                int endMonthTotal = DateUtil.getWorkingDaysBetweenTwoDates(startOfEndMonth, endDate);
 
-            Month endMon = Month.getMonthFromIndex(endMonth);
-            updateTotal(endMon, endMonthTotal);
+                Month startMon = Month.getMonthFromIndex(startMonth);
+                updateTotal(startMon, startMonthTotal);
+
+                Month endMon = Month.getMonthFromIndex(endMonth);
+                updateTotal(endMon, endMonthTotal);
+            }
+
+        } catch (Exception e) {
+            logger.error("Error Updating with Start("+startDate+") End("+endDate+")",e);
         }
     }
 

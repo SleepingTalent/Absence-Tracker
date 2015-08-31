@@ -55,7 +55,7 @@ public class DateUtil {
         Calendar today = Calendar.getInstance();
 
         if(startCal.getTimeInMillis() < today.getTimeInMillis()) {
-            throw new InvalidDateException("Start Date must be current or future Date!");
+            throw new InvalidDateException("Start Date must be a future Date!");
         }
 
         if (startCal.getTimeInMillis() > endCal.getTimeInMillis()) {

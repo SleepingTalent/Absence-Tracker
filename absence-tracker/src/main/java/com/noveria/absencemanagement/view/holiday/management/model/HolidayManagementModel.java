@@ -80,9 +80,9 @@ public class HolidayManagementModel implements Serializable {
                         String css = "holidayAuth";
                         String title = employee.getFirstName() + " " + employee.getLastName();
 
-                        if(!annualLeave.getStatus().equals("AUTHORISED")) {
-                          css = "holidayAwaitingAuth";
-                          title = title + " (Pending)";
+                        if (!annualLeave.getStatus().equals("AUTHORISED")) {
+                            css = "holidayAwaitingAuth";
+                            title = title + " (Pending)";
                         }
 
                         lazyEventModel.addEvent(buildEvent(title,
@@ -139,7 +139,7 @@ public class HolidayManagementModel implements Serializable {
     }
 
     public HolidayAllowanceViewBean getHolidayAllowance() {
-            return buildHolidayAllowance();
+        return buildHolidayAllowance();
     }
 
     public AnnualLeaveService getAnnualLeaveService() {
@@ -189,7 +189,7 @@ public class HolidayManagementModel implements Serializable {
 
             logger.debug("Remaining Holiday Allowance Hours Total : " + remainingHolidayAllowance);
 
-            if(totalHoursRequested > remainingHolidayAllowance) {
+            if (totalHoursRequested > remainingHolidayAllowance) {
                 logger.debug("Insufficient Holiday Allowance!");
 
                 messageHelper.addErrorMessage("Holiday Request Failed",
@@ -203,13 +203,13 @@ public class HolidayManagementModel implements Serializable {
 
             annualLeaveService.addHolidayAllowance(userModel.getEmployee(), totalDays);
 
-            messageHelper.addInfoMessage("Holiday Requested", holidayRequestStartStr+"-"+holidayRequestEndStr);
+            messageHelper.addInfoMessage("Holiday Requested", holidayRequestStartStr + "-" + holidayRequestEndStr);
 
             getHolidayRequest().setStart(null);
             getHolidayRequest().setEnd(null);
 
         } catch (InvalidDateException ide) {
-            messageHelper.addErrorMessage("Invalid Date Range",ide.getMessage());
+            messageHelper.addErrorMessage("Invalid Date Range", ide.getMessage());
             throw new AbortProcessingException(ide.getMessage());
         }
     }
@@ -239,13 +239,13 @@ public class HolidayManagementModel implements Serializable {
     }
 
     public HolidayBreakdown getHolidayBreakdown() {
-        List<AnnualLeave> annualLeaveList = annualLeaveService.getEmployeeAnnualLeave(userModel.getEmployee());
-        HolidayBreakdown holidayBreakdown = new HolidayBreakdown();
+            List<AnnualLeave> annualLeaveList = annualLeaveService.getEmployeeAnnualLeave(userModel.getEmployee());
+            HolidayBreakdown holidayBreakdown = new HolidayBreakdown();
 
-        for(AnnualLeave annualLeave : annualLeaveList) {
-            holidayBreakdown.updateHolidayBreakdown(annualLeave.getStart(),annualLeave.getEnd());
-        }
+            for (AnnualLeave annualLeave : annualLeaveList) {
+                holidayBreakdown.updateHolidayBreakdown(annualLeave.getStart(), annualLeave.getEnd());
+            }
 
-        return holidayBreakdown;
+            return holidayBreakdown;
     }
 }

@@ -14,33 +14,52 @@
         <ui:define name="pageContent">
             <p:panel id="welcomePanel" styleClass="mainPanel">
                 <h3 style="margin-top:0">Welcome To The Absence Tracking System</h3>
-                <h4>TODO : Describe the Absence Tracking System</h4>
+                <h4>The Absence Tracking System (ATS) is a program to facilitate the management and documentation of Annual Leave and Absences</h4>
                 <p:accordionPanel>
                     <p:tab title="Getting Started">
-                        Below is a descripton of all the feature available to you,
-                        please click on the section to view more details
+                        To get started, click on your name on the top right of this page and select an option.
+
+                        Below is a descripton of all the features available to you,
+                        please click on the section to view more details.
+
+                        You can return to this page at any time by clicking on the Home Icon.
                     </p:tab>
                     <sec:authorize ifAllGranted="EMPLOYEE">
                     <p:tab title="My Annual Leave">
-                        TODO : Add info
+                        This page displays your current Annual Leave Balance, Department Calendar and Request History.
+
+                        You can request new Annual Leave on this page and view statistics on your Annual Leave.
                     </p:tab>
                     <p:tab title="My Absence">
-                        TODO : Add info
+                        This page displays a record of your Absences.
+                        Absences which have been entered by your Line Manager, require your confirmation.
+                        Any Absences waiting to be confirmed will be displayed on this page.
+                        A history of your Absences can be viewed by selecting "View" then "Absence History".
+                        Statistics on your Absences can be viewd by selecting "View" then "Absence Statistics".
                     </p:tab>
                     </sec:authorize>
 
                     <sec:authorize ifAllGranted="MANAGER">
                         <p:tab title="Authorise Leave">
-                            TODO : Add info
+                            This page is only available to Managers.
+                            On this page you can authorise or decline Employees Annual Leave Requests.
+                            View a Department Calendar.
+                            View a break down of your Departments Annual Leave by selecting "View" then "Department Statistics".
                         </p:tab>
                         <p:tab title="Absence Management">
-                            TODO : Add info
+                            This page is only available to Managers.
+                            On this page you can view your Departments Absence History.
+                            To enter a new Absence for an employee, select "Create" then "Absence".
+                            To view the Absence of a particular employee, select "View" then "Employee Absence".
+                            To view the Absence Statistics of the whole department, select "View" then "Department Statistics".
                         </p:tab>
                     </sec:authorize>
 
                     <sec:authorize ifAllGranted="ADMIN">
                         <p:tab title="System Administration">
-                            TODO : Add info
+                            This feature is available only to those Users who have been granted System Admininstrator Access.
+                            On this page you can create new Departments and employees to be added to the system.
+                            You can also view all the employees and departments currently entered into the system by selecting, "Browse" then either "Department" or "Employee".
                         </p:tab>
                     </sec:authorize>
 
