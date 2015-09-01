@@ -18,7 +18,7 @@
 
                     <p:separator/>
 
-                    <p:menuitem id="CreateEmployee" value="Employee"
+                    <p:menuitem id="CreateEmployee" value="User"
                                 actionListener="#{employeeController.clearEmployee}"
                                 action="#{navigationController.showAddEmployeeDialog}"
                                 update=":addEmployee" icon="ui-icon-person"/>
@@ -33,7 +33,7 @@
 
                     <p:separator/>
 
-                    <p:menuitem id="BrowseEmployee" value="Employee"
+                    <p:menuitem id="BrowseEmployee" value="Users"
                                 actionListener="#{browseEmployeeController.clearDataModel}"
                                 action="#{navigationController.showBrowseEmployeesDialog}"
                                 icon="ui-icon-search" update=":browseEmployees"/>

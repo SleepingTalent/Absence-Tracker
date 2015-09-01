@@ -13,28 +13,37 @@
 
         <ui:define name="pageContent">
             <p:panel id="welcomePanel" styleClass="mainPanel">
-                <h3 style="margin-top:0">Welcome To The Absence Tracking System</h3>
-                <h4>The Absence Tracking System (ATS) is a program to facilitate the management and documentation of Annual Leave and Absences</h4>
+                <h1 style="margin-top:0">Welcome To The Absence Tracking System</h1>
+                <h3>The Absence Tracking System (ATS) is a program to facilitate the management and documentation of Annual Leave and Absences</h3>
                 <p:accordionPanel>
                     <p:tab title="Getting Started">
-                        To get started, click on your name on the top right of this page and select an option.
-
+                        To get started, click on your name on the top right of this page and select an option from the menu.
+                        <br/>
+                        <br/>
                         Below is a descripton of all the features available to you,
                         please click on the section to view more details.
-
+                        <br/>
+                        <br/>
                         You can return to this page at any time by clicking on the Home Icon.
                     </p:tab>
                     <sec:authorize ifAllGranted="EMPLOYEE">
                     <p:tab title="My Annual Leave">
                         This page displays your current Annual Leave Balance, Department Calendar and Request History.
-
+                        <br/>
+                        <br/>
                         You can request new Annual Leave on this page and view statistics on your Annual Leave.
                     </p:tab>
                     <p:tab title="My Absence">
                         This page displays a record of your Absences.
+                        <br/>
+                        <br/>
                         Absences which have been entered by your Line Manager, require your confirmation.
                         Any Absences waiting to be confirmed will be displayed on this page.
+                        <br/>
+                        <br/>
                         A history of your Absences can be viewed by selecting "View" then "Absence History".
+                        <br/>
+                        <br/>
                         Statistics on your Absences can be viewd by selecting "View" then "Absence Statistics".
                     </p:tab>
                     </sec:authorize>
@@ -42,15 +51,29 @@
                     <sec:authorize ifAllGranted="MANAGER">
                         <p:tab title="Authorise Leave">
                             This page is only available to Managers.
+                            <br/>
+                            <br/>
                             On this page you can authorise or decline Employees Annual Leave Requests.
+                            <br/>
+                            <br/>
                             View a Department Calendar.
+                            <br/>
+                            <br/>
                             View a break down of your Departments Annual Leave by selecting "View" then "Department Statistics".
                         </p:tab>
                         <p:tab title="Absence Management">
                             This page is only available to Managers.
+                            <br/>
+                            <br/>
                             On this page you can view your Departments Absence History.
+                            <br/>
+                            <br/>
                             To enter a new Absence for an employee, select "Create" then "Absence".
+                            <br/>
+                            <br/>
                             To view the Absence of a particular employee, select "View" then "Employee Absence".
+                            <br/>
+                            <br/>
                             To view the Absence Statistics of the whole department, select "View" then "Department Statistics".
                         </p:tab>
                     </sec:authorize>
@@ -58,7 +81,11 @@
                     <sec:authorize ifAllGranted="ADMIN">
                         <p:tab title="System Administration">
                             This feature is available only to those Users who have been granted System Admininstrator Access.
+                            <br/>
+                            <br/>
                             On this page you can create new Departments and employees to be added to the system.
+                            <br/>
+                            <br/>
                             You can also view all the employees and departments currently entered into the system by selecting, "Browse" then either "Department" or "Employee".
                         </p:tab>
                     </sec:authorize>

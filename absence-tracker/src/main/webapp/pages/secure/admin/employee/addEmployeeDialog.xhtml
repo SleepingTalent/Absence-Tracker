@@ -4,7 +4,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
-    <p:dialog id="addEmployeeDialog" widgetVar="_addEmployeeDialog" header="Create Employee" modal="true" dynamic="true" resizable="false" closable="true">
+    <p:dialog id="addEmployeeDialog" widgetVar="_addEmployeeDialog" header="Create User" modal="true" dynamic="true" resizable="false" closable="true">
         <h:form id="addEmployee">
 
             <p:panelGrid styleClass="borderLessPanelGrid" columns="2">
@@ -45,7 +45,7 @@
             </p:panelGrid>
 
             <p:separator />
-            <p:commandButton id="addEmployeeBtn" styleClass="floatRight" value="Create Employee"
+            <p:commandButton id="addEmployeeBtn" styleClass="floatRight" value="Create"
                              actionListener="#{employeeController.saveEmployee}"
                              action="#{navigationController.hideAddEmployeeDialog}"
                              update=":messages"/>

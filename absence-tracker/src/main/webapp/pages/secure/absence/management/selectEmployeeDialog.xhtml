@@ -4,7 +4,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
-    <p:dialog id="selectEmployeeDialog" widgetVar="_selectEmployeeDialog" header="Select Employee" modal="true" dynamic="true" resizable="false" closable="true">
+    <p:dialog id="selectEmployeeDialog" widgetVar="_selectEmployeeDialog" header="Employee Absence" modal="true" dynamic="true" resizable="false" closable="true">
 
         <h:form id="selectEmployee">
 
@@ -20,7 +20,7 @@
             </p:panelGrid>
 
             <p:separator />
-            <p:commandButton id="selectEmployeeBtn" styleClass="floatRight" value="View Employee Absence"
+            <p:commandButton id="selectEmployeeBtn" styleClass="floatRight" value="View"
                              actionListener="#{navigationController.hideNewAbsenceDialog}"
                              action="#{navigationController.showEmployeeAbsenceDialog}"
                              update=":employeeAbsence"/>
