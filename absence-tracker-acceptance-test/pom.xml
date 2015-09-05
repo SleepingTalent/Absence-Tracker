@@ -344,6 +344,12 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>skip-acceptance-tests</id>
+            <properties>
+                <skip.acceptance.tests>true</skip.acceptance.tests>
+            </properties>
+        </profile>
     </profiles>
 </project>
 
