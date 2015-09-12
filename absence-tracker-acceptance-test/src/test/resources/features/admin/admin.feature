@@ -44,6 +44,14 @@ Feature: Administrator Features
     And they create an Employee without a "password"
     Then a "Password is required" "Password is required" validation error is displayed
 
+  @wip
+  Scenario: An Admin User Creates an Employee with a username that already exists
+    Given a valid "Admin" user
+    When the user logs in and selects admin features
+    And they create an Employee with a usernname that already exists
+    Then a "Username is already in use" "Username is already in use" validation error is displayed
+
+
   Scenario: An Admin User Creates an Employee without a department
     Given a valid "Admin" user
     When the user logs in and selects admin features

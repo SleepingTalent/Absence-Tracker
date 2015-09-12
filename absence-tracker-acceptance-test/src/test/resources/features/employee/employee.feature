@@ -12,9 +12,49 @@ Feature: Employee Features
     Then the holiday balance is set
 
   @wip
+  Scenario: An Employee can View a Graphical Representation of Annual Leave Balance
+    Given a valid "Employee" user
+    When the user logs in
+    And they select "myAnnualLeave" feature
+    And they select "myAnnualLeaveStatistics" feature
+    Then a graph of the employees annual leave is displayed
+
+  @wip
   Scenario: An Employee can request a Holiday
     Given a valid "Employee" user
     When the user logs in
     And they select "myAnnualLeave" feature
-    And they request a holiday from "today" to "tomorrow"
+    And they request a holiday from "monday nextweek" to "friday nextweel"
     Then a holiday request is created
+
+  @wip
+  Scenario: An Employee cannot request a Holiday that exceeds their balance
+    Given a valid "Employee" user
+    When the user logs in
+    And they select "myAnnualLeave" feature
+    And they request a holiday that exceeds their curret balance
+    Then a holiday request is not created
+    And a "Holiday Request Failed" "Insufficient Holiday Allowance" validation error is displayed
+
+  @wip
+  Scenario: An Employee can View a Graphical Representation of Annual Leave Balance
+    Given a valid "Employee" user
+    When the user logs in
+    And they select "myAnnualLeaveStatistics" feature
+    Then a graph of the employees annual leave is displayed
+
+  @wip
+  Scenario: An Employee can confirm a period of Absence
+    Given a valid "Employee" user with an outstanding absence awaiting confirmation
+    When the user logs in
+    And they select "myAbsence" feature
+    And confirm the absence with the reason of "cold/flu"
+    Then the absence history has now been updated
+
+  @wip
+  Scenario: An Employee can View a Graphical Representation of Absences
+    Given a valid "Employee"
+    When the user logs in
+    And they select "myAbsence" feature
+    And they select "myAbsenceStatistics" feature
+    Then a graph of the employees absences is displayed
